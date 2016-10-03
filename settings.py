@@ -48,3 +48,6 @@ def init():
 
     global player
     player = 0
+
+    global activeOutputDB
+    activeOutputDB = []

@@ -12,6 +12,7 @@ from jobset.factory import factory as jobset
 from engine.render import render
 from engine.input import input
 from player.player import player
+from util.userinteract import userInteract
 
 
 pygame.init()
@@ -51,7 +52,7 @@ settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
 for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
-        object.create('empty', y, x, 1)
+        object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
 settings.player = player()
 
@@ -65,6 +66,7 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
+val = userInteract()
 
 while not settings.gameExit:
     '''

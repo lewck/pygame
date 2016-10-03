@@ -4,10 +4,7 @@ import settings
 import util.uis.popups.welcome as popwelcome
 
 
-
-
-
-class popup :
+class popup:
 
     @staticmethod
     def active(popupid):

@@ -1,4 +1,5 @@
 import settings
+from shop import shop
 
 from object.generichouse import genericHouse
 from object.empty import empty
@@ -8,14 +9,25 @@ from object.market import market
 from object.garage import garage
 
 
+
 class factory:
+    @staticmethod
+    def getObject(**kwargs):
+        results = eval(kwargs['uid'] + '(kwargs["y"],kwargs["x"],kwargs["direction"])')
+
+        if results.base == 0:
+            results.base = settings.grid[kwargs['y']][kwargs['x']].base
+
+        return results
 
     @staticmethod
-    def create(uid,y,x,direction):
-        #Return object of UID
-        results = eval(uid+'(y,x,direction)')
+    def create(**kwargs):
+        result = factory.getObject(**kwargs)
+        if 'dev' in kwargs:
+            #Force Create
+            settings.grid[kwargs['y']][kwargs['x']] = result
+        else:
+            #Check balance etc
+            if (shop.purchase(result.price)):
+                settings.grid[kwargs['y']][kwargs['x']] = result
 
-        if results.base==0:
-            results.base = settings.grid[y][x].base
-
-        settings.grid[y][x] = results

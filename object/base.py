@@ -75,3 +75,4 @@ class base:
     def hasInventory(self):
         if(self.inventory!=0):
             return True
+

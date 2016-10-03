@@ -35,11 +35,11 @@ class input():
                     print('y' + str(yTile))
                     settings.grid[int(yTile)][int(xTile)].eventClick()
 
-                    object.create('market', yTile, xTile, 2)
+                    object.create(uid='market', y=yTile, x=xTile, direction=2, dev=True)
                 if (event.button == 3):
-                    object.create('road', yTile, xTile, 0)
+                    object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
                 if (event.button == 2):
-                    object.create('farm_1', yTile, xTile, 0)
+                    object.create(uid='farm_1', y=yTile, x=xTile, direction=0, dev=True)
 
             elif (event.type == pygame.KEYDOWN):
                 if (settings.devInputBuffer == False):
@@ -52,7 +52,7 @@ class input():
                         devmap.create(1)
                     if (event.key == pygame.K_F4):
                         print('spawn dev')
-                        object.create('garage', 0, 0, 0)
+                        object.create(uid='garage', y=0, x=0, direction=0)
                     if (event.key == pygame.K_SLASH):
                         devInputBuffer = True
 

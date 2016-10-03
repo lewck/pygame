@@ -1,10 +1,12 @@
 import settings
 import pygame
+from random import randint
+from util.tool import tool
+from util.userinteract import userInteract
 
 class render:
-
     @staticmethod
-    def render():
+    def renderGrid():
         xmod = 0
         ymod = 0
         for y in range(0, len(settings.grid)):
@@ -45,3 +47,37 @@ class render:
                 xmod += 5 * settings.zoom
             ymod += 5 * settings.zoom
             xmod = 0
+
+    @staticmethod
+    def renderMenu():
+        #Order by priority
+        sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
+        print(sorted)
+
+        for each in sorted:
+
+            if('scale' in each.attribute):
+                scale = each.attribute['scale']
+            else:
+                scale = 1
+
+            if(each.type=='shape'):
+                pygame.draw.rect(settings.surface, each.attribute['color'], (each.pos[1],each.pos[0],each.attribute['dim'][1]*scale,each.attribute['dim'][0]*scale), 0)
+
+            elif (each.type == 'image'):
+
+                img = pygame.image.load('sprites/welcome.png')
+
+                if(scale!=1):
+                    img = pygame.transform.scale(img, (200, 300))
+
+                settings.surface.blit(img, (each.pos[1], each.pos[0]))
+
+                print('shape')
+
+
+
+    @staticmethod
+    def render():
+            render.renderGrid()
+            render.renderMenu()
