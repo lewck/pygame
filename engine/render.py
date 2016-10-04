@@ -2,7 +2,7 @@ import settings
 import pygame
 from random import randint
 from util.tool import tool
-from util.userinteract import userInteract
+from engine.ui.userinteract import userInteract
 
 class render:
     @staticmethod
@@ -52,7 +52,6 @@ class render:
     def renderMenu():
         #Order by priority
         sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
-        print(sorted)
 
         for each in sorted:
 
@@ -63,17 +62,21 @@ class render:
 
             if(each.type=='shape'):
                 pygame.draw.rect(settings.surface, each.attribute['color'], (each.pos[1],each.pos[0],each.attribute['dim'][1]*scale,each.attribute['dim'][0]*scale), 0)
-
             elif (each.type == 'image'):
-
                 img = pygame.image.load('sprites/welcome.png')
-
                 if(scale!=1):
                     img = pygame.transform.scale(img, (200, 300))
-
                 settings.surface.blit(img, (each.pos[1], each.pos[0]))
+            elif(each.type == 'text'):
+                try:
+                    font = eval('settings.'+each.attribute['font'])
+                except KeyError:
+                    font = eval('settings.primaryFont')
 
-                print('shape')
+                rendered = font.render(each.attribute['value'], True, (each.attribute['color']))
+                settings.surface.blit(rendered, (each.pos[1], each.pos[0]))
+            else:
+                settings.logObject.add('Not Rendered type'+str(each.type), 2)
 
 
 

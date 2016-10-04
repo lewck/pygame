@@ -12,7 +12,7 @@ from jobset.factory import factory as jobset
 from engine.render import render
 from engine.input import input
 from player.player import player
-from util.userinteract import userInteract
+from engine.ui.userinteract import userInteract
 
 
 pygame.init()
@@ -35,7 +35,7 @@ display_height = 768
 settings.surface = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Title')
 
-font = pygame.font.SysFont(None, 25)
+settings.primaryFont = pygame.font.SysFont(None, 25)
 
 gameExit = False
 x = 0
@@ -66,30 +66,43 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
-val = userInteract()
+#val = userInteract(type='popup', subType='welcome')
+
+
+
+mainMenu = True
+val = userInteract(type='popup', subType='welcome')
 
 while not settings.gameExit:
     '''
-    '
-    '   Listen for any events
-    '
+    '   Check for main menu
     '''
-    input.listenForEvent()
-
-    render.render()
-
-    for each in settings.activeEntityDB:
-        if(each.status!=0):
-            each.tick()
-            each.draw()
+    if(mainMenu == True):
 
 
-    for y in range(0, len(settings.grid)):
-        for x in range(0, len(settings.grid[y])):
-            settings.grid[y][x].tick()
+        render.render()
+    else:
+        '''
+        '
+        '   Listen for any events
+        '
+        '''
+        input.listenForEvent()
 
-    for each in settings.tick.getTicks():
-        eval(each[1])
+        render.render()
+
+        for each in settings.activeEntityDB:
+            if(each.status!=0):
+                each.tick()
+                each.draw()
+
+
+        for y in range(0, len(settings.grid)):
+            for x in range(0, len(settings.grid[y])):
+                settings.grid[y][x].tick()
+
+        for each in settings.tick.getTicks():
+            eval(each[1])
 
 
     pygame.display.update()

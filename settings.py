@@ -51,3 +51,6 @@ def init():
 
     global activeOutputDB
     activeOutputDB = []
+
+    global primaryFont
+    primaryFont = 0
