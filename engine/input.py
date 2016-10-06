@@ -56,7 +56,7 @@ class input():
                         print(y)
                         if((each.attribute['pos'][0] < y < each.attribute['dim'][0] )&
                             (each.attribute['pos'][1] < x < each.attribute['dim'][1])):
-                            eval('each.'+each.attribute['event']+'()')
+                            eval('each.event(each.attribute["event"])')
                             #in x and y
 
 

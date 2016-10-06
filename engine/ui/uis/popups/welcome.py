@@ -6,6 +6,12 @@ class welcome(base):
     def __init__(self):
         super(welcome, self).__init__()
 
+    def getSubClassName(self):
+        return self.__class__.__name__
+
+    def eventClose(self):
+        print('Closing!')
+
     def active(self):
         self.activeOutput.append(ioobject(pos=[0, 0], type='shape', priority=1))
         self.activeOutput[0].addAttrs({
@@ -25,22 +31,19 @@ class welcome(base):
             'scale': 1
         })
 
-        self.activeOutput.append(ioobject(pos=[200, 200], type='text', priority=50))
-        self.activeOutput[len(self.activeOutput) - 1].addAttrs({
+        self.addOutput(pos=[200, 200], type='text', priority=50)
+        self.addOutputAttrs({
             'size': 10,
             'value': 'Basic introduction!',
-            'color': (255, 255, 0),
-
+            'color': (255, 255, 0)
         })
 
-        self.activeInput.append(ioobject(type='mouseAction', priority = 5))
-
-        self.activeInput[len(self.activeInput) - 1].addAttrs({
+        self.addInput(type='mouseAction', priority = 5)
+        self.addInputAttrs({
             'click': 1,
             'pos':[0,0],
             'dim':[200,100],
             'event': 'close',
         })
-
 
         return [self.activeOutput, self.activeInput]
