@@ -52,5 +52,14 @@ def init():
     global activeOutputDB
     activeOutputDB = []
 
+    global activeInputDB
+    activeInputDB = []
+
     global primaryFont
     primaryFont = 0
+
+    global color
+    color = {
+        'white':(0,0,0),
+        'red': (255,0,0)
+    }

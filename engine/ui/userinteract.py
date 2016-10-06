@@ -19,6 +19,9 @@ class userInteract:
         for each in self.ui.activeOutput:
             settings.activeOutputDB.append(each)
 
+        for each in self.ui.activeInput:
+            settings.activeInputDB.append(each)
+
 
     '''
     def createPopup(self, popupid):

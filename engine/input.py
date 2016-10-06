@@ -10,6 +10,8 @@ from job.factory import factory as job
 from engine.tick import tick
 from jobset.factory import factory as jobset
 from engine.render import render
+from util.tool import tool
+from engine.ui.uis.helper import helper as uishelper
 
 class input():
     @staticmethod
@@ -17,28 +19,57 @@ class input():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 settings.gameExit = True
+
             elif event.type == pygame.MOUSEBUTTONUP:
-                # print(event.button)
+                '''
+                '
+                '   Handle Zoom
+                '
+                '''
                 if (event.button == 5):
                     settings.zoom -= 5
-                    settings.surface.fill(white)
+                    settings.surface.fill(settings.color['white'])
                 elif (event.button == 4):
                     settings.zoom += 5
-                    settings.surface.fill(white)
+                    settings.surface.fill(settings.color['white'])
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                print('MOUSE DOWN')
+                '''
+                '
+                '   Handle Mouse Click
+                '
+                '''
                 x = event.pos[0]
                 y = event.pos[1]
                 xTile = (int(x / (5 * settings.zoom)))
                 yTile = (int(y / (5 * settings.zoom)))
-                if (event.button == 1):
-                    print('x' + str(xTile))
-                    print('y' + str(yTile))
-                    settings.grid[int(yTile)][int(xTile)].eventClick()
 
+                if(event.button == 1):
+                    #Left Click
+                    sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
+                    refined = uishelper.getInputWithLeftClick(sorted)
+
+                    #Evaluate if in click range of any things
+                    for each in refined:
+                        print(x)
+                        print(y)
+                        if((each.attribute['pos'][0] < y < each.attribute['dim'][0] )&
+                            (each.attribute['pos'][1] < x < each.attribute['dim'][1])):
+                            eval('each.'+each.attribute['event']+'()')
+                            #in x and y
+
+
+                            print('TRUE')
+
+
+                    settings.grid[int(yTile)][int(xTile)].eventClick()
                     object.create(uid='market', y=yTile, x=xTile, direction=2, dev=True)
-                if (event.button == 3):
+                elif(event.button == 3):
+                    #Right Click
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
-                if (event.button == 2):
+                elif(event.button == 2):
+                    #Middle Mouse
                     object.create(uid='farm_1', y=yTile, x=xTile, direction=0, dev=True)
 
             elif (event.type == pygame.KEYDOWN):

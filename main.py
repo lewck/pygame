@@ -66,12 +66,11 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
-#val = userInteract(type='popup', subType='welcome')
-
-
-
-mainMenu = True
 val = userInteract(type='popup', subType='welcome')
+
+
+
+mainMenu = False
 
 while not settings.gameExit:
     '''

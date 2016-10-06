@@ -33,12 +33,14 @@ class welcome(base):
 
         })
 
-        self.activeInput.append(ioobject(pos=[200, 200], type='text', priority=50))
-        self.activeInput[len(self.activeInput) - 1].addAttrs({
-            'size': 10,
-            'value': 'Basic introduction!',
-            'color': (255, 255, 0),
+        self.activeInput.append(ioobject(type='mouseAction', priority = 5))
 
+        self.activeInput[len(self.activeInput) - 1].addAttrs({
+            'click': 1,
+            'pos':[0,0],
+            'dim':[200,100],
+            'event': 'close',
         })
+
 
         return [self.activeOutput, self.activeInput]

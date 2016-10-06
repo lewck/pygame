@@ -3,6 +3,7 @@ import pygame
 from random import randint
 from util.tool import tool
 from engine.ui.userinteract import userInteract
+from engine.ui.uis.helper import helper as uishelper
 
 class render:
     @staticmethod
@@ -47,6 +48,16 @@ class render:
                 xmod += 5 * settings.zoom
             ymod += 5 * settings.zoom
             xmod = 0
+
+        sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
+        refined = uishelper.getInputWithLeftClick(sorted)
+
+        # Evaluate if in click range of any things
+        for each in refined:
+            # in x and y
+            pygame.draw.rect(settings.surface, settings.color['red'], (
+                each.attribute['pos'][1], each.attribute['pos'][0], each.attribute['dim'][1],
+                each.attribute['dim'][0]), 0)
 
     @staticmethod
     def renderMenu():

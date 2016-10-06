@@ -21,3 +21,7 @@ class popup(base):
         self.inout = self.subObject.active()
         self.activeOutput = self.inout[0]
         self.activeInput = self.inout[1]
+
+    def close(self):
+        self.activeOutput = []
+        self.activeInput = []
