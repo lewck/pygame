@@ -63,3 +63,6 @@ def init():
         'white':(0,0,0),
         'red': (255,0,0)
     }
+
+    global activeEventDB
+    activeEventDB = []

@@ -1,5 +1,7 @@
 from engine.ui.uis.ioobject import ioobject
 from engine.ui.uis.base import base
+from engine.event import event
+
 from random import randint
 
 class welcome(base):
@@ -8,6 +10,9 @@ class welcome(base):
 
     def getSubClassName(self):
         return self.__class__.__name__
+
+    def doEvent(self, event):
+        print('eventijg'+event)
 
     def eventClose(self):
         print('Closing!')
@@ -43,7 +48,9 @@ class welcome(base):
             'click': 1,
             'pos':[0,0],
             'dim':[200,100],
-            'event': 'close',
+            'eventID': self.addEvent('close'),
         })
+
+
 
         return [self.activeOutput, self.activeInput]

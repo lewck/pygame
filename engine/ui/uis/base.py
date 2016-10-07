@@ -1,4 +1,5 @@
 from engine.ui.uis.ioobject import ioobject
+from engine.event import event
 
 class base():
     def __init__(self, **kwargs):
@@ -19,3 +20,9 @@ class base():
 
     def addInputAttrs(self, args):
         self.activeInput[len(self.activeInput)-1].addAttrs(args)
+
+    def addEvent(self, name):
+        event.create(self)
+
+    def doEve(self):
+        print('hi')

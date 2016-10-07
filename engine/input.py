@@ -12,6 +12,7 @@ from jobset.factory import factory as jobset
 from engine.render import render
 from util.tool import tool
 from engine.ui.uis.helper import helper as uishelper
+from engine.eventhelper import eventhelper
 
 class input():
     @staticmethod
@@ -56,7 +57,7 @@ class input():
                         print(y)
                         if((each.attribute['pos'][0] < y < each.attribute['dim'][0] )&
                             (each.attribute['pos'][1] < x < each.attribute['dim'][1])):
-                            eval('each.event(each.attribute["event"])')
+                            eventhelper.call(each.attribute['eventID'])
                             #in x and y
 
 
