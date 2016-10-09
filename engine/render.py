@@ -1,9 +1,9 @@
-import settings
 import pygame
-from random import randint
+
+import settings
+from legacy.ui.uis.helper import helper as uishelper
 from util.tool import tool
-from engine.ui.userinteract import userInteract
-from engine.ui.uis.helper import helper as uishelper
+
 
 class render:
     @staticmethod
@@ -62,32 +62,26 @@ class render:
     @staticmethod
     def renderMenu():
         #Order by priority
-        sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
+        for each in settings.activeOutDB:
 
-        for each in sorted:
 
-            if('scale' in each.attribute):
-                scale = each.attribute['scale']
-            else:
-                scale = 1
-
-            if(each.type=='shape'):
-                pygame.draw.rect(settings.surface, each.attribute['color'], (each.pos[1],each.pos[0],each.attribute['dim'][1]*scale,each.attribute['dim'][0]*scale), 0)
-            elif (each.type == 'image'):
-                img = pygame.image.load('sprites/welcome.png')
-                if(scale!=1):
-                    img = pygame.transform.scale(img, (200, 300))
-                settings.surface.blit(img, (each.pos[1], each.pos[0]))
-            elif(each.type == 'text'):
+            if (each.data['type'] == 'text'):
                 try:
-                    font = eval('settings.'+each.attribute['font'])
+                    font = eval('settings.' + each.data['attribute']['font'])
                 except KeyError:
                     font = eval('settings.primaryFont')
 
-                rendered = font.render(each.attribute['value'], True, (each.attribute['color']))
-                settings.surface.blit(rendered, (each.pos[1], each.pos[0]))
+                rendered = font.render(each.data['attribute']['value'], True, (each.data['attribute']['color']))
+                settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
+
             else:
-                settings.logObject.add('Not Rendered type'+str(each.type), 2)
+                settings.logObject.add('Not Rendered type' + str(each.type), 2)
+
+
+        sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
+
+
+
 
 
 

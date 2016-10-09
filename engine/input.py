@@ -1,18 +1,12 @@
 import pygame
+
 import settings
-from object.factory import factory as object
-from entity.factory import factory as entity
-from pathfind import pathFind
-from util.grid import grid
-from dev.log import log
 from dev.testmap import testmap as devmap
-from job.factory import factory as job
-from engine.tick import tick
 from jobset.factory import factory as jobset
-from engine.render import render
+from legacy.ui.uis.helper import helper as uishelper
+from object.factory import factory as object
 from util.tool import tool
-from engine.ui.uis.helper import helper as uishelper
-from engine.eventhelper import eventhelper
+
 
 class input():
     @staticmethod
@@ -48,6 +42,17 @@ class input():
 
                 if(event.button == 1):
                     #Left Click
+                    for each in settings.activeEventDB:
+                        if(each.data['attribute']['click']==1):
+
+                            if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['dim'][0]) &
+                                    (each.data['attribute']['pos'][1] < x < each.data['attribute']['dim'][1])):
+
+                                each.doEvent()
+
+
+
+
                     sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
                     refined = uishelper.getInputWithLeftClick(sorted)
 
@@ -57,6 +62,7 @@ class input():
                         print(y)
                         if((each.attribute['pos'][0] < y < each.attribute['dim'][0] )&
                             (each.attribute['pos'][1] < x < each.attribute['dim'][1])):
+
                             eventhelper.call(each.attribute['eventID'])
                             #in x and y
 

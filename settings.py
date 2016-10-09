@@ -66,3 +66,9 @@ def init():
 
     global activeEventDB
     activeEventDB = []
+
+    global activeModelDB
+    activeModelDB = {}
+
+    global activeOutDB
+    activeOutDB = []

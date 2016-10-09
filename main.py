@@ -1,19 +1,15 @@
 import pygame
-import settings
-from object.factory import factory as object
-from entity.factory import factory as entity
-from pathfind import pathFind
-from util.grid import grid
-from dev.log import log
-from dev.testmap import testmap as devmap
-from job.factory import factory as job
-from engine.tick import tick
-from jobset.factory import factory as jobset
-from engine.render import render
-from engine.input import input
-from player.player import player
-from engine.ui.userinteract import userInteract
 
+import settings
+from dev.log import log
+from engine.input import input
+from engine.render import render
+from engine.tick import tick
+from entity.factory import factory as entity
+from engine.userinteract.ui import ui
+from object.factory import factory as object
+from player.player import player
+from util.grid import grid
 
 pygame.init()
 settings.init()
@@ -44,8 +40,6 @@ lead_y = 300
 lead_x_change = 0
 lead_y_change = 0
 
-from pygame.locals import *
-
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
 
@@ -66,7 +60,7 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
-val = userInteract(type='popup', subType='welcome')
+val = ui.create(1)
 
 
 

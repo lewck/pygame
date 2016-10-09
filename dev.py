@@ -20,4 +20,12 @@ print(player.gameVariables['balance'])
 
 '''
 
-import object.factory as object
+from engine.userinteract.ui import ui
+from engine.event import event
+
+import settings
+settings.init()
+
+
+
+event.call(ui.create(1))
