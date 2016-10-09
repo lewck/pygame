@@ -48,7 +48,7 @@ class welcome(base):
             'click': 1,
             'pos':[0,0],
             'dim':[200,100],
-            'eventID': self.addEvent('close'),
+            'eventIDs': self.addEvent('close'),
         })
 
 
