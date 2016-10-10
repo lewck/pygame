@@ -71,4 +71,4 @@ def init():
     activeModelDB = {}
 
     global activeOutDB
-    activeOutDB = []
+    activeOutDB = {}

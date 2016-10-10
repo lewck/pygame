@@ -3,13 +3,16 @@ from util.tool import tool
 
 
 class out:
-    def __init__(self, modelID, data):
+    def __init__(self, modelID, data, id):
         self.modelID = modelID
         self.data = data
-        self.id = tool.genRandomString(16)
+        self.id = id
+
 
 
     @staticmethod
     def create(modelID, data):
-        settings.activeOutDB.append(out(modelID, data))
-        return settings.activeOutDB[len(settings.activeEventDB)-1].id
+        id = tool.genRandomString(16)
+        settings.activeOutDB[id]=(out(modelID, data, id))
+
+        return id

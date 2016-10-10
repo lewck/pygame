@@ -19,12 +19,32 @@ class ui:
 
             settings.activeModelDB[modelID] = each
 
+            each.id = modelID
+            inReturn = []
+            outReturn = []
+
             #Register Inputs
             for out in each.input:
                 #Register with event handler
                 eid = event.create(modelID, out, out['attribute']['event'])
+                inReturn.append([eid,out['title']])
 
             # Register Outputs
             for out in each.output:
                 # Register with out handler
                 eid = outObj.create(modelID, out)
+                outReturn.append([eid,out['title']])
+
+            each.addInterfaces(inReturn, outReturn)
+
+    @staticmethod
+    def reloadModel(modelID):
+        # Register Inputs
+        for out in settings.activeModelDB[modelID].input:
+            # Register with event handler
+            eid = event.create(modelID, out, out['attribute']['event'])
+
+        # Register Outputs
+        for out in settings.activeModelDB[modelID].output:
+            # Register with out handler
+            eid = outObj.create(modelID, out)

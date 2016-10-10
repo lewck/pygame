@@ -62,7 +62,13 @@ class render:
     @staticmethod
     def renderMenu():
         #Order by priority
-        for each in settings.activeOutDB:
+        for id, each in settings.activeOutDB.items():
+            print(each)
+
+            try:
+                scale = each.data['attribute']['scale']
+            except KeyError:
+                scale = 1
 
 
             if (each.data['type'] == 'text'):
@@ -74,11 +80,25 @@ class render:
                 rendered = font.render(each.data['attribute']['value'], True, (each.data['attribute']['color']))
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
+            elif (each.data['type'] == 'image'):
+                #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
+
+                image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
+                w, h = image.get_size()
+                rendered = pygame.transform.scale(image, (int(w*scale), int(h*scale)))
+                settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
+
+            elif (each.data['type'] == 'shape'):
+                #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
+                if(each.data['attribute']['shape']=='rectangle'):
+                    pygame.draw.rect(settings.surface, each.data['attribute']['color'], (each.data['pos'][1], each.data['pos'][0], each.data['attribute']['dim'][1], each.data['attribute']['dim'][0]))
+
+
             else:
-                settings.logObject.add('Not Rendered type' + str(each.type), 2)
+                settings.logObject.add('Not Rendered type' + str(each.data['type']), 2)
 
 
-        sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
+        # legacy sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
 
 
 
@@ -87,5 +107,9 @@ class render:
 
     @staticmethod
     def render():
-            render.renderGrid()
-            render.renderMenu()
+        #Flush screen
+        settings.surface.fill((255, 255, 255))
+
+        #Render components
+        render.renderGrid()
+        render.renderMenu()
