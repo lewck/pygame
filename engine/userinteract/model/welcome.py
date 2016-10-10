@@ -23,20 +23,16 @@ class welcome(base):
         })
 
     def addOutputs(self):
-        self.addOutput(pos=[200, 200], type='text', priority=50, title='welcomeText', attribute={
+        self.addOutput(pos=[200, 200], type='text', priority=10, title='welcomeText', attribute={
             'size': 10,
             'value': 'Basic introduction!',
             'color': (255, 255, 0)
         })
 
-        self.addOutput(pos=[0, 0], type='image', priority=50, title='shopBackground', attribute={
-            'uid': 'shopBackground',
-        })
-
-        self.addOutput(pos=[0, 0], type='shape', priority=50, title='shopBackground', attribute={
+        self.addOutput(pos=[0, 0], type='shape', priority=5, title='shopBackground', attribute={
             'shape': 'rectangle',
-            'dim': [50, 150],
-            'color': (randint(0, 255), randint(0, 255), randint(0, 255))
+            'dim': [512,512],
+            'color': (51,51,51)
         })
 
 

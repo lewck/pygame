@@ -7,6 +7,7 @@ class out:
         self.modelID = modelID
         self.data = data
         self.id = id
+        self.priority = data['priority']
 
 
 

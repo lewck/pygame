@@ -62,8 +62,10 @@ class render:
     @staticmethod
     def renderMenu():
         #Order by priority
-        for id, each in settings.activeOutDB.items():
-            print(each)
+        sor = tool.bubbleSort(values=settings.activeOutDB, localvariable='priority')
+
+
+        for each in sor:
 
             try:
                 scale = each.data['attribute']['scale']
@@ -76,7 +78,6 @@ class render:
                     font = eval('settings.' + each.data['attribute']['font'])
                 except KeyError:
                     font = eval('settings.primaryFont')
-
                 rendered = font.render(each.data['attribute']['value'], True, (each.data['attribute']['color']))
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
@@ -98,7 +99,7 @@ class render:
                 settings.logObject.add('Not Rendered type' + str(each.data['type']), 2)
 
 
-        # legacy sorted = tool.bubbleSort(values=settings.activeOutputDB, localvariable='priority')
+        # legacy
 
 
 
