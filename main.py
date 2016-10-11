@@ -31,7 +31,17 @@ display_height = 768
 settings.surface = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Title')
 
-settings.primaryFont = pygame.font.SysFont(None, 25)
+settings.fonts = {
+    'primaryFont':{
+        10: pygame.font.SysFont(None, 10),
+        20: pygame.font.SysFont(None, 20),
+        30: pygame.font.SysFont(None, 30),
+        40: pygame.font.SysFont(None, 40),
+        50: pygame.font.SysFont(None, 50),
+        60: pygame.font.SysFont(None, 60),
+    },
+}
+
 
 gameExit = False
 x = 0
@@ -60,7 +70,7 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
-val = ui.create(1)
+val = ui.create('menufactorybuy')
 
 
 
@@ -101,5 +111,6 @@ while not settings.gameExit:
     pygame.display.update()
     clock.tick(60)
 
+settings.logObject.close()
 pygame.quit()
 quit()

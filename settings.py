@@ -1,4 +1,4 @@
-
+import dev.log
 def init():
     global APIKEY
     APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0skYZoAzkJd19wWBetJ0tTMaWO3HySt4m5'
@@ -55,8 +55,8 @@ def init():
     global activeInputDB
     activeInputDB = []
 
-    global primaryFont
-    primaryFont = 0
+    global fonts
+    fonts = 0
 
     global color
     color = {
@@ -65,10 +65,13 @@ def init():
     }
 
     global activeEventDB
-    activeEventDB = []
+    activeEventDB = {}
 
     global activeModelDB
     activeModelDB = {}
 
     global activeOutDB
     activeOutDB = {}
+
+    global eventBuffer
+    eventBuffer = True

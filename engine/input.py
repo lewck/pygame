@@ -29,6 +29,7 @@ class input():
                     settings.surface.fill(settings.color['white'])
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                clickUsed = False
                 print('MOUSE DOWN')
                 '''
                 '
@@ -42,36 +43,27 @@ class input():
 
                 if(event.button == 1):
                     #Left Click
-                    for each in settings.activeEventDB:
+                    '''
+                    '
+                    '   Buffer used because some events change size of activeEventDB (for example an event that closes
+                    '   itself). Every event is added to a buffer then performed after the loop is completed in order.
+                    '
+                    '''
+                    buffer = []
+                    for id, each in settings.activeEventDB.items():
                         if(each.data['attribute']['click']==1):
 
                             if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['dim'][0]) &
                                     (each.data['attribute']['pos'][1] < x < each.data['attribute']['dim'][1])):
+                                clickUsed = True
+                                buffer.append(id)
 
-                                each.doEvent()
+                    for each in buffer:
+                        settings.activeEventDB[each].doEvent()
 
-
-
-
-                    sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
-                    refined = uishelper.getInputWithLeftClick(sorted)
-
-                    #Evaluate if in click range of any things
-                    for each in refined:
-                        print(x)
-                        print(y)
-                        if((each.attribute['pos'][0] < y < each.attribute['dim'][0] )&
-                            (each.attribute['pos'][1] < x < each.attribute['dim'][1])):
-
-                            eventhelper.call(each.attribute['eventID'])
-                            #in x and y
-
-
-                            print('TRUE')
-
-
-                    settings.grid[int(yTile)][int(xTile)].eventClick()
-                    object.create(uid='market', y=yTile, x=xTile, direction=2, dev=True)
+                    if(clickUsed == False):
+                        settings.grid[int(yTile)][int(xTile)].eventClick()
+                        object.create(uid='market', y=yTile, x=xTile, direction=2, dev=True)
                 elif(event.button == 3):
                     #Right Click
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)

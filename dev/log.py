@@ -7,7 +7,8 @@ class log:
         self.file = self.openFile()
         self.add(text, type)
 
-    def __exit__(self):
+    def close(self):
+        self.add('Program Terminated Gracefully',0)
         self.file.close()
 
     def openFile(self):

@@ -8,12 +8,6 @@ class welcome(base):
     def __init__(self):
         super(welcome, self).__init__()
 
-    def close(self):
-        #Clear interfaces
-        self.deleteInterface('output', 'all')
-        print(self.id)
-
-
     def addInputs(self):
         self.addInput(type='mouseAction', priority = 5, title='close', attribute={
             'click': 1,

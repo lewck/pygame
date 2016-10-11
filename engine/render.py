@@ -75,9 +75,11 @@ class render:
 
             if (each.data['type'] == 'text'):
                 try:
-                    font = eval('settings.' + each.data['attribute']['font'])
+                    font = settings.fonts[each.data['attribute']['font']][each.data['attribute']['size']]
                 except KeyError:
-                    font = eval('settings.primaryFont')
+                    settings.logObject.add('Font not found', 2)
+                    font = settings.fonts['primaryFont'][20]
+
                 rendered = font.render(each.data['attribute']['value'], True, (each.data['attribute']['color']))
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 

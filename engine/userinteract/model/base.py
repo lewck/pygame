@@ -35,3 +35,26 @@ class base:
 
             for each in toDelete:
                 del settings.activeOutDB[each]
+        elif(type=='input'):
+            toDelete = []
+            if(id=='all'):
+                for key, each in settings.activeEventDB.items():
+                    if(each.modelID == self.id):
+                        toDelete.append(key)
+
+            else:
+                del settings.activeEventDB[id]
+
+            for each in toDelete:
+                del settings.activeEventDB[each]
+
+    def deleteModel(self):
+        #Remove Output Interface
+        self.deleteInterface('output', 'all')
+        # Remove Input Interface
+        self.deleteInterface('input', 'all')
+
+
+    def close(self):
+        # Clear interfaces
+        self.deleteModel()

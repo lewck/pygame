@@ -3,30 +3,29 @@ from util.tool import tool
 
 
 class event:
-    def __init__(self, modelID, data, trigger):
+    def __init__(self, modelID, data, trigger, id):
         self.modelID = modelID
         self.data = data
-        self.id = tool.genRandomString(16)
+        self.id = id
         self.trigger = trigger
 
 
 
     def doEvent(self):
+        #Verify buffer not active
         getattr(settings.activeModelDB[self.modelID], self.trigger)()
         print('doneeve')
 
     @staticmethod
     def create(modelID, data, trigger):
-        settings.activeEventDB.append(event(modelID, data, trigger))
-        return settings.activeEventDB[len(settings.activeEventDB)-1].id
+        id = tool.genRandomString(16)
+        settings.activeEventDB[id] = event(modelID, data, trigger, id)
+        return id
 
 
 
     @staticmethod
     def call(eventID):
         # Find Position
-        for i in range(0, len(settings.activeEventDB)):
-            if (settings.activeEventDB[i].id == eventID):
-                settings.activeEventDB[i].doEvent()
-                break
+        settings.activeEventDB[eventID].doEvent()
 
