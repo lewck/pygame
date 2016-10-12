@@ -1,7 +1,5 @@
 import settings
 
-from item.vegetableCarrot import vegetableCarrot
-
 
 class factory:
     @staticmethod

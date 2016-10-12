@@ -42,7 +42,6 @@ settings.fonts = {
     },
 }
 
-
 gameExit = False
 x = 0
 lead_x = 300

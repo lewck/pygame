@@ -75,3 +75,12 @@ def init():
 
     global eventBuffer
     eventBuffer = True
+
+    global itemDB
+    itemDB={
+        'vegetable':{
+            'vegetableCarrot':{
+                'title': 'Carrot'
+            }
+        },
+    }

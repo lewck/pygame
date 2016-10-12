@@ -68,7 +68,14 @@ class render:
         for each in sor:
 
             try:
+
                 scale = each.data['attribute']['scale']
+
+                if(type(each.data['attribute']['scale'])==int):
+                    scaleType = 'relative'
+                else:
+                    #Assume tuple
+                    scaleType = 'fixed'
             except KeyError:
                 scale = 1
 
@@ -88,7 +95,11 @@ class render:
 
                 image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
                 w, h = image.get_size()
-                rendered = pygame.transform.scale(image, (int(w*scale), int(h*scale)))
+                if(scaleType=='relative'):
+                    rendered = pygame.transform.scale(image, (int(w*scale), int(h*scale)))
+                else:
+                    rendered = pygame.transform.scale(image, (int(scale[1]), int(scale[0])))
+
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
             elif (each.data['type'] == 'shape'):

@@ -28,23 +28,32 @@ class menufactorybuy(base):
             'color': (255, 255, 255)
         })
 
-
-
         self.addOutput(pos=[0, 0], type='shape', priority=5, title='shopBackground', attribute={
             'shape': 'rectangle',
             'dim': [512,512],
             'color': (51,51,51)
         })
 
+        max = len(settings.itemDB['vegetable'])-1
+        count = 0
+
         posx = 12
         posy = 100
         for y in range(0,8):
             for x in range(0,12):
-                self.addOutput(pos=[posy+2, posx+2], type='shape', priority=10, title='shopBackground'+str(y)+str(x), attribute={
+                self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority=10, title='shopBackground' + str(y) + str(x), attribute={
                     'shape': 'rectangle',
                     'dim': [39, 39],
                     'color': (0, 0, 0)
                 })
+
+                if(count<=max):
+                    self.addOutput(pos=[posy + 2, posx + 2], type='image', priority=20, title='nu',  attribute={
+                        'uid': list(settings.itemDB['vegetable'].keys())[count],
+                        'scale': (39,39)
+                    })
+                    count += 1
+
                 posx += 41
             posx = 12
             posy += 41

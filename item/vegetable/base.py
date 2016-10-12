@@ -1,8 +1,3 @@
-import pygame
-import settings
-
-
-
 class base:
     def __init__(self):
         self.setVars()
@@ -10,5 +5,3 @@ class base:
     def setVars(self):
         self.itemDetails = settings.itemDB[self.itemID]
         pass
-
-
