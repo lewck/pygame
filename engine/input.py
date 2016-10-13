@@ -52,8 +52,8 @@ class input():
                     buffer = []
                     for id, each in settings.activeEventDB.items():
                         if(each.data['attribute']['click']==1):
-                            if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['dim'][0]) &
-                                    (each.data['attribute']['pos'][1] < x < each.data['attribute']['dim'][1])):
+                            if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
+                                    (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
                                 clickUsed = True
                                 buffer.append(id)
 

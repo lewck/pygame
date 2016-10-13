@@ -25,9 +25,10 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 
-display_width = 1024
+display_width = 1366
 display_height = 768
 
+#settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 settings.surface = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Title')
 

@@ -9,4 +9,3 @@ class vegetableCarrot(base):
 
     def eat(self):
         print('u eaten the carrot nice 1')
-        print(self.itemID)

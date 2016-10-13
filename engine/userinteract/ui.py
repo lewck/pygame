@@ -26,7 +26,11 @@ class ui:
             #Register Inputs
             for out in each.input:
                 #Register with event handler
-                eid = event.create(modelID, out, out['attribute']['event'])
+                try:
+                    eid = event.create(modelID, out, out['attribute']['event'],  out['attribute']['eventArgs'])
+                except KeyError:
+                    #ASsume no event arguments
+                    eid = event.create(modelID, out, out['attribute']['event'], 0)
                 inReturn.append([eid,out['title']])
 
             # Register Outputs

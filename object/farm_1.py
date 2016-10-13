@@ -20,5 +20,5 @@ class farm_1(base):
             pass
             #chance grow increase
         if (tickID == 1):
-            if(self.inventory.addItem(1,8)=='INVFULL'):
+            if(self.inventory.addItem('vegetableCarrot',8)=='INVFULL'):
                 self.image = self.load(self.name+'_full')

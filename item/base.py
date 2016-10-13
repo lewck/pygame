@@ -8,7 +8,6 @@ class base:
         self.setVars()
 
     def setVars(self):
-        self.itemDetails = settings.itemDB[self.itemID]
+        #TODO make this work for non vegetables
+        self.itemDetails = settings.itemDB['vegetable'][self.id]
         pass
-
-
