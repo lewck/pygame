@@ -1,9 +1,10 @@
 from object.base import base
 
 class road(base):
-    def __init__(self, y, x, direction):
-        print('initRoad')
-        super(road, self).setVars(y,x,'road',0,direction, False)
+    def __init__(self, **kwargs):
+        self.type = 'transport'
+        self.title = 'road'
+        super(road, self).setVars(image='road', **kwargs)
         self.passable = [5]
 
     def eventClick(self):

@@ -7,42 +7,51 @@ class base:
     def __init__(self):
         print('base')
 
-    def setVars(self, ypos, xpos, base, image, direction, tickListen):
-        self.devOverlay = 0
-        self.ypos = ypos
-        self.xpos = xpos
+    def setVars(self, **kwargs):
+        #base, image, direction, tickListen
 
-        if(base!= 0):
-            self.base = self.load(base)
-        else:
-            self.base = 0
+        #Load Vars
+        provided = settings.objectDB[self.type][self.title]
 
-        if(image!=0):
-            self.image = self.load(image)
-        else:
-            self.image = 0
+        defaults = {
+            'devOverlay': 0,
+            'tickListen': [],
+        }
 
-        self.direction = direction
+
+
+        for key, value in provided.items():
+            setattr(self, key, value)
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+        for key, value in defaults.items():
+            if not(hasattr(self, key)):
+                #Set default
+                setattr(self, key, value)
+
+        self.image = self.load(self.image)
+
+        if(hasattr(self, 'base')):
+            self.base = self.load(self.base)
+
+
+        #static
         self.highlighted = False
-        self.tickListen = tickListen
         self.tickCount = 0
         self.inventory = 0
 
     def load(self, spriteID):
-        stmt = 'sprites/'+spriteID+'.png'
+        stmt = 'sprites/'+str(spriteID)+'.png'
         return pygame.image.load(stmt)
-
-    def log(self):
-        print('Clicked' + str(self.ypos) + str(self.xpos))
 
     def setPathDev(self,g,h,f):
         self.devOverlay = [g,h,f]
 
-
     def highlightAdd(self, direction):
         self.highlighted = True
         self.highlightedDirection = direction
-
 
     def highlight(self):
         directions = {
@@ -52,9 +61,8 @@ class base:
             3:'LF',
             4:'4'
         }
-        pygame.draw.rect(settings.surface, (255,0,0), [self.xpos*5*settings.zoom,self.ypos*5*settings.zoom,5*settings.zoom,5*settings.zoom])
-
-        settings.surface.blit(settings.devfont.render(directions[self.highlightedDirection], True, (255,255,255)), [self.xpos*5*settings.zoom,self.ypos*5*settings.zoom,5*settings.zoom,5*settings.zoom])
+        pygame.draw.rect(settings.surface, (255,0,0), [self.x*5*settings.zoom,self.y*5*settings.zoom,5*settings.zoom,5*settings.zoom])
+        settings.surface.blit(settings.devfont.render(directions[self.highlightedDirection], True, (255,255,255)), [self.x*5*settings.zoom,self.y*5*settings.zoom,5*settings.zoom,5*settings.zoom])
 
     def isPassible(self, entityid):
         if(entityid in self.passable):
@@ -69,6 +77,7 @@ class base:
                     self.doTick(i)
                     if(i==len(self.tickListen)):
                         self.tickCount = 0
+
             #print(self.tickCount)
             #TODO ticks not being reset
 

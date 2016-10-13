@@ -6,6 +6,7 @@ from jobset.factory import factory as jobset
 from legacy.ui.uis.helper import helper as uishelper
 from object.factory import factory as object
 from util.tool import tool
+from engine.userinteract.ui import ui
 
 
 class input():
@@ -49,20 +50,25 @@ class input():
                     '   itself). Every event is added to a buffer then performed after the loop is completed in order.
                     '
                     '''
-                    buffer = []
-                    for id, each in settings.activeEventDB.items():
-                        if(each.data['attribute']['click']==1):
-                            if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
-                                    (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
-                                clickUsed = True
-                                buffer.append(id)
+                    if(settings.inputBuffer == []):
+                        buffer = []
+                        for id, each in settings.activeEventDB.items():
+                            if(each.data['attribute']['click']==1):
+                                if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
+                                        (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
+                                    clickUsed = True
+                                    buffer.append(id)
 
-                    for each in buffer:
-                        settings.activeEventDB[each].doEvent()
+                        for each in buffer:
+                            settings.activeEventDB[each].doEvent()
 
-                    if(clickUsed == False):
-                        settings.grid[int(yTile)][int(xTile)].eventClick()
-                        object.create(uid='market', y=yTile, x=xTile, direction=2, dev=True)
+                        if(clickUsed == False):
+                            settings.grid[int(yTile)][int(xTile)].eventClick()
+                    else:
+                        if(settings.inputBuffer[0] == 'setObject'):
+                            object.create(obj = settings.inputBuffer[1], y=yTile, x=xTile)
+                            settings.inputBuffer = []
+
                 elif(event.button == 3):
                     #Right Click
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
@@ -82,6 +88,21 @@ class input():
                     if (event.key == pygame.K_F4):
                         print('spawn dev')
                         object.create(uid='garage', y=0, x=0, direction=0)
+
+                    if(event.key == pygame.K_F9):
+                        if(settings.activeUI['menuproducerbuy']==False):
+                            settings.activeUI['menuproducerbuy'] = ui.create('menuproducerbuy')
+                        else:
+                            settings.activeModelDB[settings.activeUI['menuproducerbuy']].close()
+                            settings.activeUI['menuproducerbuy'] = False
+
+                    if (event.key == pygame.K_F10):
+                        if (settings.activeUI['menustoragebuy'] == False):
+                            settings.activeUI['menustoragebuy'] = ui.create('menustoragebuy')
+                        else:
+                            settings.activeModelDB[settings.activeUI['menustoragebuy']].close()
+                            settings.activeUI['menustoragebuy'] = False
+
                     if (event.key == pygame.K_SLASH):
                         devInputBuffer = True
 

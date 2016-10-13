@@ -32,7 +32,7 @@ class pathFind():
         return False
 
     def checkNeighbours(self):
-        #UP
+        #Up
         if(self.current.y-1>=0):
             if(not self.checkClosed(self.current.y-1, self.current.x))and self.isPassible(self.current.y-1, self.current.x ) and (not(self.isOpen(self.current.y-1, self.current.x))):
                 #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
@@ -42,12 +42,13 @@ class pathFind():
             if (not self.checkClosed(self.current.y, self.current.x-1)) and self.isPassible(self.current.y, self.current.x-1) and (not(self.isOpen(self.current.y, self.current.x-1))):
                 #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
                 self.open.append(node(self.current.y, self.current.x-1,[self.current.y, self.current.x,3, self.current.parent], self.sets))
-        #right
-        if (self.current.x+1 <=9):
+        #Right
+        if (self.current.x+1 <= settings.xMax -1):
             if (not self.checkClosed(self.current.y, self.current.x+1))and self.isPassible(self.current.y, self.current.x+1) and (not(self.isOpen(self.current.y, self.current.x+1))):
                 #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
                 self.open.append(node(self.current.y, self.current.x+1,[self.current.y, self.current.x, 1,self.current.parent], self.sets))
-        if (self.current.y+1 <= 9):
+        #Down
+        if (self.current.y+1 <= settings.yMax -1):
             if (not self.checkClosed(self.current.y + 1, self.current.x))and self.isPassible(self.current.y+1, self.current.x) and (not(self.isOpen(self.current.y+1, self.current.x))):
                 #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
                 self.open.append(

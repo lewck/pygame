@@ -8,9 +8,9 @@ def init():
     global grid
     grid = []
     global xMax
-    xMax = 20
+    xMax = 15
     global yMax
-    yMax = 12
+    yMax = 10
     global surface
     surface = 0
     global itemIDName
@@ -76,6 +76,9 @@ def init():
     global eventBuffer
     eventBuffer = True
 
+    global inputBuffer
+    inputBuffer = []
+
     global itemDB
     itemDB={
         'vegetable':{
@@ -83,4 +86,38 @@ def init():
                 'title': 'Carrot'
             }
         },
+    }
+    global objectDB
+    objectDB = {
+        'placeholder': {
+            'empty': {
+                'title': 'empty',
+                'tickListen': []
+            }
+        },
+        'storage': {
+            'genericHouse': {
+                'title': 'genericHouse',
+                'tickListen': []
+            },
+        },
+        'producer': {
+            'farm_1': {
+                'title': 'farm_1',
+                'tickListen': [1,10],
+                'price': 100,
+            },
+        },
+        'transport': {
+            'road': {
+                'title': 'road',
+                'tickListen': []
+            },
+        }
+    }
+
+    global activeUI
+    activeUI = {
+        'menuproducerbuy': False,
+        'menustoragebuy': False,
     }

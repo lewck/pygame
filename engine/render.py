@@ -64,7 +64,6 @@ class render:
         #Order by priority
         sor = tool.bubbleSort(values=settings.activeOutDB, localvariable='priority')
 
-
         for each in sor:
 
             try:
@@ -110,10 +109,6 @@ class render:
 
             else:
                 settings.logObject.add('Not Rendered type' + str(each.data['type']), 2)
-
-
-        # legacy
-
 
 
 

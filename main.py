@@ -25,8 +25,8 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 
-display_width = 1366
-display_height = 768
+display_width = 1000
+display_height = 500
 
 #settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 settings.surface = pygame.display.set_mode((display_width,display_height))
@@ -70,8 +70,6 @@ settings.activeEntityDB.append(entity.create(uid='car'))
 devInputBuffer = False
 devInputKey = ''
 
-val = ui.create('menufactorybuy')
-
 
 
 mainMenu = False
@@ -81,8 +79,6 @@ while not settings.gameExit:
     '   Check for main menu
     '''
     if(mainMenu == True):
-
-
         render.render()
     else:
         '''

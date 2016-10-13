@@ -13,21 +13,42 @@ from object.garage import garage
 class factory:
     @staticmethod
     def getObject(**kwargs):
-        results = eval(kwargs['uid'] + '(kwargs["y"],kwargs["x"],kwargs["direction"])')
 
-        if results.base == 0:
-            results.base = settings.grid[kwargs['y']][kwargs['x']].base
+        results = eval(kwargs['uid'] + '(**kwargs)')
+
 
         return results
 
     @staticmethod
     def create(**kwargs):
-        result = factory.getObject(**kwargs)
-        if 'dev' in kwargs:
-            #Force Create
-            settings.grid[kwargs['y']][kwargs['x']] = result
+        if('obj' in kwargs):
+            result = kwargs['obj']
         else:
-            #Check balance etc
-            if (shop.purchase(result.price)):
+            result = factory.getObject(**kwargs)
+
+        if 'y' in kwargs:
+            if not (hasattr(result, 'base')):
+                #Use existing base
+                result.base = settings.grid[kwargs['y']][kwargs['x']].base
+
+        if 'y' in kwargs:
+            #Assume needs plot
+            if 'dev' in kwargs:
+                #Force Create
                 settings.grid[kwargs['y']][kwargs['x']] = result
+                return True
+            else:
+                #Check balance etc
+                if (shop.purchase(result.price)):
+                    settings.grid[kwargs['y']][kwargs['x']] = result
+                    return True
+
+
+        else:
+            #Assume wants object
+            if (shop.purchase(result.price)):
+                return result
+
+        return False
+
 

@@ -61,9 +61,10 @@ class moveItem(base):
                     self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventory.takeItem('all', settings.activeEntityDB[self.entity].inventory.size)
                     settings.activeEntityDB[self.entity].inventory.loadItem(self.itemBuffer)
                     self.taskCurrent += 1
+
+
             if(self.startPosition[2]==1 or self.startPosition[2]==3):
                 pass
-
                 #TODO COMPLETE
 
         if(self.taskCurrent == 3):

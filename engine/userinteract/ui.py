@@ -1,5 +1,6 @@
 from engine.userinteract.model.welcome import welcome
-from engine.userinteract.model.menufactorybuy import menufactorybuy
+from engine.userinteract.model.menustoragebuy import menustoragebuy
+from engine.userinteract.model.menuproducerbuy import menuproducerbuy
 from engine.event import event
 from engine.out import out as outObj
 from util.tool import tool
@@ -40,6 +41,7 @@ class ui:
                 outReturn.append([eid,out['title']])
 
             each.addInterfaces(inReturn, outReturn)
+        return modelID
 
     @staticmethod
     def reloadModel(modelID):

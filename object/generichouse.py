@@ -2,11 +2,15 @@ from object.base import base
 from inventory import inventory
 
 class genericHouse(base):
-    def __init__(self, y, x, direction):
+    def __init__(self, **kwargs):
         print('initHouse')
-        super(genericHouse, self).setVars(y,x,0,'house',direction, False)
+        self.type = 'storage'
+        self.title = 'genericHouse'
+        super(genericHouse, self).setVars(image = 'genericHouse', **kwargs)
+
         self.passable = []
         self.inventory = inventory(20)
+        self.price = 200
 
     def eventClick(self):
         super(genericHouse, self).log()

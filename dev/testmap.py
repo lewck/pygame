@@ -35,8 +35,7 @@ class testmap:
         #object.create('garage', 1,4,3)
         object.create(uid='road', y=2, x=3, direction=0, dev=True)
         object.create(uid='road', y=3, x=3, direction=0, dev=True)
-        object.create(uid='genericHouse', y=3, x=2, direction=2, dev=True)
-
+        object.create(uid='genericHouse', y=5, x=2, direction=2, dev=True)
         object.create(uid='farm_1', y=0, x=1, direction=2, dev=True)
 
 

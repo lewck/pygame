@@ -11,7 +11,6 @@ class helper:
             for x in range(0,len(settings.grid[y])):
                 if(settings.grid[y][x].hasInventory()):
                     #Has invntory
-
                     if(not settings.grid[y][x].inventory.isFull()):
                         #Not full
                         store.append(helper.getInteractPosition(y,x,settings.grid[y][x].direction))
