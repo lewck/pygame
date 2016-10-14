@@ -79,7 +79,7 @@ class input():
             elif (event.type == pygame.KEYDOWN):
                 if (settings.devInputBuffer == False):
                     if (event.key == pygame.K_F1):
-                        jobset.create(typ='collectFromObjectAndStore', startPosition=[0,1,2])
+                        pass
 
                     if (event.key == pygame.K_F2):
                         devmap.create(0)
