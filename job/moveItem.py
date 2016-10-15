@@ -37,14 +37,8 @@ class moveItem(base):
 
             if(self.path):
                 #Assign entity to path
-                entities = entityhelper.veichleGetAvailable()
-                if(entities):
-                    self.entity = entities[0]
-                    self.assign(entities[0])
-                    self.taskCurrent += 1
-                else:
-                    #No Vehical
-                    print('No Active Vehicals')
+                self.assign(self.entityID)
+                self.taskCurrent += 1
             else:
                 print('waiting for path')
 
@@ -58,8 +52,8 @@ class moveItem(base):
                 if(settings.grid[self.startPosition[0]+options[self.startPosition[2]]][self.startPosition[1]]).hasInventory():
                     print('INVENTORY FOUND')
                     #TODO wait for full inventory
-                    self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventory.takeItem('all', settings.activeEntityDB[self.entity].inventory.size)
-                    settings.activeEntityDB[self.entity].inventory.loadItem(self.itemBuffer)
+                    self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventory.takeItem('all', settings.activeEntityDB[self.entityID].inventory.size)
+                    settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
                     self.taskCurrent += 1
 
 
@@ -69,7 +63,7 @@ class moveItem(base):
 
         if(self.taskCurrent == 3):
             #Move Vehical
-            settings.activeEntityDB[self.entity].status = 1
+            settings.activeEntityDB[self.entityID].status = 1
 
         if(self.taskCurrent==4):
             #Move to new inventory

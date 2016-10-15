@@ -5,12 +5,14 @@ from item.factory import factory as item
 '
 '''
 class inventory:
-    def __init__(self, size, type='items'):
+    def __init__(self, size, type='item'):
         self.size = size
         self.inventory = []
         self.currentSize = 0
+        self.type = type
     
     def addItem(self, itemID, quantity):
+
         if(self.currentSize+quantity <= self.size):
             for i in range(0,quantity):
                 self.inventory.append(item.create(item=itemID, quantity=quantity))

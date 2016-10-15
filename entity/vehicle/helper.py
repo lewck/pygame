@@ -4,10 +4,15 @@ class helper:
     @staticmethod
     def getAvailable():
         toReturn = []
-        for i in range(0, len(settings.activeEntityDB)):
-            if(settings.activeEntityDB[i].type == 'vehicle'):
-                if(settings.activeEntityDB[i].status==0):
+
+        for id, each in settings.activeEntityDB.items():
+            if(each.type == 'vehicle'):
+                if(each.status==0):
                     #Free
-                    toReturn.append(i)
+                    toReturn.append(id)
 
         return toReturn
+
+    @staticmethod
+    def evaluateBest(pos):
+        return helper.getAvailable()[0]

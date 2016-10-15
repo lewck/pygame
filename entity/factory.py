@@ -1,18 +1,27 @@
 import settings
 from entity.car import car
+from util.tool import tool
+
+from object.helper import helper as objecthelper
+
 
 class factory:
     @staticmethod
     def create(**args):
-        print(args)
-        #Return object of UID
-        results = []
-        print(args)
+        id = tool.genRandomString(16)
+
         uid = args['uid']
-        print(uid)
+        result = (eval(uid+'(**args, id=id)'))
 
-        result = (eval(uid+'(**args)'))
+        if(result.type=='vehicle'):
+            #Find suitable storage
+            storage = objecthelper.getEmptyStorage('vehicle')[0]
+            print(storage)
 
-        return result
+            result.pos = [storage[0], storage[1]]
+
+        settings.activeEntityDB[id] = result
+
+        return id
 
 

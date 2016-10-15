@@ -15,6 +15,7 @@ class base:
         self.tickCount = 0
         self.status = 0
         self.firstMove = True
+        pos = []
 
     def assign(self, jobID):
         print('Assignining to '+str(jobID))

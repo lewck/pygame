@@ -66,7 +66,7 @@ settings.zoom = 10
 settings.surface.fill(white)
 message = False
 
-settings.activeEntityDB.append(entity.create(uid='car'))
+
 devInputBuffer = False
 devInputKey = ''
 
@@ -90,7 +90,7 @@ while not settings.gameExit:
 
         render.render()
 
-        for each in settings.activeEntityDB:
+        for key, each in settings.activeEntityDB.items():
             if(each.status!=0):
                 each.tick()
                 each.draw()

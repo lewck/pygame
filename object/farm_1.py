@@ -11,8 +11,9 @@ class farm_1(base):
 
         super(farm_1, self).setVars(image='farm_1', **kwargs)
         self.passable = []
-        self.inventory = inventory(500)
+        self.inventory = inventory(30)
         self.status = 0
+        self.used = False
 
 
     def eventClick(self):
@@ -26,10 +27,10 @@ class farm_1(base):
 
 
         if (tickID == 1):
-            if(self.inventory.addItem('vegetableCarrot',8)=='INVFULL') & (self.status!=1):
+            if(self.inventory.addItem('vegetableCarrot',8)=='INVFULL') & (self.used==False):
 
                 self.image = self.load(self.title+'_full')
 
                 print('ADDING JOB')
-                if(jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction])):
-                    self.status = 1
+                jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction])
+                self.used = True

@@ -1,4 +1,5 @@
 from job.moveItem import moveItem
+from job.movevehicle import movevehicle
 import settings
 
 class factory():

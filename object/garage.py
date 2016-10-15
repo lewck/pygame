@@ -2,15 +2,15 @@ from object.base import base
 from inventory import inventory
 
 class garage(base):
-    def __init__(self, y, x, direction):
+    def __init__(self, **kwargs):
         print('initGarage')
         self.type = 'storageVehicles'
         self.title = 'garage'
 
-        super(garage, self).setVars()
+        super(garage, self).setVars(image=self.title, **kwargs)
 
         self.passable = []
-        self.inventory = inventory(10, 'vehicles')
+        self.inventory = inventory(10, 'vehicle')
         self.price = 50000
 
 

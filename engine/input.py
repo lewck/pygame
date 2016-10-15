@@ -7,7 +7,7 @@ from legacy.ui.uis.helper import helper as uishelper
 from object.factory import factory as object
 from util.tool import tool
 from engine.userinteract.ui import ui
-
+from entity.factory import factory as entity
 
 class input():
     @staticmethod

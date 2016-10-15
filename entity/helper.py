@@ -8,3 +8,7 @@ class helper:
     @staticmethod
     def veichleGetAvailable():
         return (vehiclehelper.getAvailable())
+
+    @staticmethod
+    def vehicleEvaluateBest(pos):
+        return (vehiclehelper.evaluateBest(pos))

@@ -29,7 +29,7 @@ def init():
     pathDB = []
 
     global activeEntityDB
-    activeEntityDB = []
+    activeEntityDB = {}
 
     global activeJobDB
     activeJobDB = []
@@ -98,6 +98,12 @@ def init():
         'storage': {
             'genericHouse': {
                 'title': 'genericHouse',
+                'tickListen': []
+            },
+        },
+        'storageVehicles': {
+            'garage': {
+                'title': 'garage',
                 'tickListen': []
             },
         },
