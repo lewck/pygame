@@ -23,11 +23,10 @@ class input():
                 '
                 '''
                 if (event.button == 5):
-                    settings.zoom -= 5
-                    settings.surface.fill(settings.color['white'])
+                    if(settings.zoom != 1):
+                        settings.zoom -= 1
                 elif (event.button == 4):
-                    settings.zoom += 5
-                    settings.surface.fill(settings.color['white'])
+                    settings.zoom += 1
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clickUsed = False
@@ -64,6 +63,7 @@ class input():
 
                         if(clickUsed == False):
                             settings.grid[int(yTile)][int(xTile)].eventClick()
+                            object.create(uid='genericHouse', y=int(yTile), x=int(xTile), direction=2)
                     else:
                         if(settings.inputBuffer[0] == 'setObject'):
                             object.create(obj = settings.inputBuffer[1], y=yTile, x=xTile)
@@ -79,7 +79,7 @@ class input():
             elif (event.type == pygame.KEYDOWN):
                 if (settings.devInputBuffer == False):
                     if (event.key == pygame.K_F1):
-                        pass
+                        devmap.create(2)
 
                     if (event.key == pygame.K_F2):
                         devmap.create(0)

@@ -10,6 +10,7 @@ from engine.userinteract.ui import ui
 from object.factory import factory as object
 from player.player import player
 from util.grid import grid
+from mapgenerator import mapgenerator
 
 pygame.init()
 settings.init()
@@ -25,8 +26,8 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 
-display_width = 1000
-display_height = 500
+display_width = 1500
+display_height = 1000
 
 #settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 settings.surface = pygame.display.set_mode((display_width,display_height))
@@ -57,6 +58,7 @@ settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
+
 
 settings.player = player()
 

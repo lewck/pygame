@@ -8,9 +8,9 @@ def init():
     global grid
     grid = []
     global xMax
-    xMax = 15
+    xMax = 50
     global yMax
-    yMax = 10
+    yMax = 30
     global surface
     surface = 0
     global itemIDName
