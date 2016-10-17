@@ -7,6 +7,7 @@ from object.road import road
 from object.farm_1 import farm_1
 from object.market import market
 from object.garage import garage
+from object.factory_parts import factory_parts
 
 
 

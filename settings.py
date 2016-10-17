@@ -8,9 +8,9 @@ def init():
     global grid
     grid = []
     global xMax
-    xMax = 50
+    xMax = 20
     global yMax
-    yMax = 30
+    yMax = 20
     global surface
     surface = 0
     global itemIDName
@@ -111,6 +111,11 @@ def init():
             'farm_1': {
                 'title': 'farm_1',
                 'tickListen': [1,10],
+                'price': 100,
+            },
+            'factory_parts': {
+                'title': 'factory_parts',
+                'tickListen': [1, 10],
                 'price': 100,
             },
         },

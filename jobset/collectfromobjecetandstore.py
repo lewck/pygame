@@ -16,23 +16,12 @@ class collectFromObjectAndStore(base):
         self.tickListen = [5,10]
         super(collectFromObjectAndStore, self).__init__(**kwargs)
 
-
     def task(self):
         if(self.taskCurrent==1):
-            if (self.status == 1):
-                entity.create(uid='car')
-                #Get car from garage
-                self.vehicleID = entityhelper.vehicleEvaluateBest([1, 1])
+            entity.create(uid='car')
+            #Decide best vehicle
+            self.vehicleID = entityhelper.vehicleEvaluateBest([self.startPosition[0], self.startPosition[1]])
 
-                pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
-                                                                  self.startPosition[2])
-
-                job.create(typ='movevehicle', parent=self.jobsetID, entityID=self.vehicleID, endPosition = [pathStart[0], pathStart[1]])
-
-                self.status = 0
-
-
-        if(self.taskCurrent==2):
             # decide best storage
             tmp = objecthelper.evaluateBestStorage([1, 1], 'item')
             if (tmp):
@@ -46,8 +35,7 @@ class collectFromObjectAndStore(base):
 
             self.taskCurrent += 1
 
-
-        if(self.taskCurrent==3):
+        if(self.taskCurrent==2):
             # Begin
             # Collect, move, deposit
             if (self.status == 1):
@@ -55,7 +43,7 @@ class collectFromObjectAndStore(base):
                            parent=self.jobsetID, entityID = self.vehicleID)
                 self.status = 0
 
-        if(self.taskCurrent==4):
+        if(self.taskCurrent==3):
             # Callback from entity, job completed
             # Send car back to storage
             # Find nearest garage
