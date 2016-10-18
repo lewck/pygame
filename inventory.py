@@ -1,5 +1,5 @@
 from item.factory import factory as item
-
+import settings
 '''
 '
 '
@@ -11,11 +11,11 @@ class inventory:
         self.currentSize = 0
         self.type = type
     
-    def addItem(self, itemID, quantity):
+    def addItem(self, itemID, quantity = 1):
 
         if(self.currentSize+quantity <= self.size):
             for i in range(0,quantity):
-                self.inventory.append(item.create(item=itemID, quantity=quantity))
+                self.inventory.extend(item.create(item=itemID, quantity=quantity))
                 self.currentSize += 1
             return True
         else:
@@ -23,22 +23,46 @@ class inventory:
                 #Not completely full
                 toFill = self.size-self.currentSize
                 for i in range(0, toFill):
-                    self.inventory.append(item.create(item=itemID, quantity=quantity))
+                    self.inventory.extend(item.create(item=itemID, quantity=quantity))
                     self.currentSize += 1
                 return 'INVFULL'
             else:
                 #Completely full
                 return 'INVFULL'
 
+    def buildItem(self, id):
+        toRemove = settings.itemDB[id]['required']
+
+        for key, quantity in toRemove.items():
+            self.removeItem(id= key, quantity=quantity)
+
+        self.addItem(id,1)
+
 
     def loadItem(self, itemBuffer):
+        print(self.inventory)
         if(len(itemBuffer)<self.size - len(self.inventory)):
-            self.inventory.append(itemBuffer)
+            print('---')
+            self.inventory.extend(itemBuffer)
+            print(self.inventory)
 
     def removeItem(self, **kwargs):
-        if(kwargs['position']):
+        if('position' in kwargs):
             #Assume inter-class method
             del self.inventory[kwargs['position']]
+
+        if('id' in kwargs):
+            count = 0
+            deleteBuffer = []
+            for i in range(0, len(self.inventory)):
+                if(self.inventory[i].id == kwargs['id']) & (count < kwargs['quantity']):
+                    deleteBuffer.append(i)
+                    count+= 1
+
+            mod = 0
+            for i in range(0, len(deleteBuffer)):
+                del self.inventory[i-mod]
+                mod += 1
 
     def takeItem(self, type, quantity):
         #
@@ -58,3 +82,13 @@ class inventory:
             return True
         return False
 
+    def has(self, id, quantity):
+        count = 0
+        for each in self.inventory:
+            if (each.id == id):
+                count += 1
+
+        if(count>=quantity):
+            return True
+
+        return False

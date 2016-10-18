@@ -74,9 +74,20 @@ class moveItem(base):
                 print(self.startPosition[1])
                 if (settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]]).hasInventory():
                     print('INVENTORY FOUND')
-                    # TODO wait for full inventory
-
                     settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]].inventory.loadItem(self.itemBuffer)
+                    self.taskCurrent += 1
+
+            if (self.endPosition[2] == 1 or self.endPosition[2] == 3):
+                # Handle x change
+                print('checking')
+                print(self.endPosition[0])
+                print(self.startPosition[1])
+
+                if (settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]]).hasInventory():
+
+                    print('INVENTORY FOUND')
+
+                    settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(self.itemBuffer)
                     self.taskCurrent += 1
 
         if(self.taskCurrent==5):

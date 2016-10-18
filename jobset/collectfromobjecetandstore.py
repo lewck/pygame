@@ -26,6 +26,8 @@ class collectFromObjectAndStore(base):
             tmp = objecthelper.evaluateBestStorage([1, 1], 'item')
             if (tmp):
                 self.pathEnd = tmp
+                print('--')
+                print(self.pathEnd)
             else:
                 # Could not find storage
                 pass

@@ -8,16 +8,11 @@ def init():
     global grid
     grid = []
     global xMax
-    xMax = 20
+    xMax = 10
     global yMax
-    yMax = 20
+    yMax = 10
     global surface
     surface = 0
-    global itemIDName
-    itemIDName = {
-        1: ['vegetableCarrot'],
-        2: ['vegetableMore']
-    }
     global log
     log = False
     global logObject
@@ -86,6 +81,16 @@ def init():
                 'title': 'Carrot'
             }
         },
+        'body': {
+            'title': 'body',
+            'required' : {}
+        },
+        'plane':{
+            'title': 'Plane',
+            'required' : {
+                'body':3,
+            }
+        }
     }
     global objectDB
     objectDB = {
