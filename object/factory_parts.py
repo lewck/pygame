@@ -11,9 +11,10 @@ class factory_parts(base):
 
         super(factory_parts, self).setVars(image=self.title, **kwargs)
         self.passable = []
-        self.inventory = inventory(30)
+        self.inventory = inventory(30+settings.mod)
         self.status = 0
         self.used = False
+        settings.mod = -20
 
     def doTick(self, tickID):
 
@@ -25,16 +26,21 @@ class factory_parts(base):
 
         if (tickID == 1):
             if(settings.itemDB[self.part]['required']=={}):
+
                 if(self.inventory.addItem('body',8)=='INVFULL') & (self.used==False):
 
                     self.image = self.load(self.title+'_full')
 
                     jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction])
                     self.used = True
+
             else:
                 #Assume has to check inventory for parts
+                print('inv')
+                print(self.inventory.inventory)
+                print(len(self.inventory.inventory))
+
                 if(self.inventory.has('body', 2)):
                     if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
+                        print('FULL INVENTORY')
                         pass
-                    print(self.inventory.inventory)
-                    print(len(self.inventory.inventory))

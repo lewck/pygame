@@ -12,7 +12,7 @@ class car(base):
         super(car, self).setVars()
         self.image = pygame.image.load('sprites/car.png')
         self.tickListen = [5]
-        self.inventory = inventory(10)
+        self.inventory = inventory(20)
 
     def followPath(self):
         pass

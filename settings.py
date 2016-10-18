@@ -88,7 +88,7 @@ def init():
         'plane':{
             'title': 'Plane',
             'required' : {
-                'body':3,
+                'body':2,
             }
         }
     }
@@ -137,3 +137,6 @@ def init():
         'menuproducerbuy': False,
         'menustoragebuy': False,
     }
+
+    global mod
+    mod = 0

@@ -31,7 +31,9 @@ class inventory:
                 return 'INVFULL'
 
     def buildItem(self, id):
+        print('build trigger')
         toRemove = settings.itemDB[id]['required']
+        print(toRemove)
 
         for key, quantity in toRemove.items():
             self.removeItem(id= key, quantity=quantity)
@@ -47,6 +49,7 @@ class inventory:
             print(self.inventory)
 
     def removeItem(self, **kwargs):
+
         if('position' in kwargs):
             #Assume inter-class method
             del self.inventory[kwargs['position']]
@@ -71,11 +74,25 @@ class inventory:
         if(type=='all'):
             if(len(self.inventory)>= quantity):
                 #Scrape from top of inventory
-                toReturn = self.inventory[0:quantity]
-                for i in range(0, quantity):
-                    self.removeItem(position=5)
+                toReturn = self.inventory[0:(quantity)]
 
+                for i in range(0, quantity):
+                    print(i)
+                    self.removeItem(position=0)
+
+                print('returning')
                 return(toReturn)
+
+            else:
+                #IDK
+                toReturn = self.inventory
+                print('ret')
+                print(toReturn)
+                for i in range(0, len(self.inventory)):
+                    self.removeItem(position=0)
+
+                print(self.inventory)
+                return toReturn
 
     def isFull(self):
         if (len(self.inventory) == self.size):
