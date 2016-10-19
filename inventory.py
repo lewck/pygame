@@ -85,14 +85,17 @@ class inventory:
 
             else:
                 #IDK
-                toReturn = self.inventory
-                print('ret')
-                print(toReturn)
+                toRet = list(self.inventory)
+
+                print('ret'+str(toRet))
+
                 for i in range(0, len(self.inventory)):
                     self.removeItem(position=0)
 
+                print('inv')
                 print(self.inventory)
-                return toReturn
+                print('ss'+str(toRet))
+                return toRet
 
     def isFull(self):
         if (len(self.inventory) == self.size):

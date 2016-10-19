@@ -50,16 +50,21 @@ class moveItem(base):
                 print('checking')
 
                 if(settings.grid[self.startPosition[0]+options[self.startPosition[2]]][self.startPosition[1]]).hasInventory():
-                    print('INVENTORY FOUND')
+                    print('INVENTORY FOUND 1')
                     #TODO wait for full inventory
                     self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventory.takeItem('all', settings.activeEntityDB[self.entityID].inventory.size)
+
+                    print('-----')
+                    print('VAR'+str(self.itemBuffer))
                     settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
+                    print('-')
+                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
                     self.taskCurrent += 1
 
 
             if(self.startPosition[2]==1 or self.startPosition[2]==3):
                 pass
-                #TODO COMPLETE
+                #TODO COMPLETE FOR X
 
         if(self.taskCurrent == 3):
             #Move Vehical
@@ -85,9 +90,11 @@ class moveItem(base):
 
                 if (settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]]).hasInventory():
 
-                    print('INVENTORY FOUND')
+                    print('INVENTORY FOUND 2')
+                    print(self.itemBuffer)
+                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
 
-                    settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(self.itemBuffer)
+                    settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(settings.activeEntityDB[self.entityID].inventory.inventory)
                     self.taskCurrent += 1
 
         if(self.taskCurrent==5):

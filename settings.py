@@ -81,10 +81,12 @@ def init():
                 'title': 'Carrot'
             }
         },
+
         'body': {
             'title': 'body',
             'required' : {}
         },
+
         'plane':{
             'title': 'Plane',
             'required' : {

@@ -36,11 +36,30 @@ class factory_parts(base):
 
             else:
                 #Assume has to check inventory for parts
+                data = settings.itemDB[self.part]
+
+                hasItems = 0
+
+                for name, quantity in data['required'].items():
+                    if(self.inventory.has(name, quantity)):
+                        hasItems += 1
+
+
+                print('dbg')
+                print(data['required'])
+
+                print(len(data['required']))
+                print(hasItems)
+
+                if((len(data['required'])) == hasItems):
+                    print('CAN CONSTRUCT')
+                    if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
+                        print('FULL INVENTORYY')
+                        pass
+
+
                 print('inv')
                 print(self.inventory.inventory)
                 print(len(self.inventory.inventory))
 
-                if(self.inventory.has('body', 2)):
-                    if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
-                        print('FULL INVENTORY')
-                        pass
+
