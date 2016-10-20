@@ -18,6 +18,7 @@ class moveItem(base):
         super(moveItem, self).__init__(**kwargs)
         #begin task 1
         self.taskCurrent = 1
+        self.assigned = False
 
     def assign(self, entityID):
         settings.activeEntityDB[entityID].assign(self.jobID)
@@ -68,7 +69,10 @@ class moveItem(base):
 
         if(self.taskCurrent == 3):
             #Move Vehical
-            settings.activeEntityDB[self.entityID].status = 1
+            if(self.assigned == False):
+                print('ASSIGNING STATUS TO '+str(self.entityID))
+                settings.activeEntityDB[self.entityID].status = 1
+                self.assigned = True
 
         if(self.taskCurrent==4):
             #Move to new inventory

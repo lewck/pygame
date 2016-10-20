@@ -35,7 +35,8 @@ class car(base):
             base1 = pygame.transform.rotate(base, directionRotation[self.direction])
 
         settings.surface.blit(base1, (self.x, self.y))
-
+        print("I'm blitting for!")
+        print(self.jobID)
 
     def loadItems(self):
         self.inventory.addItem()
@@ -43,6 +44,9 @@ class car(base):
     def doTick(self, tickID):
         if(tickID==0):
             if(self.status==1):
+                print("I'm ticking for!")
+                print(self.jobID)
+
                 xTile = (int(self.x / (5 * settings.zoom)))
                 yTile = (int(self.y / (5 * settings.zoom)))
                 

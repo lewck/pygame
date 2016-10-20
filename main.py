@@ -93,7 +93,9 @@ while not settings.gameExit:
         render.render()
 
         for key, each in settings.activeEntityDB.items():
+            print('checking for '+str(key))
             if(each.status!=0):
+                print('Correct for '+str(key))
                 each.tick()
                 each.draw()
 

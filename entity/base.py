@@ -19,7 +19,11 @@ class base:
 
     def assign(self, jobID):
         print('Assignining to '+str(jobID))
-        self.job = settings.activeJobDB[0]
+
+        for each in settings.activeJobDB:
+            if(each.jobID == jobID):
+                self.job = each
+
         self.path = settings.pathDB[settings.activeJobDB[0].path]
         print('---')
         print(self.path)
@@ -30,7 +34,7 @@ class base:
 
         print(self.job)
 
-        print('ASSIGNDEBUG')
+        print('ASSIGN DEBUG')
         print(self.x)
         print(self.y)
 
