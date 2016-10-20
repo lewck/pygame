@@ -19,8 +19,7 @@ class waitForItems(base):
         self.items = kwargs['items']
 
     def task(self):
-        print('waiting for items')
-        print(self.items)
+        pass
 
     def needsItem(self, itemID):
         print(self.items)

@@ -98,7 +98,7 @@ class moveItem(base):
                     print(self.itemBuffer)
                     print(settings.activeEntityDB[self.entityID].inventory.inventory)
 
-                    settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(settings.activeEntityDB[self.entityID].inventory.inventory)
+                    settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(self.itemBuffer)
                     self.taskCurrent += 1
 
         if(self.taskCurrent==5):

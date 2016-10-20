@@ -74,7 +74,7 @@ class inventory:
         if(type=='all'):
             if(len(self.inventory)>= quantity):
                 #Scrape from top of inventory
-                toReturn = self.inventory[0:(quantity)]
+                toReturn = self.inventory[0:(quantity)-1]
 
                 for i in range(0, quantity):
                     print(i)
@@ -85,6 +85,7 @@ class inventory:
 
             else:
                 #IDK
+                print('TORET TRIGGERED')
                 toRet = list(self.inventory)
 
                 print('ret'+str(toRet))

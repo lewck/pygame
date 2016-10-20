@@ -43,38 +43,11 @@ class testmap:
         object.create(uid='road', y=6, x=2, direction=0, dev=True)
         object.create(uid='genericHouse', y=5, x=2, direction=2, dev=True)
         object.create(uid='factory_parts', y=0, x=1, direction=2, dev=True, part='body')
-        object.create(uid='factory_parts', y=0, x=2, direction=2, dev=True, part='body')
-        object.create(uid='factory_parts', y=0, x=3, direction=2, dev=True, part='body')
 
     def loadmap2(self):
         print('loading')
 
-
-        for i in range(1,10):
-            object.create(uid='genericHouse', y=1, x=i, direction=2, dev=True)
-            object.create(uid='road', y=2, x=i, direction=0, dev=True)
-
-        object.create(uid='genericHouse', y=2, x=0, direction=1, dev=True)
-        object.create(uid='genericHouse', y=3, x=0, direction=1, dev=True)
-        object.create(uid='genericHouse', y=4, x=0, direction=1, dev=True)
-        object.create(uid='genericHouse', y=5, x=0, direction=1, dev=True)
-
-        object.create(uid='road', y=3, x=1, direction=0, dev=True)
-        object.create(uid='road', y=4, x=1, direction=0, dev=True)
-        object.create(uid='road', y=5, x=1, direction=0, dev=True)
-
-        object.create(uid='road', y=3, x=9, direction=0, dev=True)
-        object.create(uid='road', y=4, x=9, direction=0, dev=True)
-
-        for i in range(1,10):
-            object.create(uid='genericHouse', y=6, x=i, direction=0, dev=True)
-            object.create(uid='road', y=5, x=i, direction=0, dev=True)
-
-        object.create(uid='genericHouse', y=2, x=10, direction=3, dev=True)
-        object.create(uid='road', y=2, x=10, direction=0, dev=True)
-        object.create(uid='road', y=2, x=11, direction=0, dev=True)
-        object.create(uid='genericHouse', y=4, x=10, direction=3, dev=True)
-        object.create(uid='genericHouse', y=5, x=10, direction=3, dev=True)
+        object.create(uid='factory_parts', y=0, x=2, direction=2, dev=True, part='body')
 
 
     @staticmethod

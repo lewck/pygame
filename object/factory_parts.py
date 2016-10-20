@@ -11,10 +11,10 @@ class factory_parts(base):
 
         super(factory_parts, self).setVars(image=self.title, **kwargs)
         self.passable = []
-        self.inventory = inventory(30+settings.mod)
+        self.inventory = inventory(30)
         self.status = 0
         self.used = False
-        settings.mod = -0
+        #settings.mod = 0
 
     def doTick(self, tickID):
 
@@ -51,12 +51,13 @@ class factory_parts(base):
 
                 print('dbg')
                 print(data['required'])
+                print(self.inventory.inventory)
 
                 print(len(data['required']))
                 print(hasItems)
 
                 if((len(data['required'])) == hasItems):
-                    print('CAN CONSTRUCT')
+                    print('CAN CONSTRUCT PLANE')
                     if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
                         print('FULL INVENTORYY')
                         pass

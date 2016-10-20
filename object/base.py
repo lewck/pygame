@@ -18,8 +18,6 @@ class base:
             'tickListen': [],
         }
 
-
-
         for key, value in provided.items():
             setattr(self, key, value)
 

@@ -15,4 +15,8 @@ class helper:
 
     @staticmethod
     def evaluateBest(pos):
-        return helper.getAvailable()[-1]
+
+        for each in helper.getAvailable():
+            if(settings.activeEntityDB[each].claimed == False):
+                settings.activeEntityDB[each].claimed = True
+                return each

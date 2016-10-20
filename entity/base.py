@@ -16,6 +16,7 @@ class base:
         self.status = 0
         self.firstMove = True
         pos = []
+        self.claimed = False
 
     def assign(self, jobID):
         print('Assignining to '+str(jobID))
