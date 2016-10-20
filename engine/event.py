@@ -3,12 +3,13 @@ from util.tool import tool
 
 
 class event:
-    def __init__(self, modelID, data, trigger, args, id):
-        self.modelID = modelID
-        self.data = data
-        self.id = id
-        self.trigger = trigger
-        self.args = args
+    def __init__(self, **kwargs):
+
+        self.modelID = kwargs['modelID']
+        self.data = kwargs['data']
+        self.id = kwargs['id']
+        self.trigger = kwargs['trigger']
+        self.args = kwargs['args']
 
 
 
@@ -20,10 +21,16 @@ class event:
             getattr(settings.activeModelDB[self.modelID], self.trigger)()
 
     @staticmethod
-    def create(modelID, data, trigger, args):
+    def create(**kwargs):
+
         id = tool.genRandomString(16)
-        settings.activeEventDB[id] = event(modelID, data, trigger, args, id)
-        return id
+
+        if('modelID' in kwargs):
+            #Assume visual event
+            # modelID, data, trigger, args
+            settings.activeEventDB[id] = event(**kwargs, id=id)
+            return id
+
 
 
 

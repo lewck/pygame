@@ -14,7 +14,7 @@ class factory_parts(base):
         self.inventory = inventory(30+settings.mod)
         self.status = 0
         self.used = False
-        settings.mod = -20
+        settings.mod = -0
 
     def doTick(self, tickID):
 
@@ -28,10 +28,14 @@ class factory_parts(base):
             if(settings.itemDB[self.part]['required']=={}):
 
                 if(self.inventory.addItem('body',8)=='INVFULL') & (self.used==False):
+                    print('I AM FULL, CREATING JOB')
 
                     self.image = self.load(self.title+'_full')
 
-                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction])
+                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction], itemID=self.inventory.inventory[0].id)
+
+                    print('AFTER JOBSET CREATED')
+                    print(settings.activeJobsetDB)
                     self.used = True
 
             else:
@@ -56,6 +60,13 @@ class factory_parts(base):
                     if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
                         print('FULL INVENTORYY')
                         pass
+
+                else:
+                    if(self.status != 2):
+                        #2 means waiting, but job created
+                        self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
+                        self.status = 2
+
 
 
                 print('inv')

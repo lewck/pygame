@@ -20,10 +20,14 @@ class collectFromObjectAndStore(base):
         if(self.taskCurrent==1):
             entity.create(uid='car')
             #Decide best vehicle
+            print('entityDB:')
+            print(settings.activeEntityDB)
             self.vehicleID = entityhelper.vehicleEvaluateBest([self.startPosition[0], self.startPosition[1]])
-
+            print('entitySelected')
+            print(self.vehicleID)
             # decide best storage
-            tmp = objecthelper.evaluateBestStorage([1, 1], 'item')
+            tmp = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
+
             if (tmp):
                 self.pathEnd = tmp
                 print('--')

@@ -43,6 +43,8 @@ class testmap:
         object.create(uid='road', y=6, x=2, direction=0, dev=True)
         object.create(uid='genericHouse', y=5, x=2, direction=2, dev=True)
         object.create(uid='factory_parts', y=0, x=1, direction=2, dev=True, part='body')
+        object.create(uid='factory_parts', y=0, x=2, direction=2, dev=True, part='body')
+        object.create(uid='factory_parts', y=0, x=3, direction=2, dev=True, part='body')
 
     def loadmap2(self):
         print('loading')

@@ -27,10 +27,22 @@ class helper:
         return vehicles
 
     @staticmethod
-    def evaluateBestStorage(objectAPos, type='item'):
-        empty = helper.getEmptyStorage(type)
-        if(len(empty)>=1):
-            return empty[0]
+    def evaluateBestStorage(objectAPos, type='item', uid='null'):
+        possible = []
+
+        #First check if a job is waiting for it
+        if(uid!='null'):
+            for each in settings.activeJobsetDB:
+                if(each.typ == 'waitForItems'):
+                    if(each.needsItem(uid)):
+                        possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
+
+
+        #possible = helper.getEmptyStorage(type)
+
+
+        if(len(possible)>=1):
+            return possible[0]
         return False
 
         #TODO evalate based on other things

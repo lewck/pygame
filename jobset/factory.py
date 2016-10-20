@@ -1,4 +1,5 @@
 from jobset.collectfromobjecetandstore import collectFromObjectAndStore
+from jobset.waitForItems import waitForItems
 import settings
 
 class factory():

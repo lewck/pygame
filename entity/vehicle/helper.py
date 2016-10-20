@@ -15,4 +15,4 @@ class helper:
 
     @staticmethod
     def evaluateBest(pos):
-        return helper.getAvailable()[0]
+        return helper.getAvailable()[-1]

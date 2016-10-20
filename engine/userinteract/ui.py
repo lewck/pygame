@@ -28,10 +28,10 @@ class ui:
             for out in each.input:
                 #Register with event handler
                 try:
-                    eid = event.create(modelID, out, out['attribute']['event'],  out['attribute']['eventArgs'])
+                    eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
                 except KeyError:
                     #ASsume no event arguments
-                    eid = event.create(modelID, out, out['attribute']['event'], 0)
+                    eid = event.create(modelid=modelID, data=out, trigger=out['attribute']['event'], args=0)
                 inReturn.append([eid,out['title']])
 
             # Register Outputs
