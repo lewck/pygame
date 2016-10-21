@@ -3,9 +3,21 @@ from pathfind import pathFind
 from item.helper import helper as itemhelper
 
 class helper:
-
     @staticmethod
     def getEmptyStorage(type):
+        store = []
+        # Extract items with inventory
+        for y in range(0, len(settings.grid)):
+            for x in range(0, len(settings.grid[y])):
+                if (settings.grid[y][x].hasInventory()):
+                    # Has invntory
+                    if (not settings.grid[y][x].inventory.isFull()) & (settings.grid[y][x].inventory.type == type):
+                        # Not full, correct type
+                        if(not hasattr(settings.grid[y][x], 'inventoryOutput')):
+                            store.append(helper.getInteractPosition(y, x, settings.grid[y][x].direction))
+
+    @staticmethod
+    def getEmptyStorageAll(type):
         store = []
         #Extract items with inventory
         for y in range(0, len(settings.grid)):
@@ -38,16 +50,31 @@ class helper:
                     if(each.needsItem(uid)):
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
-            if (len(possible) != 1):
+            if (len(possible) != 0):
                 return possible[0]
 
+
+            '''
             #Check if end of the line
-            parent = itemhelper.findItemParents(uid)
-            if(parent):
-                print('HAS A PARENT'+str(parent))
+            parents = itemhelper.findItemParents(uid)
+            parentPositions = []
+            if(parents):
+                for each in parents:
+                    parentPositions.append(helper.getInteractPosition())
 
-        #possible = helper.getEmptyStorage(type)
+            return parents[0]
+            '''
 
+            #Nobody waiting for it, no parents, must sell
+            #TODO PICK BEST
+            parents = itemhelper.findItemParents(uid)
+
+            if(not parents):
+                return helper.findObjectByUid('exports')[0];
+
+            possible = helper.getEmptyStorage(type)[0]
+            if (len(possible) != 0):
+                return possible[0]
 
 
         return False
@@ -82,3 +109,14 @@ class helper:
             return([y+positionModifier[direction], x, directionModifier[direction]])
         if (direction in [1, 3]):
             return ([y, x+positionModifier[direction], directionModifier[direction]])
+
+
+    @staticmethod
+    def findObjectByUid(uid):
+        results = []
+        for y in range(0, len(settings.grid)):
+            for x in range(0, len(settings.grid[y])):
+                if(settings.grid[y][x].title == uid):
+                    results.append([y,x])
+
+        return results

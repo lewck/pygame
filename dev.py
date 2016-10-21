@@ -26,6 +26,37 @@ from engine.event import event
 import settings
 settings.init()
 
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+s.connect(('localhost', 10000))
 
 
-event.call(ui.create(1))
+try:
+
+    # Send data
+    message = 'This is the message.  It will be repeated.'
+    print('sending "%s"'+message)
+    s.sendall(str.encode(message))
+
+    # Look for the response
+
+
+
+
+finally:
+    while True:
+        data = s.recv(16)
+        if data:
+            print('received "%s"' + str(data))
+        else:
+            print('Closing')
+            break
+
+    print ('closing socket')
+    s.close()
+
+print(s)
+
+

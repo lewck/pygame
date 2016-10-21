@@ -15,7 +15,7 @@ class factory:
 
         if(result.type=='vehicle'):
             #Find suitable storage
-            storage = objecthelper.getEmptyStorage('vehicle')[0]
+            storage = objecthelper.getEmptyStorageAll('vehicle')[0]
             print(storage)
 
             result.pos = [storage[0], storage[1]]

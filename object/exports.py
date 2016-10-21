@@ -4,7 +4,7 @@ from inventory import inventory
 class exports(base):
     def __init__(self, **kwargs):
         print('init exports')
-        self.type = 'output'
+        self.type = 'exports'
         self.title = 'exports'
         super(exports, self).setVars(image=self.title, **kwargs)
         self.passable = []

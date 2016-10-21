@@ -131,7 +131,13 @@ def init():
                 'title': 'road',
                 'tickListen': []
             },
-        }
+        },
+        'exports': {
+            'exports': {
+                'title': 'exports',
+                'tickListen': []
+            },
+        },
     }
 
     global activeUI

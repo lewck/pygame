@@ -15,7 +15,6 @@ class factory_parts(base):
         self.inventoryOutput = inventory(30)
         self.status = 0
         self.used = False
-        #settings.mod = 15
 
     def doTick(self, tickID):
 
@@ -28,7 +27,7 @@ class factory_parts(base):
         if (tickID == 1):
             if(settings.itemDB[self.part]['required']=={}):
 
-                if(self.inventoryOutput.addItem('body',8)=='INVFULL') & (self.used==False):
+                if(self.inventoryOutput.addItem('body',5)=='INVFULL') & (self.used==False):
                     print('I AM FULL, CREATING JOB')
                     print(self.inventoryOutput.inventory[0].id)
 
@@ -41,6 +40,7 @@ class factory_parts(base):
                     self.used = True
 
             else:
+
                 #Assume has to check inventory for parts
                 data = settings.itemDB[self.part]
 
@@ -50,6 +50,7 @@ class factory_parts(base):
                     if(self.inventory.has(name, quantity)):
                         hasItems += 1
 
+                '''
 
                 print('dbg')
                 print(data['required'])
@@ -62,6 +63,8 @@ class factory_parts(base):
                 print('^outlenm')
                 print(len(self.inventory.inventory))
                 print('^inLength')
+
+                '''
 
                 if((len(data['required'])) == hasItems):
                     print('CAN CONSTRUCT PLANE')
@@ -83,11 +86,14 @@ class factory_parts(base):
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
+                if(self.inventoryOutput.isFull()):
+                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
+                                  itemID=self.inventoryOutput.inventory[0].id)
 
 
                 print('inv')
-                print(self.inventory.inventory)
-                print(len(self.inventory.inventory))
+                print(self.inventoryOutput.inventory)
+                print(len(self.inventoryOutput.inventory))
 
 
     def eventClick(self):

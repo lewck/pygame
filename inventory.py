@@ -103,6 +103,9 @@ class inventory:
                 return toRet
 
     def isFull(self):
+        print('s'+str(len(self.inventory)))
+        print(self.inventory)
+        print(self.size)
         if (len(self.inventory) == self.size):
             return True
         return False
