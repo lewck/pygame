@@ -12,9 +12,10 @@ class factory_parts(base):
         super(factory_parts, self).setVars(image=self.title, **kwargs)
         self.passable = []
         self.inventory = inventory(30)
+        self.inventoryOutput = inventory(30)
         self.status = 0
         self.used = False
-        #settings.mod = 0
+        #settings.mod = 15
 
     def doTick(self, tickID):
 
@@ -27,12 +28,13 @@ class factory_parts(base):
         if (tickID == 1):
             if(settings.itemDB[self.part]['required']=={}):
 
-                if(self.inventory.addItem('body',8)=='INVFULL') & (self.used==False):
+                if(self.inventoryOutput.addItem('body',8)=='INVFULL') & (self.used==False):
                     print('I AM FULL, CREATING JOB')
+                    print(self.inventoryOutput.inventory[0].id)
 
                     self.image = self.load(self.title+'_full')
 
-                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction], itemID=self.inventory.inventory[0].id)
+                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction], itemID=self.inventoryOutput.inventory[0].id)
 
                     print('AFTER JOBSET CREATED')
                     print(settings.activeJobsetDB)
@@ -56,11 +58,24 @@ class factory_parts(base):
                 print(len(data['required']))
                 print(hasItems)
 
+                print(len(self.inventoryOutput.inventory))
+                print('^outlenm')
+                print(len(self.inventory.inventory))
+                print('^inLength')
+
                 if((len(data['required'])) == hasItems):
                     print('CAN CONSTRUCT PLANE')
-                    if (self.inventory.buildItem('plane') == 'INVFULL') & (self.used == False):
-                        print('FULL INVENTORYY')
-                        pass
+
+
+                    toRemove = settings.itemDB[self.part]['required']
+                    print(toRemove)
+
+                    for key, quantity in toRemove.items():
+                        self.inventory.removeItem(id=key, quantity=quantity)
+
+
+                    self.inventoryOutput.addItem(self.part, 1)
+
 
                 else:
                     if(self.status != 2):
@@ -75,3 +90,5 @@ class factory_parts(base):
                 print(len(self.inventory.inventory))
 
 
+    def eventClick(self):
+        print('CLICKEED ON ME')

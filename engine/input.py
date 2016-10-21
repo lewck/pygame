@@ -63,7 +63,6 @@ class input():
 
                         if(clickUsed == False):
                             settings.grid[int(yTile)][int(xTile)].eventClick()
-                            object.create(uid='genericHouse', y=int(yTile), x=int(xTile), direction=2)
                     else:
                         if(settings.inputBuffer[0] == 'setObject'):
                             object.create(obj = settings.inputBuffer[1], y=yTile, x=xTile)

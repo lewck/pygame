@@ -43,10 +43,14 @@ class inventory:
 
     def loadItem(self, itemBuffer):
         print(self.inventory)
-        if(len(itemBuffer)<self.size - len(self.inventory)):
+        if(len(itemBuffer)<self.size - (len(self.inventory)-1)):
             print('---')
             self.inventory.extend(itemBuffer)
             print(self.inventory)
+        else:
+            print(len(itemBuffer))
+            print(self.size - len(self.inventory))
+            print('COULD NOT LODE')
 
     def removeItem(self, **kwargs):
 
@@ -72,7 +76,7 @@ class inventory:
         #   Removes selected items, returns list of removed items
         #
         if(type=='all'):
-            if(len(self.inventory)>= quantity):
+            if(len(self.inventory)-1>= quantity):
                 #Scrape from top of inventory
                 toReturn = self.inventory[0:(quantity)-1]
 

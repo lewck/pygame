@@ -1,5 +1,6 @@
 import settings
 from pathfind import pathFind
+from item.helper import helper as itemhelper
 
 class helper:
 
@@ -37,12 +38,18 @@ class helper:
                     if(each.needsItem(uid)):
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
+            if (len(possible) != 1):
+                return possible[0]
+
+            #Check if end of the line
+            parent = itemhelper.findItemParents(uid)
+            if(parent):
+                print('HAS A PARENT'+str(parent))
 
         #possible = helper.getEmptyStorage(type)
 
 
-        if(len(possible)>=1):
-            return possible[0]
+
         return False
 
         #TODO evalate based on other things

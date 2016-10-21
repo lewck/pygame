@@ -25,6 +25,7 @@ class collectFromObjectAndStore(base):
             self.vehicleID = entityhelper.vehicleEvaluateBest([self.startPosition[0], self.startPosition[1]])
             print('entitySelected')
             print(self.vehicleID)
+            
             # decide best storage
             tmp = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
 

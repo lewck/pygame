@@ -26,7 +26,7 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 
-display_width = 1500
+display_width = 500
 display_height = 1000
 
 #settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
