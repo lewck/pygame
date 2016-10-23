@@ -2,11 +2,15 @@ import settings
 
 class shop:
     @staticmethod
-    def purchase(price):
+    def canPurchase(price):
         if(price <= settings.player.balance):
             return True
         else:
             return False
+
+    @staticmethod
+    def purchase(price):
+        settings.player.balance += -price
 
     @staticmethod
     def sell(items):

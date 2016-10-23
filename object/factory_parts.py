@@ -15,6 +15,7 @@ class factory_parts(base):
         self.inventoryOutput = inventory(30)
         self.status = 0
         self.used = False
+        self.part = 0
 
     def doTick(self, tickID):
 
@@ -25,6 +26,9 @@ class factory_parts(base):
 
 
         if (tickID == 1):
+            if(self.part ==0):
+                #No part assigned
+                return False
             if(settings.itemDB[self.part]['required']=={}):
 
                 if(self.inventoryOutput.addItem('body',5)=='INVFULL') & (self.used==False):

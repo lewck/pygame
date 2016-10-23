@@ -29,22 +29,23 @@ class factory:
                 #Use existing base
                 result.base = settings.grid[kwargs['y']][kwargs['x']].base
 
-        if 'y' in kwargs:
             #Assume needs plot
             if 'dev' in kwargs:
                 #Force Create
                 settings.grid[kwargs['y']][kwargs['x']] = result
                 return True
+
             else:
                 #Check balance etc
-                if (shop.purchase(result.price)):
+                if (shop.canPurchase(result.price)):
+                    shop.purchase(result.price)
                     settings.grid[kwargs['y']][kwargs['x']] = result
                     return True
 
 
         else:
             #Assume wants object
-            if (shop.purchase(result.price)):
+            if (shop.canPurchase(result.price)):
                 return result
 
         return False

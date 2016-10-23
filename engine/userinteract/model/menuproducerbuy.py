@@ -17,13 +17,17 @@ class menuproducerbuy(base):
         super(menuproducerbuy, self).__init__()
 
     def buyObject(self, type, uid):
+
         obj = objectFactory.create(uid=uid, direction=2)
+
         if(obj):
             settings.inputBuffer = ['setObject', obj]
+
         self.close()
         settings.activeUI['menuproducerbuy'] = False
 
     def addInputs(self):
+
         self.addInput(type='mouseAction', priority = self.basePriority + 9, title='close', attribute={
             'click': 1,
             'pos': [0,502],
@@ -76,7 +80,7 @@ class menuproducerbuy(base):
                         'pos': [posy + 2, posx + 2],
                         'dim': [39,39],
                         'event': 'buyObject',
-                        'eventArgs': ['producer','farm_1'],
+                        'eventArgs': ['producer',uid],
                     })
                     count += 1
                 posx += 41

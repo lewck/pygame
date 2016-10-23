@@ -24,6 +24,9 @@ from engine.userinteract.ui import ui
 from engine.event import event
 
 from webinteract.score import score
+import settings
+
+settings.init()
 
 score = score()
 score.create('Lewis', 5000)

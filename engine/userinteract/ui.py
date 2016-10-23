@@ -32,7 +32,8 @@ class ui:
                     eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
                 except KeyError:
                     #ASsume no event arguments
-                    eid = event.create(modelid=modelID, data=out, trigger=out['attribute']['event'], args=0)
+                    eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
+
                 inReturn.append([eid,out['title']])
 
             # Register Outputs

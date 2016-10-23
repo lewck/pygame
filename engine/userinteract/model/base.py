@@ -58,3 +58,7 @@ class base:
     def close(self):
         # Clear interfaces
         self.deleteModel()
+
+    def none(self):
+        #Called with cover-all inputs
+        pass

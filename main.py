@@ -27,7 +27,7 @@ black = (0,0,0)
 red = (255,0,0)
 
 display_width = 500
-display_height = 1000
+display_height = 600
 
 #settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 settings.surface = pygame.display.set_mode((display_width,display_height))
@@ -59,6 +59,7 @@ for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
+object.create(uid='exports', y=0, x=9, direction=2, dev=True)
 
 settings.player = player()
 
@@ -76,11 +77,8 @@ devInputKey = ''
 
 mainMenu = False
 
-if (settings.activeUI['defaultoverlay'] == False):
-    settings.activeUI['defaultoverlay'] = ui.create('defaultoverlay')
-else:
-    settings.activeModelDB[settings.activeUI['defaultoverlay']].close()
-    settings.activeUI['defaultoverlay'] = False
+settings.activeUI['defaultoverlay'] = ui.create('defaultoverlay')
+
 
 while not settings.gameExit:
     '''

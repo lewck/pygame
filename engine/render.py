@@ -90,14 +90,12 @@ class render:
 
                 if('variables' in each.data['attribute']):
                     for i in range(0, len(each.data['attribute']['variables'])):
-                        print('mg')
 
                         m = re.search('\{'+str(i)+'\}', each.data['attribute']['value'])
 
                         strStart = each.data['attribute']['value'][:m.start()]
                         strEnd = each.data['attribute']['value'][m.end():]
 
-                        print(strStart)
                         value = strStart+str(eval(each.data['attribute']['variables'][i]))+strEnd
 
                 else:

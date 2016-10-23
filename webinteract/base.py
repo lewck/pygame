@@ -1,8 +1,8 @@
-import settings
 import urllib.request
 import urllib.parse
 import json
 
+import settings
 
 class base:
     def __init__(self):
@@ -17,13 +17,13 @@ class base:
         for key, value in params.items():
             data[key] = value
 
-        data['authcode'] = self.authCode
+        data['authorisation_token'] = self.authCode
 
         print(data)
 
         url_values = urllib.parse.urlencode(data)
         print(url_values)
-        url = 'http://51.254.142.77/pygame/kernal.php'
+        url = 'http://localhost/pygame/kernal.php'
         full_url = url + '?' + url_values
         data = urllib.request.urlopen(full_url)
         decodedData = data.read().decode('utf-8')
@@ -32,7 +32,7 @@ class base:
 
         if('fail' in jsonData):
             #TODO log error
-            print('FAIL')
+            settings.logObject.log('Webinteract fail'+jsonData['fail'], 2)
             return False
 
         return jsonData
@@ -40,6 +40,11 @@ class base:
 
     def auth(self):
         self.authCode = 0
-        self.authCode = self.requestCall('auth', { 'apikey':settings.APIKEY })['authcode']
+        self.authCode = self.requestCall('auth', { 'apikey': settings.APIKEY })['authorisation_token']
+        print('ac')
+        print(self.authCode)
+
+        return False;
+
         if(self.authCode):
             return True
