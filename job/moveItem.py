@@ -40,11 +40,26 @@ class moveItem(base):
                 #Assign entity to path
                 self.assign(self.entityID)
                 self.taskCurrent += 1
+                print('path assigned')
+                print('---')
+                print(self.startPosition[0])
+                print(self.startPosition[1])
+                print(self.endPosition[0])
+                print(self.endPosition[1])
+                print('---')
+
             else:
                 print('waiting for path')
+                print('---')
+                print(self.startPosition[0])
+                print(self.startPosition[1])
+                print(self.endPosition[0])
+                print(self.endPosition[1])
+                print('---')
 
 
         if(self.taskCurrent == 2):
+            print('task222222222222')
             #Move items from invA to invB
             if(self.startPosition[2]==0 or self.startPosition[2]==2):
                 #Handle y change
@@ -65,8 +80,23 @@ class moveItem(base):
 
 
             if(self.startPosition[2]==1 or self.startPosition[2]==3):
-                pass
-                #TODO COMPLETE FOR X
+
+                if (settings.grid[self.startPosition[0]][self.startPosition[1]+options[self.startPosition[2]]]).hasInventory():
+
+                    print('INVENTORY FOUND 1')
+                    # TODO wait for full inventory
+
+                    self.itemBuffer = settings.grid[self.startPosition[0]][
+                        self.startPosition[1] + options[self.startPosition[2]]].inventoryOutput.takeItem('all', settings.activeEntityDB[
+                        self.entityID].inventory.size)
+
+                    print('-----')
+                    print('VAR' + str(self.itemBuffer))
+
+                    settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
+                    print('-')
+                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
+                    self.taskCurrent += 1
 
         if(self.taskCurrent == 3):
             #Move Vehical

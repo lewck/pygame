@@ -18,11 +18,11 @@ class collectFromObjectAndStore(base):
 
     def task(self):
         if(self.taskCurrent==1):
-            entity.create(uid='car')
+            entityID = entity.create(uid='car')
             #Decide best vehicle
             print('entityDB:')
             print(settings.activeEntityDB)
-            self.vehicleID = entityhelper.vehicleEvaluateBest([self.startPosition[0], self.startPosition[1]])
+            self.vehicleID = entityID
             print('entitySelected')
             print(self.vehicleID)
             

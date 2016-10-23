@@ -1,6 +1,8 @@
 import pygame
 
 import settings
+
+import re
 from legacy.ui.uis.helper import helper as uishelper
 from util.tool import tool
 
@@ -86,7 +88,22 @@ class render:
                     settings.logObject.add('Font not found', 2)
                     font = settings.fonts['primaryFont'][20]
 
-                rendered = font.render(each.data['attribute']['value'], True, (each.data['attribute']['color']))
+                if('variables' in each.data['attribute']):
+                    for i in range(0, len(each.data['attribute']['variables'])):
+                        print('mg')
+
+                        m = re.search('\{'+str(i)+'\}', each.data['attribute']['value'])
+
+                        strStart = each.data['attribute']['value'][:m.start()]
+                        strEnd = each.data['attribute']['value'][m.end():]
+
+                        print(strStart)
+                        value = strStart+str(eval(each.data['attribute']['variables'][i]))+strEnd
+
+                else:
+                    value = each.data['attribute']['value']
+
+                rendered = font.render(value, True, (each.data['attribute']['color']))
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
             elif (each.data['type'] == 'image'):

@@ -5,15 +5,14 @@ from util.tool import tool
 
 class base:
     def __init__(self, **kwargs):
-        self.jobID = tool.genRandomString(20)
-        print('Job created, id=' + str(self.jobID))
         self.isClaimed = False
         self.initialVarsSet = False
         self.initVars(**kwargs)
         self.taskClaimed = False
         self.jobSetID = kwargs['parent']
+
         for each in self.tickListen:
-            settings.tick.register([[each, 'settings.activeJobDB['+str(self.jobIndex)+'].tick()']])
+            settings.tick.register([[each, 'settings.activeJobDB["'+str(self.jobID)+'"].tick()']])
             print('registered tick')
 
     def initVars(self, **kwargs):

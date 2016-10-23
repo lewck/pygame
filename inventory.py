@@ -74,7 +74,10 @@ class inventory:
     def takeItem(self, type, quantity):
         #
         #   Removes selected items, returns list of removed items
-        #
+        ##
+        if(quantity == 'all'):
+            quantity = len(self.inventory)
+
         if(type=='all'):
             if(len(self.inventory)-1>= quantity):
                 #Scrape from top of inventory
@@ -103,9 +106,6 @@ class inventory:
                 return toRet
 
     def isFull(self):
-        print('s'+str(len(self.inventory)))
-        print(self.inventory)
-        print(self.size)
         if (len(self.inventory) == self.size):
             return True
         return False
@@ -119,4 +119,11 @@ class inventory:
         if(count>=quantity):
             return True
 
+        return False
+
+    def hasAny(self):
+        print(len(self.inventory))
+        print(self.inventory)
+        if(len(self.inventory) != 0):
+            return True
         return False

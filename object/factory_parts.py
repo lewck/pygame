@@ -91,9 +91,6 @@ class factory_parts(base):
                                   itemID=self.inventoryOutput.inventory[0].id)
 
 
-                print('inv')
-                print(self.inventoryOutput.inventory)
-                print(len(self.inventoryOutput.inventory))
 
 
     def eventClick(self):

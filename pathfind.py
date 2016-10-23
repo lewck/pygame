@@ -103,12 +103,11 @@ class pathFind():
             else:
                 store.insert(0, [check[0][0], check[0][1], check[0][2]])
                 check = check[1]
-        '''
 
         for each in store:
             print(each)
             settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
-        '''
+
 
         print(store)
 

@@ -76,6 +76,12 @@ devInputKey = ''
 
 mainMenu = False
 
+if (settings.activeUI['defaultoverlay'] == False):
+    settings.activeUI['defaultoverlay'] = ui.create('defaultoverlay')
+else:
+    settings.activeModelDB[settings.activeUI['defaultoverlay']].close()
+    settings.activeUI['defaultoverlay'] = False
+
 while not settings.gameExit:
     '''
     '   Check for main menu
@@ -107,7 +113,7 @@ while not settings.gameExit:
 
 
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(120)
 
 settings.logObject.close()
 pygame.quit()

@@ -13,6 +13,7 @@ class base:
         data = {}
 
         data['function'] = function
+
         for key, value in params.items():
             data[key] = value
 
@@ -39,6 +40,6 @@ class base:
 
     def auth(self):
         self.authCode = 0
-        self.authCode = self.requestCall('auth', {'apikey':settings.APIKEY})['authcode']
+        self.authCode = self.requestCall('auth', { 'apikey':settings.APIKEY })['authcode']
         if(self.authCode):
             return True

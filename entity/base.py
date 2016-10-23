@@ -21,11 +21,9 @@ class base:
     def assign(self, jobID):
         print('Assignining to '+str(jobID))
 
-        for each in settings.activeJobDB:
-            if(each.jobID == jobID):
-                self.job = each
+        self.job = settings.activeJobDB[jobID]
 
-        self.path = settings.pathDB[settings.activeJobDB[0].path]
+        self.path = settings.pathDB[settings.activeJobDB[jobID].path]
         print('---')
         print(self.path)
         self.x = self.job.startPosition[1]*50

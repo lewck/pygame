@@ -27,10 +27,10 @@ def init():
     activeEntityDB = {}
 
     global activeJobDB
-    activeJobDB = []
+    activeJobDB = {}
 
     global activeJobsetDB
-    activeJobsetDB = []
+    activeJobsetDB = {}
 
     global tick
     tick = 0
@@ -84,14 +84,16 @@ def init():
 
         'body': {
             'title': 'body',
-            'required' : {}
+            'required' : {},
+            'sellPrice': 50,
         },
 
         'plane':{
             'title': 'Plane',
             'required' : {
                 'body':2,
-            }
+            },
+            'sellPrice': 500,
         }
     }
     global objectDB
@@ -144,6 +146,7 @@ def init():
     activeUI = {
         'menuproducerbuy': False,
         'menustoragebuy': False,
+        'defaultoverlay': False,
     }
 
     global mod

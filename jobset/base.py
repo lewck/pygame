@@ -7,7 +7,7 @@ class base:
         self.initVars(**kwargs)
         #Register ticks
         for each in self.tickListen:
-            settings.tick.register([[each, 'settings.activeJobsetDB['+str(self.jobsetindex)+'].tick()']])
+            settings.tick.register([[each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()']])
 
 
     def initVars(self, **kwargs):
@@ -16,7 +16,6 @@ class base:
             setattr(self, key, value)
         #Set control vars
         self.taskCurrent = 1
-        self.jobsetID = tool.genRandomString(20)
         self.status = 1
 
     def eventTaskComplete(self):

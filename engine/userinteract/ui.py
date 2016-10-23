@@ -1,6 +1,7 @@
 from engine.userinteract.model.welcome import welcome
 from engine.userinteract.model.menustoragebuy import menustoragebuy
 from engine.userinteract.model.menuproducerbuy import menuproducerbuy
+from engine.userinteract.model.defaultoverlay import defaultoverlay
 from engine.event import event
 from engine.out import out as outObj
 from util.tool import tool

@@ -45,7 +45,7 @@ class helper:
 
         #First check if a job is waiting for it
         if(uid!='null'):
-            for each in settings.activeJobsetDB:
+            for key, each in settings.activeJobsetDB.items():
                 if(each.typ == 'waitForItems'):
                     if(each.needsItem(uid)):
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
@@ -70,7 +70,9 @@ class helper:
             parents = itemhelper.findItemParents(uid)
 
             if(not parents):
-                return helper.findObjectByUid('exports')[0];
+                selected = helper.findObjectByUid('exports')[0]
+
+                return helper.getInteractPosition(selected[0],selected[1], settings.grid[selected[0]][selected[1]].direction);
 
             possible = helper.getEmptyStorage(type)[0]
             if (len(possible) != 0):

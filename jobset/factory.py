@@ -1,13 +1,14 @@
 from jobset.collectfromobjecetandstore import collectFromObjectAndStore
 from jobset.waitForItems import waitForItems
 import settings
+from util.tool import tool
 
 class factory():
 
     @staticmethod
     def create(**args):
-        length = len(settings.activeJobsetDB) #No need to negate one as len starts counting at 1
+        jobsetID = tool.genRandomString()
 
-        settings.activeJobsetDB.append(eval(args['typ']+'(**args, jobsetindex = length)'))
+        settings.activeJobsetDB[jobsetID] = eval(args['typ']+'(**args, jobsetID = jobsetID)')
 
-        return length
+        return jobsetID
