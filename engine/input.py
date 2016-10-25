@@ -67,7 +67,7 @@ class input():
                             settings.grid[int(yTile)][int(xTile)].eventClick()
                     else:
                         if(settings.inputBuffer[0] == 'setObject'):
-                            object.create(obj = settings.inputBuffer[1], y=yTile, x=xTile)
+                            object.create(uid=settings.inputBuffer[1], y=yTile, x=xTile, direction=2)
                             settings.inputBuffer = []
 
                 elif(event.button == 3):
@@ -91,11 +91,7 @@ class input():
                         object.create(uid='garage', y=0, x=0, direction=0)
 
                     if(event.key == pygame.K_F9):
-                        if(settings.activeUI['menuproducerbuy']==False):
-                            settings.activeUI['menuproducerbuy'] = ui.create('menuproducerbuy')
-                        else:
-                            settings.activeModelDB[settings.activeUI['menuproducerbuy']].close()
-                            settings.activeUI['menuproducerbuy'] = False
+                        pass
 
                     if (event.key == pygame.K_F10):
                         if (settings.activeUI['menustoragebuy'] == False):

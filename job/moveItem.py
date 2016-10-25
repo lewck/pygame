@@ -36,6 +36,9 @@ class moveItem(base):
             path = pathFind(self.startPosition[0], self.startPosition[1], self.endPosition[0], self.endPosition[1], 5)
             self.path = path.find()
 
+            print('PATH')
+            print(self.path)
+
             if(self.path):
                 #Assign entity to path
                 self.assign(self.entityID)
@@ -49,13 +52,7 @@ class moveItem(base):
                 print('---')
 
             else:
-                print('waiting for path')
-                print('---')
-                print(self.startPosition[0])
-                print(self.startPosition[1])
-                print(self.endPosition[0])
-                print(self.endPosition[1])
-                print('---')
+                settings.activeJobsetDB[self.parent].doEvent('pathnotfound')
 
 
         if(self.taskCurrent == 2):

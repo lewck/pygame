@@ -8,9 +8,9 @@ def init():
     global grid
     grid = []
     global xMax
-    xMax = 10
+    xMax = 15
     global yMax
-    yMax = 10
+    yMax = 15
     global surface
     surface = 0
     global log
@@ -21,7 +21,7 @@ def init():
     devfont = 0
 
     global pathDB
-    pathDB = []
+    pathDB = {}
 
     global activeEntityDB
     activeEntityDB = {}
@@ -117,11 +117,6 @@ def init():
             },
         },
         'producer': {
-            'farm_1': {
-                'title': 'farm_1',
-                'tickListen': [1,10],
-                'price': 100,
-            },
             'factory_parts': {
                 'title': 'factory_parts',
                 'tickListen': [1, 10],

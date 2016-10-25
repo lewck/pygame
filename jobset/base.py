@@ -7,7 +7,7 @@ class base:
         self.initVars(**kwargs)
         #Register ticks
         for each in self.tickListen:
-            settings.tick.register([[each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()']])
+            settings.tick.register(each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()')
 
 
     def initVars(self, **kwargs):

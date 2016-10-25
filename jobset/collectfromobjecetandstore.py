@@ -13,8 +13,15 @@ from entity.factory import factory as entity
 '''
 class collectFromObjectAndStore(base):
     def __init__(self, **kwargs):
-        self.tickListen = [5,10]
+        self.tickListen = [10]
         super(collectFromObjectAndStore, self).__init__(**kwargs)
+
+    def doEvent(self, eventID):
+        if(eventID == 'pathnotfound'):
+            print('PATH NOT FOUND')
+            print(str(self.jobID))
+            settings.activeJobDB[str(self.jobID)].close()
+            self.taskCurrent = 3
 
     def task(self):
         if(self.taskCurrent==1):
@@ -46,8 +53,10 @@ class collectFromObjectAndStore(base):
             # Begin
             # Collect, move, deposit
             if (self.status == 1):
-                job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd, items='all',
+
+                self.jobID = job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd, items='all',
                            parent=self.jobsetID, entityID = self.vehicleID)
+
                 self.status = 0
 
         if(self.taskCurrent==3):

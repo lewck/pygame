@@ -11,8 +11,9 @@ class base:
         self.taskClaimed = False
         self.jobSetID = kwargs['parent']
 
+
         for each in self.tickListen:
-            settings.tick.register([[each, 'settings.activeJobDB["'+str(self.jobID)+'"].tick()']])
+            self.ticks = settings.tick.register(each, 'settings.activeJobDB["'+str(self.jobID)+'"].tick()', self.jobID)
             print('registered tick')
 
     def initVars(self, **kwargs):
@@ -23,3 +24,8 @@ class base:
         #Called by entity when job is completed
         print('Job completed')
         self.taskCurrent += 1
+
+    def close(self):
+        #Unset Ticks
+        settings.tick.remove(identifier=self.jobID)
+        del settings.activeJobDB[self.jobID]

@@ -10,6 +10,7 @@ class event:
         self.id = kwargs['id']
         self.trigger = kwargs['trigger']
         self.args = kwargs['args']
+        self.active = False
 
 
 

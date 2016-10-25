@@ -8,6 +8,7 @@ class out:
         self.data = data
         self.id = id
         self.priority = data['priority']
+        self.active = False
 
 
 

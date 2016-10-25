@@ -16,16 +16,6 @@ class menuproducerbuy(base):
         self.basePriority = 110
         super(menuproducerbuy, self).__init__()
 
-    def buyObject(self, type, uid):
-
-        obj = objectFactory.create(uid=uid, direction=2)
-
-        if(obj):
-            settings.inputBuffer = ['setObject', obj]
-
-        self.close()
-        settings.activeUI['menuproducerbuy'] = False
-
     def addInputs(self):
 
         self.addInput(type='mouseAction', priority = self.basePriority + 9, title='close', attribute={

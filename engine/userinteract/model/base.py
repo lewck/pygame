@@ -10,6 +10,8 @@ class base:
 
         self.interfaces = {'inputs': [], 'outputs': []}
 
+        self.active = False
+
     def addInput(self, **kwargs):
         #Register with event
         self.input.append(kwargs)
@@ -48,17 +50,62 @@ class base:
             for each in toDelete:
                 del settings.activeEventDB[each]
 
+    def closeInterface(self, type, id):
+
+        if(type=='output'):
+            toDelete = []
+            if(id=='all'):
+                for key, each in settings.activeOutDB.items():
+                    if(each.modelID == self.id):
+                        each.active = False
+
+            else:
+                settings.activeOutDB[id].active = False
+
+
+        elif(type=='input'):
+            toDelete = []
+            if(id=='all'):
+                for key, each in settings.activeEventDB.items():
+                    if(each.modelID == self.id):
+                        each.active = False
+
+            else:
+                settings.activeOutDB[id].active = False
+
+
     def deleteModel(self):
         #Remove Output Interface
         self.deleteInterface('output', 'all')
         # Remove Input Interface
         self.deleteInterface('input', 'all')
 
+    def closeModel(self):
+        # Remove Output Interface
+        self.closeInterface('output', 'all')
+        # Remove Input Interface
+        self.closeInterface('input', 'all')
+
 
     def close(self):
         # Clear interfaces
-        self.deleteModel()
+        print('CLOSEING')
+        self.active = False
+        self.closeModel()
 
     def none(self):
         #Called with cover-all inputs
         pass
+
+    def activate(self):
+        for key, each in settings.activeOutDB.items():
+            if (each.modelID == self.id):
+                each.active = True
+
+        for key, each in settings.activeEventDB.items():
+            if (each.modelID == self.id):
+                each.active = True
+
+    def buyObject(self, type, uid):
+        settings.inputBuffer = ['setObject', uid]
+        self.close()

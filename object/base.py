@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import Rect
 import settings
 
+from engine.tick import tick
 
 class base:
     def __init__(self):
@@ -40,6 +41,17 @@ class base:
         self.tickCount = 0
         self.inventory = 0
 
+        #Set tick vars
+        if(hasattr(self, 'tickListen') & hasattr(self, 'y')):
+            #Needs registered ticks, hasPosition
+            self.registerTicks()
+
+    def registerTicks(self):
+        for each in self.tickListen:
+            settings.tick.register(each, 'settings.grid[' + str(self.y) + '][' + str(self.x) + '].tick()')
+
+
+
     def load(self, spriteID):
         stmt = 'sprites/'+str(spriteID)+'.png'
         return pygame.image.load(stmt)
@@ -68,13 +80,12 @@ class base:
         return False
 
     def tick(self):
-        if(self.tickListen!=False):
-            self.tickCount += 1
-            for i in range(0, len(self.tickListen)):
-                if (self.tickCount % self.tickListen[i] == 0):
-                    self.doTick(i)
-                    if(i==len(self.tickListen)):
-                        self.tickCount = 0
+        self.tickCount += 1
+        for i in range(0, len(self.tickListen)):
+            if (self.tickCount % self.tickListen[i] == 0):
+                self.doTick(i)
+                if(i==len(self.tickListen)):
+                    self.tickCount = 0
 
             #print(self.tickCount)
             #TODO ticks not being reset

@@ -26,8 +26,8 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 
-display_width = 500
-display_height = 600
+display_width = settings.xMax*50
+display_height = (settings.yMax * 50)+50
 
 #settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 settings.surface = pygame.display.set_mode((display_width,display_height))
@@ -53,6 +53,8 @@ lead_y_change = 0
 
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
+for key, value in settings.activeUI.items():
+    settings.activeUI[key] = ui.create(key)
 
 
 for y in range(0,settings.yMax):
@@ -77,7 +79,8 @@ devInputKey = ''
 
 mainMenu = False
 
-settings.activeUI['defaultoverlay'] = ui.create('defaultoverlay')
+print(settings.activeUI['defaultoverlay'])
+settings.activeModelDB[settings.activeUI['defaultoverlay']].activate()
 
 
 while not settings.gameExit:
@@ -102,12 +105,22 @@ while not settings.gameExit:
                 each.draw()
 
 
-        for y in range(0, len(settings.grid)):
-            for x in range(0, len(settings.grid[y])):
-                settings.grid[y][x].tick()
+        tickBuffer = []
+        for key, each in settings.tick.getTicks().items():
+            #Create buffer
+            tickBuffer.append(each[2])
 
-        for each in settings.tick.getTicks():
-            eval(each[1])
+        for each in tickBuffer:
+            '''
+            print('DEBUG JOB DB: '+str(settings.activeJobDB))
+            print('DEBUG EACH '+str(each))
+            print('DEBUG ALL ITEMS'+str(settings.tick.getTicks().items()))
+            '''
+            try:
+                eval(each)
+            except KeyError:
+                #the tick was unregistered mid buffer, this no longer exists
+                pass
 
 
     pygame.display.update()

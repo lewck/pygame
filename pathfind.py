@@ -1,5 +1,6 @@
 import settings
 from util.grid import grid
+from util.tool import tool
 import time
 
 
@@ -110,10 +111,11 @@ class pathFind():
 
 
         print(store)
+        pathID = tool.genRandomString()
 
-        settings.pathDB.append([[[0, 0], [9, 9]], [store]])
+        settings.pathDB[pathID] = ([[[0, 0], [9, 9]], [store]])
 
-        return len(settings.pathDB)-1
+        return pathID
 
 class node():
     def __init__(self,y,x,parent,sets):

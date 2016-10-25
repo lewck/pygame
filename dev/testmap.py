@@ -33,7 +33,7 @@ class testmap:
         object.create(uid='road', y=1, x=2, direction=0, dev=True)
         object.create(uid='road', y=1, x=3, direction=0, dev=True)
         object.create(uid='garage', y=1, x=4, direction=3, dev=True)
-        object.create(uid='factory_parts', y=4, x=4, direction=3, dev=True, part='plane')
+        #object.create(uid='factory_parts', y=4, x=4, direction=3, dev=True, part='plane')
         #object.create('garage', 1,4,3)
         object.create(uid='road', y=2, x=3, direction=0, dev=True)
         object.create(uid='road', y=3, x=3, direction=0, dev=True)

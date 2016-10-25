@@ -4,13 +4,11 @@ from engine.userinteract.helper import helper as uihelper
 
 import settings
 
-class defaultoverlay(base):
+class factoryPartsMenu(base):
     def __init__(self):
-        self.basePriority = 60
-        super(defaultoverlay, self).__init__()
+        self.basePriority = 70
+        super(factoryPartsMenu, self).__init__()
 
-    def openBuyMenu(self):
-        uihelper.toggleModel('menuproducerbuy')
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority=self.basePriority, title='base', attribute={
@@ -38,7 +36,7 @@ class defaultoverlay(base):
         self.addOutput(pos=[760, 10], type='text', priority= self.basePriority + 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 20,
-            'value': 'Balance: {0}',
+            'value': 'Balance:ssssssssss {0}',
             'variables': ['settings.player.balance'],
             'color': (255, 255, 255)
         })

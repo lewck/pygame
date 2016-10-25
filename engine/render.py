@@ -12,6 +12,7 @@ class render:
     def renderGrid():
         xmod = 0
         ymod = 0
+
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
 
@@ -39,6 +40,7 @@ class render:
 
                         settings.surface.blit(image, (xmod, ymod))
 
+                    '''
                     if (settings.grid[y][x].devOverlay != 0):
                         rendered = font.render('G:' + str(settings.grid[y][x].devOverlay[0]), True, (255, 0, 0))
                         settings.surface.blit(rendered, (xmod, ymod))
@@ -46,6 +48,7 @@ class render:
                         settings.surface.blit(rendered, (xmod, ymod + 15))
                         rendered = font.render('F:' + str(settings.grid[y][x].devOverlay[2]), True, (255, 0, 0))
                         settings.surface.blit(rendered, (xmod, ymod + 30))
+                    '''
 
                 xmod += 5 * settings.zoom
             ymod += 5 * settings.zoom
@@ -64,7 +67,12 @@ class render:
     @staticmethod
     def renderMenu():
         #Order by priority
-        sor = tool.bubbleSort(values=settings.activeOutDB, localvariable='priority')
+        scanned = {}
+        for key, each in settings.activeOutDB.items():
+            if(each.active != False):
+                scanned[key] = each
+
+        sor = tool.bubbleSort(values=scanned, localvariable='priority')
 
         for each in sor:
 

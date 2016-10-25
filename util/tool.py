@@ -5,20 +5,33 @@ import operator
 
 class tool:
     @staticmethod
-    def genRandomString(len=20):
+    def genRandomString(length=20):
+        chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
         val = ''
-        for i in range(len):
-            val += str(randint(0,9))
+
+        for i in range(length):
+            val += chars[randint(0,len(chars)-1)]
+
         return val
 
     @staticmethod
     def bubbleSort(**kwargs):
         if('localvariable' in kwargs):
             if(type(kwargs['values']) is list):
-                #Sort array, return array
+                # Sort array, return array
                 order = []
-                for i in range(0, len(kwargs['values'])):
-                    order.append(getattr(kwargs['values'][i], kwargs['localvariable']))
+                if('ignoreWhenFalse' in kwargs):
+
+                    for i in range(0, len(kwargs['values'])):
+                        if(getattr(kwargs['values'][i], kwargs['ignoreWhenTrue'])!=False):
+                            order.append(getattr(kwargs['values'][i], kwargs['localvariable']))
+
+                else:
+                    for i in range(0, len(kwargs['values'])):
+                        order.append(getattr(kwargs['values'][i], kwargs['localvariable']))
+
+
 
                 for i in range(0, len(order) -1):
                     for j in range(0, len(order)-i-1):

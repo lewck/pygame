@@ -1,6 +1,9 @@
 from object.base import base
 from inventory import inventory
 from jobset.factory import factory as jobset
+from engine.userinteract.helper import helper as uihelper
+
+
 import settings
 
 
@@ -8,40 +11,34 @@ class factory_parts(base):
     def __init__(self, **kwargs):
         self.title = 'factory_parts'
         self.type = 'producer'
-
+        self.part = 0
         super(factory_parts, self).setVars(image=self.title, **kwargs)
         self.passable = []
         self.inventory = inventory(30)
         self.inventoryOutput = inventory(30)
         self.status = 0
         self.used = False
-        self.part = 0
+        self.ui = ''
+        self.counter = 0
+
 
     def doTick(self, tickID):
 
         if(tickID==0):
             #chance grow increase
-            if(not self.inventory.isFull()):
-                self.image = self.load(self.title)
+            pass
 
 
         if (tickID == 1):
-            if(self.part ==0):
+
+            if(self.part==0):
                 #No part assigned
                 return False
+
+
             if(settings.itemDB[self.part]['required']=={}):
 
-                if(self.inventoryOutput.addItem('body',5)=='INVFULL') & (self.used==False):
-                    print('I AM FULL, CREATING JOB')
-                    print(self.inventoryOutput.inventory[0].id)
-
-                    self.image = self.load(self.title+'_full')
-
-                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction], itemID=self.inventoryOutput.inventory[0].id)
-
-                    print('AFTER JOBSET CREATED')
-                    print(settings.activeJobsetDB)
-                    self.used = True
+                self.inventoryOutput.addItem('body',5)
 
             else:
 
@@ -53,22 +50,6 @@ class factory_parts(base):
                 for name, quantity in data['required'].items():
                     if(self.inventory.has(name, quantity)):
                         hasItems += 1
-
-                '''
-
-                print('dbg')
-                print(data['required'])
-                print(self.inventory.inventory)
-
-                print(len(data['required']))
-                print(hasItems)
-
-                print(len(self.inventoryOutput.inventory))
-                print('^outlenm')
-                print(len(self.inventory.inventory))
-                print('^inLength')
-
-                '''
 
                 if((len(data['required'])) == hasItems):
                     print('CAN CONSTRUCT PLANE')
@@ -86,7 +67,7 @@ class factory_parts(base):
 
                 else:
                     if(self.status != 2):
-                        #2 means waiting, but job created
+                        #2 means waiting, but job waitforitems created
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
@@ -94,8 +75,25 @@ class factory_parts(base):
                     jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                                   itemID=self.inventoryOutput.inventory[0].id)
 
+            if (not self.inventoryOutput.isFull()):
+                print('reset')
+                self.image = self.load(self.title)
+            else:
+                if(self.counter == 10):
+                    print('I AM FULL, CREATING JOB')
+                    print(self.inventoryOutput.inventory[0].id)
+
+                    self.image = self.load(self.title + '_full')
+
+                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
+                                  itemID=self.inventoryOutput.inventory[0].id)
+
+                    print('AFTER JOBSET CREATED')
+                    print(settings.activeJobsetDB)
+                    self.counter = 0
+                self.counter += 1
 
 
 
     def eventClick(self):
-        print('CLICKEED ON ME')
+        uihelper.toggleModel('menuproducerbuy')

@@ -122,8 +122,6 @@ class inventory:
         return False
 
     def hasAny(self):
-        print(len(self.inventory))
-        print(self.inventory)
         if(len(self.inventory) != 0):
             return True
         return False
