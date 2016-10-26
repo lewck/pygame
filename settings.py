@@ -10,7 +10,7 @@ def init():
     global xMax
     xMax = 15
     global yMax
-    yMax = 15
+    yMax = 10
     global surface
     surface = 0
     global log
@@ -76,11 +76,6 @@ def init():
 
     global itemDB
     itemDB={
-        'vegetable':{
-            'vegetableCarrot':{
-                'title': 'Carrot'
-            }
-        },
 
         'body': {
             'title': 'body',
@@ -142,6 +137,8 @@ def init():
         'menuproducerbuy': False,
         'menustoragebuy': False,
         'defaultoverlay': False,
+        'factorypartsmenu': False,
+        'factorypartsselectpart': False,
     }
 
     global mod

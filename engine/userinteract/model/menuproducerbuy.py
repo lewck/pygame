@@ -12,9 +12,9 @@ from object.factory import factory as objectFactory
 import settings
 
 class menuproducerbuy(base):
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.basePriority = 110
-        super(menuproducerbuy, self).__init__()
+        super(menuproducerbuy, self).__init__(**kwargs)
 
     def addInputs(self):
 
@@ -72,6 +72,7 @@ class menuproducerbuy(base):
                         'event': 'buyObject',
                         'eventArgs': ['producer',uid],
                     })
+                    print('uid'+str(uid))
                     count += 1
                 posx += 41
             posx = 12

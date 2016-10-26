@@ -53,12 +53,16 @@ class input():
 
                         buffer = []
                         for id, each in settings.activeEventDB.items():
-                            if(each.data['attribute']['click']==1):
-                                if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
-                                        (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
+                            if(each.active == True):
+                                print('--ide')
+                                print(id)
+                                print(each)
+                                if(each.data['attribute']['click']==1):
+                                    if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
+                                            (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
 
-                                    clickUsed = True
-                                    buffer.append(id)
+                                        clickUsed = True
+                                        buffer.append(id)
 
                         for each in buffer:
                             settings.activeEventDB[each].doEvent()
@@ -67,6 +71,7 @@ class input():
                             settings.grid[int(yTile)][int(xTile)].eventClick()
                     else:
                         if(settings.inputBuffer[0] == 'setObject'):
+                            print('INPUT BUFFER' +str(settings.inputBuffer))
                             object.create(uid=settings.inputBuffer[1], y=yTile, x=xTile, direction=2)
                             settings.inputBuffer = []
 

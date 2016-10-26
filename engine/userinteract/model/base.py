@@ -1,7 +1,7 @@
 import settings
 
 class base:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.input = []
         self.output = []
 
@@ -11,6 +11,9 @@ class base:
         self.interfaces = {'inputs': [], 'outputs': []}
 
         self.active = False
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
     def addInput(self, **kwargs):
         #Register with event
@@ -98,6 +101,7 @@ class base:
         pass
 
     def activate(self):
+        self.active = True
         for key, each in settings.activeOutDB.items():
             if (each.modelID == self.id):
                 each.active = True
@@ -108,4 +112,12 @@ class base:
 
     def buyObject(self, type, uid):
         settings.inputBuffer = ['setObject', uid]
+        print('ib'+str(settings.inputBuffer))
         self.close()
+
+    def reload(self):
+        self.input = []
+        self.output = []
+
+        self.addInputs()
+        self.addOutputs()

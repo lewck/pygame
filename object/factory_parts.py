@@ -76,8 +76,8 @@ class factory_parts(base):
                                   itemID=self.inventoryOutput.inventory[0].id)
 
             if (not self.inventoryOutput.isFull()):
-                print('reset')
                 self.image = self.load(self.title)
+
             else:
                 if(self.counter == 10):
                     print('I AM FULL, CREATING JOB')
@@ -96,4 +96,5 @@ class factory_parts(base):
 
 
     def eventClick(self):
-        uihelper.toggleModel('menuproducerbuy')
+        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [0,0]
+        uihelper.toggleModel('factorypartsmenu', True)

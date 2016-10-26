@@ -12,9 +12,9 @@ from object.factory import factory as objectFactory
 import settings
 
 class menustoragebuy(base):
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.basePriority = 100
-        super(menustoragebuy, self).__init__()
+        super(menustoragebuy, self).__init__(**kwargs)
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority = self.basePriority + 9, title='close', attribute={

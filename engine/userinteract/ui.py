@@ -2,6 +2,11 @@ from engine.userinteract.model.welcome import welcome
 from engine.userinteract.model.menustoragebuy import menustoragebuy
 from engine.userinteract.model.menuproducerbuy import menuproducerbuy
 from engine.userinteract.model.defaultoverlay import defaultoverlay
+from engine.userinteract.model.factorypartsmenu import factorypartsmenu
+from engine.userinteract.model.factorypartsselectpart import factorypartsselectpart
+
+import engine.userinteract.model
+
 from engine.event import event
 from engine.out import out as outObj
 from util.tool import tool
@@ -11,48 +16,36 @@ import settings
 class ui:
     @staticmethod
     def create(uid):
-        model = []
+        modelID = tool.genRandomString(16)
 
-        model.append(eval(uid+'()'))
+        model = eval(uid+'(id = modelID)')
 
-        for each in model:
-            #Register Model
-            modelID = tool.genRandomString(16)
+        #Register Model
 
-            settings.activeModelDB[modelID] = each
 
-            each.id = modelID
-            inReturn = []
-            outReturn = []
+        settings.activeModelDB[modelID] = model
 
-            #Register Inputs
-            for out in each.input:
-                #Register with event handler
-                try:
-                    eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
-                except KeyError:
-                    #ASsume no event arguments
-                    eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
-                inReturn.append([eid,out['title']])
+        inReturn = []
+        outReturn = []
 
-            # Register Outputs
-            for out in each.output:
-                # Register with out handler
-                eid = outObj.create(modelID, out)
-                outReturn.append([eid,out['title']])
 
-            each.addInterfaces(inReturn, outReturn)
-        return modelID
+        #Register Inputs
+        for out in model.input:
+            #Register with event handler
+            try:
+                eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
+            except KeyError:
+                #ASsume no event arguments
+                eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
-    @staticmethod
-    def reloadModel(modelID):
-        # Register Inputs
-        for out in settings.activeModelDB[modelID].input:
-            # Register with event handler
-            eid = event.create(modelID, out, out['attribute']['event'])
+            inReturn.append([eid,out['title']])
 
         # Register Outputs
-        for out in settings.activeModelDB[modelID].output:
+        for out in model.output:
             # Register with out handler
             eid = outObj.create(modelID, out)
+            outReturn.append([eid,out['title']])
+
+        model.addInterfaces(inReturn, outReturn)
+        return modelID

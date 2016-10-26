@@ -5,8 +5,8 @@ from random import randint
 import settings
 
 class welcome(base):
-    def __init__(self):
-        super(welcome, self).__init__()
+    def __init__(self, **kwargs):
+        super(welcome, self).__init__(**kwargs)
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority = 5, title='close', attribute={
