@@ -96,5 +96,5 @@ class factory_parts(base):
 
 
     def eventClick(self):
-        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [0,0]
+        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)

@@ -44,6 +44,7 @@ class moveItem(base):
                 self.assign(self.entityID)
                 self.taskCurrent += 1
                 print('path assigned')
+
                 print('---')
                 print(self.startPosition[0])
                 print(self.startPosition[1])

@@ -106,7 +106,7 @@ class input():
                             settings.activeUI['menustoragebuy'] = False
 
                     if (event.key == pygame.K_F11):
-                        pass
+                        entityID = entity.create(uid='car')
 
                     if (event.key == pygame.K_SLASH):
                         devInputBuffer = True

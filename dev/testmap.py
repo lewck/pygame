@@ -36,6 +36,7 @@ class testmap:
         #object.create(uid='factory_parts', y=4, x=4, direction=3, dev=True, part='plane')
         #object.create('garage', 1,4,3)
         object.create(uid='road', y=2, x=3, direction=0, dev=True)
+
         object.create(uid='road', y=3, x=3, direction=0, dev=True)
         object.create(uid='road', y=4, x=3, direction=0, dev=True)
         object.create(uid='road', y=5, x=3, direction=0, dev=True)
@@ -48,8 +49,7 @@ class testmap:
 
     def loadmap2(self):
         print('loading')
-
-        object.create(uid='factory_parts', y=7, x=2, direction=2, dev=True, part='body')
+        object.create(uid='garage', y=0, x=4, direction=2, dev=True)
 
 
     @staticmethod

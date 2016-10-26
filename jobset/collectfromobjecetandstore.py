@@ -25,13 +25,9 @@ class collectFromObjectAndStore(base):
 
     def task(self):
         if(self.taskCurrent==1):
-            entityID = entity.create(uid='car')
             #Decide best vehicle
             print('entityDB:')
             print(settings.activeEntityDB)
-            self.vehicleID = entityID
-            print('entitySelected')
-            print(self.vehicleID)
             
             # decide best storage
             tmp = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
@@ -46,6 +42,12 @@ class collectFromObjectAndStore(base):
 
             self.pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
                                                               self.startPosition[2])
+
+
+            self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
+
+            print('veh = '+str(self.vehicleID))
+
 
             self.taskCurrent += 1
 

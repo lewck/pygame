@@ -15,7 +15,7 @@ class exports(base):
 
     def doTick(self, tickID):
         if(tickID==0):
-
+            print(self.inventory.inventory)
             if(self.inventory.hasAny()):
                 toSell = self.inventory.takeItem('all', 'all')
 
