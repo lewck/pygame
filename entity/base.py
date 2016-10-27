@@ -37,6 +37,17 @@ class base:
         print(self.x)
         print(self.y)
 
+    def unassign(self):
+        self.job = 0
+        self.path = 0
+        self.x = 0
+        self.y = 0
+        self.direction = 0
+        self.jobID = 0
+        self.status = 0
+        self.claimed = False
+
+
     def tick(self):
         if(self.tickListen!=False):
             self.tickCount += 1

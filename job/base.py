@@ -29,3 +29,8 @@ class base:
         #Unset Ticks
         settings.tick.remove(identifier=self.jobID)
         del settings.activeJobDB[self.jobID]
+
+    def complete(self):
+        settings.activeJobsetDB[self.jobSetID].eventTaskComplete()
+        self.jobSpecificComplete()
+        self.close()

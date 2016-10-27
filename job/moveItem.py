@@ -2,6 +2,7 @@ from job.base import base
 from pathfind import pathFind
 from entity.helper import helper as entityhelper
 from jobset.helper import helper as jobsethelper
+from jobset.helper import helper as jobsethelper
 
 import settings
 
@@ -22,6 +23,9 @@ class moveItem(base):
 
     def assign(self, entityID):
         settings.activeEntityDB[entityID].assign(self.jobID)
+
+    def unassign(self):
+        settings.activeEntityDB[self.entityID].unassign()
 
     def task(self):
         options = {
@@ -135,10 +139,14 @@ class moveItem(base):
                     self.taskCurrent += 1
 
         if(self.taskCurrent==5):
-            jobsethelper.complete(self.jobSetID)
+            self.complete()
             self.taskCurrent=6
 
     def tick(self):
         if (self.taskClaimed == False):
             # Not claimed
             self.task()
+
+    def jobSpecificComplete(self):
+        #Undo everything done specific to this job
+        self.unassign()
