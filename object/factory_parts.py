@@ -20,6 +20,7 @@ class factory_parts(base):
         self.used = False
         self.ui = ''
         self.counter = 0
+        self.jobCreated = False
 
 
     def doTick(self, tickID):
@@ -37,8 +38,10 @@ class factory_parts(base):
 
 
             if(settings.itemDB[self.part]['required']=={}):
-
-                self.inventoryOutput.addItem('body',5)
+                #Just generate Parts
+                self.inventoryOutput.addItem(self.part,5)
+                print(self.inventoryOutput.inventory)
+                print('ADDING')
 
             else:
 
@@ -75,24 +78,24 @@ class factory_parts(base):
                     jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                                   itemID=self.inventoryOutput.inventory[0].id)
 
+
             if (not self.inventoryOutput.isFull()):
                 self.image = self.load(self.title)
 
             else:
-                if(self.counter == 10):
-                    print('I AM FULL, CREATING JOB')
-                    print(self.inventoryOutput.inventory[0].id)
+                self.image = self.load(self.title + '_full')
 
-                    self.image = self.load(self.title + '_full')
 
-                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
-                                  itemID=self.inventoryOutput.inventory[0].id)
+                print('I AM FULL, CREATING JOB')
+                print(self.inventoryOutput.inventory[0].id)
 
-                    print('AFTER JOBSET CREATED')
-                    print(settings.activeJobsetDB)
-                    self.counter = 0
-                self.counter += 1
 
+
+                jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
+                              itemID=self.inventoryOutput.inventory[0].id)
+
+                print('AFTER JOBSET CREATED')
+                print(settings.activeJobsetDB)
 
 
     def eventClick(self):

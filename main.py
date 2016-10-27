@@ -12,6 +12,8 @@ from player.player import player
 from util.grid import grid
 from mapgenerator import mapgenerator
 
+from dev.testmap import testmap
+
 pygame.init()
 settings.init()
 
@@ -61,8 +63,6 @@ for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
-object.create(uid='exports', y=0, x=9, direction=2, dev=True)
-
 settings.player = player()
 
 clock = pygame.time.Clock()
@@ -79,9 +79,12 @@ devInputKey = ''
 
 mainMenu = False
 
-print(settings.activeUI['defaultoverlay'])
-settings.activeModelDB[settings.activeUI['defaultoverlay']].activate()
 
+
+settings.activeModelDB[settings.activeUI['defaultoverlay']].activate()
+testmap.create(3)
+
+entity.create(uid='car')
 
 while not settings.gameExit:
     '''
@@ -121,7 +124,6 @@ while not settings.gameExit:
             except KeyError:
                 #the tick was unregistered mid buffer, this no longer exists
                 pass
-
 
     pygame.display.update()
     clock.tick(120)

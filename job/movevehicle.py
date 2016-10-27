@@ -39,6 +39,7 @@ class movevehicle(base):
 
             self.path = path.find()
 
+
             if(self.path):
                 #Assign entity to path
                 self.assign(self.entityID)

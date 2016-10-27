@@ -37,32 +37,30 @@ class moveItem(base):
 
         if(self.taskCurrent == 1):
             #Create path
-            path = pathFind(self.startPosition[0], self.startPosition[1], self.endPosition[0], self.endPosition[1], 5)
-            self.path = path.find()
+            print('FINDING PATH FOR MOVEITEM')
 
-            print('PATH')
-            print(self.path)
 
-            if(self.path):
-                #Assign entity to path
-                self.assign(self.entityID)
+            if(self.path != False):
+                #Assign entity to pat
+
                 self.taskCurrent += 1
+
+                self.assign(self.entityID)
+
+
                 print('path assigned')
 
-                print('---')
-                print(self.startPosition[0])
-                print(self.startPosition[1])
-                print(self.endPosition[0])
-                print(self.endPosition[1])
-                print('---')
+
 
             else:
+                print('Path Not Found')
                 settings.activeJobsetDB[self.parent].doEvent('pathnotfound')
 
 
         if(self.taskCurrent == 2):
-            print('task222222222222')
+            print('task2')
             #Move items from invA to invB
+
             if(self.startPosition[2]==0 or self.startPosition[2]==2):
                 #Handle y change
                 print('checking')

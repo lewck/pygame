@@ -13,18 +13,16 @@ class inventory:
     
     def addItem(self, itemID, quantity = 1):
 
-        if(self.currentSize+quantity <= self.size):
+        if((len(self.inventory))+quantity <= self.size):
             for i in range(0,quantity):
                 self.inventory.extend(item.create(item=itemID, quantity=quantity))
-                self.currentSize += 1
             return True
         else:
-            if(self.currentSize<= self.size):
+            if((len(self.inventory))<= self.size):
                 #Not completely full
-                toFill = self.size-self.currentSize
+                toFill = self.size-(len(self.inventory))
                 for i in range(0, toFill):
                     self.inventory.extend(item.create(item=itemID, quantity=quantity))
-                    self.currentSize += 1
                 return 'INVFULL'
             else:
                 #Completely full

@@ -15,21 +15,16 @@ class factorypartsmenu(base):
         uihelper.toggleModel('factorypartsselectpart')
 
     def addInputs(self):
-        self.addInput(type='mouseAction', priority=self.basePriority + 5, title='openBuyMenu', attribute={
+        self.addInput(type='mouseAction', priority=5, title='openBuyMenu', attribute={
             'click': 1,
             'pos': [50, 110],
             'dim': [40, 70],
             'event': 'createPartSelect',
         })
-        self.addInput(type='mouseAction', priority=self.basePriority + 9, title='close', attribute={
-            'click': 1,
-            'pos': [0, 0],
-            'dim': [10, 10],
-            'event': 'close',
-        })
+        self.addCommon(uid='close', pos=[0, 512])
 
     def addOutputs(self):
-        self.addOutput(pos=[10, 10], type='text', priority=self.basePriority + 2, title='factoryparttitle',
+        self.addOutput(pos=[10, 10], type='text', priority=2, title='factoryparttitle',
             attribute={
                'font': 'primaryFont',
                'size': 50,
@@ -38,16 +33,15 @@ class factorypartsmenu(base):
            }
         )
 
-        self.addOutput(pos=[0,0], type='shape', priority=self.basePriority, title='factoryPartBackground',
+        self.addOutput(pos=[0,0], type='shape', priority=0, title='factoryPartBackground',
             attribute={
                 'shape': 'rectangle',
                 'dim': [512, 512],
                 'color': (0, 0, 0)
             }
         )
-        if(hasattr(self, 'objectPosition')):
-            print('pos'+str(self.objectPosition))
 
+        if(hasattr(self, 'objectPosition')):
             #Assume claimed
 
             #Draw Part
@@ -58,7 +52,7 @@ class factorypartsmenu(base):
 
 
 
-            self.addOutput(pos=[60, 10], type='text', priority=self.basePriority + 5, title='factoryparttitle',
+            self.addOutput(pos=[60, 10], type='text', priority= 5, title='factoryparttitle',
                attribute={
                    'font': 'primaryFont',
                    'size': 30,
@@ -66,8 +60,6 @@ class factorypartsmenu(base):
                    'color': (255, 255, 255)
                }
             )
-
-
 
 
             '''

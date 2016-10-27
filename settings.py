@@ -127,7 +127,7 @@ def init():
         'exports': {
             'exports': {
                 'title': 'exports',
-                'tickListen': []
+                'tickListen': [5]
             },
         },
     }

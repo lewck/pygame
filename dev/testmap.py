@@ -6,6 +6,7 @@ class testmap:
         eval('self.loadmap'+str(tid)+'()')
 
     def loadmap0(self):
+        # Map for testing pathfinding
         print('loading')
         object.create(uid='genericHouse', y=0, x=1, direction=0, dev=True)
         object.create(uid='genericHouse', y=1, x=1, direction=0, dev=True)
@@ -28,6 +29,7 @@ class testmap:
         object.create(uid='genericHouse', y=9, x=3, direction=0, dev=True)
 
     def loadmap1(self):
+        # Map for testing
         print('loading')
         object.create(uid='road', y=1, x=1, direction=0, dev=True)
         object.create(uid='road', y=1, x=2, direction=0, dev=True)
@@ -50,6 +52,18 @@ class testmap:
     def loadmap2(self):
         print('loading')
         object.create(uid='garage', y=0, x=4, direction=2, dev=True)
+
+    def loadmap3(self):
+        # Map for testing new game spawns
+        print('loading')
+        object.create(uid='garage', y=0, x=4, direction=2, dev=True)
+        object.create(uid='factory_parts', y=0, x=1, direction=2, dev=True)
+        object.create(uid='road', y=1, x=1, direction=0, dev=True)
+        object.create(uid='road', y=1, x=2, direction=0, dev=True)
+        object.create(uid='road', y=1, x=3, direction=0, dev=True)
+        object.create(uid='road', y=1, x=4, direction=0, dev=True)
+
+        object.create(uid='exports', y=0, x=9, direction=2, dev=True)
 
 
     @staticmethod

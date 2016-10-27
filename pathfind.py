@@ -86,9 +86,9 @@ class pathFind():
             self.close(self.current.y,self.current.x)
             self.open.pop(pos)
             #print('Closed Self')
+
             if self.current.x==self.xend and self.current.y==self.yend:
-                #print('success')
-                print(self.current.parent)
+                print('success path find')
                 return(self.organise([[self.current.y, self.current.x, 4], self.current.parent]))
 
 
@@ -98,7 +98,7 @@ class pathFind():
 
         store = []
         while True:
-            print(check)  # uncomment for sort debug
+            #print(check)  # uncomment for sort debug
             if (check[0] == -1):
                 break
             else:
@@ -106,11 +106,11 @@ class pathFind():
                 check = check[1]
 
         for each in store:
-            print(each)
+            #print(each)
             settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
 
 
-        print(store)
+        #print(store)
         pathID = tool.genRandomString()
 
         settings.pathDB[pathID] = ([[[0, 0], [9, 9]], [store]])

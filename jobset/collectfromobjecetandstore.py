@@ -21,6 +21,7 @@ class collectFromObjectAndStore(base):
             print('PATH NOT FOUND')
             print(str(self.jobID))
             settings.activeJobDB[str(self.jobID)].close()
+            self.close()
             self.taskCurrent = 3
 
     def task(self):
@@ -46,10 +47,20 @@ class collectFromObjectAndStore(base):
 
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
 
-            print('veh = '+str(self.vehicleID))
+            if(self.vehicleID):
+
+                path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1],
+                                5)
+
+                self.pathID = path.find()
+
+                if(self.pathID):
+                    self.taskCurrent += 1
 
 
-            self.taskCurrent += 1
+            if(self.taskCurrent == 1):
+                self.close()
+
 
         if(self.taskCurrent==2):
             # Begin
@@ -57,7 +68,7 @@ class collectFromObjectAndStore(base):
             if (self.status == 1):
 
                 self.jobID = job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd, items='all',
-                           parent=self.jobsetID, entityID = self.vehicleID)
+                           parent=self.jobsetID, entityID = self.vehicleID, path = self.pathID)
 
                 self.status = 0
 
@@ -65,5 +76,5 @@ class collectFromObjectAndStore(base):
             # Callback from entity, job completed
             # Send car back to storage
             # Find nearest garage
-
+            self.close()
             pass

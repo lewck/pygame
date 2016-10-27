@@ -14,35 +14,26 @@ import settings
 class menuproducerbuy(base):
     def __init__(self, **kwargs):
         self.basePriority = 110
+        self.basePos = [0,0]
+        self.baseDim = [512,512]
         super(menuproducerbuy, self).__init__(**kwargs)
 
     def addInputs(self):
-
-        self.addInput(type='mouseAction', priority = self.basePriority + 9, title='close', attribute={
-            'click': 1,
-            'pos': [0,502],
-            'dim': [100, 100],
-            'event': 'close'
-        })
+        self.addCommon(uid='close', pos=[0,512])
+        self.addCommon(uid='coverall')
 
     def addOutputs(self):
-        self.addOutput(pos=[10, 10], type='text', priority= self.basePriority + 2, title='menustoragebuytext', attribute={
+        self.addOutput(pos=self.basePos, type='text', priority= 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 50,
             'value': 'Producer Shop',
             'color': (255, 255, 255)
         })
 
-        self.addOutput(pos=[0, 0], type='shape', priority= self.basePriority + 0, title='shopBackground', attribute={
+        self.addOutput(pos=self.basePos, type='shape', priority= 0, title='shopBackground', attribute={
             'shape': 'rectangle',
-            'dim': [512,512],
+            'dim': self.baseDim,
             'color': (51,51,51)
-        })
-
-        self.addOutput(pos=[0, 502], type='shape', priority= self.basePriority + 6, title='shopBackground', attribute={
-            'shape': 'rectangle',
-            'dim': [10, 10],
-            'color': (255, 0,0)
         })
 
 
@@ -53,7 +44,7 @@ class menuproducerbuy(base):
         posy = 100
         for y in range(0,8):
             for x in range(0,12):
-                self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= self.basePriority + 5, title='shopBackground' + str(y) + str(x), attribute={
+                self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, title='shopBackground' + str(y) + str(x), attribute={
                     'shape': 'rectangle',
                     'dim': [39, 39],
                     'color': (0, 0, 0)
@@ -61,11 +52,11 @@ class menuproducerbuy(base):
 
                 if(count<=max):
                     uid = list(settings.objectDB['producer'].keys())[count]
-                    self.addOutput(pos=[posy + 2, posx + 2], type='image', priority= self.basePriority + 6, title='btn',  attribute={
+                    self.addOutput(pos=[posy + 2, posx + 2], type='image', priority= 6, title='btn',  attribute={
                         'uid': uid,
                         'scale': (39,39)
                     })
-                    self.addInput(type='mouseclick', priority=6, title='btnin', attribute={
+                    self.addInput(type='mouseclick', priority= 6, title='btnin', attribute={
                         'click': 1,
                         'pos': [posy + 2, posx + 2],
                         'dim': [39,39],

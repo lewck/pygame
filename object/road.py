@@ -8,4 +8,4 @@ class road(base):
         self.passable = [5]
 
     def eventClick(self):
-        super(road, self).log()
+        pass

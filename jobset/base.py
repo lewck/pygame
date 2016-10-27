@@ -7,7 +7,7 @@ class base:
         self.initVars(**kwargs)
         #Register ticks
         for each in self.tickListen:
-            settings.tick.register(each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()')
+            settings.tick.register(each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()', self.jobsetID)
 
 
     def initVars(self, **kwargs):
@@ -26,3 +26,7 @@ class base:
 
     def tick(self):
         self.task()
+
+    def close(self):
+        settings.tick.remove(identifier = self.jobsetID)
+        del settings.activeJobsetDB[self.jobsetID]

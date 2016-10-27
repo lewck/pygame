@@ -30,3 +30,4 @@ settings.init()
 
 score = score()
 score.create('Lewis', 5000)
+time = 0

@@ -17,10 +17,12 @@ class base:
 
     def addInput(self, **kwargs):
         #Register with event
+        kwargs['priority'] += self.basePriority
         self.input.append(kwargs)
 
     def addOutput(self, **kwargs):
         #Register with event
+        kwargs['priority'] += self.basePriority
         self.output.append(kwargs)
 
     def addInterfaces(self, ins, outs):
@@ -121,3 +123,36 @@ class base:
 
         self.addInputs()
         self.addOutputs()
+
+    def addCommon(self, **kwargs):
+        #Required args: UID
+        if(kwargs['uid'] == 'close'):
+            #Required Args: Pos (top right model)
+            self.addInput(type='mouseAction', priority=9, title='close', attribute={
+                'click': 1,
+                'pos': [kwargs['pos'][0], kwargs['pos'][1]-20],
+                'dim': [20, 20],
+                'event': 'close'
+            })
+            self.addOutput(pos=[kwargs['pos'][0], kwargs['pos'][1]-20], type='shape', priority=6, title='close',
+               attribute={
+                   'shape': 'rectangle',
+                   'dim': [20, 20],
+                   'color': (255, 0, 0)
+            })
+
+        if(kwargs['uid'] == 'coverall'):
+            print('TRIGGER COVERALL')
+            #Required Args: Pos (top right model)
+            self.addInput(type='mouseAction', priority=0, title='base', attribute={
+                'click': 1,
+                'pos': [0,0],
+                'dim': [512,512],
+                'event': 'none'
+            })
+            self.addInput(type='mouseAction', priority=0, title='base', attribute={
+                'click': 3,
+                'pos': self.basePos,
+                'dim': self.baseDim,
+                'event': 'none'
+            })
