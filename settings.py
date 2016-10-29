@@ -3,8 +3,6 @@ def init():
     global APIKEY
     APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0skYZoAzkJd19wWBetJ0tTMaWO3HySt4m5'
 
-    global zoom
-    zoom = 0
     global grid
     grid = []
     global xMax
@@ -74,13 +72,23 @@ def init():
     global inputBuffer
     inputBuffer = []
 
+    global entityDB
+    entityDB = {
+        'vehicle': {
+            'car':{
+                'title': 'car',
+                'buyprice': 100,
+            }
+        }
+    }
+
     global itemDB
     itemDB={
 
         'body': {
             'title': 'body',
             'required' : {},
-            'sellPrice': 50,
+            'sellPrice': 5,
         },
 
         'plane':{
@@ -88,8 +96,26 @@ def init():
             'required' : {
                 'body':2,
             },
-            'sellPrice': 500,
-        }
+            'sellPrice': 15,
+        },
+        'metalcopper':{
+            'title': 'Copper',
+            'required': {},
+            'sellPrice': 5,
+        },
+        'metalzinc': {
+            'title': 'Zinc',
+            'required': {},
+            'sellPrice': 5,
+        },
+        'metalbrass': {
+            'title': 'Brass',
+            'required' : {
+                'metalcopper':1,
+                'metalzinc':1,
+            },
+            'sellPrice': 5,
+        },
     }
     global objectDB
     objectDB = {
@@ -139,7 +165,15 @@ def init():
         'defaultoverlay': False,
         'factorypartsmenu': False,
         'factorypartsselectpart': False,
+        'menuvehiclebuy': False,
+        'menumarketstatus': False,
     }
 
     global mod
     mod = 0
+
+    global marketCache
+    marketCache = {}
+
+    global zoom
+    zoom = 10

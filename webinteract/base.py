@@ -31,8 +31,7 @@ class base:
         jsonData = json.loads(decodedData)
 
         if('fail' in jsonData):
-            #TODO log error
-            settings.logObject.log('Webinteract fail'+jsonData['fail'], 2)
+            settings.logObject.create('Webinteract fail'+jsonData['fail'], 2)
             return False
 
         return jsonData
@@ -41,10 +40,7 @@ class base:
     def auth(self):
         self.authCode = 0
         self.authCode = self.requestCall('auth', { 'apikey': settings.APIKEY })['authorisation_token']
-        print('ac')
-        print(self.authCode)
-
-        return False;
 
         if(self.authCode):
             return True
+        return False

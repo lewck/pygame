@@ -4,6 +4,8 @@ from engine.userinteract.model.menuproducerbuy import menuproducerbuy
 from engine.userinteract.model.defaultoverlay import defaultoverlay
 from engine.userinteract.model.factorypartsmenu import factorypartsmenu
 from engine.userinteract.model.factorypartsselectpart import factorypartsselectpart
+from engine.userinteract.model.menuvehiclebuy import menuvehiclebuy
+from engine.userinteract.model.menumarketstatus import menumarketstatus
 
 import engine.userinteract.model
 

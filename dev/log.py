@@ -4,6 +4,7 @@ import settings
 
 class log:
     def __init__(self, text, type):
+        self.logmode = 1
         self.file = self.openFile()
         self.add(text, type)
 
@@ -29,7 +30,13 @@ class log:
         return levels[type]
 
     def add(self, text, type):
-        self.file.write('['+self.getDatePrefix()+'] '+'['+self.getLevelPrefix(type)+'] '+text+'\n')
+        if(self.logmode == 0):
+            self.file.write('['+self.getDatePrefix()+'] '+'['+self.getLevelPrefix(type)+'] '+text+'\n')
+        elif(self.logmode ==1):
+            print('[' + self.getDatePrefix() + '] ' + '[' + self.getLevelPrefix(type) + '] ' + text + '\n')
+            self.file.write('[' + self.getDatePrefix() + '] ' + '[' + self.getLevelPrefix(type) + '] ' + text + '\n')
+        elif (self.logmode == 2):
+            print('[' + self.getDatePrefix() + '] ' + '[' + self.getLevelPrefix(type) + '] ' + text + '\n')
 
     @staticmethod
     def create(text, type=0):

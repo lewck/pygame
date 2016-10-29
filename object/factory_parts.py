@@ -13,6 +13,7 @@ class factory_parts(base):
         self.type = 'producer'
         self.part = 0
         super(factory_parts, self).setVars(image=self.title, **kwargs)
+
         self.passable = []
         self.inventory = inventory(30)
         self.inventoryOutput = inventory(30)
@@ -21,6 +22,7 @@ class factory_parts(base):
         self.ui = ''
         self.counter = 0
         self.jobCreated = False
+        self.setSegregation = False
 
 
     def doTick(self, tickID):
@@ -34,19 +36,32 @@ class factory_parts(base):
 
             if(self.part==0):
                 #No part assigned
+                print('NO PARTTTTTT')
                 return False
+
+            else:
+                if(self.setSegregation == False):
+                    if (not settings.itemDB[self.part]['required'] == {}):
+                        print('SEGREGATING')
+                        self.inventory.segregate(['metalcopper', 'metalzinc'])
+                        self.setSegregation = True
 
 
             if(settings.itemDB[self.part]['required']=={}):
                 #Just generate Parts
+                print('add')
                 self.inventoryOutput.addItem(self.part,5)
                 print(self.inventoryOutput.inventory)
                 print('ADDING')
 
             else:
-
                 #Assume has to check inventory for parts
                 data = settings.itemDB[self.part]
+
+                print('-------------------------------')
+                print('Inventory')
+                print(self.inventory.inventory)
+                print('-------------------------------')
 
                 hasItems = 0
 
@@ -86,16 +101,16 @@ class factory_parts(base):
                 self.image = self.load(self.title + '_full')
 
 
-                print('I AM FULL, CREATING JOB')
-                print(self.inventoryOutput.inventory[0].id)
+                #print('I AM FULL, CREATING JOB')
+                #print(self.inventoryOutput.inventory[0].id)
 
 
 
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                               itemID=self.inventoryOutput.inventory[0].id)
 
-                print('AFTER JOBSET CREATED')
-                print(settings.activeJobsetDB)
+                #print('AFTER JOBSET CREATED')
+                #print(settings.activeJobsetDB)
 
 
     def eventClick(self):

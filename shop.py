@@ -14,5 +14,7 @@ class shop:
 
     @staticmethod
     def sell(items):
+        #Check if cache needs to be busted
+
         for each in items:
             settings.player.balance += settings.itemDB[each.id]['sellPrice']

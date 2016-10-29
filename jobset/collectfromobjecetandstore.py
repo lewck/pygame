@@ -27,16 +27,15 @@ class collectFromObjectAndStore(base):
     def task(self):
         if(self.taskCurrent==1):
             #Decide best vehicle
-            print('entityDB:')
-            print(settings.activeEntityDB)
+
+            #print('entityDB:')
+            #print(settings.activeEntityDB)
             
             # decide best storage
             tmp = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
 
             if (tmp):
                 self.pathEnd = tmp
-                print('--')
-                print(self.pathEnd)
             else:
                 # Could not find storage
                 pass

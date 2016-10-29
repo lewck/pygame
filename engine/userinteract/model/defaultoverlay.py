@@ -9,8 +9,8 @@ class defaultoverlay(base):
         self.basePriority = 60
         super(defaultoverlay, self).__init__(**kwargs)
 
-    def openProducerMenu(self):
-        uihelper.toggleModel('menuproducerbuy')
+    def openMenu(self, uid):
+        uihelper.toggleModel(uid)
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority=self.basePriority, title='base', attribute={
@@ -24,8 +24,26 @@ class defaultoverlay(base):
             'click': 1,
             'pos': [settings.yMax*50, 150],
             'dim': [50, 150],
-            'event': 'openProducerMenu',
+            'event': 'openMenu',
+            'eventArgs': ['menuproducerbuy'],
         })
+
+        self.addInput(type='mouseAction', priority=self.basePriority + 5, title='oepnvehiclemenu', attribute={
+            'click': 1,
+            'pos': [settings.yMax * 50, 305],
+            'dim': [50, 150],
+            'event': 'openMenu',
+            'eventArgs': ['menuvehiclebuy'],
+        })
+
+        self.addInput(type='mouseAction', priority=self.basePriority + 5, title='openmarketmenu', attribute={
+            'click': 1,
+            'pos': [settings.yMax * 50, 460],
+            'dim': [50, 150],
+            'event': 'openMenu',
+            'eventArgs': ['menumarketstatus'],
+        })
+
 
     def addOutputs(self):
         #Background
@@ -36,8 +54,34 @@ class defaultoverlay(base):
                 'color': (51, 51, 51)
             }
         )
+        #sidebar
+        self.addOutput(pos=[0, settings.xMax * 50], type='shape', priority=self.basePriority, title='overlayBackground',
+           attribute={
+               'shape': 'rectangle',
+               'dim': [(settings.yMax*50)+50, 300],
+               'color': (51, 51, 51)
+           }
+        )
+        self.addOutput(pos=[20, (settings.xMax * 50)+20], type='text', priority=self.basePriority + 2,title='menustoragebuytext',
+           attribute={
+               'font': 'primaryFont',
+               'size': 30,
+               'value': 'Environment',
+               'color': (255, 255, 255)
+           }
+        )
 
-        #Balaance
+        self.addOutput(pos=[50, (settings.xMax * 50) + 20], type='text', priority=self.basePriority + 2, title='menustoragebuytext',
+           attribute={
+               'font': 'primaryFont',
+               'size': 20,
+               'value': 'Balance: {0}',
+               'variables': ['settings.player.balance'],
+               'color': (255, 255, 255)
+           }
+        )
+
+        #Balance
         self.addOutput(pos=[(settings.yMax*50) +10, 10], type='text', priority= self.basePriority + 2, title='menustoragebuytext',
             attribute={
                 'font': 'primaryFont',
@@ -61,6 +105,39 @@ class defaultoverlay(base):
                'font': 'primaryFont',
                'size': 20,
                'value': 'Producer Menu',
+               'color': (0, 0, 0)
+           }
+        )
+
+        # Vehicle Menu Button
+        self.addOutput(pos=[settings.yMax * 50, 305], type='shape', priority=self.basePriority + 2, title='overlayBackground',
+           attribute={
+               'shape': 'rectangle',
+               'dim': [50, 150],
+               'color': (255, 255, 0)
+           }
+        )
+        self.addOutput(pos=[(settings.yMax * 50) + 15, 335], type='text', priority=self.basePriority + 5, title='menustoragebuytext',
+           attribute={
+               'font': 'primaryFont',
+               'size': 20,
+               'value': 'Vehicle Menu',
+               'color': (0, 0, 0)
+           }
+        )
+
+        self.addOutput(pos=[settings.yMax * 50, 460], type='shape', priority=self.basePriority + 2, title='overlayBackground',
+           attribute={
+               'shape': 'rectangle',
+               'dim': [50, 150],
+               'color': (255, 255, 0)
+           }
+        )
+        self.addOutput(pos=[(settings.yMax * 50) + 15, 500], type='text', priority=self.basePriority + 5, title='menustoragebuytext',
+           attribute={
+               'font': 'primaryFont',
+               'size': 20,
+               'value': 'Market',
                'color': (0, 0, 0)
            }
         )

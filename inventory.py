@@ -10,23 +10,43 @@ class inventory:
         self.inventory = []
         self.currentSize = 0
         self.type = type
+        self.segregations = {}
     
     def addItem(self, itemID, quantity = 1):
 
-        if((len(self.inventory))+quantity <= self.size):
-            for i in range(0,quantity):
-                self.inventory.extend(item.create(item=itemID, quantity=quantity))
-            return True
-        else:
-            if((len(self.inventory))<= self.size):
-                #Not completely full
-                toFill = self.size-(len(self.inventory))
-                for i in range(0, toFill):
-                    self.inventory.extend(item.create(item=itemID, quantity=quantity))
-                return 'INVFULL'
+        if(len(self.segregations) == 0):
+            #Ignore Segregations
+            if((len(self.inventory))+quantity <= self.size):
+
+                for i in range(0,quantity):
+                    self.inventory.extend(item.create(item=itemID))
+                return True
+
             else:
-                #Completely full
-                return 'INVFULL'
+                print('NOT COMPLETELT FULL')
+                if((len(self.inventory))<= self.size):
+                    #Not completely full
+                    toFill = self.size-(len(self.inventory))
+                    for i in range(0, toFill):
+                        self.inventory.extend(item.create(item=itemID))
+                    return 'INVFULL'
+                else:
+                    #Completely full
+                    return 'INVFULL'
+
+        else:
+            #Use segregations
+            print('USING SEGREGATIONS')
+            if(not itemID in self.segregations):
+                return False
+
+            while(self.segregations[itemID][0] > (self.segregations[itemID][1])):
+
+                self.inventory.extend(item.create(item=itemID))
+                self.segregations[itemID][1] += 1
+
+
+
 
     def buildItem(self, id):
         print('build trigger')
@@ -40,15 +60,19 @@ class inventory:
 
 
     def loadItem(self, itemBuffer):
-        print(self.inventory)
-        if(len(itemBuffer)<self.size - (len(self.inventory)-1)):
-            print('---')
-            self.inventory.extend(itemBuffer)
-            print(self.inventory)
+        if (len(self.segregations) == 0):
+            if(len(itemBuffer)< (self.size - (len(self.inventory)-1))):
+                self.inventory.extend(itemBuffer)
+                return True
+            else:
+                return False
         else:
-            print(len(itemBuffer))
-            print(self.size - len(self.inventory))
-            print('COULD NOT LODE')
+            #Use segregations
+            for each in itemBuffer:
+                if(each.id in self.segregations):
+                    if(self.segregations[each.id][0] > (self.segregations[each.id][1])):
+                        self.inventory.append(each)
+                        self.segregations[each.id][1] += 1
 
     def removeItem(self, **kwargs):
 
@@ -123,3 +147,13 @@ class inventory:
         if(len(self.inventory) != 0):
             return True
         return False
+
+    def segregate(self, segregations):
+        #Divide the invnetory space do item specific chunks
+        perSeg = int( self.size / len(segregations) ) #Use int to round down, this may loose slots
+
+        for each in segregations:
+            self.segregations[each] = [perSeg, 0]
+
+        print(self.segregations)
+

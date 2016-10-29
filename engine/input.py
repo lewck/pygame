@@ -3,11 +3,11 @@ import pygame
 import settings
 from dev.testmap import testmap as devmap
 from jobset.factory import factory as jobset
-from legacy.ui.uis.helper import helper as uishelper
 from object.factory import factory as object
 from util.tool import tool
 from engine.userinteract.ui import ui
 from entity.factory import factory as entity
+from engine.userinteract.helper import helper as uihelper
 
 class input():
     @staticmethod
@@ -96,7 +96,7 @@ class input():
                         object.create(uid='garage', y=0, x=0, direction=0)
 
                     if(event.key == pygame.K_F9):
-                        pass
+                        uihelper.toggleModel('menuvehiclebuy');
 
                     if (event.key == pygame.K_F10):
                         if (settings.activeUI['menustoragebuy'] == False):

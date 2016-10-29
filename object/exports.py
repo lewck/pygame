@@ -20,6 +20,5 @@ class exports(base):
                 toSell = self.inventory.takeItem('all', 'all')
                 shop.sell(toSell)
 
-
     def eventClick(self):
         pass

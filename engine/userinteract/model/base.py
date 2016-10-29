@@ -1,3 +1,5 @@
+from shop import shop
+from entity.factory import factory as entity
 import settings
 
 class base:
@@ -112,15 +114,9 @@ class base:
             if (each.modelID == self.id):
                 each.active = True
 
-    def buyObject(self, type, uid):
-        settings.inputBuffer = ['setObject', uid]
-        print('ib'+str(settings.inputBuffer))
-        self.close()
-
     def reload(self):
         self.input = []
         self.output = []
-
         self.addInputs()
         self.addOutputs()
 
@@ -142,7 +138,6 @@ class base:
             })
 
         if(kwargs['uid'] == 'coverall'):
-            print('TRIGGER COVERALL')
             #Required Args: Pos (top right model)
             self.addInput(type='mouseAction', priority=0, title='base', attribute={
                 'click': 1,
@@ -156,3 +151,14 @@ class base:
                 'dim': self.baseDim,
                 'event': 'none'
             })
+
+    def buyObject(self, type, uid):
+        settings.inputBuffer = ['setObject', uid]
+        print('ib'+str(settings.inputBuffer))
+        self.close()
+
+    def buyEntity(self, type, uid):
+        price = settings.entityDB[type][uid]['buyprice']
+        if(shop.canPurchase(price)):
+            shop.purchase(price)
+            entity.create(uid='car')

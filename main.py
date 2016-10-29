@@ -1,6 +1,9 @@
 import pygame
-
 import settings
+
+import pygame
+import settings
+
 from dev.log import log
 from engine.input import input
 from engine.render import render
@@ -11,32 +14,33 @@ from object.factory import factory as object
 from player.player import player
 from util.grid import grid
 from mapgenerator import mapgenerator
-
+from webinteract.market import market
 from dev.testmap import testmap
 
+
+'''
+'
+'   BOOTSTRAP CODE
+'
+'''
+
+#Initiate Depends
 pygame.init()
 settings.init()
 
-settings.tick = tick()
-
-settings.devfont = pygame.font.Font(None, 25)
+#Begin startup logging
 log.create('Main Initiated')
-car = 0
 
 
-white = (255,255,255)
-black = (0,0,0)
-red = (255,0,0)
+#Initiate Pygame-related vars
+settings.tick = tick()
+clock = pygame.time.Clock()
 
-display_width = settings.xMax*50
-display_height = (settings.yMax * 50)+50
 
-#settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
-settings.surface = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('Title')
-
+#Pre-load Fonts
+settings.devfont = pygame.font.Font(None, 25)
 settings.fonts = {
-    'primaryFont':{
+    'primaryFont': {
         10: pygame.font.SysFont(None, 10),
         20: pygame.font.SysFont(None, 20),
         30: pygame.font.SysFont(None, 30),
@@ -46,88 +50,83 @@ settings.fonts = {
     },
 }
 
-gameExit = False
-x = 0
-lead_x = 300
-lead_y = 300
-lead_x_change = 0
-lead_y_change = 0
+#Calculate surface width
+display_width = 1050
+display_height = 550
 
+#Create surface
+#Uncomment for full screen settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
+settings.surface = pygame.display.set_mode((display_width,display_height))
+pygame.display.set_caption('Game Title')
+
+
+#Generate grid
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
+#Pre-load User Interfaces (inactive)
 for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
 
-
+#Fill grid with grass
 for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
+
+#Define player
 settings.player = player()
 
-clock = pygame.time.Clock()
-settings.zoom = 10
-
-settings.surface.fill(white)
-message = False
-
-
-devInputBuffer = False
-devInputKey = ''
-
-
-
 mainMenu = False
-
-
 
 settings.activeModelDB[settings.activeUI['defaultoverlay']].activate()
 testmap.create(3)
 
 entity.create(uid='car')
 
+#Get market prices
+settings.webinteractmarket = market()
+settings.marketCache = settings.webinteractmarket.get()
+
+
+'''
+'
+'   CORE GAME LOOP
+'
+'''
+
 while not settings.gameExit:
-    '''
-    '   Check for main menu
-    '''
-    if(mainMenu == True):
-        render.render()
-    else:
-        '''
-        '
-        '   Listen for any events
-        '
-        '''
-        input.listenForEvent()
+    #Listen for events
+    input.listenForEvent()
 
-        render.render()
+    #Render the screen
+    render.render()
 
-        for key, each in settings.activeEntityDB.items():
-            if(each.status!=0):
-                each.tick()
-                each.draw()
+    #Tick entities
+    for key, each in settings.activeEntityDB.items():
+        if(each.status!=0):
+            each.tick()
+            each.draw()
 
 
-        tickBuffer = []
-        for key, each in settings.tick.getTicks().items():
-            #Create buffer
-            tickBuffer.append(each[2])
+    #Tick everything else
+    tickBuffer = []
+    for key, each in settings.tick.getTicks().items():
+        #Create buffer
+        tickBuffer.append(each[2])
 
-        for each in tickBuffer:
-            '''
-            print('DEBUG JOB DB: '+str(settings.activeJobDB))
-            print('DEBUG EACH '+str(each))
-            print('DEBUG ALL ITEMS'+str(settings.tick.getTicks().items()))
-            '''
-            try:
-                eval(each)
-            except KeyError:
-                #the tick was unregistered mid buffer, this no longer exists
-                pass
+    for each in tickBuffer:
+        try:
+            eval(each)
+        except KeyError:
+            #the tick was unregistered mid buffer, this no longer exists
+            pass
 
+    #Finish frame
     pygame.display.update()
     clock.tick(120)
 
+
+#Game Over
 settings.logObject.close()
 pygame.quit()
 quit()
