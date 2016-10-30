@@ -51,7 +51,8 @@ class factory_parts(base):
                 #Just generate Parts
                 print('add')
                 self.inventoryOutput.addItem(self.part,5)
-                print(self.inventoryOutput.inventory)
+                print(self.inventoryOutput.inventory.inventory)
+
                 print('ADDING')
 
             else:
@@ -105,9 +106,9 @@ class factory_parts(base):
                 #print(self.inventoryOutput.inventory[0].id)
 
 
-
+                #TODO fix force pick
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
-                              itemID=self.inventoryOutput.inventory[0].id)
+                              itemID=self.inventoryOutput.inventory.inventory[0].id)
 
                 #print('AFTER JOBSET CREATED')
                 #print(settings.activeJobsetDB)

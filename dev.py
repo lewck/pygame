@@ -20,14 +20,27 @@ print(player.gameVariables['balance'])
 
 '''
 
-from engine.userinteract.ui import ui
-from engine.event import event
+from inventory import inventory
 
-from webinteract.score import score
 import settings
 
 settings.init()
 
-score = score()
-score.create('Lewis', 5000)
-time = 0
+
+inventoryInput = inventory(30)
+inventoryOutput = inventory(30)
+
+
+
+inventoryOutput.segregate(['metalcopper', 'metalzinc'])
+
+inventoryOutput.addItem('metalcopper',30)
+#inventoryOutput.addItem('metalzinc',40)
+
+print(inventoryOutput.takeItem('metalcopper', 25))
+
+if(inventoryOutput.has('metalcopper', 5)):
+    print('FULL')
+
+for each in inventoryOutput.getInventory('metalcopper'):
+    print(each)
