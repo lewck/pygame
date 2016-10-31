@@ -51,7 +51,6 @@ class factory_parts(base):
                 #Just generate Parts
                 print('add')
                 self.inventoryOutput.addItem(self.part,5)
-                print(self.inventoryOutput.inventory.inventory)
 
                 print('ADDING')
 
@@ -61,7 +60,9 @@ class factory_parts(base):
 
                 print('-------------------------------')
                 print('Inventory')
-                print(self.inventory.inventory)
+                print(self.inventory.getInventory('metalcopper'))
+                print(self.inventory.getInventory('metalzinc'))
+                print(self.inventoryOutput.getInventory('all'))
                 print('-------------------------------')
 
                 hasItems = 0
@@ -71,7 +72,7 @@ class factory_parts(base):
                         hasItems += 1
 
                 if((len(data['required'])) == hasItems):
-                    print('CAN CONSTRUCT PLANE')
+                    print('CAN CONSTRUCT')
 
 
                     toRemove = settings.itemDB[self.part]['required']
@@ -92,7 +93,7 @@ class factory_parts(base):
 
                 if(self.inventoryOutput.isFull()):
                     jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
-                                  itemID=self.inventoryOutput.inventory[0].id)
+                                  itemID=self.inventoryOutput.getInventory('all')[0].id)
 
 
             if (not self.inventoryOutput.isFull()):
@@ -108,7 +109,7 @@ class factory_parts(base):
 
                 #TODO fix force pick
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
-                              itemID=self.inventoryOutput.inventory.inventory[0].id)
+                              itemID=self.inventoryOutput.getInventory()[0].id)
 
                 #print('AFTER JOBSET CREATED')
                 #print(settings.activeJobsetDB)

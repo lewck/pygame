@@ -75,7 +75,7 @@ class moveItem(base):
 
                     settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
                     print('-')
-                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
+                    print(settings.activeEntityDB[self.entityID].inventory.getInventory())
                     self.taskCurrent += 1
 
 
@@ -112,6 +112,7 @@ class moveItem(base):
                 print('checking')
                 print(self.endPosition[0])
                 print(self.startPosition[1])
+
                 if (settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]]).hasInventory():
                     print('INVENTORY FOUND 2')
                     print(self.itemBuffer)

@@ -37,7 +37,7 @@ class menumarketstatus(base):
                 'color': (0, 0, 0)
             }
         )
-
+        '''
         marketResponse = market()
         basey = 50
         limit = 10
@@ -60,7 +60,7 @@ class menumarketstatus(base):
             else:
                 break
 
-
+            '''
 
     def load(self, pos):
         self.objectPosition = pos

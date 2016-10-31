@@ -107,7 +107,8 @@ class pathFind():
 
         for each in store:
             #print(each)
-            settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
+            #settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
+            pass
 
 
         #print(store)

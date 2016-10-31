@@ -11,6 +11,11 @@ class node():
         self.size = size
         self.type = type
 
+    def hasAny(self):
+        if(len(self.inventory)>0):
+            return True
+        return False
+
     def addItem(self, itemID, quantity):
         count = 0
 
@@ -41,9 +46,10 @@ class node():
     def takeItem(self, itemID, quantity):
         count = 0
         delBuffer = []
+
         for i in range(0, len(self.inventory)):
             if(count < quantity):
-                if(self.inventory[i].id == itemID):
+                if(self.inventory[i].id == itemID or itemID == 'all'):
                     delBuffer.append(i)
             else:
                 break
@@ -55,11 +61,13 @@ class node():
             toReturn.append(self.inventory[i + modifier])
             del self.inventory[i + modifier]
             modifier += -1
-
+        print('RETURNING TO BUFFER'+str(toReturn))
+        print(quantity)
+        print(itemID)
         return toReturn
 
     def isFull(self):
-        if(len(self.inventory) == self.size):
+        if(len(self.inventory) >= self.size):
             return True
         return False
 
@@ -72,6 +80,13 @@ class node():
                     return True
 
         return False
+
+    def loadItem(self, itemBuffer):
+        if (len(itemBuffer) < (self.size - (len(self.inventory) - 1))):
+            self.inventory.extend(itemBuffer)
+            return True
+        else:
+            return False
 
 
 
@@ -130,19 +145,13 @@ class inventory:
 
 
     def loadItem(self, itemBuffer):
-        if (len(self.segregations) == 0):
-            if(len(itemBuffer)< (self.size - (len(self.inventory.inventory)-1))):
-                self.inventory.inventory.extend(itemBuffer)
-                return True
-            else:
-                return False
+        if ('all' in self.inventory):
+            self.inventory['all'].loadItem(itemBuffer)
         else:
             #Use segregations
             for each in itemBuffer:
-                if(each.id in self.segregations):
-                    if(self.segregations[each.id][0] > (self.segregations[each.id][1])):
-                        self.inventory.append(each)
-                        self.segregations[each.id][1] += 1
+                if(each.id in self.inventory):
+                    self.inventory[each.id].loadItem([each])
 
     def segregate(self, segregations):
         # Divide the invnetory space do item specific chunks
@@ -179,7 +188,8 @@ class inventory:
         else:
             return self.inventory[id].has(id, quantity)
 
-    def hasAny(self, itemID):
-        if(self.has(itemID, 1)):
-            return True
-
+    def hasAny(self):
+        for key, each in self.inventory.items():
+            if(each.hasAny()):
+                return True
+        return False

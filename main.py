@@ -31,7 +31,6 @@ settings.init()
 #Begin startup logging
 log.create('Main Initiated')
 
-
 #Initiate Pygame-related vars
 settings.tick = tick()
 clock = pygame.time.Clock()
@@ -84,8 +83,8 @@ testmap.create(3)
 entity.create(uid='car')
 
 #Get market prices
-settings.webinteractmarket = market()
-settings.marketCache = settings.webinteractmarket.get()
+#settings.webinteractmarket = market()
+#settings.marketCache = settings.webinteractmarket.get()
 
 
 '''
