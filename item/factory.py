@@ -6,6 +6,7 @@ from item.plane import plane
 from item.metal.metalbrass import metalbrass
 from item.metal.metalcopper import metalcopper
 from item.metal.metalzinc import metalzinc
+from item.brass.brassnails import brassnails
 
 
 class factory:

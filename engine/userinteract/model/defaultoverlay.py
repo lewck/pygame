@@ -44,6 +44,14 @@ class defaultoverlay(base):
             'eventArgs': ['menumarketstatus'],
         })
 
+        self.addInput(type='mouseAction', priority=self.basePriority + 5, title='openunlocksmenu', attribute={
+            'click': 1,
+            'pos': [settings.yMax * 50, 615],
+            'dim': [50, 150],
+            'event': 'openMenu',
+            'eventArgs': ['menuunlock'],
+        })
+
 
     def addOutputs(self):
         #Background
@@ -141,3 +149,21 @@ class defaultoverlay(base):
                'color': (0, 0, 0)
            }
         )
+
+        self.addOutput(pos=[settings.yMax * 50, 615], type='shape', priority=self.basePriority + 2,
+                       title='overlayBackground',
+                       attribute={
+                           'shape': 'rectangle',
+                           'dim': [50, 150],
+                           'color': (255, 255, 0)
+                       }
+                       )
+        self.addOutput(pos=[(settings.yMax * 50) + 15, 650], type='text', priority=self.basePriority + 5,
+                       title='menustoragebuytext',
+                       attribute={
+                           'font': 'primaryFont',
+                           'size': 20,
+                           'value': 'Unlocks',
+                           'color': (0, 0, 0)
+                       }
+                       )

@@ -7,3 +7,7 @@ class market(base):
 
     def get(self, sortby = 'null'):
         return self.requestCall('market', {'sortby':sortby})
+
+    def checkCache(self):
+        #TODO fix
+        return self.requestCall('checkCache', {'token': 1})

@@ -62,6 +62,9 @@ pygame.display.set_caption('Game Title')
 #Generate grid
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
+#Define player
+settings.player = player()
+
 #Pre-load User Interfaces (inactive)
 for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
@@ -72,8 +75,7 @@ for y in range(0,settings.yMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
 
-#Define player
-settings.player = player()
+
 
 mainMenu = False
 
@@ -83,9 +85,8 @@ testmap.create(3)
 entity.create(uid='car')
 
 #Get market prices
-#settings.webinteractmarket = market()
-#settings.marketCache = settings.webinteractmarket.get()
-
+settings.webinteractmarket = market()
+settings.marketCache = settings.webinteractmarket.get()
 
 '''
 '

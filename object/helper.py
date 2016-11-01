@@ -1,6 +1,7 @@
 import settings
 from pathfind import pathFind
 from item.helper import helper as itemhelper
+from random import randint
 
 class helper:
     @staticmethod
@@ -51,7 +52,11 @@ class helper:
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
             if (len(possible) != 0):
-                return possible[0]
+                print('FOUND WITH JOB')
+
+                return possible[randint(0,len(possible)-1)]
+
+            print('NOT FOUND WITH JOB')
 
 
             '''
@@ -73,6 +78,7 @@ class helper:
                 selected = helper.findObjectByUid('exports')[0]
 
                 return helper.getInteractPosition(selected[0],selected[1], settings.grid[selected[0]][selected[1]].direction)
+
 
 
             possible = helper.getEmptyStorage(type)[0]

@@ -84,29 +84,17 @@ def init():
 
     global itemDB
     itemDB={
-
-        'body': {
-            'title': 'body',
-            'required' : {},
-            'sellPrice': 5,
-        },
-
-        'plane':{
-            'title': 'Plane',
-            'required' : {
-                'body':2,
-            },
-            'sellPrice': 15,
-        },
         'metalcopper':{
             'title': 'Copper',
             'required': {},
             'sellPrice': 5,
+            'discovered': True,
         },
         'metalzinc': {
             'title': 'Zinc',
             'required': {},
             'sellPrice': 5,
+            'discovered': True,
         },
         'metalbrass': {
             'title': 'Brass',
@@ -115,26 +103,69 @@ def init():
                 'metalzinc':1,
             },
             'sellPrice': 5,
+            'discovered': True,
         },
+
+        'brassnails': {
+            'title': 'Brass Nails',
+            'required': {
+                'metalbrass':1,
+                'metalzinc':1,
+            },
+            'sellPrice': 20,
+            'discovered': False,
+            'unlockPrice': 500,
+        },
+
+        'brassdagger': {
+            'title': 'Brass Dragger',
+            'required': {
+                'metalbrass': 3,
+            },
+            'sellPrice': 30,
+            'discovered': False,
+            'unlockPrice': 1000,
+        }
+
     }
+
+    default_speed_upgrade = {
+        1: 100,
+        2: 500,
+        3: 1000,
+        4: 2500,
+        5: 10000
+    }
+
+    default_speed_modifier = {
+        1: 1.1,
+        2: 1.5,
+        3: 2,
+        4: 2.5,
+        5: 3,
+    }
+
     global objectDB
     objectDB = {
         'placeholder': {
             'empty': {
                 'title': 'empty',
-                'tickListen': []
+                'tickListen': [],
+                'discovered': False,
             }
         },
         'storage': {
             'genericHouse': {
                 'title': 'genericHouse',
-                'tickListen': []
+                'tickListen': [],
+                'discovered': False,
             },
         },
         'storageVehicles': {
             'garage': {
                 'title': 'garage',
-                'tickListen': []
+                'tickListen': [],
+                'discovered': True,
             },
         },
         'producer': {
@@ -142,18 +173,23 @@ def init():
                 'title': 'factory_parts',
                 'tickListen': [1, 10],
                 'price': 100,
+                'discovered': True,
+                'speed_upgrades': default_speed_upgrade,
+                'speed_upgrades_modifier': default_speed_modifier
             },
         },
         'transport': {
             'road': {
                 'title': 'road',
-                'tickListen': []
+                'tickListen': [],
+                'discovered': True,
             },
         },
         'exports': {
             'exports': {
                 'title': 'exports',
-                'tickListen': [5]
+                'tickListen': [5],
+                'discovered': True,
             },
         },
     }
@@ -167,6 +203,7 @@ def init():
         'factorypartsselectpart': False,
         'menuvehiclebuy': False,
         'menumarketstatus': False,
+        'menuunlock': False,
     }
 
     global mod

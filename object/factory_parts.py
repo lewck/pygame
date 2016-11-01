@@ -43,7 +43,7 @@ class factory_parts(base):
                 if(self.setSegregation == False):
                     if (not settings.itemDB[self.part]['required'] == {}):
                         print('SEGREGATING')
-                        self.inventory.segregate(['metalcopper', 'metalzinc'])
+                        self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))
                         self.setSegregation = True
 
 
@@ -86,9 +86,13 @@ class factory_parts(base):
 
 
                 else:
+                    print('STAT')
                     if(self.status != 2):
+                        print('STATUS2')
                         #2 means waiting, but job waitforitems created
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
+                        print('JOB ')
+                        print(settings.activeJobsetDB[self.job])
                         self.status = 2
 
                 if(self.inventoryOutput.isFull()):
