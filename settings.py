@@ -138,6 +138,7 @@ def init():
     }
 
     default_speed_modifier = {
+        0: 1,
         1: 1.1,
         2: 1.5,
         3: 2,

@@ -23,7 +23,7 @@ class factorypartsmenu(base):
             if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel + 1])):
                 shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel + 1])
 
-                self.speedLevel += 1
+                settings.grid[self.y][self.x].level = 1
                 uihelper.toggleModel('factorypartsmenu')
 
     def createPartSelect(self):

@@ -23,6 +23,7 @@ class factory_parts(base):
         self.counter = 0
         self.jobCreated = False
         self.setSegregation = False
+        self.level = 0
 
 
     def doTick(self, tickID):
@@ -58,13 +59,6 @@ class factory_parts(base):
                 #Assume has to check inventory for parts
                 data = settings.itemDB[self.part]
 
-                print('-------------------------------')
-                print('Inventory')
-                print(self.inventory.getInventory('metalcopper'))
-                print(self.inventory.getInventory('metalzinc'))
-                print(self.inventoryOutput.getInventory('all'))
-                print('-------------------------------')
-
                 hasItems = 0
 
                 for name, quantity in data['required'].items():
@@ -74,15 +68,15 @@ class factory_parts(base):
                 if((len(data['required'])) == hasItems):
                     print('CAN CONSTRUCT')
 
-
+                    #Get Items To Remove
                     toRemove = settings.itemDB[self.part]['required']
-                    print(toRemove)
 
+                    #Remove Items
                     for key, quantity in toRemove.items():
                         self.inventory.removeItem(id=key, quantity=quantity)
 
 
-                    self.inventoryOutput.addItem(self.part, 1)
+                    self.inventoryOutput.addItem(self.part, settings.itemDB[self.part]['makes']*settings.itemDB[self.part]['speed_upgrades_modifier'][self.level])
 
 
                 else:
