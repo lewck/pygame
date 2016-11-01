@@ -42,6 +42,7 @@ class menuvehiclebuy(base):
         count = 0
         posx = 12
         posy = 100
+        keys = list(settings.entityDB['vehicle'].keys())
         for y in range(0,8):
             for x in range(0,12):
                 self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, title='shopBackground' + str(y) + str(x), attribute={
@@ -50,8 +51,10 @@ class menuvehiclebuy(base):
                     'color': (0, 0, 0)
                 })
 
+
                 if(count<=max):
-                    uid = list(settings.entityDB['vehicle'].keys())[count]
+
+                    uid = keys[count]
                     self.addOutput(pos=[posy + 2, posx + 2], type='image', priority= 6, title='btn',  attribute={
                         'uid': uid,
                         'scale': (39,39)

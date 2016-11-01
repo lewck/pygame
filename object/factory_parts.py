@@ -23,7 +23,7 @@ class factory_parts(base):
         self.counter = 0
         self.jobCreated = False
         self.setSegregation = False
-        self.level = 0
+        self.speedLevel = 0
 
 
     def doTick(self, tickID):
@@ -37,7 +37,6 @@ class factory_parts(base):
 
             if(self.part==0):
                 #No part assigned
-                print('NO PARTTTTTT')
                 return False
 
             else:
@@ -50,10 +49,7 @@ class factory_parts(base):
 
             if(settings.itemDB[self.part]['required']=={}):
                 #Just generate Parts
-                print('add')
-                self.inventoryOutput.addItem(self.part,5)
-
-                print('ADDING')
+                self.inventoryOutput.addItem(self.part,settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
             else:
                 #Assume has to check inventory for parts
@@ -75,8 +71,7 @@ class factory_parts(base):
                     for key, quantity in toRemove.items():
                         self.inventory.removeItem(id=key, quantity=quantity)
 
-
-                    self.inventoryOutput.addItem(self.part, settings.itemDB[self.part]['makes']*settings.itemDB[self.part]['speed_upgrades_modifier'][self.level])
+                    self.inventoryOutput.addItem(self.part, settings.itemDB[self.part]['makes'] *settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
 
                 else:

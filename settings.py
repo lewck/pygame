@@ -77,7 +77,15 @@ def init():
         'vehicle': {
             'car':{
                 'title': 'car',
-                'buyprice': 100,
+                'buyprice': 500,
+            },
+            'van': {
+                'title': 'van',
+                'buyprice': 1000,
+            },
+            'lorry': {
+                'title': 'lorry',
+                'buyprice': 5000,
             }
         }
     }
@@ -89,61 +97,89 @@ def init():
             'required': {},
             'sellPrice': 5,
             'discovered': True,
+            'makes': 1,
         },
         'metalzinc': {
             'title': 'Zinc',
             'required': {},
             'sellPrice': 5,
             'discovered': True,
+            'makes': 1,
         },
+        'metaltin': {
+            'title': 'Tin',
+            'required': {},
+            'sellPrice': 5,
+            'discovered': True,
+            'makes': 1,
+        },
+
+        'metalbronze': {
+            'title': 'Bronze',
+            'required' : {
+                'metalcopper':1,
+                'metaltin':1,
+            },
+            'sellPrice': 5,
+            'discovered': True,
+            'makes': 1,
+        },
+
         'metalbrass': {
             'title': 'Brass',
             'required' : {
                 'metalcopper':1,
                 'metalzinc':1,
             },
-            'sellPrice': 5,
+            'sellPrice': 10,
             'discovered': True,
+            'makes': 2,
         },
 
         'brassnails': {
             'title': 'Brass Nails',
             'required': {
                 'metalbrass':1,
-                'metalzinc':1,
             },
-            'sellPrice': 20,
+            'sellPrice': 15,
             'discovered': False,
             'unlockPrice': 500,
+            'makes': 1,
+        },
+        'bronzecoin': {
+            'title': 'Bronze Coin',
+            'required': {
+                'metalbronze': 1,
+            },
+            'sellPrice': 15,
+            'discovered': False,
+            'unlockPrice': 500,
+            'makes': 1,
         },
 
         'brassdagger': {
             'title': 'Brass Dragger',
             'required': {
-                'metalbrass': 3,
+                'metalbrass': 2,
             },
             'sellPrice': 30,
             'discovered': False,
             'unlockPrice': 1000,
+            'makes': 1,
         }
 
     }
 
     default_speed_upgrade = {
         1: 100,
-        2: 500,
-        3: 1000,
-        4: 2500,
-        5: 10000
+        2: 1000,
+        2: 10000,
     }
 
     default_speed_modifier = {
         0: 1,
-        1: 1.1,
-        2: 1.5,
-        3: 2,
-        4: 2.5,
-        5: 3,
+        1: 2,
+        2: 3,
     }
 
     global objectDB

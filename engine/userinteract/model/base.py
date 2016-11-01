@@ -161,4 +161,4 @@ class base:
         price = settings.entityDB[type][uid]['buyprice']
         if(shop.canPurchase(price)):
             shop.purchase(price)
-            entity.create(uid='car')
+            entity.create(uid=uid)

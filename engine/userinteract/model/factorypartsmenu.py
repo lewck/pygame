@@ -9,21 +9,25 @@ class factorypartsmenu(base):
     def __init__(self, **kwargs):
         self.basePriority = 70
         self.title = 'factory'
-        self.speedLevel = 0
         super(factorypartsmenu, self).__init__(**kwargs)
 
     def getSpeedUpgradePrice(self):
-        if(self.speedLevel+1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
-            return settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel+1]
-            if(shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel+1])):
-                shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel+1])
+        try:
+            obj = settings.grid[self.objectPosition[0]][self.objectPosition[1]]
+
+            if(obj.speedLevel+1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
+                return settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel+1]
+        except AttributeError:
+            # Assume model not yet assigned to a item, so function will not be called
+            pass
 
     def doSpeedUpgrade(self):
-        if (self.speedLevel + 1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
-            if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel + 1])):
-                shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][self.speedLevel + 1])
+        obj = settings.grid[self.objectPosition[0]][self.objectPosition[1]]
 
-                settings.grid[self.y][self.x].level = 1
+        if (obj.speedLevel + 1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
+            if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])):
+                shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])
+                obj.speedLevel += 1
                 uihelper.toggleModel('factorypartsmenu')
 
     def createPartSelect(self):

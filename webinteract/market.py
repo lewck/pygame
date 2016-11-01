@@ -1,4 +1,6 @@
 from webinteract.base import base
+import settings
+
 
 class market(base):
     def __init__(self):
@@ -8,6 +10,10 @@ class market(base):
     def get(self, sortby = 'null'):
         return self.requestCall('market', {'sortby':sortby})
 
-    def checkCache(self):
-        #TODO fix
-        return self.requestCall('checkCache', {'token': 1})
+    def verifyCache(self):
+        if(self.requestCall('verifyCache')):
+            return True
+        else:
+            #Get new cache
+            settings.marketCache = self.get()
+            return True

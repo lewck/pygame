@@ -1,5 +1,7 @@
 import settings
 from entity.car import car
+from entity.van import van
+from entity.lorry import lorry
 from util.tool import tool
 
 from object.helper import helper as objecthelper

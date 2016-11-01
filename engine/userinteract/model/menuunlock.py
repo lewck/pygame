@@ -12,11 +12,6 @@ class menuunlock(base):
         self.title = 'menuunlock'
         super(menuunlock, self).__init__(**kwargs)
 
-    def selectPart(self, part):
-        settings.grid[self.objectPosition[0]][self.objectPosition[1]].part = part
-        print('part selected')
-        uihelper.toggleModel('factorypartsselectpart')
-
     def addInputs(self):
         self.addCommon(uid='close', pos=[0, 512])
 
@@ -26,6 +21,8 @@ class menuunlock(base):
             settings.itemDB[itemID]['discovered'] = True
 
             uihelper.reloadModel(settings.activeModelDB[settings.activeUI['factorypartsselectpart']].id)
+            uihelper.reloadModel(settings.activeModelDB[settings.activeUI['menuunlock']].id)
+            uihelper.toggleModel('menuunlock')
 
 
     def addOutputs(self):

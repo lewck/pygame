@@ -80,7 +80,7 @@ class input():
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
                 elif(event.button == 2):
                     #Middle Mouse
-                    object.create(uid='farm_1', y=yTile, x=xTile, direction=0, dev=True)
+                    object.create(uid='empty', y=yTile, x=xTile, direction=0, dev=True)
 
             elif (event.type == pygame.KEYDOWN):
                 if (settings.devInputBuffer == False):
