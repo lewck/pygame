@@ -14,8 +14,9 @@ class base:
 
         data['function'] = function
 
-        for key, value in params.items():
-            data[key] = value
+        if(params != 0):
+            for key, value in params.items():
+                data[key] = value
 
         data['authorisation_token'] = self.authCode
 

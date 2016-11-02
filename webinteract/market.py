@@ -11,7 +11,7 @@ class market(base):
         return self.requestCall('market', {'sortby':sortby})
 
     def verifyCache(self):
-        if(self.requestCall('verifyCache')):
+        if(self.requestCall('verifymarketcache')):
             return True
         else:
             #Get new cache

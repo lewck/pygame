@@ -16,7 +16,8 @@ class shop:
     def sell(items):
         #Check if cache needs to be busted
         settings.webinteractmarket.verifyCache()
-
+        print('CACHE')
+        print(settings.marketCache)
         for each in items:
             itemUsed = False
             for cache in settings.marketCache:

@@ -21,26 +21,18 @@ print(player.gameVariables['balance'])
 '''
 
 from inventory import inventory
-
+from webinteract.market import market
 import settings
 
 settings.init()
 
 
-inventoryInput = inventory(30)
-inventoryOutput = inventory(30)
+settings.webinteractmarket = market()
+settings.marketCache = settings.webinteractmarket.get()
 
-
-
-inventoryOutput.segregate(['metalcopper', 'metalzinc'])
-
-inventoryOutput.addItem('metalcopper',30)
-#inventoryOutput.addItem('metalzinc',40)
-
-print(inventoryOutput.takeItem('metalcopper', 25))
-
-if(inventoryOutput.has('metalcopper', 5)):
-    print('FULL')
-
-for each in inventoryOutput.getInventory('metalcopper'):
-    print(each)
+while True:
+    print(settings.marketCache)
+    val = input()
+    if(val=='x'):
+        break
+    settings.webinteractmarket.verifyCache()
