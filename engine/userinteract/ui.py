@@ -7,6 +7,7 @@ from engine.userinteract.model.factorypartsselectpart import factorypartsselectp
 from engine.userinteract.model.menuvehiclebuy import menuvehiclebuy
 from engine.userinteract.model.menumarketstatus import menumarketstatus
 from engine.userinteract.model.menuunlock import menuunlock
+from engine.userinteract.model.menustart import menustart
 
 import engine.userinteract.model
 

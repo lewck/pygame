@@ -32,7 +32,7 @@ class base:
         jsonData = json.loads(decodedData)
 
         if('fail' in jsonData):
-            settings.logObject.create('Webinteract fail'+jsonData['fail'], 2)
+            print('Webinteract fail '+str(jsonData['fail']))
             return False
 
         return jsonData

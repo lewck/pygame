@@ -1,7 +1,7 @@
 import dev.log
 def init():
     global APIKEY
-    APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0skYZoAzkJd19wWBetJ0tTMaWO3HySt4m5'
+    APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0s'
 
     global grid
     grid = []
@@ -241,6 +241,7 @@ def init():
         'menuvehiclebuy': False,
         'menumarketstatus': False,
         'menuunlock': False,
+        'menustart': False,
     }
 
     global mod

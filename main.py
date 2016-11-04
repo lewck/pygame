@@ -58,23 +58,47 @@ display_height = 550
 settings.surface = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Game Title')
 
+#Pre-load User Interfaces (inactive)
+for key, value in settings.activeUI.items():
+    settings.activeUI[key] = ui.create(key)
 
+settings.currentScreen = 'menu'
+'''
+'
+'   Start Menu
+'
+'''
+settings.activeModelDB[settings.activeUI['menustart']].activate()
+
+
+while settings.currentScreen=='menu' and not settings.gameExit:
+    #Listen for events
+    input.listenForEvent()
+
+    #Render the screen
+    render.render()
+
+
+    #Finish frame
+    pygame.display.update()
+    clock.tick(120)
+
+
+'''
+'
+'   Init Game
+'
+'''
 #Generate grid
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
 #Define player
 settings.player = player()
 
-#Pre-load User Interfaces (inactive)
-for key, value in settings.activeUI.items():
-    settings.activeUI[key] = ui.create(key)
-
 #Fill grid with grass
 for y in range(0,settings.yMax):
     for x in range(0,settings.xMax):
         object.create(uid='empty', y=y, x=x, direction=1, dev=True)
-
-
 
 
 mainMenu = False

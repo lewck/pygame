@@ -8,7 +8,8 @@ class market(base):
         super(market, self).__init__()
 
     def get(self, sortby = 'null'):
-        return self.requestCall('market', {'sortby':sortby})
+        return False
+        return self.requestCall('getmarketdemand', {'sortby':sortby})
 
     def verifyCache(self):
         if(self.requestCall('verifymarketcache')):
