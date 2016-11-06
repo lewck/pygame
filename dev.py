@@ -22,17 +22,21 @@ print(player.gameVariables['balance'])
 
 from inventory import inventory
 from webinteract.market import market
+from webinteract.game import game
 import settings
+import time
 
 settings.init()
 
 
 settings.webinteractmarket = market()
+settings.webinteractgame = game()
+
+settings.webinteractgame.create()
+
+
 settings.marketCache = settings.webinteractmarket.get()
 
 while True:
-    print(settings.marketCache)
-    val = input()
-    if(val=='x'):
-        break
     settings.webinteractmarket.verifyCache()
+    input()

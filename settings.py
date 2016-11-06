@@ -242,6 +242,8 @@ def init():
         'menumarketstatus': False,
         'menuunlock': False,
         'menustart': False,
+        'menustartonlinegame': False,
+        'menuloading': False,
     }
 
     global mod
@@ -252,3 +254,6 @@ def init():
 
     global zoom
     zoom = 10
+
+    global gameData
+    gameData = {'session_id':1, 'game_id':2, 'game_pin':3}

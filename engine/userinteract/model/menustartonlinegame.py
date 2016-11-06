@@ -7,27 +7,20 @@
 from engine.userinteract.model.base import base
 from engine.userinteract.helper import helper as uihelper
 
-from webinteract.game import game
-
 import settings
 
-class menustart(base):
+class menustartonlinegame(base):
     def __init__(self, **kwargs):
-        self.basePriority = 110
+        self.basePriority = 120
         self.basePos = [0,0]
         self.baseDim = [550,1050]
-        super(menustart, self).__init__(**kwargs)
+        super(menustartonlinegame, self).__init__(**kwargs)
 
-    def createGame(self):
-        #Try web create
-        gamewebinteract = game()
-        gamewebinteract.create()
-
-        uihelper.toggleModel('menustart')
-
-        uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
+    def startGame(self):
+        settings.currentScreen = 'game'
 
         uihelper.toggleModel('menustartonlinegame')
+        uihelper.toggleModel('menuloading')
 
     def addInputs(self):
         self.addCommon(uid='coverall')
@@ -36,14 +29,27 @@ class menustart(base):
             'click': 1,
             'pos': [200, 400],
             'dim': [50,250],
-            'event': 'createGame',
+            'event': 'startGame',
         })
 
     def addOutputs(self):
-        self.addOutput(pos=[80,425], type='text', priority= 2, title='menustoragebuytext', attribute={
+        self.addOutput(pos=[80,400], type='text', priority= 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 60,
-            'value': 'Welcome',
+            'value': 'Online Game',
+            'color': (255, 255, 255)
+        })
+
+        self.addOutput(pos=[150, 425], type='text', priority=2, title='menustoragebuytext', attribute={
+            'font': 'primaryFont',
+            'size': 30,
+            'value': 'Game ID: '+str(settings.gameData['game_id']),
+            'color': (255, 255, 255)
+        })
+        self.addOutput(pos=[170, 425], type='text', priority=2, title='menustoragebuytext', attribute={
+            'font': 'primaryFont',
+            'size': 30,
+            'value': 'Access Pin: ' + str(settings.gameData['game_pin']),
             'color': (255, 255, 255)
         })
 
@@ -56,12 +62,11 @@ class menustart(base):
         self.addOutput(pos=[212, 445], type='text', priority=3, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 30,
-            'value': 'Start New Game',
+            'value': 'Continue',
             'color': (255, 255, 255)
         })
-
-        self.addOutput(pos=self.basePos, type='shape', priority= 0, title='shopBackground', attribute={
+        self.addOutput(pos=self.basePos, type='shape', priority=0, title='shopBackground', attribute={
             'shape': 'rectangle',
             'dim': self.baseDim,
-            'color': (51,51,51)
+            'color': (51, 51, 51)
         })

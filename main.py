@@ -16,6 +16,7 @@ from util.grid import grid
 from mapgenerator import mapgenerator
 from webinteract.market import market
 from dev.testmap import testmap
+from engine.userinteract.helper import helper as uihelper
 
 
 '''
@@ -68,6 +69,7 @@ settings.currentScreen = 'menu'
 '   Start Menu
 '
 '''
+
 settings.activeModelDB[settings.activeUI['menustart']].activate()
 
 
@@ -82,7 +84,7 @@ while settings.currentScreen=='menu' and not settings.gameExit:
     #Finish frame
     pygame.display.update()
     clock.tick(120)
-
+    
 
 '''
 '
@@ -118,7 +120,8 @@ settings.marketCache = settings.webinteractmarket.get()
 '
 '''
 
-while not settings.gameExit:
+uihelper.closeModel('menuloading')
+while (settings.currentScreen=='game') and (not settings.gameExit):
     #Listen for events
     input.listenForEvent()
 

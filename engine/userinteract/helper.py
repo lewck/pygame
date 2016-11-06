@@ -44,3 +44,9 @@ class helper:
     @staticmethod
     def updateAttribute(modelID, att, val):
         setattr(settings.activeModelDB[settings.activeUI[modelID]], att, val)
+
+    @staticmethod
+    def closeModel(uid):
+        if (settings.activeModelDB[settings.activeUI[uid]].active == True):
+            print('TOGGLE OFF')
+            settings.activeModelDB[settings.activeUI[uid]].close()
