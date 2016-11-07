@@ -57,13 +57,6 @@ class input():
                             object.create(uid=settings.inputBuffer[1], y=yTile, x=xTile, direction=2)
                             settings.inputBuffer = []
 
-                elif(event.button == 3):
-                    #Right Click
-                    object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
-                elif(event.button == 2):
-                    #Middle Mouse
-                    object.create(uid='empty', y=yTile, x=xTile, direction=0, dev=True)
-
             elif (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_F1):
                     devmap.create(2)
