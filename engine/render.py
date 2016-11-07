@@ -15,19 +15,14 @@ class render:
 
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
-
                 if (settings.grid[y][x].highlighted == True):
                     settings.grid[y][x].highlight()
                 else:
-                    base = pygame.transform.scale(settings.grid[y][x].base, ((5 * settings.zoom), (5 * settings.zoom)))
-
-                    # print(str(x)+''+str(y)+'blit')
+                    base = pygame.transform.scale(settings.grid[y][x].base, (50, 50))
                     settings.surface.blit(base, (xmod, ymod))
 
                     if (settings.grid[y][x].image != 0):
-                        # print(str(x) + '' + str(y) + 'Image')
-                        image = pygame.transform.scale(settings.grid[y][x].image,
-                                                       ((5 * settings.zoom), (5 * settings.zoom)))
+                        image = pygame.transform.scale(settings.grid[y][x].image,((50,50)))
 
                         directionModifier = {
                             0: 180,
@@ -40,18 +35,8 @@ class render:
 
                         settings.surface.blit(image, (xmod, ymod))
 
-                    '''
-                    if (settings.grid[y][x].devOverlay != 0):
-                        rendered = font.render('G:' + str(settings.grid[y][x].devOverlay[0]), True, (255, 0, 0))
-                        settings.surface.blit(rendered, (xmod, ymod))
-                        rendered = font.render('H:' + str(settings.grid[y][x].devOverlay[1]), True, (255, 0, 0))
-                        settings.surface.blit(rendered, (xmod, ymod + 15))
-                        rendered = font.render('F:' + str(settings.grid[y][x].devOverlay[2]), True, (255, 0, 0))
-                        settings.surface.blit(rendered, (xmod, ymod + 30))
-                    '''
-
-                xmod += 5 * settings.zoom
-            ymod += 5 * settings.zoom
+                xmod += 50
+            ymod += 50
             xmod = 0
 
         sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
