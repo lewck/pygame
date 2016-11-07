@@ -39,16 +39,6 @@ class render:
             ymod += 50
             xmod = 0
 
-        sorted = tool.bubbleSort(values=settings.activeInputDB, localvariable='priority')
-        refined = uishelper.getInputWithLeftClick(sorted)
-
-        # Evaluate if in click range of any things
-        for each in refined:
-            # in x and y
-            pygame.draw.rect(settings.surface, settings.color['red'], (
-                each.attribute['pos'][1], each.attribute['pos'][0], each.attribute['dim'][1],
-                each.attribute['dim'][0]), 0)
-
     @staticmethod
     def renderMenu():
         #Order by priority
