@@ -13,6 +13,7 @@ class tick:
         #Identifier is optional, allows all ticks to be removed
         tickID = tool.genRandomString()
         self.tick[tickID] = [identifier, tick, action]
+        return tickID
 
     def getTicks(self):
         return self.tick

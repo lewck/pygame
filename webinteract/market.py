@@ -17,5 +17,9 @@ class market(base):
         else:
             #Get new cache
             print('GENERATING NEW CACHE')
-            self.get()
+            settings.marketCache = self.get()
             return True
+
+    def getDemand(self):
+        self.verifyCache()
+        return settings.marketCache

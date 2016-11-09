@@ -13,7 +13,6 @@ class menumarketstatus(base):
 
     def selectPart(self, part):
         settings.grid[self.objectPosition[0]][self.objectPosition[1]].part = part
-        print('part selected')
         uihelper.toggleModel('factorypartsselectpart')
 
     def addInputs(self):
@@ -37,30 +36,25 @@ class menumarketstatus(base):
                 'color': (0, 0, 0)
             }
         )
-        '''
-        marketResponse = market()
+
         basey = 50
         limit = 10
         current = 0
-
-        for each in marketResponse.get():
-            if(current <= limit):
-                settings.marketCache[each['itemid']] = each['current_demand']
-
+        for each in settings.webinteractmarket.getDemand():
+            if (current <= limit):
                 self.addOutput(pos=[basey, 10], type='text', priority=2, title='factoryparttitle',
-                   attribute={
-                       'font': 'primaryFont',
-                       'size': 30,
-                       'value': str(each['itemid']) + ' : ' + str(each['current_demand']),
-                       'color': (255, 255, 255)
-                   }
-                )
+                               attribute={
+                                   'font': 'primaryFont',
+                                   'size': 30,
+                                   'value': str(each['itemid']) + ' : ' + str(each['current_demand']),
+                                   'color': (255, 255, 255)
+                               }
+                               )
                 current += 1
                 basey += 30
             else:
                 break
 
-            '''
 
     def load(self, pos):
         self.objectPosition = pos

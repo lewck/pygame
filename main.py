@@ -36,7 +36,6 @@ log.create('Main Initiated')
 settings.tick = tick()
 clock = pygame.time.Clock()
 
-
 #Pre-load Fonts
 settings.devfont = pygame.font.Font(None, 25)
 settings.fonts = {
@@ -64,6 +63,7 @@ for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
 
 settings.currentScreen = 'menu'
+
 '''
 '
 '   Start Menu
@@ -71,7 +71,6 @@ settings.currentScreen = 'menu'
 '''
 
 settings.activeModelDB[settings.activeUI['menustart']].activate()
-
 
 while settings.currentScreen=='menu' and not settings.gameExit:
     #Listen for events
@@ -110,9 +109,14 @@ testmap.create(3)
 
 entity.create(uid='car')
 
-#Get market prices
+#Assign web interacts
 settings.webinteractmarket = market()
 settings.marketCache = settings.webinteractmarket.get()
+
+
+#Get market prices
+for key, value in settings.gameExcluseUI.items():
+    settings.activeUI[key] = ui.create(key)
 
 '''
 '
@@ -135,11 +139,13 @@ while (settings.currentScreen=='game') and (not settings.gameExit):
             each.draw()
 
 
+
     #Tick everything else
     tickBuffer = []
     for key, each in settings.tick.getTicks().items():
         #Create buffer
-        tickBuffer.append(each[2])
+        if(pygame.time.get_ticks()%each[1] == 0):
+            tickBuffer.append(each[2])
 
     for each in tickBuffer:
         try:

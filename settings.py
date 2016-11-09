@@ -239,11 +239,15 @@ def init():
         'factorypartsmenu': False,
         'factorypartsselectpart': False,
         'menuvehiclebuy': False,
-        'menumarketstatus': False,
         'menuunlock': False,
         'menustart': False,
         'menustartonlinegame': False,
         'menuloading': False,
+    }
+
+    global gameExcluseUI
+    gameExcluseUI = {
+        'menumarketstatus': False,
     }
 
     global mod

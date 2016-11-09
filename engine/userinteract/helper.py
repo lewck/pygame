@@ -7,13 +7,11 @@ class helper:
     @staticmethod
     def toggleModel(uid, reload=False):
         if(settings.activeModelDB[settings.activeUI[uid]].active == False):
-            print('TOGGLE')
             if(reload):
                 helper.reloadModel(settings.activeModelDB[settings.activeUI[uid]].id)
 
             settings.activeModelDB[settings.activeUI[uid]].activate()
         else:
-            print('TOGGLE OFF')
             settings.activeModelDB[settings.activeUI[uid]].close()
 
     @staticmethod

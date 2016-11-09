@@ -19,7 +19,7 @@ class menustart(base):
         super(menustart, self).__init__(**kwargs)
 
     def createGame(self):
-        #Try web create
+        #Try webinteract to create game
         gamewebinteract = game()
         gamewebinteract.create()
 

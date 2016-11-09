@@ -3,7 +3,8 @@ import pygame
 import settings
 
 import re
-from legacy.ui.uis.helper import helper as uishelper
+from engine.out import out
+
 from util.tool import tool
 
 
@@ -41,15 +42,9 @@ class render:
 
     @staticmethod
     def renderMenu():
-        #Order by priority
-        scanned = {}
-        for key, each in settings.activeOutDB.items():
-            if(each.active != False):
-                scanned[key] = each
+        sortedOutput = out.getActiveByPriority()
 
-        sor = tool.bubbleSort(values=scanned, localvariable='priority')
-
-        for each in sor:
+        for each in sortedOutput:
 
             try:
 
