@@ -62,18 +62,13 @@ class base:
     def doMove(self):
         if (self.status == 1):
 
-            xTile = (int(self.x / (5 * settings.zoom)))
-            yTile = (int(self.y / (5 * settings.zoom)))
+            xTile = (int(self.x /50))
+            yTile = (int(self.y /50))
 
-            # print(xTile)
-            # print(yTile)
-            # print('----------')
-            # print(self.path[1])
 
             for i in range(0, len(self.path[1])):
                 for o in range(0, len(self.path[1][i])):
-                    if (self.y / (5 * settings.zoom) == self.path[1][i][o][0] and self.x / (5 * settings.zoom) ==
-                        self.path[1][i][o][1]):
+                    if (self.y / 50 == self.path[1][i][o][0] and self.x / 50 == self.path[1][i][o][1]):
                         if (self.direction == 4):
                             # Here
                             self.status = 3
@@ -82,9 +77,7 @@ class base:
                         currDirection = self.direction
                         self.direction = self.path[1][i][o][2]
                         print(self.direction)
-                        # print(self.path[1][i][o])
 
-            # print('---------')
             # update location tick
             if (self.direction == 0):
                 self.y += -10
@@ -100,7 +93,7 @@ class base:
             pass
 
     def place(self):
-        settings.surface.blit(self.image, (self.x*5*settings.zoom, self.y*5*settings.zoom))
+        settings.surface.blit(self.image, (self.x*50, self.y*50))
 
     def draw(self):
         directionRotation = {
@@ -109,8 +102,7 @@ class base:
             2: 180,
             3: 90
         }
-        #print(str((5 * settings.zoom)/2))
-        base = pygame.transform.scale(self.image, (int(((5 * settings.zoom))), int(((5 * settings.zoom)))))
+        base = pygame.transform.scale(self.image, (50, 50))
         base1 = base
 
         if(self.direction!=4):

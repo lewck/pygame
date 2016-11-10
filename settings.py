@@ -1,77 +1,109 @@
 import dev.log
 def init():
+    # Used in webinteract > base.py
+    # required for authentication
     global APIKEY
     APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0s'
 
+    # Used extensively
+    # required for object placement
     global grid
     grid = []
+
+    # Used extensively
+    # required for grid dimentions
     global xMax
     xMax = 15
     global yMax
     yMax = 10
+
+    # Used engine > render.py
+    # placeholder for pygame surface
     global surface
     surface = 0
+
+    # Used tools > log.py
+    # decides if text logging should be enabled
     global log
     log = False
+
+    # Used extensively
+    # Called to create new log line
     global logObject
     logObject = 0
-    global devfont
-    devfont = 0
 
+    # Used in pathfind.py
+    # Stores pre found paths
     global pathDB
     pathDB = {}
 
+    # Used entity > *
+    # Storage for current entities
     global activeEntityDB
     activeEntityDB = {}
 
+    # Used job > *
+    # Storage for current jobs
     global activeJobDB
     activeJobDB = {}
 
+    # Used jobset > *
+    #Storage for current jobsets
     global activeJobsetDB
     activeJobsetDB = {}
 
+    # Used extensively
+    # Placeholder for global tick handler
     global tick
     tick = 0
 
+    # Used in main.py
+    # Used to terminate game
     global gameExit
     gameExit = False
 
-    global devInputBuffer
-    devInputBuffer = False
-
+    # Used extensively
+    # placeholder for global player objecgt
     global player
     player = 0
 
+    # Used engine > out.py
+    # storage for model output
     global activeOutputDB
     activeOutputDB = []
 
+    # Used engine > event.py
+    # storage for model inputs
     global activeInputDB
     activeInputDB = []
 
+    # Used main.py, engine > render.py
+    # placeholder for font database
     global fonts
     fonts = 0
 
-    global color
-    color = {
-        'white':(0,0,0),
-        'red': (255,0,0)
-    }
-
+    # Used engine > *
+    # storage for current events
     global activeEventDB
     activeEventDB = {}
 
+    # Used engine > userinteract > *
+    # storage for current models
     global activeModelDB
     activeModelDB = {}
 
+    # Used engine > *
+    # storage for current outputs
     global activeOutDB
     activeOutDB = {}
 
-    global eventBuffer
-    eventBuffer = True
-
+    # Used engine > input.py
+    # handles input buffers
     global inputBuffer
     inputBuffer = []
 
+    # Used extensively
+    # entity statistics/configurations
     global entityDB
     entityDB = {
         'vehicle': {
@@ -90,6 +122,8 @@ def init():
         }
     }
 
+    # Used extensively
+    # item statistics/configurations
     global itemDB
     itemDB={
         'metalcopper':{
@@ -170,18 +204,24 @@ def init():
 
     }
 
+    # Used settings.py
+    # default speed upgrade prices
     default_speed_upgrade = {
         1: 100,
         2: 1000,
-        2: 10000,
+        3: 10000,
     }
 
+    # Used settings.py
+    # Default speed production modifier
     default_speed_modifier = {
         0: 1,
         1: 2,
         2: 3,
     }
 
+    # Used extensively
+    # object settings/configuration
     global objectDB
     objectDB = {
         'placeholder': {
@@ -231,6 +271,8 @@ def init():
         },
     }
 
+    # Used main.py
+    # Models to be pre-loaded as early as possible
     global activeUI
     activeUI = {
         'menuproducerbuy': False,
@@ -245,19 +287,19 @@ def init():
         'menuloading': False,
     }
 
+    # Used main.py
+    # Models to be pre-loaded when GAME starts
     global gameExcluseUI
     gameExcluseUI = {
         'menumarketstatus': False,
     }
 
-    global mod
-    mod = 0
-
+    # Used webinteract > market.py
+    # Holds current cache information
     global marketCache
     marketCache = {}
 
-    global zoom
-    zoom = 10
-
+    # Used webinteract > *
+    # Holds current web-game data
     global gameData
     gameData = {'session_id':1, 'game_id':2, 'game_pin':3}
