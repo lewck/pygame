@@ -46,7 +46,7 @@ class menumarketstatus(base):
                                attribute={
                                    'font': 'primaryFont',
                                    'size': 30,
-                                   'value': str(each['itemid']) + ' : ' + str(each['current_demand']),
+                                   'value': str(each['itemid']) + ' : ' + str(each['current_demand_addition']),
                                    'color': (255, 255, 255)
                                }
                                )

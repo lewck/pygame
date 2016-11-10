@@ -57,6 +57,9 @@ class input():
                             object.create(uid=settings.inputBuffer[1], y=yTile, x=xTile, direction=2)
                             settings.inputBuffer = []
 
+                elif (event.button == 3):
+                    object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
+
             elif (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_F1):
                     devmap.create(2)
@@ -66,6 +69,8 @@ class input():
                     devmap.create(1)
                 if (event.key == pygame.K_F4):
                     object.create(uid='garage', y=0, x=0, direction=0)
+                if (event.key == pygame.K_F5):
+                    settings.webinteractmarket.reduceDemand('metalzinc', 5)
                 if(event.key == pygame.K_F9):
                     uihelper.toggleModel('menuvehiclebuy')
                 if (event.key == pygame.K_F11):

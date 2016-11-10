@@ -23,3 +23,6 @@ class market(base):
     def getDemand(self):
         self.verifyCache()
         return settings.marketCache
+
+    def reduceDemand(self, itemID, quantity):
+        self.requestCall('reduceMarketDemand', {'game_id': settings.gameData['game_id'], 'item_id': itemID, 'quantity':quantity})
