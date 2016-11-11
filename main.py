@@ -17,7 +17,6 @@ from webinteract.market import market
 from dev.testmap import testmap
 from engine.userinteract.helper import helper as uihelper
 
-
 '''
 '
 '   BOOTSTRAP CODE
