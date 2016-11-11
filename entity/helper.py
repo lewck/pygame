@@ -1,4 +1,4 @@
-from entity.vehicle.helper import helper as vehiclehelper
+import settings
 
 class helper:
     '''
@@ -7,8 +7,19 @@ class helper:
 
     @staticmethod
     def veichleGetAvailable():
-        return (vehiclehelper.getAvailable())
+        toReturn = []
+
+        for id, each in settings.activeEntityDB.items():
+            if (each.type == 'vehicle'):
+                if (each.status == 0):
+                    # Free
+                    toReturn.append(id)
+
+        return toReturn
 
     @staticmethod
     def vehicleEvaluateBest(pos):
-        return (vehiclehelper.evaluateBest(pos))
+        for each in helper.getAvailable():
+            if(settings.activeEntityDB[each].claimed == False):
+                settings.activeEntityDB[each].claimed = True
+                return each
