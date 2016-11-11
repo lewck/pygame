@@ -13,7 +13,6 @@ from engine.userinteract.ui import ui
 from object.factory import factory as object
 from player.player import player
 from util.grid import grid
-from mapgenerator import mapgenerator
 from webinteract.market import market
 from dev.testmap import testmap
 from engine.userinteract.helper import helper as uihelper
