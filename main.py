@@ -4,7 +4,7 @@ import settings
 import pygame
 import settings
 
-from dev.log import log
+from util.log import log
 from engine.input import input
 from engine.render import render
 from engine.tick import tick

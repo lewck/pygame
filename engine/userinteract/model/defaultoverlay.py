@@ -89,6 +89,7 @@ class defaultoverlay(base):
            }
         )
 
+
         #Balance
         self.addOutput(pos=[(settings.yMax*50) +10, 10], type='text', priority= self.basePriority + 2, title='menustoragebuytext',
             attribute={

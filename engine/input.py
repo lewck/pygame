@@ -37,9 +37,6 @@ class input():
                         buffer = []
                         for id, each in settings.activeEventDB.items():
                             if(each.active == True):
-                                print('--ide')
-                                print(id)
-                                print(each)
                                 if(each.data['attribute']['click']==1):
                                     if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
                                             (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):

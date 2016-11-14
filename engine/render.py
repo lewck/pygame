@@ -84,8 +84,7 @@ class render:
 
             elif (each.data['type'] == 'image'):
                 #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
-
-                image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
+                image = pygame.image.load('spritess/'+each.data['attribute']['uid']+'.png')
                 w, h = image.get_size()
                 if(scaleType=='relative'):
                     rendered = pygame.transform.scale(image, (int(w*scale), int(h*scale)))

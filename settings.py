@@ -1,4 +1,4 @@
-import dev.log
+import util.log
 def init():
     # Used in webinteract > base.py
     # required for authentication
