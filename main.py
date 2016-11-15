@@ -88,6 +88,7 @@ while settings.currentScreen=='menu' and not settings.gameExit:
 '   Init Game
 '
 '''
+
 #Generate grid
 settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
@@ -135,8 +136,6 @@ while (settings.currentScreen=='game') and (not settings.gameExit):
         if(each.status!=0):
             each.tick()
             each.draw()
-
-
 
     #Tick everything else
     tickBuffer = []

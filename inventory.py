@@ -98,16 +98,15 @@ class inventory:
 
         self.inventory = {'all': node(size, type)}
 
-    #Private Function
     def verifySegregation(self, id):
+        # Private Function
+        #
         if(id in self.inventory):
             return True
         return False
     
     def addItem(self, itemID, quantity = 1):
-
         if('all' in self.inventory):
-            print('add')
             self.inventory['all'].addItem(itemID, quantity)
         else:
             # Use segregations
@@ -116,16 +115,6 @@ class inventory:
                 self.inventory[itemID].addItem(itemID, quantity)
                 return True
             return False
-
-    def buildItem(self, id):
-        toRemove = settings.itemDB[id]['required']
-        print(toRemove)
-
-        for key, quantity in toRemove.items():
-            self.removeItem(id=key, quantity=quantity)
-
-        #TODO update to add variable quantity
-        self.addItem(id, 1)
 
     def removeItem(self, **kwargs):
         if ('id' in kwargs):
