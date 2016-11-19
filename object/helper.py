@@ -27,18 +27,10 @@ class helper:
                     #Has invntory
                     if(not settings.grid[y][x].inventory.isFull()) & (settings.grid[y][x].inventory.type==type):
                         #Not full, correct type
+
                         store.append(helper.getInteractPosition(y,x,settings.grid[y][x].direction))
 
         return store
-
-    @staticmethod
-    def getAvailableVehicles(type):
-        vehicles = []
-        for id, each in settings.activeEntityDB.items():
-            if(each.status == 0):
-                pass
-
-        return vehicles
 
     @staticmethod
     def evaluateBestStorage(objectAPos, type='item', uid='null'):
@@ -87,16 +79,6 @@ class helper:
 
 
         return False
-
-        #TODO evalate based on other things
-        '''
-        if(mode=='distance'):
-            #Find closest
-            for each in empty:
-                path = pathFind(objectAPos[0], objectAPos[1], each[0], each[1], 5)
-                if(path.find()):
-                    print('pathFound')
-        '''
 
     @staticmethod
     def getInteractPosition(y,x,direction):

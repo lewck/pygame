@@ -147,7 +147,6 @@ def init():
             'discovered': True,
             'makes': 1,
         },
-
         'metalbronze': {
             'title': 'Bronze',
             'required' : {
@@ -169,7 +168,6 @@ def init():
             'discovered': True,
             'makes': 2,
         },
-
         'brassnails': {
             'title': 'Brass Nails',
             'required': {
@@ -190,7 +188,6 @@ def init():
             'unlockPrice': 500,
             'makes': 1,
         },
-
         'brassdagger': {
             'title': 'Brass Dragger',
             'required': {
@@ -283,6 +280,7 @@ def init():
         'menuvehiclebuy': False,
         'menuunlock': False,
         'menustart': False,
+        'gamesettings': False,
         'menustartonlinegame': False,
         'menuloading': False,
     }

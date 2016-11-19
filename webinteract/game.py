@@ -7,12 +7,12 @@ class game(base):
         #Init parent
         super(game, self).__init__()
 
-    def create(self):
-        request = self.requestCall('creategame', {'goal_id': 1, 'goal_args': 50000})
+    def create(self, goalID, goalArgs):
+        request = self.requestCall('creategame', {'goal_id': goalID, 'goal_args': goalArgs})
 
         settings.gameData['session_id'] = request['session_id']
         settings.gameData['game_id'] = request['game_id']
         settings.gameData['game_pin'] = request['game_pin']
-
+        settings.gameData['objectives'] = request['objectives']
         return True
 

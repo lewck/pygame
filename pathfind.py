@@ -95,7 +95,6 @@ class pathFind():
         return False
 
     def organise(self, check):
-
         store = []
         while True:
             #print(check)  # uncomment for sort debug

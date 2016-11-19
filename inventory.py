@@ -61,9 +61,6 @@ class node():
             toReturn.append(self.inventory[i + modifier])
             del self.inventory[i + modifier]
             modifier += -1
-        print('RETURNING TO BUFFER'+str(toReturn))
-        print(quantity)
-        print(itemID)
         return toReturn
 
     def isFull(self):
@@ -143,7 +140,7 @@ class inventory:
                     self.inventory[each.id].loadItem([each])
 
     def segregate(self, segregations):
-        # Divide the invnetory space do item specific chunks
+        # Divide the inventory space do item specific chunks
         # ['id', 'id2']
         perSeg = int(self.size / len(segregations))  # Use int to round down, this may loose slots
 

@@ -56,6 +56,7 @@ class render:
                     #Assume tuple
                     scaleType = 'fixed'
             except KeyError:
+                scaleType = 'none'
                 scale = 1
 
 
@@ -64,7 +65,7 @@ class render:
                     font = settings.fonts[each.data['attribute']['font']][each.data['attribute']['size']]
                 except KeyError:
                     settings.logObject.add('Font not found', 2)
-                    font = settings.fonts['primaryFont'][20]
+                    font = settings.fonts['primaryFont'][each.data['attribute']['size']]
 
                 if('variables' in each.data['attribute']):
                     for i in range(0, len(each.data['attribute']['variables'])):
@@ -84,12 +85,15 @@ class render:
 
             elif (each.data['type'] == 'image'):
                 #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
-                image = pygame.image.load('spritess/'+each.data['attribute']['uid']+'.png')
+                image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
                 w, h = image.get_size()
                 if(scaleType=='relative'):
                     rendered = pygame.transform.scale(image, (int(w*scale), int(h*scale)))
-                else:
+                elif(scaleType=='fixed'):
                     rendered = pygame.transform.scale(image, (int(scale[1]), int(scale[0])))
+                else:
+                    # Assume no scale
+                    rendered = image
 
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 

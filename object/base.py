@@ -72,7 +72,7 @@ class base:
             4:'4'
         }
         pygame.draw.rect(settings.surface, (255,0,0), [self.x*50,self.y*50,50,50])
-        settings.surface.blit(settings.fonts['primaryFont'][10].render(directions[self.highlightedDirection], True, (255,255,255)), [self.x*50,self.y*50,50,50])
+        settings.surface.blit(settings.fonts['primaryFont'][30].render(directions[self.highlightedDirection], True, (255,255,255)), [self.x*50,self.y*50,50,50])
 
     def isPassible(self, entityid):
         if(entityid in self.passable):

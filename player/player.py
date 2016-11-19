@@ -1,4 +1,3 @@
-from webinteract.playerdata import playerData
 from util.tool import tool
 
 class player:
@@ -16,30 +15,22 @@ class player:
             print('new player')
         '''
 
-    def loadPlayerData(self, id):
-        self.playerData = playerData()
-        print(self.playerData.get(id))
-        print('loading')
-        return True
-        #TODO SAVE ERROR
-
     def newPlayer(self, **kwargs):
         #Init vars
         self.id = tool.genRandomString(16)
 
-        gameVariableDefaults = {
-            'difficulty': 2,
-            'balance': 5
+        playerVariableDefaults = {
+            'name': 'player1'
         }
 
-        self.gameVariables = {}
+        self.playerVariables = {}
+        #set game variables (pv prefix, non camel-case for simplicity)
 
-        #set game variables (gv prefix, non camel-case for simplicity)
-        for key, value in gameVariableDefaults.items():
+        for key, value in playerVariableDefaults.items():
             try:
-                self.gameVariables[key] = kwargs['gv'+key]
+                self.playerVariables[key] = kwargs['pv'+key]
             except KeyError:
                 #Assume default
-                self.gameVariables[key] = value
+                self.playerVariables[key] = value
 
         self.balance = 3000

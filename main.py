@@ -45,7 +45,16 @@ settings.fonts = {
         50: pygame.font.SysFont(None, 50),
         60: pygame.font.SysFont(None, 60),
     },
+    'monospacedFont': {
+        10: pygame.font.SysFont('couriernew', 10),
+        20: pygame.font.SysFont('couriernew', 20),
+        30: pygame.font.SysFont('couriernew', 30),
+        40: pygame.font.SysFont('couriernew', 40),
+        50: pygame.font.SysFont('couriernew', 50),
+        60: pygame.font.SysFont('couriernew', 60),
+    },
 }
+
 
 #Calculate surface width
 display_width = 1050
@@ -116,6 +125,8 @@ settings.marketCache = settings.webinteractmarket.get()
 #Get market prices
 for key, value in settings.gameExcluseUI.items():
     settings.activeUI[key] = ui.create(key)
+
+settings.grid[5][5].highlightAdd(3)
 
 '''
 '

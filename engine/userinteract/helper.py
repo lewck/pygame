@@ -16,7 +16,6 @@ class helper:
 
     @staticmethod
     def reloadModel(modelID):
-        # Register Input
 
         # Remove output interfaces
         settings.activeModelDB[modelID].deleteInterface('output', 'all')

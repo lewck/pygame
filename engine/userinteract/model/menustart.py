@@ -20,19 +20,13 @@ class menustart(base):
 
     def createGame(self):
         #Try webinteract to create game
-        gamewebinteract = game()
-        gamewebinteract.create()
-
         uihelper.toggleModel('menustart')
-
-        uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
-
-        uihelper.toggleModel('menustartonlinegame')
+        uihelper.toggleModel('gamesettings')
 
     def addInputs(self):
         self.addCommon(uid='coverall')
         #New game button
-        self.addInput(type='mouseAction', priority=5, title='openBuyMenu', attribute={
+        self.addInput(type='mouseAction', priority=5, title='createGame', attribute={
             'click': 1,
             'pos': [200, 400],
             'dim': [50,250],
@@ -40,6 +34,7 @@ class menustart(base):
         })
 
     def addOutputs(self):
+
         self.addOutput(pos=[80,425], type='text', priority= 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 60,

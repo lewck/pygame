@@ -19,7 +19,7 @@ class helper:
 
     @staticmethod
     def vehicleEvaluateBest(pos):
-        for each in helper.getAvailable():
+        for each in helper.veichleGetAvailable():
             if(settings.activeEntityDB[each].claimed == False):
                 settings.activeEntityDB[each].claimed = True
                 return each

@@ -54,7 +54,9 @@ class defaultoverlay(base):
 
 
     def addOutputs(self):
-        #Background
+        # Background
+
+
         self.addOutput(pos=[settings.yMax*50, 0], type='shape', priority=self.basePriority , title='overlayBackground',
             attribute={
                 'shape': 'rectangle',

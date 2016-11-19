@@ -12,7 +12,7 @@ class lorry(base):
         super(lorry, self).setVars()
         self.image = pygame.image.load('sprites/lorry.png')
         self.tickListen = [5]
-        self.inventory = inventory(30)
+        self.inventory = inventory(50)
 
     def doTick(self, tickID):
         if(tickID==0):

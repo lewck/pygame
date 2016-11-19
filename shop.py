@@ -10,13 +10,12 @@ class shop:
 
     @staticmethod
     def purchase(price):
-        settings.player.balance += -price
+        if(shop.canPurchase(price)):
+            settings.player.balance += -price
 
     @staticmethod
     def sell(items):
         #Check if cache needs to be busted
-
-
         for each in items:
             settings.webinteractmarket.verifyCache()
             itemUsed = False
@@ -28,6 +27,12 @@ class shop:
 
                     # Update demands
                     settings.webinteractmarket.reduceDemand(each.id, 1)
+
+                    #Check if balance objective is met
+                    if(settings.gameData['objectives'][0]==1):
+                        if(settings.player.balance > settings.gameData['objectives'][1]):
+                            settings.currentScreen = 'gameCompleted'
+
                     break
 
             if(not itemUsed):

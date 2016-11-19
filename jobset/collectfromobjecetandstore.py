@@ -18,8 +18,6 @@ class collectFromObjectAndStore(base):
 
     def doEvent(self, eventID):
         if(eventID == 'pathnotfound'):
-            print('PATH NOT FOUND')
-            print(str(self.jobID))
             settings.activeJobDB[str(self.jobID)].close()
             self.close()
             self.taskCurrent = 3
