@@ -33,4 +33,4 @@ class player:
                 #Assume default
                 self.playerVariables[key] = value
 
-        self.balance = 3000
+        self.balance = 9999

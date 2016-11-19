@@ -28,12 +28,16 @@ class shop:
                     # Update demands
                     settings.webinteractmarket.reduceDemand(each.id, 1)
 
-                    #Check if balance objective is met
-                    if(settings.gameData['objectives'][0]==1):
-                        if(settings.player.balance > settings.gameData['objectives'][1]):
-                            settings.currentScreen = 'gameCompleted'
-
                     break
 
             if(not itemUsed):
                 settings.player.balance += settings.itemDB[each.id]['sellPrice']
+
+            # Check if balance objective is met
+            print('obj')
+
+            print(settings.gameData['objectives'])
+            if (settings.gameData['objectives'][0] == '1'):
+                if (settings.player.balance > int(settings.gameData['objectives'][1])):
+                    settings.winStatus = True
+                    settings.currentScreen = 'gameCompleted'

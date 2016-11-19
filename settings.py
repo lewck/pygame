@@ -283,6 +283,7 @@ def init():
         'gamesettings': False,
         'menustartonlinegame': False,
         'menuloading': False,
+        'menugameend': False,
     }
 
     # Used main.py

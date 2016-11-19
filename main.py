@@ -166,6 +166,26 @@ while (settings.currentScreen=='game') and (not settings.gameExit):
     pygame.display.update()
     clock.tick(120)
 
+'''
+'
+'   END GAME LOOP
+'
+'''
+
+uihelper.updateAttribute('menugameend', 'winstatus', settings.winStatus)
+uihelper.toggleModel('menugameend', True)
+
+while (settings.currentScreen=='gameCompleted') and (not settings.gameExit):
+    # Listen for events
+    input.listenForEvent()
+
+    # Render the screen
+    render.render()
+
+    # Finish frame
+    pygame.display.update()
+    clock.tick(120)
+
 
 #Game Over
 settings.logObject.close()
