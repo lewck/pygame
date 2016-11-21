@@ -13,6 +13,7 @@ from engine.userinteract.model.menuloading import menuloading
 from engine.userinteract.model.menustart import menustart
 from engine.userinteract.model.gamesettings import gamesettings
 from engine.userinteract.model.menugameend import menugameend
+from engine.userinteract.model.menujoingame import menujoingame
 
 import engine.userinteract.model
 

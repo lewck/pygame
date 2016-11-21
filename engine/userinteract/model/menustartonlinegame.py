@@ -18,12 +18,12 @@ class menustartonlinegame(base):
 
     def startGame(self):
         settings.currentScreen = 'game'
-
         uihelper.toggleModel('menustartonlinegame')
         uihelper.toggleModel('menuloading')
 
     def addInputs(self):
         self.addCommon(uid='coverall')
+
         #New game button
         self.addInput(type='mouseAction', priority=5, title='openBuyMenu', attribute={
             'click': 1,

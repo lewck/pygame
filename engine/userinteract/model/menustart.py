@@ -23,6 +23,10 @@ class menustart(base):
         uihelper.toggleModel('menustart')
         uihelper.toggleModel('gamesettings')
 
+    def joinGame(self):
+        uihelper.toggleModel('menustart')
+        uihelper.toggleModel('menujoingame')
+
     def addInputs(self):
         self.addCommon(uid='coverall')
         #New game button
@@ -31,6 +35,13 @@ class menustart(base):
             'pos': [200, 400],
             'dim': [50,250],
             'event': 'createGame',
+        })
+        #Join game button
+        self.addInput(type='mouseAction', priority=5, title='joinGame', attribute={
+            'click': 1,
+            'pos': [300, 400],
+            'dim': [50, 250],
+            'event': 'joinGame',
         })
 
     def addOutputs(self):
@@ -52,6 +63,19 @@ class menustart(base):
             'font': 'primaryFont',
             'size': 30,
             'value': 'Start New Game',
+            'color': (255, 255, 255)
+        })
+
+        # Join game button
+        self.addOutput(pos=[300, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
+            'shape': 'rectangle',
+            'dim': [50, 250],
+            'color': (255, 0, 0)
+        })
+        self.addOutput(pos=[312, 445], type='text', priority=3, title='menustoragebuytext', attribute={
+            'font': 'primaryFont',
+            'size': 30,
+            'value': 'Join A Game',
             'color': (255, 255, 255)
         })
 

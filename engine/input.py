@@ -17,8 +17,6 @@ class input():
             if event.type == pygame.QUIT:
                 settings.gameExit = True
 
-
-
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 #Handle all mouse clicks
                 clickUsed = False
@@ -63,6 +61,11 @@ class input():
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
 
             elif (event.type == pygame.KEYDOWN):
+                if(inputbuffer.isKey()):
+                    if event.key in range(pygame.K_a, pygame.K_z + 1):
+                        inputbuffer.addKey(event.unicode)
+                        print(settings.inputBuffer['value'])
+
                 if (event.key == pygame.K_F1):
                     devmap.create(2)
                 if (event.key == pygame.K_F2):

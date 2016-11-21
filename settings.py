@@ -284,6 +284,7 @@ def init():
         'menustartonlinegame': False,
         'menuloading': False,
         'menugameend': False,
+        'menujoingame': False,
     }
 
     # Used main.py
