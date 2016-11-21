@@ -45,9 +45,7 @@ class render:
         sortedOutput = out.getActiveByPriority()
 
         for each in sortedOutput:
-
             try:
-
                 scale = each.data['attribute']['scale']
 
                 if(type(each.data['attribute']['scale'])==int):

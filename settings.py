@@ -100,7 +100,7 @@ def init():
     # Used engine > input.py
     # handles input buffers
     global inputBuffer
-    inputBuffer = []
+    inputBuffer = {}
 
     # Used extensively
     # entity statistics/configurations

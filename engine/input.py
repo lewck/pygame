@@ -8,6 +8,7 @@ from util.tool import tool
 from engine.userinteract.ui import ui
 from entity.factory import factory as entity
 from engine.userinteract.helper import helper as uihelper
+from engine.inputbuffer import inputbuffer
 
 class input():
     @staticmethod
@@ -15,6 +16,8 @@ class input():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 settings.gameExit = True
+
+
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 #Handle all mouse clicks
@@ -33,7 +36,7 @@ class input():
                     '   itself). Every event is added to a buffer then performed after the loop is completed in order.
                     '
                     '''
-                    if(settings.inputBuffer == []):
+                    if (not inputbuffer.isClick()):
                         buffer = []
                         for id, each in settings.activeEventDB.items():
                             if(each.active == True):
@@ -49,10 +52,12 @@ class input():
 
                         if(clickUsed == False):
                             settings.grid[int(yTile)][int(xTile)].eventClick()
-                    else:
-                        if(settings.inputBuffer[0] == 'setObject'):
-                            object.create(uid=settings.inputBuffer[1], y=yTile, x=xTile, direction=2)
-                            settings.inputBuffer = []
+
+                    elif(inputbuffer.getClick() == 1):
+                        #Has Left Click Buffer
+
+                        object.create(uid=inputbuffer.getArgs(), y=yTile, x=xTile, direction=2)
+                        inputbuffer.clear()
 
                 elif (event.button == 3):
                     object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)

@@ -1,5 +1,6 @@
 from shop import shop
 from entity.factory import factory as entity
+from engine.inputbuffer import inputbuffer
 import settings
 
 class base:
@@ -153,8 +154,7 @@ class base:
             })
 
     def buyObject(self, type, uid):
-        settings.inputBuffer = ['setObject', uid]
-        print('ib'+str(settings.inputBuffer))
+        inputbuffer.create('setObject', uid)
         self.close()
 
     def buyEntity(self, type, uid):
