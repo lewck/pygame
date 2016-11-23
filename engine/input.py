@@ -53,7 +53,7 @@ class input():
 
                     elif(inputbuffer.getClick() == 1):
                         #Has Left Click Buffer
-                        object.create(uid=inputbuffer.getArgs(), y=yTile, x=xTile, direction=2)
+                        object.create(uid=inputbuffer.getObject(), y=yTile, x=xTile, direction=2)
                         inputbuffer.clear()
 
                 elif (event.button == 3):

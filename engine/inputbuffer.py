@@ -28,17 +28,13 @@ class inputbuffer:
 
     @staticmethod
     def create(title, **kwargs):
-        '''
-        for key input, args = [maxlength]
-
-        :param title:
-        :param args:
-        :return:
-        '''
+        # for key input, maxlength
+        # for setobject,  object
 
         if(title == 'setObject'):
             # Set object specifc variables
             settings.inputBuffer['click'] = 1
+            settings.inputBuffer['object'] = kwargs['object']
 
         elif(title == 'getKeyInput'):
             # Text input specific variables
@@ -71,8 +67,8 @@ class inputbuffer:
         settings.inputBuffer = {}
 
     @staticmethod
-    def getArgs():
-        return settings.inputBuffer['args']
+    def getObject():
+        return settings.inputBuffer['object']
 
     @staticmethod
     def getClick():

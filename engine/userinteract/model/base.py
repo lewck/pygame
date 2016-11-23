@@ -154,7 +154,7 @@ class base:
             })
 
     def buyObject(self, type, uid):
-        inputbuffer.create('setObject', uid)
+        inputbuffer.create('setObject', object = uid)
         self.close()
 
     def buyEntity(self, type, uid):
