@@ -8,7 +8,6 @@ from engine.userinteract.model.base import base
 from engine.userinteract.helper import helper as uihelper
 
 from webinteract.game import game
-
 import settings
 
 class menustart(base):

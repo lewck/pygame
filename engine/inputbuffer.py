@@ -27,7 +27,7 @@ class inputbuffer:
         return False
 
     @staticmethod
-    def create(title, args = None):
+    def create(title, **kwargs):
         '''
         for key input, args = [maxlength]
 
@@ -43,11 +43,14 @@ class inputbuffer:
         elif(title == 'getKeyInput'):
             # Text input specific variables
             settings.inputBuffer['value'] = ''
+            settings.inputBuffer['trigger'] = kwargs['trigger']
+            settings.inputBuffer['model'] = kwargs['model']
+            settings.inputBuffer['maxlength'] = kwargs['maxlength']
 
 
         settings.inputBuffer['type'] = inputbuffer.getTitleType(title)
         settings.inputBuffer['title'] = title
-        settings.inputBuffer['args'] = args
+        settings.inputBuffer['args'] = kwargs
 
     @staticmethod
     def isClick():
@@ -77,5 +80,18 @@ class inputbuffer:
 
     @staticmethod
     def addKey(key):
-        if(len(settings.inputBuffer['value']) < settings.inputBuffer['args']):
+        if(len(settings.inputBuffer['value']) < settings.inputBuffer['maxlength']):
             settings.inputBuffer['value'] += key
+
+    @staticmethod
+    def delKey():
+        settings.inputBuffer['value'] = settings.inputBuffer['value'][:-1]
+        return True
+
+    @staticmethod
+    def complete():
+        if(settings.inputBuffer['type'] == 1):
+            # Assume Key Input
+            getattr(settings.activeModelDB[settings.inputBuffer['model']], settings.inputBuffer['trigger'])(settings.inputBuffer['value'])
+
+        inputbuffer.clear()

@@ -86,11 +86,11 @@ while settings.currentScreen=='menu' and not settings.gameExit:
     #Render the screen
     render.render()
 
-
     #Finish frame
     pygame.display.update()
     clock.tick(120)
-    
+
+print('BR')
 
 '''
 '
@@ -133,7 +133,6 @@ settings.grid[5][5].highlightAdd(3)
 '   CORE GAME LOOP
 '
 '''
-
 uihelper.closeModel('menuloading')
 while (settings.currentScreen=='game') and (not settings.gameExit):
     #Listen for events

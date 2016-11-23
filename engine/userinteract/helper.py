@@ -17,6 +17,8 @@ class helper:
     @staticmethod
     def reloadModel(modelID):
 
+        settings.activeModelDB[modelID].close()
+
         # Remove output interfaces
         settings.activeModelDB[modelID].deleteInterface('output', 'all')
         # Remove Input Interface
@@ -37,6 +39,10 @@ class helper:
         for out in settings.activeModelDB[modelID].output:
             # Register with out handler
             eid = outObj.create(modelID, out)
+
+        settings.activeModelDB[modelID].activate()
+
+        print('reloaded')
 
     @staticmethod
     def updateAttribute(modelID, att, val):

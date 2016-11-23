@@ -16,3 +16,12 @@ class game(base):
         settings.gameData['objectives'] = request['objectives']
         return True
 
+    def join(self, gameID, gamePin):
+        request = self.requestCall('joingame', {'game_id': gameID, 'game_pin': gamePin})
+
+        settings.gameData['session_id'] = request['session_id']
+        settings.gameData['game_id'] = gamePin
+        settings.gameData['game_pin'] = gameID
+        settings.gameData['objectives'] = request['objectives']
+
+        return True

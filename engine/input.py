@@ -53,7 +53,6 @@ class input():
 
                     elif(inputbuffer.getClick() == 1):
                         #Has Left Click Buffer
-
                         object.create(uid=inputbuffer.getArgs(), y=yTile, x=xTile, direction=2)
                         inputbuffer.clear()
 
@@ -63,8 +62,20 @@ class input():
             elif (event.type == pygame.KEYDOWN):
                 if(inputbuffer.isKey()):
                     if event.key in range(pygame.K_a, pygame.K_z + 1):
+                        # Letter key detected
                         inputbuffer.addKey(event.unicode)
                         print(settings.inputBuffer['value'])
+                    elif event.key in range(pygame.K_0, pygame.K_9 + 1):
+                        # Number key detected
+                        inputbuffer.addKey(event.unicode)
+                        print(settings.inputBuffer['value'])
+                    elif event.key == (pygame.K_DELETE) or event.key == (pygame.K_BACKSPACE):
+                        # Remove key detected
+                        inputbuffer.delKey()
+                        print(settings.inputBuffer['value'])
+                    elif event.key == (pygame.K_RETURN):
+                        # Send buffer
+                        inputbuffer.complete()
 
                 if (event.key == pygame.K_F1):
                     devmap.create(2)

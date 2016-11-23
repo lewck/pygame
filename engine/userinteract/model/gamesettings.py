@@ -28,7 +28,7 @@ class gamesettings(base):
         gamewebinteract.create(1, self.balance)
         uihelper.toggleModel('gamesettings')
         uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
-        uihelper.toggleModel('menustartonlinegame')
+
 
     def addInputs(self):
         self.addCommon(uid='coverall')
