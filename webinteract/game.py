@@ -35,3 +35,9 @@ class game(base):
 
     def checkCompleted(self):
         request = self.requestCall('checkGameComplete', {'game_id': settings.gameData['game_id']})
+        if(request['success'] == 'notcomplete'):
+            # Not completed do nothing
+            return True
+        # Assume Completed
+        settings.winStatus = False
+        settings.currentScreen = 'gameCompleted'
