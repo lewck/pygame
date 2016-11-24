@@ -16,6 +16,7 @@ from util.grid import grid
 from webinteract.market import market
 from dev.testmap import testmap
 from engine.userinteract.helper import helper as uihelper
+from webinteract.game import game
 
 '''
 '
@@ -133,7 +134,15 @@ settings.grid[5][5].highlightAdd(3)
 '   CORE GAME LOOP
 '
 '''
+
+settings.webinteract = {}
+
+settings.webinteract['game'] = game()
+
 uihelper.closeModel('menuloading')
+settings.tick.register(100, "settings.webinteract['game'].checkCompleted()")
+
+
 while (settings.currentScreen=='game') and (not settings.gameExit):
     #Listen for events
     input.listenForEvent()

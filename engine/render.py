@@ -82,7 +82,7 @@ class render:
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
             elif (each.data['type'] == 'image'):
-                #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
+                # NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
                 image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
                 w, h = image.get_size()
                 if(scaleType=='relative'):
