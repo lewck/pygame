@@ -14,7 +14,6 @@ class base:
 
         for each in self.tickListen:
             self.ticks = settings.tick.register(each, 'settings.activeJobDB["'+str(self.jobID)+'"].tick()', self.jobID)
-            print('registered tick')
 
     def initVars(self, **kwargs):
         for key, value in kwargs.items():
@@ -22,7 +21,6 @@ class base:
 
     def eventTaskComplete(self):
         #Called by entity when job is completed
-        print('Job completed')
         self.taskCurrent += 1
 
     def close(self):

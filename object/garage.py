@@ -3,7 +3,6 @@ from inventory import inventory
 
 class garage(base):
     def __init__(self, **kwargs):
-        print('initGarage')
         self.type = 'storageVehicles'
         self.title = 'garage'
 

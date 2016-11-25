@@ -3,9 +3,9 @@ from inventory import inventory
 
 class genericHouse(base):
     def __init__(self, **kwargs):
-        print('initHouse')
         self.type = 'storage'
         self.title = 'genericHouse'
+
         super(genericHouse, self).setVars(image = 'genericHouse', **kwargs)
 
         self.passable = []

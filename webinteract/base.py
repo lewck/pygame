@@ -24,6 +24,7 @@ class base:
 
         url_values = urllib.parse.urlencode(data)
         print(url_values)
+
         url = 'http://localhost/pygame/kernal.php'
         full_url = url + '?' + url_values
         data = urllib.request.urlopen(full_url)

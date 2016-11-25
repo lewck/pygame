@@ -63,7 +63,6 @@ class menuproducerbuy(base):
                         'event': 'buyObject',
                         'eventArgs': ['producer',uid],
                     })
-                    print('uid'+str(uid))
                     count += 1
                 posx += 41
             posx = 12

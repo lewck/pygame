@@ -36,7 +36,7 @@ class helper:
     def evaluateBestStorage(objectAPos, type='item', uid='null'):
         possible = []
 
-        #First check if a job is waiting for it
+        # First check if a job is waiting for it
         if(uid!='null'):
             for key, each in settings.activeJobsetDB.items():
                 if(each.typ == 'waitForItems'):
@@ -44,11 +44,9 @@ class helper:
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
             if (len(possible) != 0):
-                print('FOUND WITH JOB')
-
                 return possible[randint(0,len(possible)-1)]
 
-            print('NOT FOUND WITH JOB')
+            # Not found with job
 
 
             '''
@@ -62,7 +60,7 @@ class helper:
             return parents[0]
             '''
 
-            #Nobody waiting for it, no parents, must sell
+            # Nobody waiting for it, no parents, must sell
             #TODO PICK BEST
             parents = itemhelper.findItemParents(uid)
 

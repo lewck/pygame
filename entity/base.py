@@ -19,23 +19,13 @@ class base:
         self.claimed = False
 
     def assign(self, jobID):
-        print('Assignining to '+str(jobID))
-
         self.job = settings.activeJobDB[jobID]
 
         self.path = settings.pathDB[settings.activeJobDB[jobID].path]
-        print('---')
-        print(self.path)
         self.x = self.job.startPosition[1]*50
         self.y = self.job.startPosition[0]*50
         self.direction = 1
         self.jobID = jobID
-
-        print(self.job)
-
-        print('ASSIGN DEBUG')
-        print(self.x)
-        print(self.y)
 
     def unassign(self):
         self.job = 0
@@ -56,12 +46,10 @@ class base:
                     self.doTick(i)
                     if(i==len(self.tickListen)):
                         self.tickCount = 0
-            #print(self.tickCount)
 
 
     def doMove(self):
         if (self.status == 1):
-
             xTile = (int(self.x /50))
             yTile = (int(self.y /50))
 
@@ -76,7 +64,6 @@ class base:
 
                         currDirection = self.direction
                         self.direction = self.path[1][i][o][2]
-                        print(self.direction)
 
             # update location tick
             if (self.direction == 0):
@@ -87,7 +74,7 @@ class base:
                 self.y += 10
             elif (self.direction == 3):
                 self.x += -10
-                # print(matches)
+
         if (self.status == 3):
             # idle
             pass

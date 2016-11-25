@@ -52,45 +52,33 @@ class moveItem(base):
 
             if(self.startPosition[2]==0 or self.startPosition[2]==2):
                 #Handle y change
-                print('checking')
 
                 if(settings.grid[self.startPosition[0]+options[self.startPosition[2]]][self.startPosition[1]]).hasInventory():
-                    print('INVENTORY FOUND 1')
                     #TODO wait for full inventory
-                    self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventoryOutput.takeItem('all', settings.activeEntityDB[self.entityID].inventory.size)
-
-                    print('-----')
-                    print('VAR'+str(self.itemBuffer))
+                    self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventoryOutput.takeItem(
+                        'all',
+                        settings.activeEntityDB[self.entityID].inventory.size
+                    )
 
                     settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
-                    print('-')
-                    print(settings.activeEntityDB[self.entityID].inventory.getInventory())
                     self.taskCurrent += 1
 
 
             if(self.startPosition[2]==1 or self.startPosition[2]==3):
 
                 if (settings.grid[self.startPosition[0]][self.startPosition[1]+options[self.startPosition[2]]]).hasInventory():
-
-                    print('INVENTORY FOUND 1')
                     # TODO wait for full inventory
-
-                    self.itemBuffer = settings.grid[self.startPosition[0]][
-                        self.startPosition[1] + options[self.startPosition[2]]].inventoryOutput.takeItem('all', settings.activeEntityDB[
-                        self.entityID].inventory.size)
-
-                    print('-----')
-                    print('VAR' + str(self.itemBuffer))
+                    self.itemBuffer = settings.grid[self.startPosition[0]][self.startPosition[1] + options[self.startPosition[2]]].inventoryOutput.takeItem(
+                        'all',
+                        settings.activeEntityDB[self.entityID].inventory.size
+                    )
 
                     settings.activeEntityDB[self.entityID].inventory.loadItem(self.itemBuffer)
-                    print('-')
-                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
                     self.taskCurrent += 1
 
         if(self.taskCurrent == 3):
             #Move Vehical
             if(self.assigned == False):
-                print('ASSIGNING STATUS TO '+str(self.entityID))
                 settings.activeEntityDB[self.entityID].status = 1
                 self.assigned = True
 
@@ -98,32 +86,15 @@ class moveItem(base):
             #Move to new inventory
             if (self.endPosition[2] == 0 or self.endPosition[2] == 2):
                 # Handle y change
-                print('checking')
-                print(self.endPosition[0])
-                print(self.startPosition[1])
-
                 if (settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]]).hasInventory():
-                    print('INVENTORY FOUND 2')
-                    print(self.itemBuffer)
                     settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]].inventory.loadItem(self.itemBuffer)
                     self.taskCurrent += 1
 
             if (self.endPosition[2] == 1 or self.endPosition[2] == 3):
                 # Handle x change
-                print('checking')
-                print(self.endPosition[0])
-                print(self.startPosition[1])
 
                 if (settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]]).hasInventory():
-
-                    print('INVENTORY FOUND 2')
-
-                    print(settings.activeEntityDB[self.entityID].inventory.inventory)
-
                     settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.loadItem(self.itemBuffer)
-
-                    print('inv')
-                    print(settings.grid[self.endPosition[0]][self.endPosition[1]+ options[self.endPosition[2]]].inventory.inventory)
                     self.taskCurrent += 1
 
         if(self.taskCurrent==5):

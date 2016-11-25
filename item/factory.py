@@ -15,7 +15,6 @@ class factory:
     def create(**args):
         #Return object of UID
         results = []
-        print(args['item'])
         results.append(eval(args['item']+'()'))
 
         return results

@@ -19,8 +19,6 @@ class game(base):
     def join(self, gameID, gamePin):
         request = self.requestCall('joingame', {'game_id': gameID, 'game_pin': gamePin})
 
-        print(request)
-
         if(request):
             settings.gameData['session_id'] = request['session_id']
             settings.gameData['game_id'] = gameID
@@ -31,7 +29,6 @@ class game(base):
         return False
 
     def markCompleted(self, gameID, sessionID):
-        print('marked complete')
         request = self.requestCall('completeGame', {'game_id': gameID, 'session_id': sessionID})
 
     def checkCompleted(self):

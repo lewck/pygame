@@ -97,7 +97,6 @@ class base:
 
     def close(self):
         # Clear interfaces
-        print('CLOSEING')
         self.active = False
         self.closeModel()
 

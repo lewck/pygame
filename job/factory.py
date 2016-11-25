@@ -11,5 +11,4 @@ class factory():
 
         settings.activeJobDB[jobID] = eval(args['typ'] + '(**args, jobID = jobID)')
 
-        print('JID'+str(jobID))
         return jobID

@@ -20,7 +20,6 @@ class base:
 
     def eventTaskComplete(self):
         #Called by entity when job is completed
-        print('Job SET completed')
         self.status = 1
         self.taskCurrent += 1
 

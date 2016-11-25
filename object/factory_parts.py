@@ -42,7 +42,6 @@ class factory_parts(base):
             else:
                 if(self.setSegregation == False):
                     if (not settings.itemDB[self.part]['required'] == {}):
-                        print('SEGREGATING')
                         self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))
                         self.setSegregation = True
 
@@ -62,7 +61,6 @@ class factory_parts(base):
                         hasItems += 1
 
                 if((len(data['required'])) == hasItems):
-                    print('CAN CONSTRUCT')
 
                     #Get Items To Remove
                     toRemove = settings.itemDB[self.part]['required']
@@ -75,13 +73,9 @@ class factory_parts(base):
 
 
                 else:
-                    print('STAT')
                     if(self.status != 2):
-                        print('STATUS2')
                         #2 means waiting, but job waitforitems created
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
-                        print('JOB ')
-                        print(settings.activeJobsetDB[self.job])
                         self.status = 2
 
                 if(self.inventoryOutput.isFull()):
@@ -96,16 +90,9 @@ class factory_parts(base):
                 self.image = self.load(self.title + '_full')
 
 
-                #print('I AM FULL, CREATING JOB')
-                #print(self.inventoryOutput.inventory[0].id)
-
-
                 #TODO fix force pick
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                               itemID=self.inventoryOutput.getInventory()[0].id)
-
-                #print('AFTER JOBSET CREATED')
-                #print(settings.activeJobsetDB)
 
 
     def eventClick(self):

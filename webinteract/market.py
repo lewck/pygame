@@ -12,11 +12,9 @@ class market(base):
 
     def verifyCache(self):
         if(self.requestCall('verifymarketcache', {'session_id': settings.gameData['session_id']})):
-            print('SAME CACHE')
             return True
         else:
             #Get new cache
-            print('GENERATING NEW CACHE')
             settings.marketCache = self.get()
             return True
 

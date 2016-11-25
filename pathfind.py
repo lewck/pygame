@@ -88,7 +88,6 @@ class pathFind():
             #print('Closed Self')
 
             if self.current.x==self.xend and self.current.y==self.yend:
-                print('success path find')
                 return(self.organise([[self.current.y, self.current.x, 4], self.current.parent]))
 
 

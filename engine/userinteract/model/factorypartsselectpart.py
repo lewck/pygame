@@ -12,7 +12,6 @@ class factorypartsselectpart(base):
 
     def selectPart(self, part):
         settings.grid[self.objectPosition[0]][self.objectPosition[1]].part = part
-        print('part selected')
         uihelper.toggleModel('factorypartsselectpart')
 
     def addInputs(self):

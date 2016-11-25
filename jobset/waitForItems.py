@@ -22,7 +22,6 @@ class waitForItems(base):
         pass
 
     def needsItem(self, itemID):
-        print(self.items)
         for id, qty in self.items.items():
             if(id==itemID):
                 return True

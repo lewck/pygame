@@ -5,9 +5,6 @@ import settings
 from engine.tick import tick
 
 class base:
-    def __init__(self):
-        print('base')
-
     def setVars(self, **kwargs):
         #base, image, direction, tickListen
 

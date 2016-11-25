@@ -31,21 +31,16 @@ class movevehicle(base):
             self.startPosition = settings.activeEntityDB[self.entityID].pos
 
             path = pathFind(self.startPosition[0], self.startPosition[1], self.endPosition[0], self.endPosition[1], 5)
-
-            print(self.startPosition[0])
-            print(self.startPosition[1])
-            print(self.endPosition[0])
-            print(self.endPosition[1])
-
             self.path = path.find()
 
 
             if(self.path):
-                #Assign entity to path
+                # Assign entity to path
                 self.assign(self.entityID)
                 self.taskCurrent += 1
             else:
-                print('waiting for path')
+                # Waiting for a path
+                pass
 
 
         if(self.taskCurrent == 2):

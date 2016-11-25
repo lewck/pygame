@@ -4,10 +4,11 @@ from shop import shop
 
 class exports(base):
     def __init__(self, **kwargs):
-        print('init exports')
         self.type = 'exports'
         self.title = 'exports'
+
         super(exports, self).setVars(image=self.title, **kwargs)
+
         self.passable = []
         self.inventory = inventory(500)
         self.price = 500
