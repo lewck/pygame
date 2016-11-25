@@ -23,14 +23,15 @@ class game(base):
 
         if(request):
             settings.gameData['session_id'] = request['session_id']
-            settings.gameData['game_id'] = gamePin
-            settings.gameData['game_pin'] = gameID
+            settings.gameData['game_id'] = gameID
+            settings.gameData['game_pin'] = gamePin
             settings.gameData['objectives'] = request['objectives']
             return True
 
         return False
 
     def markCompleted(self, gameID, sessionID):
+        print('marked complete')
         request = self.requestCall('completeGame', {'game_id': gameID, 'session_id': sessionID})
 
     def checkCompleted(self):

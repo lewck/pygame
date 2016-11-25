@@ -86,7 +86,7 @@ class defaultoverlay(base):
                'font': 'primaryFont',
                'size': 20,
                'value': 'Balance: {0}',
-               'variables': ['settings.player.balance'],
+               'variables': ['int(settings.player.balance)'],
                'color': (255, 255, 255)
            }
         )
@@ -98,7 +98,7 @@ class defaultoverlay(base):
                 'font': 'primaryFont',
                 'size': 20,
                 'value': 'Balance: {0}',
-                'variables': ['settings.player.balance'],
+                'variables': ['int(settings.player.balance)'],
                 'color': (255, 255, 255)
             }
         )

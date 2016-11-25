@@ -35,9 +35,12 @@ class shop:
                 settings.player.balance += settings.itemDB[each.id]['sellPrice']
 
             # Check if balance objective is met
+            print('objectives ')
             print(settings.gameData['objectives'])
-            if (settings.gameData['objectives'][0] == '1'):
+            if (int(settings.gameData['objectives'][0]) == 1):
+
                 if (settings.player.balance > int(settings.gameData['objectives'][1])):
+
                     settings.winStatus = True
                     settings.currentScreen = 'gameCompleted'
                     gamewebinteract = game()

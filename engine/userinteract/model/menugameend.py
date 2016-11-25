@@ -41,7 +41,7 @@ class menugameend(base):
                 self.addOutput(pos=[140, 450], type='text', priority=2, title='menustoragebuytext', attribute={
                     'font': 'primaryFont',
                     'size': 60,
-                    'value': 'You Loose!',
+                    'value': 'You Lose!',
                     'color': (255, 0, 0)
                 })
 
