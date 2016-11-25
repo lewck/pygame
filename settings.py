@@ -303,3 +303,6 @@ def init():
     # Holds current web-game data
     global gameData
     gameData = {'session_id':1, 'game_id':2, 'game_pin':3}
+
+    global authcode
+    authcode = None

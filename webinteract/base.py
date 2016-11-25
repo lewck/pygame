@@ -18,7 +18,7 @@ class base:
             for key, value in params.items():
                 data[key] = value
 
-        data['authorisation_token'] = self.authCode
+        data['authorisation_token'] = settings.authcode
 
         print(data)
 
@@ -39,9 +39,10 @@ class base:
 
 
     def auth(self):
-        self.authCode = 0
-        self.authCode = self.requestCall('auth', { 'apikey': settings.APIKEY })['authorisation_token']
+        if(settings.authcode == None):
+            settings.authcode = 0
+            settings.authcode = self.requestCall('auth', { 'apikey': settings.APIKEY })['authorisation_token']
 
-        if(self.authCode):
-            return True
-        return False
+            if(settings.authcode):
+                return True
+            return False
