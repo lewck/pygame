@@ -18,29 +18,35 @@ class input():
                 settings.gameExit = True
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                #Handle all mouse clicks
+                # Assume mouse click event
                 clickUsed = False
                 x = event.pos[0]
                 y = event.pos[1]
-                #Int rounds down to nearest tile always
+
+                # Int rounds down to nearest tile always
                 xTile = (int(x / 50))
                 yTile = (int(y / 50))
 
                 if(event.button == 1):
-                    #Left Click
+                    # Left Click
+
                     '''
-                    '
-                    '   Buffer used because some events change size of activeEventDB (for example an event that closes
-                    '   itself). Every event is added to a buffer then performed after the loop is completed in order.
-                    '
+                      Buffer used because some events change size of activeEventDB (for example an event that closes
+                      itself). Every event is added to a buffer then performed after the loop is completed in order.
                     '''
+
                     if (not inputbuffer.isClick()):
+                        # No buffer found
+
                         buffer = []
                         for id, each in settings.activeEventDB.items():
                             if(each.active == True):
                                 if(each.data['attribute']['click']==1):
-                                    if ((each.data['attribute']['pos'][0] < y < each.data['attribute']['pos'][0] +each.data['attribute']['dim'][0]) &
-                                            (each.data['attribute']['pos'][1] < x < each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
+                                    if ((each.data['attribute']['pos'][0] < y <
+                                         each.data['attribute']['pos'][0] + each.data['attribute']['dim'][0])&
+                                        (each.data['attribute']['pos'][1] < x <
+                                         each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
+                                        # A listener was waiting for this event
 
                                         clickUsed = True
                                         buffer.append(id)
@@ -51,8 +57,8 @@ class input():
                         if(clickUsed == False):
                             settings.grid[int(yTile)][int(xTile)].eventClick()
 
-                    elif(inputbuffer.getClick() == 1):
-                        #Has Left Click Buffer
+                    elif(inputbuffer.getClick()==1):
+                        # Has Left Click Buffer
                         object.create(uid=inputbuffer.getObject(), y=yTile, x=xTile, direction=2)
                         inputbuffer.clear()
 

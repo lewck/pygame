@@ -15,7 +15,7 @@ class event:
 
 
     def doEvent(self):
-        #Verify buffer not active
+        # Verify buffer not active
         if(self.args != 0):
             getattr(settings.activeModelDB[self.modelID], self.trigger)(*self.args)
         else:
@@ -27,7 +27,7 @@ class event:
         id = tool.genRandomString(16)
 
         if('modelID' in kwargs):
-            #Assume visual event
+            # Assume visual event
             # modelID, data, trigger, args
             settings.activeEventDB[id] = event(**kwargs, id=id)
             return id
