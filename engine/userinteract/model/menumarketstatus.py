@@ -40,7 +40,7 @@ class menumarketstatus(base):
         basey = 50
         limit = 10
         current = 0
-        for each in settings.webinteractmarket.getDemand():
+        for each in settings.webinteract['market'].getDemand():
             if (current <= limit):
                 self.addOutput(pos=[basey, 10], type='text', priority=2, title='factoryparttitle',
                                attribute={

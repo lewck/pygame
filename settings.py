@@ -5,10 +5,16 @@ def init():
     global APIKEY
     APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0s'
 
+
     # Used extensively
     # required for object placement
     global grid
     grid = []
+
+    # Used in canvas setup
+    # defines width and height of canvas
+    global canvasDimensions
+    canvasDimensions = (1050, 550)
 
     # Used extensively
     # required for grid dimentions
@@ -21,6 +27,11 @@ def init():
     # placeholder for pygame surface
     global surface
     surface = 0
+
+    # Used main.py
+    # Current screen shown to the user
+    global currentScreen
+    currentScreen = 'menu'
 
     # Used tools > log.py
     # decides if text logging should be enabled
@@ -306,3 +317,6 @@ def init():
 
     global authcode
     authcode = None
+
+    global webinteract
+    webinteract = {}

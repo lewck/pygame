@@ -4,7 +4,7 @@ import settings
 
 class market(base):
     def __init__(self):
-        #Init parent
+        # Init parent
         super(market, self).__init__()
 
     def get(self, sortby = 'null'):

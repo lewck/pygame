@@ -18,24 +18,19 @@ from dev.testmap import testmap
 from engine.userinteract.helper import helper as uihelper
 from webinteract.game import game
 
-'''
-'
-'   BOOTSTRAP CODE
-'
-'''
-
-#Initiate Depends
+# Initial Setup & Housekeeping
+# Initiate Depends
 pygame.init()
 settings.init()
 
-#Begin startup logging
+# Begin startup logging
 log.create('Main Initiated')
 
-#Initiate Pygame-related vars
+# Initiate Pygame-related vars
 settings.tick = tick()
 clock = pygame.time.Clock()
 
-#Pre-load Fonts
+# Pre-load Fonts
 settings.devfont = pygame.font.Font(None, 25)
 settings.fonts = {
     'primaryFont': {
@@ -56,30 +51,18 @@ settings.fonts = {
     },
 }
 
+# Create surface
+settings.surface = pygame.display.set_mode(settings.canvasDimensions)
+pygame.display.set_caption('Little Factory')
 
-#Calculate surface width
-display_width = 1050
-display_height = 550
-
-#Create surface
-#Uncomment for full screen settings.surface = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
-settings.surface = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('Game Title')
-
-#Pre-load User Interfaces (inactive)
+# Pre-load User Interfaces (inactive)
 for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
 
-settings.currentScreen = 'menu'
+# Open start menu UI
+uihelper.toggleModel('menustart')
 
-'''
-'
-'   Start Menu
-'
-'''
-
-settings.activeModelDB[settings.activeUI['menustart']].activate()
-
+# Start Menu Loop
 while settings.currentScreen=='menu' and not settings.gameExit:
     #Listen for events
     input.listenForEvent()
@@ -91,111 +74,95 @@ while settings.currentScreen=='menu' and not settings.gameExit:
     pygame.display.update()
     clock.tick(120)
 
-print('BR')
-
-'''
-'
-'   Init Game
-'
-'''
-
-#Generate grid
-settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
-
-#Define player
-settings.player = player()
-
-#Fill grid with grass
-for y in range(0,settings.yMax):
-    for x in range(0,settings.xMax):
-        object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
 
-mainMenu = False
+if(settings.currentScreen == 'game'):
+    # Initiate Pre Game Variables
+    # Generate grid
+    settings.grid = grid.createEmpty(settings.yMax, settings.xMax)
 
-settings.activeModelDB[settings.activeUI['defaultoverlay']].activate()
-testmap.create(3)
+    # Fill grid with grass
+    for y in range(0, settings.yMax):
+        for x in range(0, settings.xMax):
+            object.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
-entity.create(uid='car')
+    # Define player
+    settings.player = player()
 
-#Assign web interacts
-settings.webinteractmarket = market()
-settings.marketCache = settings.webinteractmarket.get()
+    # Pre game setup
+    uihelper.toggleModel('defaultoverlay')
+    testmap.create(3)
+    entity.create(uid='car')
 
+    # Assign web interacts
+    settings.webinteract['market'] = market()
+    settings.marketCache = settings.webinteract['market'].get()
+    settings.webinteract['game'] = game()
 
-#Get market prices
-for key, value in settings.gameExcluseUI.items():
-    settings.activeUI[key] = ui.create(key)
+    # Get market prices
+    for key, value in settings.gameExcluseUI.items():
+        settings.activeUI[key] = ui.create(key)
 
-settings.grid[5][5].highlightAdd(3)
+    # Register periodic server ping tick event
+    settings.tick.register(100, "settings.webinteract['game'].checkCompleted()")
 
-'''
-'
-'   CORE GAME LOOP
-'
-'''
+    # Close Loading overlay
+    uihelper.closeModel('menuloading')
 
-settings.webinteract = {}
+    # Core Game Loop
+    while (settings.currentScreen=='game') and (not settings.gameExit):
+        #Listen for events
+        input.listenForEvent()
 
-settings.webinteract['game'] = game()
+        #Render the screen
+        render.render()
 
-uihelper.closeModel('menuloading')
-settings.tick.register(100, "settings.webinteract['game'].checkCompleted()")
+        #Tick entities
+        for key, each in settings.activeEntityDB.items():
+            if(each.status!=0):
+                each.tick()
+                each.draw()
 
+        #Tick everything else
+        tickBuffer = []
+        for key, each in settings.tick.getTicks().items():
+            #Create buffer
+            if(pygame.time.get_ticks()%each[1] == 0):
+                tickBuffer.append(each[2])
 
-while (settings.currentScreen=='game') and (not settings.gameExit):
-    #Listen for events
-    input.listenForEvent()
+        for each in tickBuffer:
+            try:
+                eval(each)
+            except KeyError:
+                #the tick was unregistered mid buffer, this no longer exists
+                pass
 
-    #Render the screen
-    render.render()
-
-    #Tick entities
-    for key, each in settings.activeEntityDB.items():
-        if(each.status!=0):
-            each.tick()
-            each.draw()
-
-    #Tick everything else
-    tickBuffer = []
-    for key, each in settings.tick.getTicks().items():
-        #Create buffer
-        if(pygame.time.get_ticks()%each[1] == 0):
-            tickBuffer.append(each[2])
-
-    for each in tickBuffer:
-        try:
-            eval(each)
-        except KeyError:
-            #the tick was unregistered mid buffer, this no longer exists
-            pass
-
-    #Finish frame
-    pygame.display.update()
-    clock.tick(120)
-
-'''
-'
-'   END GAME LOOP
-'
-'''
-
-uihelper.updateAttribute('menugameend', 'winstatus', settings.winStatus)
-uihelper.toggleModel('menugameend', True)
-
-while (settings.currentScreen=='gameCompleted') and (not settings.gameExit):
-    # Listen for events
-    input.listenForEvent()
-
-    # Render the screen
-    render.render()
-
-    # Finish frame
-    pygame.display.update()
-    clock.tick(120)
+        #Finish frame
+        pygame.display.update()
+        clock.tick(120)
 
 
-#Game Over
+
+# End Of Game
+if(settings.currentScreen == 'gameCompleted'):
+    # End game setup
+    uihelper.updateAttribute('menugameend', 'winstatus', settings.winStatus)
+    uihelper.toggleModel('menugameend', True)
+
+    # End game loop
+    while (settings.currentScreen=='gameCompleted') and (not settings.gameExit):
+        # Listen for events
+        input.listenForEvent()
+
+        # Render the screen
+        render.render()
+
+        # Finish frame
+        pygame.display.update()
+        clock.tick(120)
+
+
+# Game Over, cleanup
 settings.logObject.close()
 pygame.quit()
 quit()
