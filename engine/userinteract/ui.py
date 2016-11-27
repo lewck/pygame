@@ -27,29 +27,30 @@ class ui:
     @staticmethod
     def create(uid):
         modelID = tool.genRandomString(16)
+        try:
+            model = eval(uid+'(id = modelID)')
+        except NameError:
+            # Model not defined/imported, exit
+            settings.logObject.add('Model "'+str(uid)+'" failed to initiate',2);
+            return False
 
-        model = eval(uid+'(id = modelID)')
-
-        #Register Model
-
-
+        # Register Model
         settings.activeModelDB[modelID] = model
-
 
         inReturn = []
         outReturn = []
 
-
-        #Register Inputs
+        # Register Inputs
         for out in model.input:
-            #Register with event handler
+            # Register with event handler
             try:
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
             except KeyError:
-                #Assume no event arguments
+                # Assume no event arguments
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
             inReturn.append([eid,out['title']])
+
 
         # Register Outputs
         for out in model.output:

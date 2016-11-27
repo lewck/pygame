@@ -10,13 +10,19 @@ class tick:
         self.tick = {}
 
     def register(self, tick, action, identifier=0):
-        #Identifier is optional, allows all ticks to be removed
+        # Identifier is optional, allows all ticks to be removed
         tickID = tool.genRandomString()
         self.tick[tickID] = [identifier, tick, action]
         return tickID
 
-    def getTicks(self):
+    def getAll(self):
         return self.tick
+
+    def get(self, tickID):
+        try:
+            return(self.tick[tickID])
+        except IndexError:
+            return False
 
     def remove(self, **kwargs):
         if('identifier' in kwargs):

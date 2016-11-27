@@ -14,7 +14,6 @@ class out:
     def create(modelID, data):
         id = tool.genRandomString(16)
         settings.activeOutDB[id]=(out(modelID, data, id))
-
         return id
 
     @staticmethod

@@ -63,6 +63,8 @@ for key, value in settings.activeUI.items():
 uihelper.toggleModel('menustart')
 
 # Start Menu Loop
+ui.create('unknownmodel')
+
 while settings.currentScreen=='menu' and not settings.gameExit:
     #Listen for events
     input.listenForEvent()
@@ -73,8 +75,6 @@ while settings.currentScreen=='menu' and not settings.gameExit:
     #Finish frame
     pygame.display.update()
     clock.tick(120)
-
-
 
 if(settings.currentScreen == 'game'):
     # Initiate Pre Game Variables
@@ -90,7 +90,7 @@ if(settings.currentScreen == 'game'):
     settings.player = player()
 
     # Pre game setup
-    uihelper.toggleModel('defaultoverlay')
+    # uihelper.toggleModel('defaultoverlay')
     testmap.create(3)
     entity.create(uid='car')
 
@@ -104,28 +104,37 @@ if(settings.currentScreen == 'game'):
         settings.activeUI[key] = ui.create(key)
 
     # Register periodic server ping tick event
-    settings.tick.register(100, "settings.webinteract['game'].checkCompleted()")
+    devTick = settings.tick.register(1000, "settings.webinteract['game'].checkCompleted()", 5)
+    devTick = settings.tick.register(5000, "settings.webinteract['game'].checkCompleted()", 5)
+    devTick = settings.tick.register(5000, "settings.webinteract['game'].checkCompleted()", 5)
+    devTick = settings.tick.register(6000, "settings.webinteract['game'].checkCompleted()", 5)
+
+    print('Development')
+    print(len(settings.tick.getAll()))
+    settings.tick.remove(identifier=5)
+    print(len(settings.tick.getAll()))
 
     # Close Loading overlay
     uihelper.closeModel('menuloading')
 
+
     # Core Game Loop
     while (settings.currentScreen=='game') and (not settings.gameExit):
-        #Listen for events
+        # Listen for events
         input.listenForEvent()
 
-        #Render the screen
+        # Render the screen
         render.render()
 
-        #Tick entities
+        # Tick entities
         for key, each in settings.activeEntityDB.items():
             if(each.status!=0):
                 each.tick()
                 each.draw()
 
-        #Tick everything else
+        # Tick everything else
         tickBuffer = []
-        for key, each in settings.tick.getTicks().items():
+        for key, each in settings.tick.getAll().items():
             #Create buffer
             if(pygame.time.get_ticks()%each[1] == 0):
                 tickBuffer.append(each[2])
@@ -137,7 +146,7 @@ if(settings.currentScreen == 'game'):
                 #the tick was unregistered mid buffer, this no longer exists
                 pass
 
-        #Finish frame
+        # Finish frame
         pygame.display.update()
         clock.tick(120)
 

@@ -9,6 +9,7 @@ from engine.userinteract.ui import ui
 from entity.factory import factory as entity
 from engine.userinteract.helper import helper as uihelper
 from engine.inputbuffer import inputbuffer
+from engine.event import event as eventObject
 
 class input():
     @staticmethod
@@ -29,7 +30,6 @@ class input():
 
                 if(event.button == 1):
                     # Left Click
-
                     '''
                       Buffer used because some events change size of activeEventDB (for example an event that closes
                       itself). Every event is added to a buffer then performed after the loop is completed in order.
@@ -37,25 +37,24 @@ class input():
 
                     if (not inputbuffer.isClick()):
                         # No buffer found
-
                         buffer = []
-                        for id, each in settings.activeEventDB.items():
-                            if(each.active == True):
-                                if(each.data['attribute']['click']==1):
-                                    if ((each.data['attribute']['pos'][0] < y <
-                                         each.data['attribute']['pos'][0] + each.data['attribute']['dim'][0])&
-                                        (each.data['attribute']['pos'][1] < x <
-                                         each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
-                                        # A listener was waiting for this event
+                        for id, each in eventObject.getActive().items():
+                            if(each.data['attribute']['click']==1):
+                                if ((each.data['attribute']['pos'][0] < y <
+                                     each.data['attribute']['pos'][0] + each.data['attribute']['dim'][0])&
+                                    (each.data['attribute']['pos'][1] < x <
+                                     each.data['attribute']['pos'][1] + each.data['attribute']['dim'][1])):
 
-                                        clickUsed = True
-                                        buffer.append(id)
+                                    # A listener was waiting for this event
+                                    clickUsed = True
+                                    buffer.append(id)
 
                         for each in buffer:
                             settings.activeEventDB[each].doEvent()
 
                         if(clickUsed == False):
-                            settings.grid[int(yTile)][int(xTile)].eventClick()
+                            if(yTile < settings.yMax) & (xTile < settings.xMax):
+                                settings.grid[int(yTile)][int(xTile)].eventClick()
 
                     elif(inputbuffer.getClick()==1):
                         # Has Left Click Buffer

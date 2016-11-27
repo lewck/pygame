@@ -121,9 +121,9 @@ class base:
         self.addOutputs()
 
     def addCommon(self, **kwargs):
-        #Required args: UID
+        # Required args: UID
         if(kwargs['uid'] == 'close'):
-            #Required Args: Pos (top right model)
+            # Required Args: Pos (top right model)
             self.addInput(type='mouseAction', priority=9, title='close', attribute={
                 'click': 1,
                 'pos': [kwargs['pos'][0], kwargs['pos'][1]-20],
@@ -138,11 +138,11 @@ class base:
             })
 
         if(kwargs['uid'] == 'coverall'):
-            #Required Args: Pos (top right model)
+            # Required Args: Pos (top right model)
             self.addInput(type='mouseAction', priority=0, title='base', attribute={
                 'click': 1,
-                'pos': [0,0],
-                'dim': [512,512],
+                'pos': self.basePos,
+                'dim': self.baseDim,
                 'event': 'none'
             })
             self.addInput(type='mouseAction', priority=0, title='base', attribute={

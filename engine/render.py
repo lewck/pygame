@@ -1,10 +1,7 @@
 import pygame
-
 import settings
-
 import re
 from engine.out import out
-
 from util.tool import tool
 
 

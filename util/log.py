@@ -9,7 +9,7 @@ class log:
         self.add(text, type)
 
     def close(self):
-        self.add('Program Terminated Gracefully',0)
+        self.add('Program Terminated Gracefully', 0)
         self.file.close()
 
     def openFile(self):
