@@ -18,6 +18,7 @@ class factory:
 
     @staticmethod
     def create(**kwargs):
+
         if('obj' in kwargs):
             result = kwargs['obj']
         else:
@@ -25,25 +26,27 @@ class factory:
 
         if 'y' in kwargs:
             if not (hasattr(result, 'base')):
-                #Use existing base
+                # Use existing base
                 result.base = settings.grid[kwargs['y']][kwargs['x']].base
 
-            #Assume needs plot
+            # Assume needs plot
             if 'dev' in kwargs:
-                #Force Create
+                # Force Create
                 settings.grid[kwargs['y']][kwargs['x']] = result
                 return True
 
             else:
-                #Check balance etc
+                # Check balance etc
                 if (shop.canPurchase(result.price)):
                     shop.purchase(result.price)
                     settings.grid[kwargs['y']][kwargs['x']] = result
                     return True
+                else:
+                    return False
 
 
         else:
-            #Assume wants object
+            # Assume wants object
             if (shop.canPurchase(result.price)):
                 return result
 

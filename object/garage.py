@@ -14,4 +14,4 @@ class garage(base):
 
 
     def eventClick(self):
-        super(garage, self).log()
+        pass

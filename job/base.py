@@ -20,7 +20,7 @@ class base:
             setattr(self, key, value)
 
     def eventTaskComplete(self):
-        # Called by entity when job is completed
+        # Called by entity when job is compled
         self.taskCurrent += 1
 
     def close(self):

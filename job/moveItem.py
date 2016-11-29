@@ -21,8 +21,6 @@ class moveItem(base):
         self.taskCurrent = 1
         self.assigned = False
 
-    def assign(self, entityID):
-        settings.activeEntityDB[entityID].assign(self.jobID)
 
     def unassign(self):
         settings.activeEntityDB[self.entityID].unassign()
@@ -38,7 +36,8 @@ class moveItem(base):
         if(self.taskCurrent == 1):
             # Assign entity to pat
             self.taskCurrent += 1
-            self.assign(self.entityID)
+            # Assign Entity
+            settings.activeEntityDB[self.entityID].assign(self.jobID)
 
 
         if(self.taskCurrent == 2):

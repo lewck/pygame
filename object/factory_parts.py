@@ -29,7 +29,7 @@ class factory_parts(base):
     def doTick(self, tickID):
 
         if(tickID==0):
-            #chance grow increase
+            # Chance grow increase
             pass
 
 

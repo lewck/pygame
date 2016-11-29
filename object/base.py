@@ -6,9 +6,8 @@ from engine.tick import tick
 
 class base:
     def setVars(self, **kwargs):
-        #base, image, direction, tickListen
-
-        #Load Vars
+        # base, image, direction, tickListen
+        # Load Vars
         provided = settings.objectDB[self.type][self.title]
 
         defaults = {
@@ -33,12 +32,12 @@ class base:
             self.base = self.load(self.base)
 
 
-        #static
+        # static
         self.highlighted = False
         self.tickCount = 0
         self.inventory = 0
 
-        #Set tick vars
+        # Set tick vars
         if(hasattr(self, 'tickListen') & hasattr(self, 'y')):
             #Needs registered ticks, hasPosition
             self.registerTicks()
