@@ -16,9 +16,9 @@ class shop:
 
     @staticmethod
     def sell(items):
-        #Check if cache needs to be busted
+        # Check if cache needs to be busted
         for each in items:
-            settings.webinteractmarket.verifyCache()
+            settings.webinteract['market'].verifyCache()
             itemUsed = False
             for cache in settings.marketCache:
                 if(cache['itemid'] == each.id):
@@ -27,7 +27,7 @@ class shop:
                     settings.player.balance += settings.itemDB[each.id]['sellPrice'] + cache['current_demand_addition']
 
                     # Update demands
-                    settings.webinteractmarket.reduceDemand(each.id, 1)
+                    settings.webinteract['market'].reduceDemand(each.id, 1)
 
                     break
 

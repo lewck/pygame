@@ -36,15 +36,9 @@ class moveItem(base):
         }
 
         if(self.taskCurrent == 1):
-            # Create path
-            if(self.path != False):
-                # Assign entity to pat
-                self.taskCurrent += 1
-                self.assign(self.entityID)
-
-            else:
-                # Path not found
-                settings.activeJobsetDB[self.parent].doEvent('pathnotfound')
+            # Assign entity to pat
+            self.taskCurrent += 1
+            self.assign(self.entityID)
 
 
         if(self.taskCurrent == 2):

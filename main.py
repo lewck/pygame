@@ -90,7 +90,7 @@ if(settings.currentScreen == 'game'):
     settings.player = player()
 
     # Pre game setup
-    # uihelper.toggleModel('defaultoverlay')
+    uihelper.toggleModel('defaultoverlay')
     testmap.create(3)
     entity.create(uid='car')
 
@@ -104,15 +104,7 @@ if(settings.currentScreen == 'game'):
         settings.activeUI[key] = ui.create(key)
 
     # Register periodic server ping tick event
-    devTick = settings.tick.register(1000, "settings.webinteract['game'].checkCompleted()", 5)
-    devTick = settings.tick.register(5000, "settings.webinteract['game'].checkCompleted()", 5)
-    devTick = settings.tick.register(5000, "settings.webinteract['game'].checkCompleted()", 5)
-    devTick = settings.tick.register(6000, "settings.webinteract['game'].checkCompleted()", 5)
-
-    print('Development')
-    print(len(settings.tick.getAll()))
-    settings.tick.remove(identifier=5)
-    print(len(settings.tick.getAll()))
+    devTick = settings.tick.register(5000, "settings.webinteract['game'].checkCompleted()")
 
     # Close Loading overlay
     uihelper.closeModel('menuloading')
