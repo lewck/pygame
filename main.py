@@ -175,3 +175,5 @@ if(settings.currentScreen == 'gameCompleted'):
 settings.logObject.close()
 pygame.quit()
 quit()
+
+# GIT TEST
