@@ -17,7 +17,7 @@ class moveItem(base):
     def __init__(self, **kwargs):
         self.tickListen = [1, 10]
         super(moveItem, self).__init__(**kwargs)
-        #begin task 1
+        # Begin task 1
         self.taskCurrent = 1
         self.assigned = False
 
@@ -48,13 +48,13 @@ class moveItem(base):
 
 
         if(self.taskCurrent == 2):
-            #Move items from invA to invB
+            # Move items from invA to invB
 
             if(self.startPosition[2]==0 or self.startPosition[2]==2):
-                #Handle y change
+                # Handle y change
 
                 if(settings.grid[self.startPosition[0]+options[self.startPosition[2]]][self.startPosition[1]]).hasInventory():
-                    #TODO wait for full inventory
+                    # TODO wait for full inventory
                     self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventoryOutput.takeItem(
                         'all',
                         settings.activeEntityDB[self.entityID].inventory.size
@@ -77,13 +77,13 @@ class moveItem(base):
                     self.taskCurrent += 1
 
         if(self.taskCurrent == 3):
-            #Move Vehical
+            # Move Vehical
             if(self.assigned == False):
                 settings.activeEntityDB[self.entityID].status = 1
                 self.assigned = True
 
         if(self.taskCurrent==4):
-            #Move to new inventory
+            # Move to new inventory
             if (self.endPosition[2] == 0 or self.endPosition[2] == 2):
                 # Handle y change
                 if (settings.grid[self.endPosition[0] + options[self.endPosition[2]]][self.endPosition[1]]).hasInventory():
@@ -107,5 +107,5 @@ class moveItem(base):
             self.task()
 
     def jobSpecificComplete(self):
-        #Undo everything done specific to this job
+        # Undo everything done specific to this job
         self.unassign()

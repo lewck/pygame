@@ -19,12 +19,12 @@ class base:
             setattr(self, key, value)
 
     def addInput(self, **kwargs):
-        #Register with event
+        # Register with event
         kwargs['priority'] += self.basePriority
         self.input.append(kwargs)
 
     def addOutput(self, **kwargs):
-        #Register with event
+        # Register with event
         kwargs['priority'] += self.basePriority
         self.output.append(kwargs)
 
@@ -83,7 +83,7 @@ class base:
 
 
     def deleteModel(self):
-        #Remove Output Interface
+        # Remove Output Interface
         self.deleteInterface('output', 'all')
         # Remove Input Interface
         self.deleteInterface('input', 'all')
@@ -101,7 +101,7 @@ class base:
         self.closeModel()
 
     def none(self):
-        #Called with cover-all inputs
+        # Called with cover-all inputs
         pass
 
     def activate(self):

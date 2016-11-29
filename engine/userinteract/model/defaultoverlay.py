@@ -64,7 +64,7 @@ class defaultoverlay(base):
                 'color': (51, 51, 51)
             }
         )
-        #sidebar
+        # Sidebar
         self.addOutput(pos=[0, settings.xMax * 50], type='shape', priority=self.basePriority, title='overlayBackground',
            attribute={
                'shape': 'rectangle',
@@ -92,7 +92,7 @@ class defaultoverlay(base):
         )
 
 
-        #Balance
+        # Balance
         self.addOutput(pos=[(settings.yMax*50) +10, 10], type='text', priority= self.basePriority + 2, title='menustoragebuytext',
             attribute={
                 'font': 'primaryFont',
@@ -103,7 +103,7 @@ class defaultoverlay(base):
             }
         )
 
-        #Producer Menu Button
+        # Producer Menu Button
         self.addOutput(pos=[settings.yMax * 50, 150], type='shape', priority=self.basePriority+2, title='overlayBackground',
            attribute={
                'shape': 'rectangle',

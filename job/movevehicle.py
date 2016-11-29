@@ -12,7 +12,7 @@ class movevehicle(base):
     def __init__(self, **kwargs):
         self.tickListen = [1, 10]
         super(movevehicle, self).__init__(**kwargs)
-        #begin task 1
+        # Begin task 1
         self.taskCurrent = 1
 
     def assign(self, entityID):
@@ -27,7 +27,7 @@ class movevehicle(base):
         }
 
         if(self.taskCurrent == 1):
-            #Create path
+            # Create path
             self.startPosition = settings.activeEntityDB[self.entityID].pos
 
             path = pathFind(self.startPosition[0], self.startPosition[1], self.endPosition[0], self.endPosition[1], 5)
@@ -44,7 +44,7 @@ class movevehicle(base):
 
 
         if(self.taskCurrent == 2):
-            #Move Vehical
+            # Move Vehical
             settings.activeEntityDB[self.entityID].status = 1
 
         if(self.taskCurrent==3):

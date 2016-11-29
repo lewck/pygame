@@ -84,9 +84,9 @@ class factorypartsmenu(base):
                        )
 
         if(hasattr(self, 'objectPosition')):
-            #Assume claimed
+            # Assume claimed
 
-            #Draw Part
+            # Draw Part
             if(settings.grid[self.objectPosition[0]][self.objectPosition[1]].part != 0):
                 text = settings.grid[self.objectPosition[0]][self.objectPosition[1]].part
             else:
@@ -102,18 +102,6 @@ class factorypartsmenu(base):
                    'color': (255, 255, 255)
                }
             )
-
-
-            '''
-            #Visulisation of button area
-            self.addOutput(pos=[50, 110], type='shape', priority=self.basePriority + 4, title='factoryparttitle',
-                attribute = {
-                    'shape': 'rectangle',
-                    'dim': [40, 70],
-                    'color': (255, 0, 0)
-                }
-               )
-            '''
 
 
 

@@ -48,7 +48,7 @@ class render:
                 if(type(each.data['attribute']['scale'])==int):
                     scaleType = 'relative'
                 else:
-                    #Assume tuple
+                    # Assume tuple
                     scaleType = 'fixed'
             except KeyError:
                 scaleType = 'none'
@@ -93,7 +93,7 @@ class render:
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
             elif (each.data['type'] == 'shape'):
-                #NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
+                # NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
                 if(each.data['attribute']['shape']=='rectangle'):
                     pygame.draw.rect(settings.surface, each.data['attribute']['color'], (each.data['pos'][1], each.data['pos'][0], each.data['attribute']['dim'][1], each.data['attribute']['dim'][0]))
 
@@ -107,9 +107,9 @@ class render:
 
     @staticmethod
     def render():
-        #Flush screen
+        # Flush screen
         settings.surface.fill((255, 255, 255))
 
-        #Render components
+        # Render components
         render.renderGrid()
         render.renderMenu()

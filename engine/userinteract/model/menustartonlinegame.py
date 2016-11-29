@@ -24,7 +24,7 @@ class menustartonlinegame(base):
     def addInputs(self):
         self.addCommon(uid='coverall')
 
-        #New game button
+        # New game button
         self.addInput(type='mouseAction', priority=5, title='openBuyMenu', attribute={
             'click': 1,
             'pos': [200, 400],
@@ -53,7 +53,7 @@ class menustartonlinegame(base):
             'color': (255, 255, 255)
         })
 
-        #Start new game button
+        # Start new game button
         self.addOutput(pos=[200, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
             'shape': 'rectangle',
             'dim': [50,250],

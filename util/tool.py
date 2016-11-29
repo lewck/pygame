@@ -44,7 +44,7 @@ class tool:
                             kwargs['values'][j + 1] = bufferObject
 
             elif (type(kwargs['values']) is dict):
-                #Sort Dictionary, return array
+                # Sort Dictionary, return array
                 toReturn = []
                 for each in sorted(kwargs['values'].values(), key=operator.attrgetter(kwargs['localvariable'])):
                     toReturn.append(each)

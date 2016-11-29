@@ -23,7 +23,7 @@ class gamesettings(base):
         self.balance = balance
 
     def createGame(self):
-        #Try webinteract to create game
+        # Try webinteract to create game
         gamewebinteract = game()
         gamewebinteract.create(1, self.balance)
         uihelper.toggleModel('gamesettings')

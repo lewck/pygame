@@ -45,7 +45,7 @@ class menujoingame(base):
 
     def addInputs(self):
         self.addCommon(uid='coverall')
-        #New game button
+        # New game button
         self.addInput(type='mouseAction', priority=5, title='createGame', attribute={
             'click': 1,
             'pos': [500,850],

@@ -13,7 +13,7 @@ from item.bronze.bronzecoin import bronzecoin
 class factory:
     @staticmethod
     def create(**args):
-        #Return object of UID
+        # Return object of UID
         results = []
         results.append(eval(args['item']+'()'))
 
