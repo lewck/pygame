@@ -42,8 +42,6 @@ class tool:
                     for i in range(0, len(kwargs['values'])):
                         order.append(getattr(kwargs['values'][i], kwargs['localvariable']))
 
-
-
                 for i in range(0, len(order) -1):
                     for j in range(0, len(order)-i-1):
                         if order[j] > order[j+1]:
@@ -60,7 +58,6 @@ class tool:
                 for each in sorted(kwargs['values'].values(), key=operator.attrgetter(kwargs['localvariable'])):
                     toReturn.append(each)
                 return toReturn
-
 
         else:
             for i in range(0, len(kwargs['values']) -1):

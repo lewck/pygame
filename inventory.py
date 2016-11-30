@@ -131,10 +131,11 @@ class inventory:
 
 
     def loadItem(self, itemBuffer):
+        # Import items from a buffer
         if ('all' in self.inventory):
             self.inventory['all'].loadItem(itemBuffer)
         else:
-            #Use segregations
+            # Use segregations
             for each in itemBuffer:
                 if(each.id in self.inventory):
                     self.inventory[each.id].loadItem([each])
@@ -152,9 +153,7 @@ class inventory:
         self.segregated = True
 
     def takeItem(self, itemID, quantity):
-        ##
-        #   Removes selected items, returns list of removed items
-        ##
+        # Removes selected items, returns list of removed items
         if (quantity == 'all'):
             quantity = len(self.inventory[itemID].inventory)
 

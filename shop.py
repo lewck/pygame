@@ -16,8 +16,8 @@ class shop:
 
     @staticmethod
     def sell(items):
-        # Check if cache needs to be busted
         for each in items:
+            # Check if cache needs to be busted
             settings.webinteract['market'].verifyCache()
             itemUsed = False
             for cache in settings.marketCache:
