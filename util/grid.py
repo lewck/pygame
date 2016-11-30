@@ -1,3 +1,4 @@
+import settings
 
 class grid:
 
@@ -11,3 +12,9 @@ class grid:
                 toReturn[tmpy].append(0)
 
         return toReturn
+
+    @staticmethod
+    def clearGrid():
+        settings.grid = []
+
+        return True

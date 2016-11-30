@@ -7,7 +7,8 @@ class factory():
 
     @staticmethod
     def create(**args):
-        jobsetID = tool.genRandomString()
+        jobsetID = tool.genRandomString(16)
+        jobsetID = tool.genUniqueID(settings.activeJobsetDB, 16)
 
         settings.activeJobsetDB[jobsetID] = eval(args['typ']+'(**args, jobsetID = jobsetID)')
 

@@ -16,6 +16,17 @@ class tool:
         return val
 
     @staticmethod
+    def genUniqueID(current, length=16):
+        while True:
+            randomString = tool.genRandomString(length)
+            if(randomString not in current):
+                break
+
+        return randomString
+
+
+
+    @staticmethod
     def bubbleSort(**kwargs):
         if('localvariable' in kwargs):
             if(type(kwargs['values']) is list):

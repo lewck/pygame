@@ -27,31 +27,23 @@ class factory_parts(base):
 
 
     def doTick(self, tickID):
-
-        if(tickID==0):
-            # Chance grow increase
-            pass
-
-
-        if (tickID == 1):
-
+        if (tickID == 0):
             if(self.part==0):
-                #No part assigned
+                # No part assigned
                 return False
 
-            else:
-                if(self.setSegregation == False):
-                    if (not settings.itemDB[self.part]['required'] == {}):
-                        self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))
-                        self.setSegregation = True
+            if(self.setSegregation == False):
+                if (not settings.itemDB[self.part]['required'] == {}):
+                    self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))
+                    self.setSegregation = True
 
 
             if(settings.itemDB[self.part]['required']=={}):
-                #Just generate Parts
+                # Just generate Parts
                 self.inventoryOutput.addItem(self.part,settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
             else:
-                #Assume has to check inventory for parts
+                # Assume has to check inventory for parts
                 data = settings.itemDB[self.part]
 
                 hasItems = 0
@@ -62,10 +54,10 @@ class factory_parts(base):
 
                 if((len(data['required'])) == hasItems):
 
-                    #Get Items To Remove
+                    # Get Items To Remove
                     toRemove = settings.itemDB[self.part]['required']
 
-                    #Remove Items
+                    # Remove Items
                     for key, quantity in toRemove.items():
                         self.inventory.removeItem(id=key, quantity=quantity)
 
@@ -74,7 +66,7 @@ class factory_parts(base):
 
                 else:
                     if(self.status != 2):
-                        #2 means waiting, but job waitforitems created
+                        # 2 means waiting, but job waitforitems created
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
@@ -90,7 +82,7 @@ class factory_parts(base):
                 self.image = self.load(self.title + '_full')
 
 
-                #TODO fix force pick
+                # TODO fix force pick
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                               itemID=self.inventoryOutput.getInventory()[0].id)
 

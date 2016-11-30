@@ -20,11 +20,11 @@ class helper:
     @staticmethod
     def getEmptyStorageAll(type):
         store = []
-        #Extract items with inventory
+        # Extract items with inventory
         for y in range(0, len(settings.grid)):
             for x in range(0,len(settings.grid[y])):
                 if(settings.grid[y][x].hasInventory()):
-                    #Has invntory
+                    # Has invntory
                     if(not settings.grid[y][x].inventory.isFull()) & (settings.grid[y][x].inventory.type==type):
                         #Not full, correct type
 
