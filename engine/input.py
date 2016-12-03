@@ -3,10 +3,10 @@ import pygame
 import settings
 from dev.testmap import testmap as devmap
 from jobset.factory import factory as jobset
-from object.factory import factory as object
+import object
 from util.tool import tool
 from engine.userinteract.ui import ui
-from entity.factory import factory as entity
+import entity
 from engine.userinteract.helper import helper as uihelper
 from engine.inputbuffer import inputbuffer
 from engine.event import event as eventObject
@@ -58,11 +58,11 @@ class input():
 
                     elif(inputbuffer.getClick()==1):
                         # Has Left Click Buffer
-                        object.create(uid=inputbuffer.getObject(), y=yTile, x=xTile, direction=2)
+                        object.factory.create(uid=inputbuffer.getObject(), y=yTile, x=xTile, direction=2)
                         inputbuffer.clear()
 
                 elif (event.button == 3):
-                    object.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
+                    object.factory.create(uid='road', y=yTile, x=xTile, direction=0, dev=True)
 
             elif (event.type == pygame.KEYDOWN):
                 if(inputbuffer.isKey()):
@@ -86,10 +86,10 @@ class input():
                 if (event.key == pygame.K_F3):
                     devmap.create(1)
                 if (event.key == pygame.K_F4):
-                    object.create(uid='garage', y=0, x=0, direction=0)
+                    object.factory.create(uid='garage', y=0, x=0, direction=0)
                 if (event.key == pygame.K_F5):
                     settings.webinteractmarket.reduceDemand('metalzinc', 5)
                 if(event.key == pygame.K_F9):
                     uihelper.toggleModel('menuvehiclebuy')
                 if (event.key == pygame.K_F11):
-                    entityID = entity.create(uid='car')
+                    entityID = entity.factory.create(uid='car')

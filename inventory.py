@@ -1,4 +1,4 @@
-from item.factory import factory as item
+from item import factory as item
 import settings
 '''
 '

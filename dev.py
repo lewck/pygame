@@ -1,3 +1,3 @@
-import entity
+import object
 
-Hello = entity.factory.create(uid='car')
+object.factory.create()

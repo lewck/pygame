@@ -1,5 +1,8 @@
 import settings
 
+#--------------------------------------------------
+#  Helper Class
+#--------------------------------------------------
 class helper:
     @staticmethod
     def findItemParents(uid):

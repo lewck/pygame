@@ -1,24 +1,19 @@
 import pygame
-import settings
 
-import pygame
+import entity
+import object
 import settings
-
-from util.log import log
+from dev.testmap import testmap
 from engine.input import input
 from engine.render import render
 from engine.tick import tick
-
-from entity import *
-
-from engine.userinteract.ui import ui
-from object.factory import factory as object
-from player.player import player
-from util.grid import grid
-from webinteract.market import market
-from dev.testmap import testmap
 from engine.userinteract.helper import helper as uihelper
+from engine.userinteract.ui import ui
+from player import player
+from util.grid import grid
+from util.log import log
 from webinteract.game import game
+from webinteract.market import market
 
 # Initial Setup & Housekeeping
 # Initiate Depends
@@ -84,7 +79,7 @@ if(settings.currentScreen == 'game'):
     # Fill grid with grass
     for y in range(0, settings.yMax):
         for x in range(0, settings.xMax):
-            object.create(uid='empty', y=y, x=x, direction=1, dev=True)
+            object.factory.create(uid='empty', y=y, x=x, direction=1, dev=True)
 
     # Define player
     settings.player = player()
@@ -92,7 +87,8 @@ if(settings.currentScreen == 'game'):
     # Pre game setup
     uihelper.toggleModel('defaultoverlay')
     testmap.create(3)
-    fact
+    entity.factory.create(uid='car')
+
 
     # Assign web interacts
     settings.webinteract['market'] = market()

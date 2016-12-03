@@ -6,8 +6,8 @@
 
 from engine.userinteract.model.base import base
 from shop import shop
-from item.factory import factory as itemFactory
-from object.factory import factory as objectFactory
+import item
+import object
 
 import settings
 

@@ -6,8 +6,6 @@ from jobset.helper import helper as jobsethelper
 
 import settings
 
-
-
 class movevehicle(base):
     def __init__(self, **kwargs):
         self.tickListen = [1, 10]

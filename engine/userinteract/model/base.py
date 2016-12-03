@@ -1,5 +1,5 @@
 from shop import shop
-from entity.factory import factory as entity
+import entity
 from engine.inputbuffer import inputbuffer
 import settings
 
@@ -160,4 +160,4 @@ class base:
         price = settings.entityDB[type][uid]['buyprice']
         if(shop.canPurchase(price)):
             shop.purchase(price)
-            entity.create(uid=uid)
+            entity.factory.create(uid=uid)

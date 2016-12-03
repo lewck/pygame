@@ -1,14 +1,19 @@
 import pygame
+
 import settings
-from job.helper import helper as jobhelper
 from inventory import inventory
-from util.tool import tool
+from job.helper import helper as jobhelper
 from object.helper import helper as objecthelper
+from util.tool import tool
+
 
 #----------------------------------------------------------------------------
 #  Factory Class
 #----------------------------------------------------------------------------
 class factory:
+    def __init(self):
+        print('success')
+
     @staticmethod
     def create(**args):
         id = tool.genRandomString(16)
@@ -125,7 +130,6 @@ class base:
 
     def loadItems(self):
         self.inventory.addItem()
-
 
 #----------------------------------------------------------------------------
 #  Entity > Car

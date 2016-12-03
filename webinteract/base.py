@@ -6,7 +6,7 @@ import settings
 
 class base:
     def __init__(self):
-        #Authenticate with server
+        # Authenticate with server
         self.auth()
 
     def requestCall(self, function, params = 0):
@@ -27,6 +27,7 @@ class base:
 
         url = 'http://localhost/pygame/kernal.php'
         full_url = url + '?' + url_values
+
         data = urllib.request.urlopen(full_url)
         decodedData = data.read().decode('utf-8')
 

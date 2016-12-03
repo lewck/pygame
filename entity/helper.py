@@ -1,14 +1,12 @@
 import settings
 
+#----------------------------------------------------------------------------
+#  Entity > Helper
+#----------------------------------------------------------------------------
 class helper:
-    '''
-    '   HELPER METHODS
-    '''
-
     @staticmethod
     def veichleGetAvailable():
         toReturn = []
-
         for id, each in settings.activeEntityDB.items():
             if (each.type == 'vehicle'):
                 if (each.status == 0):
@@ -20,6 +18,6 @@ class helper:
     @staticmethod
     def vehicleEvaluateBest(pos):
         for each in helper.veichleGetAvailable():
-            if(settings.activeEntityDB[each].claimed == False):
+            if (settings.activeEntityDB[each].claimed == False):
                 settings.activeEntityDB[each].claimed = True
                 return each
