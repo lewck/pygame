@@ -1,8 +1,5 @@
 import pygame
-import settings
 from inventory import inventory
-from job.factory import factory as job
-from job.helper import helper as jobhelper
 
 from entity.base import base
 

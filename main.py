@@ -8,7 +8,9 @@ from util.log import log
 from engine.input import input
 from engine.render import render
 from engine.tick import tick
-from entity.factory import factory as entity
+
+from entity import *
+
 from engine.userinteract.ui import ui
 from object.factory import factory as object
 from player.player import player
@@ -63,8 +65,6 @@ for key, value in settings.activeUI.items():
 uihelper.toggleModel('menustart')
 
 # Start Menu Loop
-ui.create('unknownmodel')
-
 while settings.currentScreen=='menu' and not settings.gameExit:
     #Listen for events
     input.listenForEvent()
@@ -92,7 +92,7 @@ if(settings.currentScreen == 'game'):
     # Pre game setup
     uihelper.toggleModel('defaultoverlay')
     testmap.create(3)
-    entity.create(uid='car')
+    fact
 
     # Assign web interacts
     settings.webinteract['market'] = market()

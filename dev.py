@@ -1,11 +1,3 @@
-from inventory import inventory
-from webinteract.market import market
-from webinteract.game import game
-import settings
-import time
-from util.log import log
+import entity
 
-settings.init()
-
-
-logObj = log.create('This is another error', 1)
+Hello = entity.factory.create(uid='car')
