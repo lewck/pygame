@@ -25,14 +25,19 @@ class gamesettings(base):
     def createGame(self):
         # Try webinteract to create game
         gamewebinteract = game()
-        gamewebinteract.create(1, self.balance)
-        uihelper.toggleModel('gamesettings')
-        uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
+        gameStatus = gamewebinteract.create(1, self.balance)
+        if(gameStatus):
+            # Game creation success
+            uihelper.toggleModel('gamesettings')
+            uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
+
+        # Game creation error
+        print('Game Could Not Be Created')
 
 
     def addInputs(self):
         self.addCommon(uid='coverall')
-        #New game button
+        # New game button
         self.addInput(type='mouseAction', priority=5, title='createGame', attribute={
             'click': 1,
             'pos': [500,850],

@@ -4,17 +4,20 @@ import settings
 
 class game(base):
     def __init__(self):
-        #Init parent
+        # Init parent
         super(game, self).__init__()
 
     def create(self, goalID, goalArgs):
         request = self.requestCall('creategame', {'goal_id': goalID, 'goal_args': goalArgs})
 
-        settings.gameData['session_id'] = request['session_id']
-        settings.gameData['game_id'] = request['game_id']
-        settings.gameData['game_pin'] = request['game_pin']
-        settings.gameData['objectives'] = request['objectives']
-        return True
+        if(request):
+            settings.gameData['session_id'] = request['session_id']
+            settings.gameData['game_id'] = request['game_id']
+            settings.gameData['game_pin'] = request['game_pin']
+            settings.gameData['objectives'] = request['objectives']
+            return True
+
+        return False
 
     def join(self, gameID, gamePin):
         request = self.requestCall('joingame', {'game_id': gameID, 'game_pin': gamePin})

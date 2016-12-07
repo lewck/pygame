@@ -14,6 +14,9 @@ from util.grid import grid
 from util.log import log
 from webinteract.game import game
 from webinteract.market import market
+from util.map import map
+import json
+
 
 # Initial Setup & Housekeeping
 # Initiate Depends
@@ -26,6 +29,16 @@ log.create('Main Initiated')
 # Initiate Pygame-related vars
 settings.tick = tick()
 clock = pygame.time.Clock()
+
+
+# Mix config with globals
+f = open('config.json', 'r')
+config = json.loads(f.read())
+
+# Assign globals from settings
+settings.APIKEY = config['api_key']
+settings.remoteURL = config['server_url']
+
 
 # Pre-load Fonts
 settings.devfont = pygame.font.Font(None, 25)
@@ -86,7 +99,7 @@ if(settings.currentScreen == 'game'):
 
     # Pre game setup
     uihelper.toggleModel('defaultoverlay')
-    testmap.create(3)
+    map.create(0)
     entity.factory.create(uid='car')
 
 

@@ -11,7 +11,6 @@ class base:
 
     def requestCall(self, function, params = 0):
         data = {}
-
         data['function'] = function
 
         if(params != 0):
@@ -25,13 +24,20 @@ class base:
         url_values = urllib.parse.urlencode(data)
         print(url_values)
 
-        url = 'http://localhost/pygame/kernal.php'
+        url = 'http://'+settings.remoteURL+'/pygame/kernal.php'
         full_url = url + '?' + url_values
+        try:
+            data = urllib.request.urlopen(full_url)
+            decodedData = data.read().decode('utf-8')
+            jsonData = json.loads(decodedData)
 
-        data = urllib.request.urlopen(full_url)
-        decodedData = data.read().decode('utf-8')
+        except urllib.error.URLError:
+            print('Error Connecting')
+            jsonData = {}
+            jsonData['fail'] = '404'
 
-        jsonData = json.loads(decodedData)
+
+
 
         if('fail' in jsonData):
             print('Webinteract fail '+str(jsonData['fail']))
@@ -42,9 +48,10 @@ class base:
 
     def auth(self):
         if(settings.authcode == None):
-            settings.authcode = 0
-            settings.authcode = self.requestCall('auth', { 'apikey': settings.APIKEY })['authorisation_token']
+            authcode = self.requestCall('auth', { 'apikey': settings.APIKEY })
 
-            if(settings.authcode):
+            if(authcode):
+                settings.authcode = authcode['authorisation_token']
                 return True
+
             return False

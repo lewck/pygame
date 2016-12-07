@@ -10,6 +10,8 @@ import entity
 from engine.userinteract.helper import helper as uihelper
 from engine.inputbuffer import inputbuffer
 from engine.event import event as eventObject
+from util.map import map
+
 
 class input():
     @staticmethod

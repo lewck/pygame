@@ -1,6 +1,6 @@
 import settings
 from entity.helper import helper as entityhelper
-from job.factory import factory as job
+from job import factory as job
 from jobset.base import base
 from object.helper import helper as objecthelper
 from pathfind import pathFind

@@ -1,9 +1,10 @@
 import util.log
+
 def init():
     # Used in webinteract > base.py
     # required for authentication
     global APIKEY
-    APIKEY = 'ngyBtvxbC2dPQg2f8lmZMVAceGQo2q0s'
+    APIKEY = 0
 
 
     # Used extensively
