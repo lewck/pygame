@@ -2,7 +2,9 @@ from util.tool import tool
 import settings
 
 
-
+#--------------------------------------------------
+#  Factory Class
+#--------------------------------------------------
 class factory():
 
     @staticmethod
@@ -13,6 +15,9 @@ class factory():
 
         return jobID
 
+#--------------------------------------------------
+#  Base Class
+#--------------------------------------------------
 class base:
     def __init__(self, **kwargs):
         self.isClaimed = False
@@ -43,8 +48,12 @@ class base:
         self.jobSpecificComplete()
         self.close()
 
+#===========================================================================
+#  Subsidory Classes
+#==============================================================
+#  Move Item Job
+#--------------------------------------------------
 class moveItem(base):
-
     '''
         typ='moveItem', startPosition=[1, 1, 0], endPosition=[3, 3, 2], items='all')
     '''
@@ -138,7 +147,9 @@ class moveItem(base):
         # Undo everything done specific to this job
         self.unassign()
 
-
+#-------------------------------------------------
+#  Move Vehicle Job
+#--------------------------------------------------
 class movevehicle(base):
     def __init__(self, **kwargs):
         self.tickListen = [1, 10]

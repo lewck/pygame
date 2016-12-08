@@ -3,7 +3,7 @@ import pygame
 import settings
 from engine.userinteract.helper import helper as uihelper
 from inventory import inventory
-from jobset.factory import factory as jobset
+from jobset import factory as jobset
 from shop import shop
 
 
