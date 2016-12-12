@@ -2,7 +2,7 @@ import pygame
 
 import settings
 from dev.testmap import testmap as devmap
-from jobset.factory import factory as jobset
+from jobset import factory as jobset
 import object
 from util.tool import tool
 from engine.userinteract.ui import ui
