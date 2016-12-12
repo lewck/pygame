@@ -39,6 +39,7 @@ class helper:
 
         # First check if a job is waiting for it
         if(uid!='null'):
+
             for key, each in settings.activeJobsetDB.items():
                 if(each.typ == 'waitForItems'):
                     if(each.needsItem(uid)):
@@ -47,24 +48,10 @@ class helper:
             if (len(possible) != 0):
                 return possible[randint(0,len(possible)-1)]
 
-            # Not found with job
+            # Nobody is waiting for this object must sell
 
-
-            '''
-            #Check if end of the line
-            parents = itemhelper.findItemParents(uid)
-            parentPositions = []
-            if(parents):
-                for each in parents:
-                    parentPositions.append(helper.getInteractPosition())
-
-            return parents[0]
-            '''
-
-            # Nobody waiting for it, no parents, must sell
             #TODO PICK BEST
             parents = itemhelper.findItemParents(uid)
-
             if(not parents):
                 selected = helper.findObjectByUid('exports')[0]
 

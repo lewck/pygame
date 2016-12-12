@@ -88,7 +88,7 @@ class input():
                 if (event.key == pygame.K_F3):
                     devmap.create(1)
                 if (event.key == pygame.K_F4):
-                    object.factory.create(uid='garage', y=0, x=0, direction=0)
+                    object.factory.create(uid='factory_press', y=5, x=5, direction=0)
                 if (event.key == pygame.K_F5):
                     settings.webinteractmarket.reduceDemand('metalzinc', 5)
                 if(event.key == pygame.K_F9):

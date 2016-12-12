@@ -209,7 +209,14 @@ def init():
             'discovered': False,
             'unlockPrice': 1000,
             'makes': 1,
-        }
+        },
+        'copperplate': {
+            'title': 'Copper Plate',
+            'required': {'copper':1},
+            'sellPrice': 50,
+            'discovered': True,
+            'makes': 1,
+        },
 
     }
 
@@ -257,6 +264,16 @@ def init():
         'producer': {
             'factory_parts': {
                 'title': 'factory_parts',
+                'tickListen': [1],
+                'price': 100,
+                'discovered': True,
+                'speed_upgrades': default_speed_upgrade,
+                'speed_upgrades_modifier': default_speed_modifier
+            },
+        },
+        'processor': {
+            'factory_press': {
+                'title': 'factory_press',
                 'tickListen': [1],
                 'price': 100,
                 'discovered': True,

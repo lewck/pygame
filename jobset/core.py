@@ -49,7 +49,7 @@ class base:
         del settings.activeJobsetDB[self.jobsetID]
 
 #===========================================================================
-#  Subsidory Classes
+#  Subsidiary Classes
 #==============================================================
 #  Collect From Object And Store Jobset
 #--------------------------------------------------
@@ -71,6 +71,7 @@ class collectFromObjectAndStore(base):
 
             if (self.pathEnd!=False):
                 # Storage Not Found
+                print('DOING')
                 return False
 
             self.pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
