@@ -24,15 +24,15 @@ class factory():
 class base:
     def __init__(self, **kwargs):
         self.initVars(**kwargs)
-        #Register ticks
+        # Register ticks
         for each in self.tickListen:
             settings.tick.register(each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()', self.jobsetID)
 
     def initVars(self, **kwargs):
-        #Set independent vars
+        # Set independent vars
         for key, value in kwargs.items():
             setattr(self, key, value)
-        #Set control vars
+        # Set control vars
         self.taskCurrent = 1
         self.status = 1
 
@@ -53,6 +53,7 @@ class base:
 #==============================================================
 #  Collect From Object And Store Jobset
 #--------------------------------------------------
+
 class collectFromObjectAndStore(base):
     def __init__(self, **kwargs):
         self.tickListen = [10]
@@ -69,9 +70,9 @@ class collectFromObjectAndStore(base):
             # Determine best storage
             self.pathEnd = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
 
-            if (self.pathEnd!=False):
+            if (self.pathEnd==False):
                 # Storage Not Found
-                print('DOING')
+                print('DOINGs')
                 return False
 
             self.pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
@@ -79,6 +80,7 @@ class collectFromObjectAndStore(base):
 
             # Determine best vehicle
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
+            print('VEHICLE '+str(self.vehicleID))
 
             if (self.vehicleID):
                 path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1],

@@ -4,6 +4,7 @@ import settings
 from inventory import inventory
 from job.helper import helper as jobhelper
 from object.helper import helper as objecthelper
+from engine.tick import tick
 from util.tool import tool
 
 
@@ -39,15 +40,18 @@ class factory:
 #--------------------------------------------------
 class base:
     def __init__(self):
-        self.setVars()
+        pass
 
-
-    def setVars(self):
+    def setVars(self, **kwargs):
         self.tickCount = 0
         self.status = 0
         self.firstMove = True
         pos = []
         self.claimed = False
+        self.id = kwargs['id']
+        self.tickID = settings.tick.register(5, 'settings.activeEntityDB["'+self.id+'"].doTick(0)')
+        print('YA')
+        print(str(self.tickID))
 
     def assign(self, jobID):
         self.job = settings.activeJobDB[jobID]
@@ -80,6 +84,7 @@ class base:
 
     def doMove(self):
         if (self.status == 1):
+            print('Status Set')
             xTile = (int(self.x /50))
             yTile = (int(self.y /50))
 
@@ -138,13 +143,14 @@ class base:
 class car(base):
     def __init__(self, **args):
         self.type = 'vehicle'
-        super(car, self).setVars()
+        super(car, self).setVars(**args)
         self.image = pygame.image.load('sprites/car.png')
         self.tickListen = [5]
         self.inventory = inventory(5)
 
     def doTick(self, tickID):
         if(tickID==0):
+            print('DOING MOVE')
             self.doMove()
 
 #--------------------------------------------------
@@ -153,7 +159,7 @@ class car(base):
 class van(base):
     def __init__(self, **args):
         self.type = 'vehicle'
-        super(van, self).setVars()
+        super(van, self).setVars(**args)
         self.image = pygame.image.load('sprites/van.png')
         self.tickListen = [5]
         self.inventory = inventory(30)
@@ -168,7 +174,7 @@ class van(base):
 class lorry(base):
     def __init__(self, **args):
         self.type = 'vehicle'
-        super(lorry, self).setVars()
+        super(lorry, self).setVars(**args)
         self.image = pygame.image.load('sprites/lorry.png')
         self.tickListen = [5]
         self.inventory = inventory(50)

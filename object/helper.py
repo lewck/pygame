@@ -50,7 +50,6 @@ class helper:
 
             # Nobody is waiting for this object must sell
 
-            #TODO PICK BEST
             parents = itemhelper.findItemParents(uid)
             if(not parents):
                 selected = helper.findObjectByUid('exports')[0]

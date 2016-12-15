@@ -8,7 +8,6 @@
 class helper:
     @staticmethod
     def directionToPosition(pos, direction):
-        #TODO test before implimentation
         pass
         modifier = {
             0: -1,

@@ -65,6 +65,9 @@ settings.fonts = {
 settings.surface = pygame.display.set_mode(settings.canvasDimensions)
 pygame.display.set_caption('Little Factory')
 
+#TODO make this real icon
+pygame.display.set_icon(pygame.image.load('sprites/car.png'))
+
 # Pre-load User Interfaces (inactive)
 for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
@@ -144,7 +147,7 @@ if(settings.currentScreen == 'game'):
             try:
                 eval(each)
             except KeyError:
-                #the tick was unregistered mid buffer, this no longer exists
+                # the tick was unregistered mid buffer, this no longer exists
                 pass
 
         # Finish frame
