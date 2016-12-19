@@ -32,6 +32,7 @@ class base:
         # Set independent vars
         for key, value in kwargs.items():
             setattr(self, key, value)
+
         # Set control vars
         self.taskCurrent = 1
         self.status = 1
@@ -72,7 +73,6 @@ class collectFromObjectAndStore(base):
 
             if (self.pathEnd==False):
                 # Storage Not Found
-                print('DOINGs')
                 return False
 
             self.pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
@@ -80,19 +80,19 @@ class collectFromObjectAndStore(base):
 
             # Determine best vehicle
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
-            print('VEHICLE '+str(self.vehicleID))
 
             if (self.vehicleID):
-                path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1],
-                                5)
+                path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1], 5)
 
                 self.pathID = path.find()
 
                 if (self.pathID):
                     self.taskCurrent += 1
 
+
             if (self.taskCurrent == 1):
-                self.close()
+                # Unclaim the entity
+                settings.activeEntityDB[self.vehicleID].claimed = False
 
         if (self.taskCurrent == 2):
             # Begin
@@ -101,7 +101,6 @@ class collectFromObjectAndStore(base):
                 self.jobID = job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd,
                                         items='all',
                                         parent=self.jobsetID, entityID=self.vehicleID, path=self.pathID)
-
                 self.status = 0
 
         if (self.taskCurrent == 3):

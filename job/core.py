@@ -66,9 +66,6 @@ class moveItem(base):
         self.assigned = False
 
 
-    def unassign(self):
-        settings.activeEntityDB[self.entityID].unassign()
-
     def task(self):
         options = {
             0: -1,
@@ -86,10 +83,8 @@ class moveItem(base):
 
         if(self.taskCurrent == 2):
             # Move items from invA to invB
-
             if(self.startPosition[2]==0 or self.startPosition[2]==2):
                 # Handle y change
-
                 if(settings.grid[self.startPosition[0]+options[self.startPosition[2]]][self.startPosition[1]]).hasInventory():
                     # TODO wait for full inventory
                     self.itemBuffer = settings.grid[self.startPosition[0] + options[self.startPosition[2]]][self.startPosition[1]].inventoryOutput.takeItem(
@@ -145,7 +140,8 @@ class moveItem(base):
 
     def jobSpecificComplete(self):
         # Undo everything done specific to this job
-        self.unassign()
+        # Unassign Entity
+        settings.activeEntityDB[self.entityID].unassign()
 
 #-------------------------------------------------
 #  Move Vehicle Job

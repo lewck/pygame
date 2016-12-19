@@ -85,7 +85,7 @@ while settings.currentScreen=='menu' and not settings.gameExit:
 
     #Finish frame
     pygame.display.update()
-    clock.tick(120)
+    clock.tick(30)
 
 if(settings.currentScreen == 'game'):
     # Initiate Pre Game Variables
@@ -172,7 +172,7 @@ if(settings.currentScreen == 'gameCompleted'):
 
         # Finish frame
         pygame.display.update()
-        clock.tick(120)
+        clock.tick(30)
 
 
 # Game Over, cleanup

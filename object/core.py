@@ -126,8 +126,8 @@ class base:
                 if(i==len(self.tickListen)):
                     self.tickCount = 0
 
-            #print(self.tickCount)
-            #TODO ticks not being reset
+            # print(self.tickCount)
+            # TODO ticks not being reset
 
     def hasInventory(self):
         if(hasattr(self, 'inventory')):
@@ -159,15 +159,28 @@ class factory_parts(base):
                 # No part assigned
                 return False
 
+            if (not self.inventoryOutput.isFull()):
+                self.image = self.load(self.title)
+                self.jobcollectcreated = False
+
+            else:
+                self.image = self.load(self.title + '_full')
+
+                # TODO fix force pick
+                if (self.jobcollectcreated == False):
+                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
+                              itemID=self.inventoryOutput.getInventory()[0].id)
+
+                    self.jobcollectcreated = True
+
             if(self.setSegregation == False):
                 if (not settings.itemDB[self.part]['required'] == {}):
                     self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))
                     self.setSegregation = True
 
 
-            if(settings.itemDB[self.part]['required']=={}):
+            if(settings.itemDB[self.part]['required']=={}) & (not self.inventoryOutput.isFull()):
                 # Just generate Parts
-                print('JUST GENERATING')
                 self.inventoryOutput.addItem(self.part,settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
             else:
@@ -181,7 +194,6 @@ class factory_parts(base):
                         hasItems += 1
 
                 if((len(data['required'])) == hasItems):
-
                     # Get Items To Remove
                     toRemove = settings.itemDB[self.part]['required']
 
@@ -194,23 +206,11 @@ class factory_parts(base):
                 else:
                     if(self.status != 2):
                         # 2 means waiting, but job waitforitems created
-
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
+        print(settings.activeJobsetDB)
 
-            if (not self.inventoryOutput.isFull()):
-                self.image = self.load(self.title)
-            else:
-                self.image = self.load(self.title + '_full')
-                # TODO fix force pick
-                if (self.jobcollectcreated == False):
-                    jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
-                              itemID=self.inventoryOutput.getInventory()[0].id)
-
-                    self.jobcollectcreated = True
-
-                print(settings.activeJobsetDB)
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]

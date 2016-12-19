@@ -276,7 +276,7 @@ def init():
         'producer': {
             'factory_parts': {
                 'title': 'factory_parts',
-                'tickListen': [1],
+                'tickListen': [2],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,

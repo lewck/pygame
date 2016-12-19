@@ -55,7 +55,6 @@ class base:
 
     def assign(self, jobID):
         self.job = settings.activeJobDB[jobID]
-
         self.path = settings.pathDB[settings.activeJobDB[jobID].path]
         self.x = self.job.startPosition[1]*50
         self.y = self.job.startPosition[0]*50
