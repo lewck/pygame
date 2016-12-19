@@ -2,7 +2,7 @@ from random import randint
 
 import settings
 from item.helper import helper as itemhelper
-
+from pathfind import pathFind
 
 class helper:
     @staticmethod
@@ -46,7 +46,10 @@ class helper:
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
             if (len(possible) != 0):
-                return possible[randint(0,len(possible)-1)]
+                for each in possible:
+                    path = pathFind(objectAPos[0], objectAPos[1], each[0], each[1], 5)
+                    if(path.find()):
+                        return each
 
             # Nobody is waiting for this object must sell
 

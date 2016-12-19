@@ -134,6 +134,18 @@ def init():
         }
     }
 
+    global processingDB
+    processingDB = {
+        'press':{
+            'transformations': {
+                'metalcopper': {
+                    'required': 2,
+                    'produces': [['metalzinc',5],['copperplate',5]]
+                }
+            }
+        }
+    }
+
     # Used extensively
     # item statistics/configurations
     global itemDB
@@ -212,7 +224,7 @@ def init():
         },
         'copperplate': {
             'title': 'Copper Plate',
-            'required': {'copper':1},
+            'required': {'metalcopper':1},
             'sellPrice': 50,
             'discovered': True,
             'makes': 1,

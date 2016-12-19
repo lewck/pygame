@@ -14,6 +14,7 @@ class map:
         object.factory.create(uid='road', y=1, x=3, direction=0, dev=True)
         object.factory.create(uid='road', y=1, x=4, direction=0, dev=True)
         object.factory.create(uid='exports', y=0, x=9, direction=2, dev=True)
+        object.factory.create(uid='factory_press', y=2, x=9, direction=2, dev=True)
 
     def loadmap1(self):
         # Alternative Game Map

@@ -52,6 +52,10 @@ class factory:
 class base:
     def setVars(self, **kwargs):
         # base, image, direction, tickListen
+        # Init Boilerplate
+        self.highlighted = False
+        self.tickCount = 0
+
         # Load Vars
         provided = settings.objectDB[self.type][self.title]
 
@@ -76,15 +80,9 @@ class base:
         if(hasattr(self, 'base')):
             self.base = self.load(self.base)
 
-
-        # static
-        self.highlighted = False
-        self.tickCount = 0
-        self.inventory = 0
-
         # Set tick vars
         if(hasattr(self, 'tickListen') & hasattr(self, 'y')):
-            #Needs registered ticks, hasPosition
+            # Needs registered ticks, hasPosition
             self.registerTicks()
 
     def registerTicks(self):
@@ -132,11 +130,12 @@ class base:
             #TODO ticks not being reset
 
     def hasInventory(self):
-        if(self.inventory!=0):
+        if(hasattr(self, 'inventory')):
             return True
 
 class factory_parts(base):
     def __init__(self, **kwargs):
+        super(factory_parts, self).__init__()
         self.title = 'factory_parts'
         self.type = 'producer'
         self.part = 0
@@ -146,7 +145,6 @@ class factory_parts(base):
         self.inventory = inventory(30)
         self.inventoryOutput = inventory(30)
         self.status = 0
-        self.used = False
         self.ui = ''
         self.counter = 0
         self.jobCreated = False
@@ -169,6 +167,7 @@ class factory_parts(base):
 
             if(settings.itemDB[self.part]['required']=={}):
                 # Just generate Parts
+                print('JUST GENERATING')
                 self.inventoryOutput.addItem(self.part,settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
             else:
@@ -195,21 +194,22 @@ class factory_parts(base):
                 else:
                     if(self.status != 2):
                         # 2 means waiting, but job waitforitems created
+
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
 
             if (not self.inventoryOutput.isFull()):
                 self.image = self.load(self.title)
-
             else:
                 self.image = self.load(self.title + '_full')
                 # TODO fix force pick
-                print('JOB GEN')
                 if (self.jobcollectcreated == False):
                     jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                               itemID=self.inventoryOutput.getInventory()[0].id)
+
                     self.jobcollectcreated = True
+
                 print(settings.activeJobsetDB)
 
     def eventClick(self):
@@ -219,14 +219,13 @@ class factory_parts(base):
 
 class factory_base(base):
     def __init__(self):
-        self.type = 'producer'
         self.part = 0
+        self.type = 'processor'
 
         self.passable = []
         self.inventory = inventory(30)
         self.inventoryOutput = inventory(30)
         self.status = 0
-        self.used = False
         self.ui = ''
         self.counter = 0
         self.jobCreated = False
@@ -236,9 +235,12 @@ class factory_base(base):
     def doTick(self, tickID):
         if (tickID == 0):
             if (self.part == 0):
-                # No Output Selected
-                return False
+                # No specified output, check inventory.
+                for each in self.inventory.getInventory():
+                    pass
 
+
+            # Output was specified
             data = settings.itemDB[self.part]
 
             # Verify required items are in inventory
@@ -284,10 +286,13 @@ class factory_base(base):
 class factory_press(factory_base):
     def __init__(self, **kwargs):
         self.title = 'factory_press'
-        self.type = 'processor'
+        self.process = 'press'
         self.part = 'bronzecoin'
-        super(factory_press, self).setVars(image=self.title, **kwargs)
+
         super(factory_press, self).__init__()
+        super(factory_press, self).setVars(image=self.title, **kwargs)
+
+        self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items={'metalcopper':1})
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]

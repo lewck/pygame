@@ -96,7 +96,7 @@ class pathFind():
     def organise(self, check):
         store = []
         while True:
-            #print(check)  # uncomment for sort debug
+            # print(check)  # uncomment for sort debug
             if (check[0] == -1):
                 break
             else:
@@ -104,12 +104,12 @@ class pathFind():
                 check = check[1]
 
         for each in store:
-            #print(each)
+            # print(each)
             settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
             pass
 
 
-        #print(store)
+        # print(store)
         pathID = tool.genRandomString()
 
         settings.pathDB[pathID] = ([[[0, 0], [9, 9]], [store]])

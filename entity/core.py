@@ -150,7 +150,6 @@ class car(base):
 
     def doTick(self, tickID):
         if(tickID==0):
-            print('DOING MOVE')
             self.doMove()
 
 #--------------------------------------------------
