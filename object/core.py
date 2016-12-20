@@ -275,6 +275,21 @@ class factory_press(factory_base):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)
 
+class factory_puncher(factory_base):
+    def __init__(self, **kwargs):
+        self.title = 'factory_puncher'
+        self.process = 'puncher'
+        self.part = 'bronzecoin'
+
+        super(factory_puncher, self).__init__()
+        super(factory_puncher, self).setVars(image=self.title, **kwargs)
+
+        self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items={'copperplate':1})
+
+    def eventClick(self):
+        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
+        uihelper.toggleModel('factorypartsmenu', True)
+
 
 
 class empty(base):

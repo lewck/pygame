@@ -23,14 +23,14 @@ class menustart(base):
         # New game button
         self.addInput(type='mouseAction', priority=5, title='createGame', attribute={
             'click': 1,
-            'pos': [200, 400],
+            'pos': [300, 400],
             'dim': [50,250],
             'event': 'createGame',
         })
         # Join game button
         self.addInput(type='mouseAction', priority=5, title='joinGame', attribute={
             'click': 1,
-            'pos': [300, 400],
+            'pos': [400, 400],
             'dim': [50, 250],
             'event': 'joinGame',
         })
@@ -44,12 +44,12 @@ class menustart(base):
         })
 
         # Start new game button
-        self.addOutput(pos=[200, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
+        self.addOutput(pos=[300, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
             'shape': 'rectangle',
             'dim': [50,250],
             'color': (255, 0, 0)
         })
-        self.addOutput(pos=[212, 445], type='text', priority=3, title='menustoragebuytext', attribute={
+        self.addOutput(pos=[312, 445], type='text', priority=3, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 30,
             'value': 'Start New Game',
@@ -57,12 +57,12 @@ class menustart(base):
         })
 
         # Join game button
-        self.addOutput(pos=[300, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
+        self.addOutput(pos=[400, 400], type='shape', priority=2, title='menustoragebuytext', attribute={
             'shape': 'rectangle',
             'dim': [50, 250],
             'color': (255, 0, 0)
         })
-        self.addOutput(pos=[312, 445], type='text', priority=3, title='menustoragebuytext', attribute={
+        self.addOutput(pos=[412, 445], type='text', priority=3, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 30,
             'value': 'Join A Game',
@@ -72,5 +72,10 @@ class menustart(base):
         self.addOutput(pos=self.basePos, type='shape', priority= 0, title='background', attribute={
             'shape': 'rectangle',
             'dim': self.baseDim,
-            'color': (51,51,51)
+            'color': (255,255,255)
+        })
+
+        self.addOutput(pos=[50,425], type='image', priority=6, title='logo', attribute={
+            'uid': 'icon',
+            'scale': (200,200)
         })

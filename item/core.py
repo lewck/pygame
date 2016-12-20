@@ -117,3 +117,8 @@ class copperplate(base):
     def __init__(self, **args):
         self.id = 'copperplate'
         super(copperplate, self).__init__()
+
+class copperdisk(base):
+    def __init__(self, **args):
+        self.id = 'copperdisk'
+        super(copperdisk, self).__init__()

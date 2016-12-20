@@ -140,7 +140,15 @@ def init():
             'transformations': {
                 'metalcopper': {
                     'required': 2,
-                    'produces': {'copperplate': 5}
+                    'produces': {'copperplate': 2}
+                }
+            }
+        },
+        'puncher': {
+            'transformations': {
+                'copperplate': {
+                    'required': 1,
+                    'produces': {'copperdisk': 5}
                 }
             }
         }
@@ -225,8 +233,12 @@ def init():
         'copperplate': {
             'title': 'Copper Plate',
             'sellPrice': 50,
-            'discovered': True,
-            'makes': 1,
+            'discovered': True
+        },
+        'copperdisk': {
+            'title': 'Copper Disk',
+            'sellPrice': 100,
+            'discovered': True
         },
 
     }
@@ -285,6 +297,14 @@ def init():
         'processor': {
             'factory_press': {
                 'title': 'factory_press',
+                'tickListen': [1],
+                'price': 100,
+                'discovered': True,
+                'speed_upgrades': default_speed_upgrade,
+                'speed_upgrades_modifier': default_speed_modifier
+            },
+            'factory_puncher': {
+                'title': 'factory_puncher',
                 'tickListen': [1],
                 'price': 100,
                 'discovered': True,
