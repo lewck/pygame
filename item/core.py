@@ -110,3 +110,10 @@ class bronzecoin(bronzebase):
         self.id = 'brassdagger'
         super(bronzecoin, self).__init__()
 
+#--------------------------------------------------
+#  Copper Plate
+#--------------------------------------------------
+class copperplate(base):
+    def __init__(self, **args):
+        self.id = 'copperplate'
+        super(copperplate, self).__init__()

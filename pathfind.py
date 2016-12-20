@@ -14,7 +14,7 @@ class pathFind():
         self.entity = entity
         self.closed = []
         self.open = []
-        self.sets=[x,y,x1,y1]
+        self.sets=[y,x,y1,x1]
 
     def isPassible(self, y, x):
         if (settings.grid[y][x].isPassible(self.entity)):
@@ -35,7 +35,7 @@ class pathFind():
     def checkNeighbours(self):
         #Up
         if(self.current.y-1>=0):
-            if(not self.checkClosed(self.current.y-1, self.current.x))and self.isPassible(self.current.y-1, self.current.x ) and (not(self.isOpen(self.current.y-1, self.current.x))):
+            if(not self.checkClosed(self.current.y-1, self.current.x)) and self.isPassible(self.current.y-1, self.current.x ) and (not(self.isOpen(self.current.y-1, self.current.x))):
                 #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
                 self.open.append(node(self.current.y-1, self.current.x,[self.current.y, self.current.x,0,  self.current.parent], self.sets))
         #Left

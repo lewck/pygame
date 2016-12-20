@@ -83,10 +83,8 @@ class base:
 
     def doMove(self):
         if (self.status == 1):
-            print('Status Set')
             xTile = (int(self.x /50))
             yTile = (int(self.y /50))
-
 
             for i in range(0, len(self.path[1])):
                 for o in range(0, len(self.path[1][i])):

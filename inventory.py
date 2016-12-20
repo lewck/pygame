@@ -18,13 +18,13 @@ class node():
 
     def addItem(self, itemID, quantity):
         count = 0
-
         while (len(self.inventory) < self.size):
             if(count < quantity):
                 self.inventory.extend(item.create(item=itemID))
                 count += 1
             else:
                 return 'INVFULL'
+
 
     def removeItem(self, itemID, quantity):
         count = 0

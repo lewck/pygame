@@ -17,7 +17,6 @@ class helper:
 
     @staticmethod
     def vehicleEvaluateBest(pos):
-        print(settings.activeEntityDB)
         for each in helper.veichleGetAvailable():
             if (settings.activeEntityDB[each].claimed == False):
                 settings.activeEntityDB[each].claimed = True

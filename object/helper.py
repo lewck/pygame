@@ -56,10 +56,9 @@ class helper:
             parents = itemhelper.findItemParents(uid)
             if(not parents):
                 selected = helper.findObjectByUid('exports')[0]
-
                 return helper.getInteractPosition(selected[0],selected[1], settings.grid[selected[0]][selected[1]].direction)
 
-
+            print('NO PARENTS')
 
             possible = helper.getEmptyStorage(type)[0]
             if (len(possible) != 0):

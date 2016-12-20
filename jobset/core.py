@@ -68,6 +68,7 @@ class collectFromObjectAndStore(base):
 
     def task(self):
         if (self.taskCurrent == 1):
+
             # Determine best storage
             self.pathEnd = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
 
@@ -80,11 +81,19 @@ class collectFromObjectAndStore(base):
 
             # Determine best vehicle
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
-
+            print(str(settings.grid[self.startPosition[0]][self.startPosition[1]].title))
             if (self.vehicleID):
+                print('CREATED MOVEITEM FOR ' + str(settings.grid[self.startPosition[0]][self.startPosition[1]].title))
                 path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1], 5)
 
                 self.pathID = path.find()
+                print('PATH VARS')
+                print(self.pathStart[0])
+                print(self.pathStart[1])
+                print(self.pathEnd[0])
+                print(self.pathEnd[1])
+
+                print('')
 
                 if (self.pathID):
                     self.taskCurrent += 1
@@ -95,9 +104,11 @@ class collectFromObjectAndStore(base):
                 settings.activeEntityDB[self.vehicleID].claimed = False
 
         if (self.taskCurrent == 2):
+
             # Begin
             # Collect, move, deposit
             if (self.status == 1):
+
                 self.jobID = job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd,
                                         items='all',
                                         parent=self.jobsetID, entityID=self.vehicleID, path=self.pathID)

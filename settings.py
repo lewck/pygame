@@ -140,7 +140,7 @@ def init():
             'transformations': {
                 'metalcopper': {
                     'required': 2,
-                    'produces': [['metalzinc',5],['copperplate',5]]
+                    'produces': {'copperplate': 5}
                 }
             }
         }
@@ -224,7 +224,6 @@ def init():
         },
         'copperplate': {
             'title': 'Copper Plate',
-            'required': {'metalcopper':1},
             'sellPrice': 50,
             'discovered': True,
             'makes': 1,
