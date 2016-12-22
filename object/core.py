@@ -269,7 +269,6 @@ class factory_press(factory_base):
         super(factory_press, self).__init__()
         super(factory_press, self).setVars(image=self.title, **kwargs)
 
-        self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items={'metalcopper':1})
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
@@ -283,8 +282,6 @@ class factory_puncher(factory_base):
 
         super(factory_puncher, self).__init__()
         super(factory_puncher, self).setVars(image=self.title, **kwargs)
-
-        self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items={'copperplate':1})
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]

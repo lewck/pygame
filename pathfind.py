@@ -33,23 +33,23 @@ class pathFind():
         return False
 
     def checkNeighbours(self):
-        #Up
+        # Up
         if(self.current.y-1>=0):
             if(not self.checkClosed(self.current.y-1, self.current.x)) and self.isPassible(self.current.y-1, self.current.x ) and (not(self.isOpen(self.current.y-1, self.current.x))):
                 #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
                 self.open.append(node(self.current.y-1, self.current.x,[self.current.y, self.current.x,0,  self.current.parent], self.sets))
-        #Left
-        if (self.current.x - 1 >= 0):
+        # Left
+        if (self.current.x-1 >= 0):
             if (not self.checkClosed(self.current.y, self.current.x-1)) and self.isPassible(self.current.y, self.current.x-1) and (not(self.isOpen(self.current.y, self.current.x-1))):
                 #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
                 self.open.append(node(self.current.y, self.current.x-1,[self.current.y, self.current.x,3, self.current.parent], self.sets))
-        #Right
-        if (self.current.x+1 <= settings.xMax -1):
+        # Right
+        if (self.current.x+1 <= settings.xMax-1):
             if (not self.checkClosed(self.current.y, self.current.x+1))and self.isPassible(self.current.y, self.current.x+1) and (not(self.isOpen(self.current.y, self.current.x+1))):
                 #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
                 self.open.append(node(self.current.y, self.current.x+1,[self.current.y, self.current.x, 1,self.current.parent], self.sets))
-        #Down
-        if (self.current.y+1 <= settings.yMax -1):
+        # Down
+        if (self.current.y+1 <= settings.yMax-1):
             if (not self.checkClosed(self.current.y + 1, self.current.x))and self.isPassible(self.current.y+1, self.current.x) and (not(self.isOpen(self.current.y+1, self.current.x))):
                 #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
                 self.open.append(

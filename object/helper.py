@@ -43,6 +43,7 @@ class helper:
             for key, each in settings.activeJobsetDB.items():
                 if(each.typ == 'waitForItems'):
                     if(each.needsItem(uid)):
+
                         possible.append(helper.getInteractPosition(each.pos[0], each.pos[1], settings.grid[each.pos[0]][each.pos[1]].direction))
 
             if (len(possible) != 0):
@@ -51,14 +52,22 @@ class helper:
                     if(path.find()):
                         return each
 
-            # Nobody is waiting for this object must sell
+            # No job waiting, attempt to find factory components
+
+            for key, value in settings.processingDB.items():
+                if(uid in value['transformations']):
+                    locations = helper.findObjectByUid('factory_'+key)
+                    if(locations != []):
+                        # Pick first
+                        return helper.getInteractPosition(locations[0][0], locations[0][1], settings.grid[locations[0][0]][locations[0][1]].direction)
+
 
             parents = itemhelper.findItemParents(uid)
+
             if(not parents):
                 selected = helper.findObjectByUid('exports')[0]
                 return helper.getInteractPosition(selected[0],selected[1], settings.grid[selected[0]][selected[1]].direction)
 
-            print('NO PARENTS')
 
             possible = helper.getEmptyStorage(type)[0]
             if (len(possible) != 0):
