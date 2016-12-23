@@ -82,7 +82,9 @@ class input():
                         inputbuffer.complete()
 
                 if (event.key == pygame.K_F1):
-                    devmap.create(2)
+                    x = ui.create('gamesettings')
+                    settings.activeModelDB[x].activate()
+
                 if (event.key == pygame.K_F2):
                     devmap.create(0)
                 if (event.key == pygame.K_F3):

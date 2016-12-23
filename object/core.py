@@ -2,6 +2,7 @@ import pygame
 
 import settings
 from engine.userinteract.helper import helper as uihelper
+from engine.helper import helper as enginehelper
 from inventory import inventory
 from jobset import factory as jobset
 from shop import shop
@@ -50,50 +51,40 @@ class factory:
         return False
 
 class base:
-    def setVars(self, **kwargs):
-        # base, image, direction, tickListen
+    def __init__(self):
         # Init Boilerplate
         self.highlighted = False
         self.tickCount = 0
+        self.part = 0
+        self.passable = []
 
+        self.inventory = inventory(30)
+        self.inventoryOutput = inventory(30)
+
+        self.status = 0
+        self.ui = ''
+        self.counter = 0
+        self.jobCreated = False
+        self.setSegregation = False
+        self.speedLevel = 0
+
+    def setVars(self, **kwargs):
         # Load Vars
         provided = settings.objectDB[self.type][self.title]
+        self.tickListen = provided['tickListen']
+        self.image = enginehelper.loadImage(self.title)
 
-        defaults = {
-            'devOverlay': 0,
-            'tickListen': [],
-        }
+        if('base' in kwargs):
+            self.base = enginehelper.loadImage(kwargs['base'])
 
-        for key, value in provided.items():
-            setattr(self, key, value)
+        if('y' in kwargs):
+            self.y = kwargs['y']
+            self.x = kwargs['x']
+            self.direction = kwargs['direction']
 
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-        for key, value in defaults.items():
-            if not(hasattr(self, key)):
-                # Set default
-                setattr(self, key, value)
-
-        self.image = self.load(self.image)
-
-        if(hasattr(self, 'base')):
-            self.base = self.load(self.base)
-
-        # Set tick vars
-        if(hasattr(self, 'tickListen') & hasattr(self, 'y')):
             # Needs registered ticks, hasPosition
-            self.registerTicks()
-
-    def registerTicks(self):
-        for each in self.tickListen:
-            settings.tick.register(each, 'settings.grid[' + str(self.y) + '][' + str(self.x) + '].tick()')
-
-
-
-    def load(self, spriteID):
-        stmt = 'sprites/'+str(spriteID)+'.png'
-        return pygame.image.load(stmt)
+            for each in self.tickListen:
+                settings.tick.register(each, 'settings.grid[' + str(self.y) + '][' + str(self.x) + '].tick()')
 
     def setPathDev(self,g,h,f):
         self.devOverlay = [g,h,f]
@@ -135,11 +126,11 @@ class base:
 
     def checkFullInventory(self):
         if (not self.inventoryOutput.isFull()):
-            self.image = self.load(self.title)
+            self.image = enginehelper.loadImage(self.title)
             self.jobcollectcreated = False
 
         else:
-            self.image = self.load(self.title + '_full')
+            self.image = enginehelper.loadImage(self.title + '_full')
 
             # TODO fix force pick
             if (self.jobcollectcreated == False):
@@ -150,16 +141,15 @@ class base:
 
 class factory_parts(base):
     def __init__(self, **kwargs):
-        super(factory_parts, self).__init__()
         self.title = 'factory_parts'
         self.type = 'producer'
-        self.part = 0
-        super(factory_parts, self).setVars(image=self.title, **kwargs)
 
-        self.passable = []
-        self.inventory = inventory(30)
-        self.inventoryOutput = inventory(30)
-        self.status = 0
+        base.__init__(self)
+        base.setVars(self, **kwargs)
+
+
+
+
         self.ui = ''
         self.counter = 0
         self.jobCreated = False
@@ -212,27 +202,14 @@ class factory_parts(base):
                         self.job = jobset.create(typ='waitForItems', position=[self.y, self.x], items=data['required'])
                         self.status = 2
 
-
-
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)
 
-
-class factory_base(base):
+class processor_base(base):
     def __init__(self):
-        self.part = 0
+        base.__init__(self)
         self.type = 'processor'
-
-        self.passable = []
-        self.inventory = inventory(30)
-        self.inventoryOutput = inventory(30)
-        self.status = 0
-        self.ui = ''
-        self.counter = 0
-        self.jobCreated = False
-        self.setSegregation = False
-        self.speedLevel = 0
 
     def doTick(self, tickID):
         if (tickID == 0):
@@ -240,60 +217,59 @@ class factory_base(base):
             # Handle Full Inventory
             self.checkFullInventory()
 
-            print('TOPROD')
             if(self.inventory.getInventory()):
                 # Has some items
                 for each in self.inventory.getInventory():
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
-
                     if(self.inventory.has(each.id, toProduce['required'])):
                         # Has required quantity
                         items = self.inventory.takeItem(each.id, toProduce['required'])
                         for prodKey, prodQuant in toProduce['produces'].items():
-                            print('each')
-                            print(prodKey)
-                            print(prodQuant)
                             self.inventoryOutput.addItem(prodKey, prodQuant)
                             print(self.inventoryOutput.getInventory())
 
             return False
 
-
-
-class factory_press(factory_base):
+class factory_press(processor_base):
     def __init__(self, **kwargs):
         self.title = 'factory_press'
         self.process = 'press'
         self.part = 'bronzecoin'
 
-        super(factory_press, self).__init__()
-        super(factory_press, self).setVars(image=self.title, **kwargs)
+        processor_base.__init__(self)
+        processor_base.setVars(self, image=self.title, **kwargs)
 
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)
 
-class factory_puncher(factory_base):
+class factory_puncher(processor_base):
     def __init__(self, **kwargs):
         self.title = 'factory_puncher'
         self.process = 'puncher'
         self.part = 'bronzecoin'
 
-        super(factory_puncher, self).__init__()
-        super(factory_puncher, self).setVars(image=self.title, **kwargs)
+        processor_base.__init__(self)
+        processor_base.setVars(self, image=self.title, **kwargs)
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)
 
 
+#===========================================================================
+#  Non-factory objects
+#==============================================================
+#  Empty Object
+#--------------------------------------------------
 
 class empty(base):
     def __init__(self, **kwargs):
         self.type = 'placeholder'
         self.title = 'empty'
-        super(empty, self).setVars(image = 'empty', base='empty', **kwargs)
+        base.__init__(self)
+        base.setVars(self, base='empty', **kwargs)
         self.passable = []
 
     def eventClick(self):
@@ -304,7 +280,8 @@ class exports(base):
         self.type = 'exports'
         self.title = 'exports'
 
-        super(exports, self).setVars(image=self.title, **kwargs)
+        base.__init__(self)
+        base.setVars(self,**kwargs)
 
         self.passable = []
         self.inventory = inventory(500)
@@ -314,20 +291,19 @@ class exports(base):
     def doTick(self, tickID):
         if(tickID==0):
             if(self.inventory.hasAny()):
-
                 toSell = self.inventory.takeItem('all', 'all')
                 shop.sell(toSell)
 
     def eventClick(self):
         pass
 
-
 class garage(base):
     def __init__(self, **kwargs):
         self.type = 'storageVehicles'
         self.title = 'garage'
 
-        super(garage, self).setVars(image=self.title, **kwargs)
+        base.__init__(self)
+        base.setVars(self, **kwargs)
 
         self.passable = []
         self.inventory = inventory(10, 'vehicle')
@@ -342,7 +318,8 @@ class genericHouse(base):
         self.type = 'storage'
         self.title = 'genericHouse'
 
-        super(genericHouse, self).setVars(image = 'genericHouse', **kwargs)
+        base.__init__(self)
+        base.setVars(self, **kwargs)
 
         self.passable = []
         self.inventory = inventory(20)
@@ -355,7 +332,8 @@ class road(base):
     def __init__(self, **kwargs):
         self.type = 'transport'
         self.title = 'road'
-        super(road, self).setVars(image='road', **kwargs)
+        base.__init__(self)
+        base.setVars(self, **kwargs)
         self.passable = [5]
 
     def eventClick(self):

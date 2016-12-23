@@ -27,6 +27,7 @@ class ui:
     @staticmethod
     def create(uid):
         modelID = tool.genRandomString(16)
+
         try:
             model = eval(uid+'(id = modelID)')
         except NameError:

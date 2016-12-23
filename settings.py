@@ -141,7 +141,23 @@ def init():
                 'metalcopper': {
                     'required': 2,
                     'produces': {'copperplate': 2}
-                }
+                },
+                'metalzinc': {
+                    'required': 2,
+                    'produces': {'zincplate': 2}
+                },
+                'metaltin': {
+                    'required': 2,
+                    'produces': {'tinplate': 2}
+                },
+                'metalbronze': {
+                    'required': 2,
+                    'produces': {'bronzeplate': 2}
+                },
+                'metalbrass': {
+                    'required': 2,
+                    'produces': {'brassplate': 2}
+                },
             }
         },
         'puncher': {
@@ -164,6 +180,7 @@ def init():
             'sellPrice': 5,
             'discovered': True,
             'makes': 1,
+            'mineable': True,
         },
         'metalzinc': {
             'title': 'Zinc',
@@ -171,6 +188,7 @@ def init():
             'sellPrice': 5,
             'discovered': True,
             'makes': 1,
+            'mineable': True,
         },
         'metaltin': {
             'title': 'Tin',
@@ -178,6 +196,7 @@ def init():
             'sellPrice': 5,
             'discovered': True,
             'makes': 1,
+            'mineable': True,
         },
         'metalbronze': {
             'title': 'Bronze',
@@ -189,7 +208,6 @@ def init():
             'discovered': True,
             'makes': 1,
         },
-
         'metalbrass': {
             'title': 'Brass',
             'required' : {
@@ -200,6 +218,32 @@ def init():
             'discovered': True,
             'makes': 2,
         },
+        'copperplate': {
+            'title': 'Copper Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'zincplate': {
+            'title': 'Zink Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'tinplate': {
+            'title': 'Tin Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'bronzeplate': {
+            'title': 'Bronze Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'brassplate': {
+            'title': 'Copper Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+
         'brassnails': {
             'title': 'Brass Nails',
             'required': {
@@ -230,17 +274,11 @@ def init():
             'unlockPrice': 1000,
             'makes': 1,
         },
-        'copperplate': {
-            'title': 'Copper Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
         'copperdisk': {
             'title': 'Copper Disk',
             'sellPrice': 100,
             'discovered': True
         },
-
     }
 
     # Used settings.py

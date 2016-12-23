@@ -40,13 +40,19 @@ class factorypartsselectpart(base):
             }
         )
 
-        max = len(settings.itemDB) - 1
+        toShow = {}
+
+        for key, value in settings.itemDB.items():
+            if('mineable' in value):
+                toShow[key] = value
+
+        max = len(toShow) - 1
 
         count = 0
         posx = 12
         posy = 100
         shouldBreak = False
-        keys = list(settings.itemDB.keys())
+        keys = list(toShow.keys())
 
         for y in range(0, 8):
             for x in range(0, 12):
@@ -66,7 +72,7 @@ class factorypartsselectpart(base):
                                        'scale': (39, 39)
                                    })
 
-                    if(settings.itemDB[keys[count]]['discovered'] == True):
+                    if('mineable' in toShow[keys[count]]):
                         self.addInput(type='mouseclick', priority=6, title='btnin', attribute={
                             'click': 1,
                             'pos': [posy + 2, posx + 2],
