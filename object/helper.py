@@ -61,7 +61,6 @@ class helper:
                         # Pick first
                         return helper.getInteractPosition(locations[0][0], locations[0][1], settings.grid[locations[0][0]][locations[0][1]].direction)
 
-
             parents = itemhelper.findItemParents(uid)
 
             if(not parents):

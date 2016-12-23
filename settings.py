@@ -305,21 +305,19 @@ def init():
             'empty': {
                 'title': 'empty',
                 'tickListen': [],
+                'price': 0,
                 'discovered': False,
             }
         },
         'storage': {
-            'genericHouse': {
-                'title': 'genericHouse',
-                'tickListen': [],
-                'discovered': False,
-            },
+
         },
         'storageVehicles': {
             'garage': {
                 'title': 'garage',
                 'tickListen': [],
                 'discovered': True,
+                'price': 100,
             },
         },
         'producer': {
@@ -354,6 +352,7 @@ def init():
             'road': {
                 'title': 'road',
                 'tickListen': [],
+                'price': 5,
                 'discovered': True,
             },
         },
@@ -361,6 +360,7 @@ def init():
             'exports': {
                 'title': 'exports',
                 'tickListen': [5],
+                'price': 50,
                 'discovered': True,
             },
         },

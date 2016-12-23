@@ -16,17 +16,16 @@ class factory:
 
     @staticmethod
     def create(**kwargs):
-
         if('obj' in kwargs):
             result = kwargs['obj']
         else:
             result = factory.getObject(**kwargs)
 
+        # Is item being placed?
         if 'y' in kwargs:
             if not (hasattr(result, 'base')):
                 # Use existing base
                 result.base = settings.grid[kwargs['y']][kwargs['x']].base
-
             # Assume needs plot
             if 'dev' in kwargs:
                 # Force Create
@@ -42,12 +41,9 @@ class factory:
                 else:
                     return False
 
-
-        else:
-            # Assume wants object
-            if (shop.canPurchase(result.price)):
-                return result
-
+        # Assume wants object response
+        if (shop.canPurchase(result.price)):
+            return result
         return False
 
 class base:
@@ -69,9 +65,10 @@ class base:
         self.speedLevel = 0
 
     def setVars(self, **kwargs):
-        # Load Vars
+        # Get and set provided vars
         provided = settings.objectDB[self.type][self.title]
         self.tickListen = provided['tickListen']
+        self.price = provided['price']
         self.image = enginehelper.loadImage(self.title)
 
         if('base' in kwargs):
@@ -94,15 +91,19 @@ class base:
         self.highlightedDirection = direction
 
     def highlight(self):
-        directions = {
-            0:'UP',
-            1:'RI',
-            2:'DO',
-            3:'LF',
-            4:'4'
+        image = enginehelper.loadImage('highlight')
+        directionModifier = {
+            0: 180,
+            1: 90,
+            2: 0,
+            3: 270,
+            4: 0,
         }
-        pygame.draw.rect(settings.surface, (255,0,0), [self.x*50,self.y*50,50,50])
-        settings.surface.blit(settings.fonts['primaryFont'][30].render(directions[self.highlightedDirection], True, (255,255,255)), [self.x*50,self.y*50,50,50])
+
+        image = pygame.transform.rotate(image, directionModifier[self.highlightedDirection])
+
+        settings.surface.blit(pygame.transform.scale(image, (50, 50)), (self.x*50,self.y*50))
+
 
     def isPassible(self, entityid):
         if(entityid in self.passable):
