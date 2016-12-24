@@ -7,14 +7,14 @@ class market(base):
         # Init parent
         super(market, self).__init__()
 
-    def get(self, sortby = 'null'):
+    def get(self, sortby = None):
         return self.requestCall('getmarketdemand', {'sortby':sortby, 'session_id': settings.gameData['session_id']})
 
     def verifyCache(self):
         if(self.requestCall('verifymarketcache', {'session_id': settings.gameData['session_id']})):
             return True
         else:
-            #Get new cache
+            # Get new cache
             settings.marketCache = self.get()
             return True
 

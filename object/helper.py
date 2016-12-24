@@ -34,11 +34,11 @@ class helper:
         return store
 
     @staticmethod
-    def evaluateBestStorage(objectAPos, type='item', uid='null'):
+    def evaluateBestStorage(objectAPos, type='item', uid=None):
         possible = []
 
         # First check if a job is waiting for it
-        if(uid!='null'):
+        if(uid):
 
             for key, each in settings.activeJobsetDB.items():
                 if(each.typ == 'waitForItems'):
