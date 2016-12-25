@@ -53,7 +53,6 @@ class helper:
                         return each
 
             # No job waiting, attempt to find factory components
-
             for key, value in settings.processingDB.items():
                 if(uid in value['transformations']):
                     locations = helper.findObjectByUid('factory_'+key)

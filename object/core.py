@@ -149,8 +149,6 @@ class factory_parts(base):
         base.setVars(self, **kwargs)
 
 
-
-
         self.ui = ''
         self.counter = 0
         self.jobCreated = False
@@ -214,7 +212,6 @@ class processor_base(base):
 
     def doTick(self, tickID):
         if (tickID == 0):
-            print(settings.activeJobsetDB)
             # Handle Full Inventory
             self.checkFullInventory()
 
@@ -228,8 +225,16 @@ class processor_base(base):
                         for prodKey, prodQuant in toProduce['produces'].items():
                             self.inventoryOutput.addItem(prodKey, prodQuant)
                             print(self.inventoryOutput.getInventory())
-
             return False
+
+class producer_base(base):
+    def __init__(self):
+        base.__init__(self)
+        self.type = 'producer'
+
+    def doTick(self, tickID):
+        if (tickID == 0):
+            pass
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):
