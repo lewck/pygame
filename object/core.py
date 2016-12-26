@@ -207,8 +207,8 @@ class factory_parts(base):
 
 class processor_base(base):
     def __init__(self):
-        base.__init__(self)
         self.type = 'processor'
+        base.__init__(self)
 
     def doTick(self, tickID):
         if (tickID == 0):
@@ -229,12 +229,19 @@ class processor_base(base):
 
 class producer_base(base):
     def __init__(self):
-        base.__init__(self)
         self.type = 'producer'
+        self.itemID = None
+        base.__init__(self)
 
     def doTick(self, tickID):
         if (tickID == 0):
-            pass
+            if(self.itemID):
+                print(self.itemID)
+
+class factory_miner(producer_base):
+    def __init__(self):
+        producer_base.__init__(self)
+        self.itemID = 'metalCopper'
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):

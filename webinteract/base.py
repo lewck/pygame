@@ -25,6 +25,9 @@ class base:
         print(url_values)
 
         url = 'http://'+settings.remoteURL+'/pygame/kernal.php'
+
+        print('CALLING')
+        print(url)
         full_url = url + '?' + url_values
         try:
             data = urllib.request.urlopen(full_url)
@@ -35,8 +38,6 @@ class base:
             print('Error Connecting')
             jsonData = {}
             jsonData['fail'] = '404'
-
-
 
 
         if('fail' in jsonData):
