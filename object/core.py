@@ -224,38 +224,28 @@ class processor_base(base):
                         items = self.inventory.takeItem(each.id, toProduce['required'])
                         for prodKey, prodQuant in toProduce['produces'].items():
                             self.inventoryOutput.addItem(prodKey, prodQuant)
-                            print(self.inventoryOutput.getInventory())
             return False
 
 class producer_base(base):
     def __init__(self):
         self.type = 'producer'
         self.itemID = None
-
         base.__init__(self)
 
     def doTick(self, tickID):
         if (tickID == 0):
             if(self.itemID):
-                #print(self.details['speed_upgrades_modifier'][self.speedLevel])
-
+                self.checkFullInventory()
                 self.inventoryOutput.addItem(self.itemID, settings.itemDB[self.itemID]['makes'] *
-                                            self.details['speed_upgrades_modifier'][
-                                                 self.speedLevel])
-
-                print(len(self.inventoryOutput.getInventory()))
-
-
-
-            else:
-                print('NOID')
+                                        self.details['speed_upgrades_modifier'][
+                                             self.speedLevel])
 
 class factory_miner(producer_base):
     def __init__(self, **kwargs):
         self.title = 'factory_miner'
         producer_base.__init__(self)
         producer_base.setVars(self, **kwargs)
-        self.itemID = 'metalCopper'
+        self.itemID = 'metalcopper'
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):

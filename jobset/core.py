@@ -11,9 +11,7 @@ from job import factory as job
 class factory():
     @staticmethod
     def create(**args):
-        jobsetID = tool.genRandomString(16)
         jobsetID = tool.genUniqueID(settings.activeJobsetDB, 16)
-
         settings.activeJobsetDB[jobsetID] = eval(args['typ']+'(**args, jobsetID = jobsetID)')
 
         return jobsetID
@@ -59,15 +57,17 @@ class collectFromObjectAndStore(base):
     def __init__(self, **kwargs):
         self.tickListen = [10]
         super(collectFromObjectAndStore, self).__init__(**kwargs)
+        self.dontTick = 0
 
     def doEvent(self, eventID):
-        if (eventID == 'pathnotfound'):
-            settings.activeJobDB[str(self.jobID)].close()
-            self.close()
-            self.taskCurrent = 3
+        pass
 
     def task(self):
         if (self.taskCurrent == 1):
+            if(self.dontTick):
+                # Apply a cooldown period if not found
+                self.dontTick += -1
+                return False
 
             # Determine best storage
             self.pathEnd = objecthelper.evaluateBestStorage([1, 1], 'item', self.itemID)
@@ -81,30 +81,19 @@ class collectFromObjectAndStore(base):
 
             # Determine best vehicle
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
-            print(str(settings.grid[self.startPosition[0]][self.startPosition[1]].title))
+
             if (self.vehicleID):
-                print('CREATED MOVEITEM FOR ' + str(settings.grid[self.startPosition[0]][self.startPosition[1]].title))
                 path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1], 5)
-
                 self.pathID = path.find()
-                print('PATH VARS')
-                print(self.pathStart[0])
-                print(self.pathStart[1])
-                print(self.pathEnd[0])
-                print(self.pathEnd[1])
-
-                print('')
-
                 if (self.pathID):
                     self.taskCurrent += 1
 
-
             if (self.taskCurrent == 1):
-                # Unclaim the entity
+                # Unclaim the entity, apply buffer
+                self.dontTick = 5
                 settings.activeEntityDB[self.vehicleID].claimed = False
 
         if (self.taskCurrent == 2):
-
             # Begin
             # Collect, move, deposit
             if (self.status == 1):

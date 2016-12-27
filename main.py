@@ -152,7 +152,7 @@ if(settings.currentScreen == 'game'):
 
         # Finish frame
         pygame.display.update()
-        clock.tick(120)
+        clock.tick(60)
 
 
 
