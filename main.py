@@ -116,7 +116,7 @@ if(settings.currentScreen == 'game'):
         settings.activeUI[key] = ui.create(key)
 
     # Register periodic server ping tick event
-    devTick = settings.tick.register(500, "settings.webinteract['game'].checkCompleted()")
+    devTick = settings.tick.register(50000, "settings.webinteract['game'].checkCompleted()")
 
     # Close Loading overlay
     uihelper.closeModel('menuloading')

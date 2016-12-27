@@ -329,6 +329,14 @@ def init():
                 'speed_upgrades': default_speed_upgrade,
                 'speed_upgrades_modifier': default_speed_modifier
             },
+            'factory_miner': {
+                'title': 'factory_miner',
+                'tickListen': [2],
+                'price': 100,
+                'discovered': True,
+                'speed_upgrades': default_speed_upgrade,
+                'speed_upgrades_modifier': default_speed_modifier
+            },
         },
         'processor': {
             'factory_press': {

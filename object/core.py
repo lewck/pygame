@@ -67,6 +67,7 @@ class base:
     def setVars(self, **kwargs):
         # Get and set provided vars
         provided = settings.objectDB[self.type][self.title]
+        self.details = provided
         self.tickListen = provided['tickListen']
         self.price = provided['price']
         self.image = enginehelper.loadImage(self.title)
@@ -147,7 +148,6 @@ class factory_parts(base):
 
         base.__init__(self)
         base.setVars(self, **kwargs)
-
 
         self.ui = ''
         self.counter = 0
@@ -231,16 +231,30 @@ class producer_base(base):
     def __init__(self):
         self.type = 'producer'
         self.itemID = None
+
         base.__init__(self)
 
     def doTick(self, tickID):
         if (tickID == 0):
             if(self.itemID):
-                print(self.itemID)
+                #print(self.details['speed_upgrades_modifier'][self.speedLevel])
+
+                self.inventoryOutput.addItem(self.itemID, settings.itemDB[self.itemID]['makes'] *
+                                            self.details['speed_upgrades_modifier'][
+                                                 self.speedLevel])
+
+                print(len(self.inventoryOutput.getInventory()))
+
+
+
+            else:
+                print('NOID')
 
 class factory_miner(producer_base):
-    def __init__(self):
+    def __init__(self, **kwargs):
+        self.title = 'factory_miner'
         producer_base.__init__(self)
+        producer_base.setVars(self, **kwargs)
         self.itemID = 'metalCopper'
 
 class factory_press(processor_base):
