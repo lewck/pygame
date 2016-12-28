@@ -16,6 +16,9 @@ class pathFind():
         self.open = []
         self.sets=[y,x,y1,x1]
 
+        print('LOOKING FOR')
+        print(self.sets)
+
     def isPassible(self, y, x):
         if (settings.grid[y][x].isPassible(self.entity)):
             return True

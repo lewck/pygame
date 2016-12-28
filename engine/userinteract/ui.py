@@ -25,18 +25,16 @@ import settings
 
 class ui:
     @staticmethod
-    def create(uid):
+    def make(uid):
+        # private method for initiating a model
         modelID = tool.genRandomString(16)
 
         try:
-            model = eval(uid+'(id = modelID)')
+            model = eval(uid + '(id = modelID)')
         except NameError:
             # Model not defined/imported, exit
-            settings.logObject.add('Model "'+str(uid)+'" failed to initiate',2);
+            settings.logObject.add('Model "' + str(uid) + '" failed to initiate', 2);
             return False
-
-        # Register Model
-        settings.activeModelDB[modelID] = model
 
         inReturn = []
         outReturn = []
@@ -45,19 +43,34 @@ class ui:
         for out in model.input:
             # Register with event handler
             try:
-                eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],  args=out['attribute']['eventArgs'])
+                eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],
+                                   args=out['attribute']['eventArgs'])
             except KeyError:
                 # Assume no event arguments
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
-            inReturn.append([eid,out['title']])
-
+            inReturn.append([eid, out['title']])
 
         # Register Outputs
         for out in model.output:
             # Register with out handler
             eid = outObj.create(modelID, out)
-            outReturn.append([eid,out['title']])
+            outReturn.append([eid, out['title']])
 
         model.addInterfaces(inReturn, outReturn)
+
+        return (modelID, model)
+
+    @staticmethod
+    def create(uid):
+        # Make
+        modelID, model = ui.make(uid)
+
+        # Register Model
+        settings.activeModelDB[modelID] = model
+
         return modelID
+
+    def getInstance(self):
+        # Use to get an instance of the model, opposed to a globally assigned
+        pass

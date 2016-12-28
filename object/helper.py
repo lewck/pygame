@@ -55,10 +55,19 @@ class helper:
             # No job waiting, attempt to find factory components
             for key, value in settings.processingDB.items():
                 if(uid in value['transformations']):
-                    locations = helper.findObjectByUid('factory_'+key)
-                    if(locations != []):
-                        # Pick first
-                        return helper.getInteractPosition(locations[0][0], locations[0][1], settings.grid[locations[0][0]][locations[0][1]].direction)
+                    locations = helper.findObjectByUid('factory_'+key, True)
+                    for position in locations:
+                        # Get Interact Position
+                        print('CONSIDERING')
+
+
+                        positionInteract = helper.getInteractPosition(position[0], position[1], position[2])
+                        print(positionInteract)
+
+                        path = pathFind(objectAPos[0], objectAPos[1], positionInteract[0], positionInteract[1], 5)
+                        if(path.find()):
+                            print('FOUND')
+                            return positionInteract
 
             parents = itemhelper.findItemParents(uid)
 
@@ -97,11 +106,17 @@ class helper:
 
 
     @staticmethod
-    def findObjectByUid(uid):
+    def findObjectByUid(uid, getDir = False):
         results = []
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
                 if(settings.grid[y][x].title == uid):
-                    results.append([y,x])
+                    pos = [y,x]
+
+                    if(getDir):
+                        # Extend with direction if required
+                        pos.extend([settings.grid[y][x].direction])
+
+                    results.append(pos)
 
         return results
