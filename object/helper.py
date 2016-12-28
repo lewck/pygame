@@ -58,15 +58,11 @@ class helper:
                     locations = helper.findObjectByUid('factory_'+key, True)
                     for position in locations:
                         # Get Interact Position
-                        print('CONSIDERING')
-
-
                         positionInteract = helper.getInteractPosition(position[0], position[1], position[2])
                         print(positionInteract)
 
                         path = pathFind(objectAPos[0], objectAPos[1], positionInteract[0], positionInteract[1], 5)
                         if(path.find()):
-                            print('FOUND')
                             return positionInteract
 
             parents = itemhelper.findItemParents(uid)
