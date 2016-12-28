@@ -10,7 +10,6 @@ class render:
     def renderGrid():
         xmod = 0
         ymod = 0
-
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
                 if (settings.grid[y][x].highlighted == True):

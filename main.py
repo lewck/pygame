@@ -32,12 +32,20 @@ clock = pygame.time.Clock()
 
 
 # Mix config with globals
-f = open('config.json', 'r')
-config = json.loads(f.read())
+try:
+    f = open('config.json', 'r')
+    try:
+        config = json.loads(f.read())
+        # Assign globals from settings
+        settings.APIKEY = config['api_key']
+        settings.remoteURL = config['server_url']
+    except json.decoder.JSONDecodeError:
+        log.create('JSON decode error')
+        settings.gameExit = True
+except FileNotFoundError:
+    log.create('Config file could not be found')
+    settings.gameExit = True
 
-# Assign globals from settings
-settings.APIKEY = config['api_key']
-settings.remoteURL = config['server_url']
 
 
 # Pre-load Fonts

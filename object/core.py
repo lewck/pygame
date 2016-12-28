@@ -112,15 +112,11 @@ class base:
         return False
 
     def tick(self):
+        # Call correct doTick
         self.tickCount += 1
         for i in range(0, len(self.tickListen)):
             if (self.tickCount % self.tickListen[i] == 0):
                 self.doTick(i)
-                if(i==len(self.tickListen)):
-                    self.tickCount = 0
-
-            # print(self.tickCount)
-            # TODO ticks not being reset
 
     def hasInventory(self):
         if(hasattr(self, 'inventory')):
