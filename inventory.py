@@ -16,13 +16,19 @@ class node():
             return True
         return False
 
-    def addItem(self, itemID, quantity):
+    def addItem(self, itemID, quantity, type):
+        print('y' + str(quantity))
+        print(len(self.inventory))
+        print(self.size)
         count = 0
         while (len(self.inventory) < self.size):
             if(count < quantity):
-                self.inventory.extend(item.create(item=itemID))
+                print('DO')
+                print('--' + str(item.create(item=itemID, type=None)))
+                self.inventory.extend([item.create(item=itemID, type=type)])
                 count += 1
             else:
+                print('fuk')
                 return 'INVFULL'
 
 
@@ -85,9 +91,6 @@ class node():
         else:
             return False
 
-
-
-
 class inventory:
     def __init__(self, size, type='item'):
         self.size = size
@@ -102,27 +105,36 @@ class inventory:
             return True
         return False
     
-    def addItem(self, itemID, quantity = 1):
+    def addItem(self, **kwargs):
+        # Require name (id)
+        # Optional : quantity(quantity), type(type)
+        if(not 'quantity' in kwargs):
+            kwargs['quantity'] = 1
+
+        if (not 'type' in kwargs):
+            kwargs['type'] = None
+
         if('all' in self.inventory):
-            self.inventory['all'].addItem(itemID, quantity)
+            self.inventory['all'].addItem(kwargs['id'], kwargs['quantity'], kwargs['type'])
         else:
             # Use segregations
             # Verify exists
-            if (self.verifySegregation(itemID)):
-                self.inventory[itemID].addItem(itemID, quantity)
+            if (self.verifySegregation(kwargs['id'])):
+                self.inventory[kwargs['id']].addItem(kwargs['id'], kwargs['quantity'], kwargs['type'])
                 return True
             return False
 
     def removeItem(self, **kwargs):
-        if ('id' in kwargs):
+        if (not 'quantity' in kwargs):
+            kwargs['quantity'] = 1
 
+        if ('id' in kwargs):
             if ('all' in self.inventory):
                 self.inventory['all'].removeItem(kwargs['id'], kwargs['quantity'])
             else:
                 # Use Segregations
                 if (self.verifySegregation(kwargs['id'])):
                     return self.inventory[kwargs['id']].removeItem(kwargs['id'], kwargs['quantity'])
-
 
 
     def getInventory(self, segregation='all'):

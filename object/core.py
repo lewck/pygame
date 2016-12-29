@@ -165,7 +165,7 @@ class factory_parts(base):
 
             if(settings.itemDB[self.part]['required']=={}) & (not self.inventoryOutput.isFull()):
                 # Just generate Parts
-                self.inventoryOutput.addItem(self.part,settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
+                self.inventoryOutput.addItem(id = self.part, quantity = settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
             else:
                 # Assume has to check inventory for parts
@@ -185,7 +185,7 @@ class factory_parts(base):
                     for key, quantity in toRemove.items():
                         self.inventory.removeItem(id=key, quantity=quantity)
 
-                    self.inventoryOutput.addItem(self.part, settings.itemDB[self.part]['makes'] *settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
+                    self.inventoryOutput.addItem(id=self.part, quantity=settings.itemDB[self.part]['makes']*settings.objectDB['producer']['factory_parts']['speed_upgrades_modifier'][self.speedLevel])
 
                 else:
                     if(self.status != 2):
@@ -213,13 +213,20 @@ class processor_base(base):
             if(self.inventory.getInventory()):
                 # Has some items
                 for each in self.inventory.getInventory():
+
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
                     if(self.inventory.has(each.id, toProduce['required'])):
+
                         # Has required quantity
-                        items = self.inventory.takeItem(each.id, toProduce['required'])
+                        self.inventory.takeItem(each.id, toProduce['required'])
+
                         for prodKey, prodQuant in toProduce['produces'].items():
-                            self.inventoryOutput.addItem(prodKey, prodQuant)
-            return False
+                            print('ADD')
+                            print(prodKey)
+                            print(prodQuant)
+                            self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0], type=prodQuant[1])
+                            print(self.inventoryOutput.getInventory())
+                            print(self.inventory.getInventory())
 
 class producer_base(base):
     def __init__(self):
@@ -233,7 +240,7 @@ class producer_base(base):
                 self.checkFullInventory()
 
                 # Continuously create item
-                self.inventoryOutput.addItem(self.itemID, settings.itemDB[self.itemID]['makes'] *
+                self.inventoryOutput.addItem(id=self.itemID, quantity=settings.itemDB[self.itemID]['makes'] *
                                         self.details['speed_upgrades_modifier'][
                                              self.speedLevel])
 #===========================================================================

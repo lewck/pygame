@@ -140,7 +140,7 @@ def init():
             'transformations': {
                 'metalcopper': {
                     'required': 2,
-                    'produces': {'copperplate': 2}
+                    'produces': {'plate': [2, 'copper']}
                 },
                 'metalzinc': {
                     'required': 2,
@@ -364,7 +364,7 @@ def init():
         'processor': {
             'factory_press': {
                 'title': 'factory_press',
-                'tickListen': [10],
+                'tickListen': [1],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,
@@ -372,7 +372,7 @@ def init():
             },
             'factory_puncher': {
                 'title': 'factory_puncher',
-                'tickListen': [10],
+                'tickListen': [1],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,
@@ -380,7 +380,7 @@ def init():
             },
             'factory_cutter': {
                 'title': 'factory_cutter',
-                'tickListen': [10],
+                'tickListen': [1],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,

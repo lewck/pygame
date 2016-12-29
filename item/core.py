@@ -6,12 +6,18 @@ import settings
 #--------------------------------------------------
 class factory:
     @staticmethod
-    def create(**args):
+    def create(**kwargs):
         # Return object of UID
-        results = []
-        results.append(eval(args['item']+'()'))
+        if(not kwargs['type']):
+            print('ret1')
+            return eval(kwargs['item']+'()')
 
-        return results
+        # Generate object with a type
+        item = eval(kwargs['item'] + '()')
+        item.type = kwargs['type']
+        print('ret2')
+        return item
+
 
 #--------------------------------------------------
 #  Base Class
@@ -119,3 +125,9 @@ class copperstrip(base):
     def __init__(self, **args):
         self.id = 'copperplate'
         super(copperstrip, self).__init__()
+
+class plate(base):
+    def __init__(self, **args):
+        self.id = 'plate'
+        super(plate, self).__init__()
+

@@ -129,9 +129,6 @@ class base:
 
         settings.surface.blit(base1, (self.x, self.y))
 
-    def loadItems(self):
-        self.inventory.addItem()
-
 #===========================================================================
 #  Subsidory Classes
 #==============================================================
