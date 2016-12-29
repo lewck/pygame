@@ -167,6 +167,14 @@ def init():
                     'produces': {'copperdisk': 5}
                 }
             }
+        },
+        'cutter': {
+            'transformations': {
+                'copperplate': {
+                    'required': 1,
+                    'produces': {'copperstrip': 5}
+                }
+            }
         }
     }
 
@@ -239,7 +247,32 @@ def init():
             'discovered': True
         },
         'brassplate': {
-            'title': 'Copper Plate',
+            'title': 'Brass Plate',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'copperstrip': {
+            'title': 'Copper Strip',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'zincstrip': {
+            'title': 'Zinc Strip',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'tinstrip': {
+            'title': 'Tin Strip',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'bronzestrip': {
+            'title': 'Bronze Strip',
+            'sellPrice': 50,
+            'discovered': True
+        },
+        'brassstrip': {
+            'title': 'Brass Strip',
             'sellPrice': 50,
             'discovered': True
         },
@@ -262,16 +295,6 @@ def init():
             'sellPrice': 15,
             'discovered': False,
             'unlockPrice': 500,
-            'makes': 1,
-        },
-        'brassdagger': {
-            'title': 'Brass Dragger',
-            'required': {
-                'metalbrass': 2,
-            },
-            'sellPrice': 30,
-            'discovered': False,
-            'unlockPrice': 1000,
             'makes': 1,
         },
         'copperdisk': {
@@ -341,7 +364,7 @@ def init():
         'processor': {
             'factory_press': {
                 'title': 'factory_press',
-                'tickListen': [1],
+                'tickListen': [10],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,
@@ -349,7 +372,15 @@ def init():
             },
             'factory_puncher': {
                 'title': 'factory_puncher',
-                'tickListen': [1],
+                'tickListen': [10],
+                'price': 100,
+                'discovered': True,
+                'speed_upgrades': default_speed_upgrade,
+                'speed_upgrades_modifier': default_speed_modifier
+            },
+            'factory_cutter': {
+                'title': 'factory_cutter',
+                'tickListen': [10],
                 'price': 100,
                 'discovered': True,
                 'speed_upgrades': default_speed_upgrade,

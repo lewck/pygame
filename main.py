@@ -73,7 +73,6 @@ settings.fonts = {
 settings.surface = pygame.display.set_mode(settings.canvasDimensions)
 pygame.display.set_caption('Little Factory')
 
-#TODO make this real icon
 pygame.display.set_icon(pygame.image.load('sprites/favicon.png'))
 
 # Pre-load User Interfaces (inactive)

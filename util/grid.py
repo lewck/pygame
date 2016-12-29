@@ -1,7 +1,6 @@
 import settings
 
 class grid:
-
     @staticmethod
     def createEmpty(y,x):
         toReturn = []

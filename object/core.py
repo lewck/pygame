@@ -84,9 +84,6 @@ class base:
             for each in self.tickListen:
                 settings.tick.register(each, 'settings.grid[' + str(self.y) + '][' + str(self.x) + '].tick()')
 
-    def setPathDev(self,g,h,f):
-        self.devOverlay = [g,h,f]
-
     def highlightAdd(self, direction):
         self.highlighted = True
         self.highlightedDirection = direction
@@ -102,7 +99,6 @@ class base:
         }
 
         image = pygame.transform.rotate(image, directionModifier[self.highlightedDirection])
-
         settings.surface.blit(pygame.transform.scale(image, (50, 50)), (self.x*50,self.y*50))
 
 
@@ -111,16 +107,16 @@ class base:
             return True
         return False
 
+    def hasInventory(self):
+        if(hasattr(self, 'inventory')):
+            return True
+
     def tick(self):
-        # Call correct doTick
+        # Call correct tick function
         self.tickCount += 1
         for i in range(0, len(self.tickListen)):
             if (self.tickCount % self.tickListen[i] == 0):
                 self.doTick(i)
-
-    def hasInventory(self):
-        if(hasattr(self, 'inventory')):
-            return True
 
     def checkFullInventory(self):
         if (not self.inventoryOutput.isFull()):
@@ -201,6 +197,10 @@ class factory_parts(base):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
         uihelper.toggleModel('factorypartsmenu', True)
 
+#===========================================================================
+#  Bases
+#===========================================================================
+
 class processor_base(base):
     def __init__(self):
         self.type = 'processor'
@@ -208,7 +208,6 @@ class processor_base(base):
 
     def doTick(self, tickID):
         if (tickID == 0):
-            # Handle Full Inventory
             self.checkFullInventory()
 
             if(self.inventory.getInventory()):
@@ -232,9 +231,14 @@ class producer_base(base):
         if (tickID == 0):
             if(self.itemID):
                 self.checkFullInventory()
+
+                # Continuously create item
                 self.inventoryOutput.addItem(self.itemID, settings.itemDB[self.itemID]['makes'] *
                                         self.details['speed_upgrades_modifier'][
                                              self.speedLevel])
+#===========================================================================
+#  Factories
+#===========================================================================
 
 class factory_miner(producer_base):
     def __init__(self, **kwargs):
@@ -247,29 +251,25 @@ class factory_press(processor_base):
     def __init__(self, **kwargs):
         self.title = 'factory_press'
         self.process = 'press'
-        self.part = 'bronzecoin'
 
         processor_base.__init__(self)
-        processor_base.setVars(self, image=self.title, **kwargs)
-
-
-    def eventClick(self):
-        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
-        uihelper.toggleModel('factorypartsmenu', True)
+        processor_base.setVars(self, **kwargs)
 
 class factory_puncher(processor_base):
     def __init__(self, **kwargs):
         self.title = 'factory_puncher'
         self.process = 'puncher'
-        self.part = 'bronzecoin'
 
         processor_base.__init__(self)
-        processor_base.setVars(self, image=self.title, **kwargs)
+        processor_base.setVars(self, **kwargs)
 
-    def eventClick(self):
-        settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
-        uihelper.toggleModel('factorypartsmenu', True)
+class factory_cutter(processor_base):
+    def __init__(self, **kwargs):
+        self.title = 'factory_cutter'
+        self.process = 'cutter'
 
+        processor_base.__init__(self)
+        processor_base.setVars(self, **kwargs)
 
 #===========================================================================
 #  Non-factory objects
@@ -284,9 +284,6 @@ class empty(base):
         base.__init__(self)
         base.setVars(self, base='empty', **kwargs)
         self.passable = []
-
-    def eventClick(self):
-        pass
 
 class exports(base):
     def __init__(self, **kwargs):
@@ -307,9 +304,6 @@ class exports(base):
                 toSell = self.inventory.takeItem('all', 'all')
                 shop.sell(toSell)
 
-    def eventClick(self):
-        pass
-
 class garage(base):
     def __init__(self, **kwargs):
         self.type = 'storageVehicles'
@@ -322,25 +316,6 @@ class garage(base):
         self.inventory = inventory(10, 'vehicle')
         self.price = 50000
 
-
-    def eventClick(self):
-        pass
-
-class genericHouse(base):
-    def __init__(self, **kwargs):
-        self.type = 'storage'
-        self.title = 'genericHouse'
-
-        base.__init__(self)
-        base.setVars(self, **kwargs)
-
-        self.passable = []
-        self.inventory = inventory(20)
-        self.price = 200
-
-    def eventClick(self):
-        super(genericHouse, self).log()
-
 class road(base):
     def __init__(self, **kwargs):
         self.type = 'transport'
@@ -348,6 +323,3 @@ class road(base):
         base.__init__(self)
         base.setVars(self, **kwargs)
         self.passable = [5]
-
-    def eventClick(self):
-        pass

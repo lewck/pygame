@@ -79,14 +79,6 @@ class brassBase(base):
         super(brassBase, self).__init__()
 
 #--------------------------------------------------
-#  Brass Dagger
-#--------------------------------------------------
-class brassdagger(brassBase):
-    def __init__(self, **args):
-        self.id = 'brassdagger'
-        super(brassdagger, self).__init__()
-
-#--------------------------------------------------
 #  Brass Nails
 #--------------------------------------------------
 class brassnails(brassBase):
@@ -107,7 +99,7 @@ class bronzebase(base):
 #--------------------------------------------------
 class bronzecoin(bronzebase):
     def __init__(self, **args):
-        self.id = 'brassdagger'
+        self.id = 'bronzecoin'
         super(bronzecoin, self).__init__()
 
 #--------------------------------------------------
@@ -122,3 +114,8 @@ class copperdisk(base):
     def __init__(self, **args):
         self.id = 'copperdisk'
         super(copperdisk, self).__init__()
+
+class copperstrip(base):
+    def __init__(self, **args):
+        self.id = 'copperplate'
+        super(copperstrip, self).__init__()

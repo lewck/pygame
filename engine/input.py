@@ -56,7 +56,11 @@ class input():
 
                         if(clickUsed == False):
                             if(yTile < settings.yMax) & (xTile < settings.xMax):
-                                settings.grid[int(yTile)][int(xTile)].eventClick()
+                                # Call click function if exists
+                                try:
+                                    settings.grid[int(yTile)][int(xTile)].eventClick()
+                                except AttributeError:
+                                    pass
 
                     elif(inputbuffer.getClick()==1):
                         # Has Left Click Buffer
