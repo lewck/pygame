@@ -24,7 +24,7 @@ class node():
         while (len(self.inventory) < self.size):
             if(count < quantity):
                 print('DO')
-                print('--' + str(item.create(item=itemID, type=None)))
+                print(item.create(item=itemID, type=type))
                 self.inventory.extend([item.create(item=itemID, type=type)])
                 count += 1
             else:

@@ -212,21 +212,30 @@ class processor_base(base):
 
             if(self.inventory.getInventory()):
                 # Has some items
+                print(
+                    'len of out inv for ' + str(self.title) + ' ' + str(len(self.inventoryOutput.getInventory())))
+                print('len of inv for ' + str(self.title) + ' ' + str(len(self.inventory.getInventory())))
+
                 for each in self.inventory.getInventory():
 
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
                     if(self.inventory.has(each.id, toProduce['required'])):
 
+
                         # Has required quantity
                         self.inventory.takeItem(each.id, toProduce['required'])
+
+
+                        print('sd' + str(toProduce['produces']))
 
                         for prodKey, prodQuant in toProduce['produces'].items():
                             print('ADD')
                             print(prodKey)
                             print(prodQuant)
+
+
                             self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0], type=prodQuant[1])
-                            print(self.inventoryOutput.getInventory())
-                            print(self.inventory.getInventory())
+
 
 class producer_base(base):
     def __init__(self):

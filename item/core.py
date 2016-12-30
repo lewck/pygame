@@ -8,15 +8,20 @@ class factory:
     @staticmethod
     def create(**kwargs):
         # Return object of UID
+        print('creating')
+        print(kwargs['type'])
+        print(kwargs['item'])
+
         if(not kwargs['type']):
-            print('ret1')
             return eval(kwargs['item']+'()')
 
         # Generate object with a type
-        item = eval(kwargs['item'] + '()')
-        item.type = kwargs['type']
-        print('ret2')
-        return item
+        print('att2')
+
+        items = eval(kwargs['item']+'()')
+        items.type = kwargs['type']
+
+        return items
 
 
 #--------------------------------------------------
@@ -24,11 +29,7 @@ class factory:
 #--------------------------------------------------
 class base:
     def __init__(self):
-        self.setVars()
-
-    def setVars(self):
         self.itemDetails = settings.itemDB[self.id]
-        pass
 
 #===========================================================================
 #  METAL ITEMS
@@ -126,8 +127,16 @@ class copperstrip(base):
         self.id = 'copperplate'
         super(copperstrip, self).__init__()
 
-class plate(base):
+
+class compoundBase(base):
+    def setVars(self):
+        self.itemDetails = settings.itemDB[self.id]['type'][self.type]
+
+class plate(compoundBase):
     def __init__(self, **args):
         self.id = 'plate'
-        super(plate, self).__init__()
+
+    def setType(self, type):
+        self.type = type
+        compoundBase.setVars(self)
 

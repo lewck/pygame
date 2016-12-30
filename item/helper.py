@@ -17,3 +17,22 @@ class helper:
             return parents
 
         return False
+
+    @staticmethod
+    def getPrice(uid, type = None):
+        if (not type):
+            unlockPrice = settings.itemDB[uid]['unlockPrice']
+        else:
+            # Compound Item
+            unlockPrice = settings.itemDB[uid]['type'][type]['unlockPrice']
+        return True
+
+    @staticmethod
+    def discover(uid, type=None):
+        if (not type):
+            settings.itemDB[uid]['discovered'] = True
+        else:
+            # Compound Item
+            settings.itemDB[uid]['type'][type]['discovered'] = True
+
+        return True

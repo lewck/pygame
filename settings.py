@@ -302,6 +302,16 @@ def init():
             'sellPrice': 100,
             'discovered': True
         },
+        'plate' : {
+            'type': {
+                'copper' : {
+                    'title': 'Copper Plate',
+                    'sellPrice': 100,
+                    'discovered': False,
+                    'unlockPrice': 500,
+                }
+            }
+        }
     }
 
     # Used settings.py
