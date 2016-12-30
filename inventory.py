@@ -23,12 +23,9 @@ class node():
         count = 0
         while (len(self.inventory) < self.size):
             if(count < quantity):
-                print('DO')
-                print(item.create(item=itemID, type=type))
                 self.inventory.extend([item.create(item=itemID, type=type)])
                 count += 1
             else:
-                print('fuk')
                 return 'INVFULL'
 
 
@@ -74,11 +71,16 @@ class node():
             return True
         return False
 
-    def has(self, itemID, quantity):
+    def has(self, itemID, quantity, type):
         count = 0
         for each in self.inventory:
             if(each.id==itemID):
-                count += 1
+                if(type):
+                    if(each.type == type):
+                        count += 1
+                else:
+                    count += 1
+
                 if(count == quantity):
                     return True
 
@@ -179,11 +181,11 @@ class inventory:
         return self.inventory[itemID].isFull()
 
 
-    def has(self, id, quantity):
+    def has(self, id, quantity, type = None):
         if('all' in self.inventory):
-            return self.inventory['all'].has(id, quantity)
+            return self.inventory['all'].has(id, quantity, type)
         else:
-            return self.inventory[id].has(id, quantity)
+            return self.inventory[id].has(id, quantity, type)
 
     def hasAny(self):
         for key, each in self.inventory.items():

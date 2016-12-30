@@ -219,22 +219,31 @@ class processor_base(base):
                 for each in self.inventory.getInventory():
 
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
+                    print('toprod')
+                    print(toProduce)
                     if(self.inventory.has(each.id, toProduce['required'])):
-
 
                         # Has required quantity
                         self.inventory.takeItem(each.id, toProduce['required'])
 
+                        if('produces' in toProduce):
+                            # Non compound
+                            for prodKey, prodQuant in toProduce['produces'].items():
 
-                        print('sd' + str(toProduce['produces']))
+                                if (isinstance(prodQuant, list)):
+                                    self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0],
+                                                                 type=prodQuant[1])
+                                else:
+                                    self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant)
 
-                        for prodKey, prodQuant in toProduce['produces'].items():
-                            print('ADD')
-                            print(prodKey)
-                            print(prodQuant)
-
-
-                            self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0], type=prodQuant[1])
+                        else:
+                            for prodKey, prodData in toProduce['type'].items():
+                                if(prodKey == each.type):
+                                    for createsKey, createsQuantity in prodData.items():
+                                        if(isinstance(createsQuantity, list)):
+                                            self.inventoryOutput.addItem(id=createsKey, quantity=createsQuantity[0], type=createsQuantity[1])
+                                        else:
+                                            self.inventoryOutput.addItem(id=createsKey, quantity=createsQuantity)
 
 
 class producer_base(base):

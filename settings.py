@@ -170,9 +170,11 @@ def init():
         },
         'cutter': {
             'transformations': {
-                'copperplate': {
+                'plate': {
                     'required': 1,
-                    'produces': {'copperstrip': 5}
+                    'type': {
+                        'copper': {'copperstrip': 5},
+                    }
                 }
             }
         }
