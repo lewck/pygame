@@ -14,7 +14,6 @@ class factoryminermenu(base):
     def getSpeedUpgradePrice(self):
         try:
             obj = settings.grid[self.objectPosition[0]][self.objectPosition[1]]
-
             if(obj.speedLevel+1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
                 return settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel+1]
         except AttributeError:
@@ -23,7 +22,6 @@ class factoryminermenu(base):
 
     def doSpeedUpgrade(self):
         obj = settings.grid[self.objectPosition[0]][self.objectPosition[1]]
-
         if (obj.speedLevel + 1 in settings.objectDB['producer']['factory_parts']['speed_upgrades']):
             if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])):
                 shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])
@@ -54,7 +52,7 @@ class factoryminermenu(base):
             attribute={
                'font': 'primaryFont',
                'size': 50,
-               'value': 'Factory Menu',
+               'value': 'Miner Menu',
                'color': (255, 255, 255)
            }
         )

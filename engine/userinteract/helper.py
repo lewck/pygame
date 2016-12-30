@@ -5,14 +5,22 @@ import settings
 
 class helper:
     @staticmethod
-    def toggleModel(uid, reload=False):
-        if(settings.activeModelDB[settings.activeUI[uid]].active == False):
-            if(reload):
-                helper.reloadModel(settings.activeModelDB[settings.activeUI[uid]].id)
+    def getModel(uid):
+        # Get instance of model if in activeUI, or get direct from modelDB
+        if (uid in settings.activeUI):
+            return settings.activeModelDB[settings.activeUI[uid]]
+        return settings.activeModelDB[uid]
 
-            settings.activeModelDB[settings.activeUI[uid]].activate()
+    @staticmethod
+    def toggleModel(uid, reload=False):
+        model = helper.getModel(uid)
+        if (model.active == False):
+            if (reload):
+                helper.reloadModel(model.id)
+
+            model.activate()
         else:
-            settings.activeModelDB[settings.activeUI[uid]].close()
+            model.close()
 
     @staticmethod
     def reloadModel(modelID):

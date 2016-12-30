@@ -267,8 +267,7 @@ class factory_miner(producer_base):
 
     def eventClick(self):
         x = ui.create('factoryminermenu')
-        print('la')
-        print(x)
+        uihelper.toggleModel(x)
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):
