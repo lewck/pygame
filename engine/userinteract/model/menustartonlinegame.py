@@ -1,9 +1,3 @@
-'''
-'
-'   NB correct class naming convention: modeltype subtype action
-'
-'''
-
 from engine.userinteract.model.base import base
 from engine.userinteract.helper import helper as uihelper
 
@@ -14,13 +8,12 @@ class menustartonlinegame(base):
         self.basePriority = 120
         self.basePos = [0,0]
         self.baseDim = [550,1050]
-        super(menustartonlinegame, self).__init__(**kwargs)
 
-    def startGame(self):
-        settings.currentScreen = 'game'
-        uihelper.toggleModel('menustartonlinegame')
-        uihelper.toggleModel('menuloading')
+        base.__init__(self, **kwargs)
 
+    #--------------------------------------------------
+    #  Assign Inputs
+    #--------------------------------------------------
     def addInputs(self):
         self.addCommon(uid='coverall')
 
@@ -32,7 +25,11 @@ class menustartonlinegame(base):
             'event': 'startGame',
         })
 
+    #--------------------------------------------------
+    #  Assign Outputs
+    #--------------------------------------------------
     def addOutputs(self):
+        # UI
         self.addOutput(pos=[80,400], type='text', priority= 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',
             'size': 60,
@@ -70,3 +67,11 @@ class menustartonlinegame(base):
             'dim': self.baseDim,
             'color': (51, 51, 51)
         })
+
+    #--------------------------------------------------
+    #  Model-Specific Functionality
+    #--------------------------------------------------
+    def startGame(self):
+        settings.currentScreen = 'game'
+        uihelper.toggleModel('menustartonlinegame')
+        uihelper.toggleModel('menuloading')

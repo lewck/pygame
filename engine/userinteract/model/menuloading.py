@@ -1,11 +1,4 @@
-'''
-'
-'   NB correct class naming convention: modeltype subtype action
-'
-'''
-
 from engine.userinteract.model.base import base
-from engine.userinteract.helper import helper as uihelper
 
 import settings
 
@@ -14,13 +7,21 @@ class menuloading(base):
         self.basePriority = 120
         self.basePos = [0,0]
         self.baseDim = [550,1050]
-        super(menuloading, self).__init__(**kwargs)
 
+        base.__init__(self, **kwargs)
+
+    #--------------------------------------------------
+    #  Assign Inputs
+    #--------------------------------------------------
     def addInputs(self):
-        self.addCommon(uid='coverall')
+        self.addCommon(uid='coverall', color=(255,255,255))
 
+    #--------------------------------------------------
+    #  Assign Outputs
+    #--------------------------------------------------
     def addOutputs(self):
-        self.addOutput(pos=[250,400], type='text', priority= 2, title='menustoragebuytext', attribute={
+        # Loading text
+        self.addOutput(pos=[250,400], type='text', priority= 2, attribute={
             'font': 'primaryFont',
             'size': 60,
             'value': 'LOADING...',

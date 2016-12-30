@@ -1,13 +1,14 @@
-from engine import event
 from engine.userinteract.model.base import base
-from random import randint
 
 import settings
 
 class welcome(base):
     def __init__(self, **kwargs):
-        super(welcome, self).__init__(**kwargs)
+        base.__init__(self, **kwargs)
 
+    #--------------------------------------------------
+    #  Assign Inputs
+    #--------------------------------------------------
     def addInputs(self):
         self.addInput(type='mouseAction', priority = 5, title='close', attribute={
             'click': 1,
@@ -16,6 +17,9 @@ class welcome(base):
             'event': 'close'
         })
 
+    #--------------------------------------------------
+    #  Assign Outputs
+    #--------------------------------------------------
     def addOutputs(self):
         self.addOutput(pos=[200, 200], type='text', priority=10, title='welcomeText', attribute={
             'size': 10,

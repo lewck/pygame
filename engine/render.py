@@ -107,7 +107,7 @@ class render:
     @staticmethod
     def render():
         # Flush screen
-        settings.surface.fill((255, 255, 255))
+        settings.surface.fill((51, 51, 51))
 
         # Render components
         render.renderGrid()

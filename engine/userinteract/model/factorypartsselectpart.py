@@ -8,7 +8,8 @@ class factorypartsselectpart(base):
     def __init__(self, **kwargs):
         self.basePriority = 80
         self.title = 'factorypartsselectpart'
-        super(factorypartsselectpart, self).__init__(**kwargs)
+
+        base.__init__(self, **kwargs)
 
     def selectPart(self, part):
         settings.grid[self.objectPosition[0]][self.objectPosition[1]].part = part

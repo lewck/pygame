@@ -50,13 +50,13 @@ class ui:
                 # Assume no event arguments
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
-            inReturn.append([eid, out['title']])
+            inReturn.append(eid)
 
         # Register Outputs
         for out in model.output:
             # Register with out handler
             eid = outObj.create(modelID, out)
-            outReturn.append([eid, out['title']])
+            outReturn.append(eid)
 
         model.addInterfaces(inReturn, outReturn)
 

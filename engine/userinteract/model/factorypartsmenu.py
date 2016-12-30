@@ -9,7 +9,8 @@ class factorypartsmenu(base):
     def __init__(self, **kwargs):
         self.basePriority = 70
         self.title = 'factory'
-        super(factorypartsmenu, self).__init__(**kwargs)
+
+        base.__init__(self, **kwargs)
 
     def getSpeedUpgradePrice(self):
         try:

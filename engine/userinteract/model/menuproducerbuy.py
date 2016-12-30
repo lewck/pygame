@@ -1,13 +1,4 @@
-'''
-'
-'   NB correct class naming convention: modeltype subtype action
-'
-'''
-
 from engine.userinteract.model.base import base
-from shop import shop
-import item
-import object
 
 import settings
 
@@ -16,12 +7,19 @@ class menuproducerbuy(base):
         self.basePriority = 110
         self.basePos = [0,0]
         self.baseDim = [512,512]
-        super(menuproducerbuy, self).__init__(**kwargs)
 
+        base.__init__(self, **kwargs)
+
+    #--------------------------------------------------
+    #  Assign Inputs
+    #--------------------------------------------------
     def addInputs(self):
         self.addCommon(uid='close', pos=[0,512])
         self.addCommon(uid='coverall')
 
+    #--------------------------------------------------
+    #  Assign Outputs
+    #--------------------------------------------------
     def addOutputs(self):
         self.addOutput(pos=self.basePos, type='text', priority= 2, title='menustoragebuytext', attribute={
             'font': 'primaryFont',

@@ -28,9 +28,9 @@ class helper:
         settings.activeModelDB[modelID].close()
 
         # Remove output interfaces
-        settings.activeModelDB[modelID].deleteInterface('output', 'all')
+        settings.activeModelDB[modelID].deleteInterface('output')
         # Remove Input Interface
-        settings.activeModelDB[modelID].deleteInterface('input', 'all')
+        settings.activeModelDB[modelID].deleteInterface('input')
 
         settings.activeModelDB[modelID].reload()
 
