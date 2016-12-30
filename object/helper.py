@@ -35,13 +35,13 @@ class helper:
 
     @staticmethod
     def checkIfProcessorWaiting(identifier, apos):
-        print('---')
-
         locations = helper.findObjectByUid('factory_' + identifier, True)
 
         for position in locations:
             # Get Interact Position
             positionInteract = helper.getInteractPosition(position[0], position[1], position[2])
+            print('pi')
+            print(positionInteract)
             path = pathFind(apos[0], apos[1], positionInteract[0], positionInteract[1], 5)
             if (path.find()):
                 return positionInteract
@@ -50,6 +50,10 @@ class helper:
 
     @staticmethod
     def evaluateBestStorage(objectAPos, type='item', uid=None):
+        # Provide real-cordinates, not interact pos
+
+        objectAPos = helper.getInteractPosition(objectAPos[0], objectAPos[1], objectAPos[2])
+
         possible = []
 
         # First check if a job is waiting for it

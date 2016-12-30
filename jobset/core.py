@@ -70,7 +70,7 @@ class collectFromObjectAndStore(base):
                 return False
 
             # Determine best storage
-            self.pathEnd = objecthelper.evaluateBestStorage([self.startPosition[0],self.startPosition[1]], 'item', self.itemID)
+            self.pathEnd = objecthelper.evaluateBestStorage(self.startPosition, 'item', self.itemID)
 
             if (self.pathEnd==False):
                 # Storage Not Found

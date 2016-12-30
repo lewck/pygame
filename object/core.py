@@ -212,27 +212,19 @@ class processor_base(base):
 
             if(self.inventory.getInventory()):
                 # Has some items
-                print(
-                    'len of out inv for ' + str(self.title) + ' ' + str(len(self.inventoryOutput.getInventory())))
-                print('len of inv for ' + str(self.title) + ' ' + str(len(self.inventory.getInventory())))
-
                 for each in self.inventory.getInventory():
-
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
-                    print('toprod')
-                    print(toProduce)
                     if(self.inventory.has(each.id, toProduce['required'])):
 
-                        # Has required quantity
+                        # Has required quantity, remove required
                         self.inventory.takeItem(each.id, toProduce['required'])
 
+                        # Add whats needed
                         if('produces' in toProduce):
                             # Non compound
                             for prodKey, prodQuant in toProduce['produces'].items():
-
                                 if (isinstance(prodQuant, list)):
-                                    self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0],
-                                                                 type=prodQuant[1])
+                                    self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0], type=prodQuant[1])
                                 else:
                                     self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant)
 
