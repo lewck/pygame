@@ -1,6 +1,7 @@
 import pygame
 
 import settings
+from engine.userinteract.ui import ui
 from engine.userinteract.helper import helper as uihelper
 from engine.helper import helper as enginehelper
 from inventory import inventory
@@ -263,6 +264,11 @@ class factory_miner(producer_base):
         producer_base.__init__(self)
         producer_base.setVars(self, **kwargs)
         self.itemID = 'metalcopper'
+
+    def eventClick(self):
+        x = ui.create('factoryminermenu')
+        print('la')
+        print(x)
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):

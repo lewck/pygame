@@ -25,7 +25,7 @@ class defaultoverlay(base):
             'pos': [settings.yMax*50, 150],
             'dim': [50, 150],
             'event': 'openMenu',
-            'eventArgs': ['menuproducerbuy'],
+            'eventArgs': ['menufactorybuy'],
         })
 
         self.addInput(type='mouseAction', priority=self.basePriority + 5, title='oepnvehiclemenu', attribute={

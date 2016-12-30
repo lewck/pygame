@@ -2,6 +2,7 @@ from engine.userinteract.model.welcome import welcome
 from engine.userinteract.model.menustoragebuy import menustoragebuy
 from engine.userinteract.model.menuproducerbuy import menuproducerbuy
 from engine.userinteract.model.defaultoverlay import defaultoverlay
+from engine.userinteract.model.factoryminermenu import factoryminermenu
 from engine.userinteract.model.factorypartsmenu import factorypartsmenu
 from engine.userinteract.model.factorypartsselectpart import factorypartsselectpart
 from engine.userinteract.model.menuvehiclebuy import menuvehiclebuy
@@ -14,7 +15,7 @@ from engine.userinteract.model.menustart import menustart
 from engine.userinteract.model.gamesettings import gamesettings
 from engine.userinteract.model.menugameend import menugameend
 from engine.userinteract.model.menujoingame import menujoingame
-
+from engine.userinteract.model.menufactorybuy import menufactorybuy
 import engine.userinteract.model
 
 from engine.event import event
@@ -33,7 +34,7 @@ class ui:
             model = eval(uid + '(id = modelID)')
         except NameError:
             # Model not defined/imported, exit
-            settings.logObject.add('Model "' + str(uid) + '" failed to initiate', 2);
+            settings.logObject.add('Model "' + str(uid) + '" failed to initiate', 2)
             return False
 
         inReturn = []
@@ -64,7 +65,11 @@ class ui:
     @staticmethod
     def create(uid):
         # Make
-        modelID, model = ui.make(uid)
+        try:
+            modelID, model = ui.make(uid)
+        except TypeError:
+            # Assume received bool (false)
+            return False
 
         # Register Model
         settings.activeModelDB[modelID] = model

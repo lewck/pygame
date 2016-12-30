@@ -173,7 +173,7 @@ def init():
                 'plate': {
                     'required': 1,
                     'type': {
-                        'copper': {'copperstrip': 5},
+                        'copper': {'strip': [2, 'copper']},
                     }
                 }
             }
@@ -228,57 +228,6 @@ def init():
             'discovered': True,
             'makes': 2,
         },
-        'copperplate': {
-            'title': 'Copper Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'zincplate': {
-            'title': 'Zink Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'tinplate': {
-            'title': 'Tin Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'bronzeplate': {
-            'title': 'Bronze Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'brassplate': {
-            'title': 'Brass Plate',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'copperstrip': {
-            'title': 'Copper Strip',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'zincstrip': {
-            'title': 'Zinc Strip',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'tinstrip': {
-            'title': 'Tin Strip',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'bronzestrip': {
-            'title': 'Bronze Strip',
-            'sellPrice': 50,
-            'discovered': True
-        },
-        'brassstrip': {
-            'title': 'Brass Strip',
-            'sellPrice': 50,
-            'discovered': True
-        },
-
         'brassnails': {
             'title': 'Brass Nails',
             'required': {
@@ -298,11 +247,6 @@ def init():
             'discovered': False,
             'unlockPrice': 500,
             'makes': 1,
-        },
-        'copperdisk': {
-            'title': 'Copper Disk',
-            'sellPrice': 100,
-            'discovered': True
         },
         'plate' : {
             'type': {
@@ -422,6 +366,7 @@ def init():
     global activeUI
     activeUI = {
         'menuproducerbuy': False,
+        'menufactorybuy': False,
         'menustoragebuy': False,
         'defaultoverlay': False,
         'factorypartsmenu': False,

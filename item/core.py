@@ -78,55 +78,6 @@ class metalzinc(metalBase):
         self.id = 'metalzinc'
         super(metalzinc, self).__init__()
 
-#===========================================================================
-#  BRASS ITEMS
-#===========================================================================
-class brassBase(base):
-    def __init__(self):
-        super(brassBase, self).__init__()
-
-#--------------------------------------------------
-#  Brass Nails
-#--------------------------------------------------
-class brassnails(brassBase):
-    def __init__(self, **args):
-        self.id = 'brassnails'
-        super(brassnails, self).__init__()
-
-
-#===========================================================================
-#  BRONZE ITEMS
-#===========================================================================
-class bronzebase(base):
-    def __init__(self):
-        super(bronzebase, self).__init__()
-
-#--------------------------------------------------
-#  Bronze Coin
-#--------------------------------------------------
-class bronzecoin(bronzebase):
-    def __init__(self, **args):
-        self.id = 'bronzecoin'
-        super(bronzecoin, self).__init__()
-
-#--------------------------------------------------
-#  Copper Plate
-#--------------------------------------------------
-class copperplate(base):
-    def __init__(self, **args):
-        self.id = 'copperplate'
-        super(copperplate, self).__init__()
-
-class copperdisk(base):
-    def __init__(self, **args):
-        self.id = 'copperdisk'
-        super(copperdisk, self).__init__()
-
-class copperstrip(base):
-    def __init__(self, **args):
-        self.id = 'copperplate'
-        super(copperstrip, self).__init__()
-
 
 class compoundBase(base):
     def setVars(self):
@@ -135,6 +86,15 @@ class compoundBase(base):
 class plate(compoundBase):
     def __init__(self, **args):
         self.id = 'plate'
+
+    def setType(self, type):
+        self.type = type
+        compoundBase.setVars(self)
+
+
+class strip(compoundBase):
+    def __init__(self, **args):
+        self.id = 'strip'
 
     def setType(self, type):
         self.type = type
