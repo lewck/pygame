@@ -31,8 +31,11 @@ class ui:
         modelID = tool.genRandomString(16)
 
         try:
+            print('no')
             model = eval(uid + '(id = modelID)')
+            print(model)
         except NameError:
+
             # Model not defined/imported, exit
             settings.logObject.add('Model "' + str(uid) + '" failed to initiate', 2)
             return False
@@ -65,12 +68,9 @@ class ui:
     @staticmethod
     def create(uid):
         # Make
-        try:
-            modelID, model = ui.make(uid)
-        except TypeError:
-            # Assume received bool (false)
-            return False
+        modelID, model = ui.make(uid)
 
+        print('SUCCESS')
         # Register Model
         settings.activeModelDB[modelID] = model
 

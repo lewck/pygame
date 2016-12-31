@@ -9,32 +9,35 @@ class helper:
         # Get instance of model if in activeUI, or get direct from modelDB
         if (uid in settings.activeUI):
             return settings.activeModelDB[settings.activeUI[uid]]
+
+
         return settings.activeModelDB[uid]
 
     @staticmethod
-    def toggleModel(uid, reload=False):
-        model = helper.getModel(uid)
+    def toggleModel(modelID, reload=False):
+        model = helper.getModel(modelID)
+
         if (model.active == False):
             if (reload):
                 helper.reloadModel(model.id)
-
             model.activate()
         else:
             model.close()
 
     @staticmethod
     def reloadModel(modelID):
+        model = helper.getModel(modelID)
 
-        settings.activeModelDB[modelID].close()
+        model.close()
 
         # Remove output interfaces
-        settings.activeModelDB[modelID].deleteInterface('output')
+        model.deleteInterface('output')
         # Remove Input Interface
-        settings.activeModelDB[modelID].deleteInterface('input')
+        model.deleteInterface('input')
 
-        settings.activeModelDB[modelID].reload()
+        model.reload()
 
-        for out in settings.activeModelDB[modelID].input:
+        for out in model.input:
             # Register with event handler
             try:
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'],
@@ -44,17 +47,19 @@ class helper:
                 eid = event.create(modelID=modelID, data=out, trigger=out['attribute']['event'], args=0)
 
         # Register Outputs
-        for out in settings.activeModelDB[modelID].output:
+        for out in model.output:
             # Register with out handler
             eid = outObj.create(modelID, out)
 
-        settings.activeModelDB[modelID].activate()
+        model.activate()
 
     @staticmethod
     def updateAttribute(modelID, att, val):
-        setattr(settings.activeModelDB[settings.activeUI[modelID]], att, val)
+        model = helper.getModel(modelID)
+        setattr(model, att, val)
 
     @staticmethod
-    def closeModel(uid):
-        if (settings.activeModelDB[settings.activeUI[uid]].active == True):
-            settings.activeModelDB[settings.activeUI[uid]].close()
+    def closeModel(modelID):
+        model = helper.getModel(modelID)
+        if (model.active == True):
+            model.close()

@@ -36,12 +36,6 @@ class menustart(base):
     #--------------------------------------------------
     def addOutputs(self):
         # UI
-        self.addOutput(pos=[80,425], type='text', priority= 2, attribute={
-            'font': 'primaryFont',
-            'size': 60,
-            'value': 'Welcome',
-            'color': (255, 255, 255)
-        })
         self.addOutput(pos=[50, 425], type='image', priority=6, attribute={
             'uid': 'icon',
             'scale': (200, 200)
@@ -72,10 +66,8 @@ class menustart(base):
             'value': 'Join A Game',
             'color': (255, 255, 255)
         })
-        self.addOutput(pos=self.basePos, type='shape', attribute={
-            'shape': 'rectangle',
-            'dim': self.baseDim,
-            'color': (255,255,255)
+        self.addOutput(pos=[0,0], type='image', attribute={
+            'uid': 'background'
         })
 
     #--------------------------------------------------

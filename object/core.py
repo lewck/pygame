@@ -266,7 +266,10 @@ class factory_miner(producer_base):
         self.itemID = 'metalcopper'
 
     def eventClick(self):
+        print('here')
         x = ui.create('factoryminermenu')
+        uihelper.updateAttribute(x, 'objectPosition', [self.y,self.x])
+
         uihelper.toggleModel(x)
 
 class factory_press(processor_base):

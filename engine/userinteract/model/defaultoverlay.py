@@ -15,8 +15,6 @@ class defaultoverlay(base):
     #  Assign Inputs
     #--------------------------------------------------
     def addInputs(self):
-        self.addCommon(uid='coverall')
-
         # Open factory buy menu
         self.addInput(type='mouseAction', priority=5, attribute={
             'click': 1,

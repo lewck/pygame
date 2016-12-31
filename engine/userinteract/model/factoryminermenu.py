@@ -7,6 +7,8 @@ import settings
 class factoryminermenu(base):
     def __init__(self, **kwargs):
         self.basePriority = 70
+        self.basePos = [0,0]
+        self.baseDim = [512,512]
 
         base.__init__(self, **kwargs)
 
