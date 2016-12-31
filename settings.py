@@ -144,19 +144,19 @@ def init():
                 },
                 'metalzinc': {
                     'required': 2,
-                    'produces': {'zincplate': 2}
+                    'produces': {'plate': [2, 'zinc']}
                 },
                 'metaltin': {
                     'required': 2,
-                    'produces': {'tinplate': 2}
+                    'produces': {'plate': [2, 'tin']}
                 },
                 'metalbronze': {
                     'required': 2,
-                    'produces': {'bronzeplate': 2}
+                    'produces': {'plate': [2, 'bronze']}
                 },
                 'metalbrass': {
                     'required': 2,
-                    'produces': {'brassplate': 2}
+                    'produces': {'plate': [2, 'brass']}
                 },
             }
         },

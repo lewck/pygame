@@ -1,7 +1,7 @@
 from engine.userinteract.model.base import base
 from engine.userinteract.helper import helper as uihelper
+from engine.userinteract.ui import ui
 from shop import shop
-
 import settings
 
 class factoryminermenu(base):
@@ -64,8 +64,8 @@ class factoryminermenu(base):
             # Object is placed
 
             # Draw Part
-            if(settings.grid[self.objectPosition[0]][self.objectPosition[1]].part != 0):
-                text = settings.grid[self.objectPosition[0]][self.objectPosition[1]].part
+            if(settings.grid[self.objectPosition[0]][self.objectPosition[1]].itemID != 0):
+                text = settings.grid[self.objectPosition[0]][self.objectPosition[1]].itemID
             else:
                 text = 'Select'
 
@@ -97,9 +97,6 @@ class factoryminermenu(base):
                 uihelper.toggleModel('factorypartsmenu')
 
     def createPartSelect(self):
-        uihelper.updateAttribute('factorypartsselectpart','objectPosition', self.objectPosition)
-        uihelper.toggleModel('factorypartsselectpart')
-
-    def load(self, pos):
-        self.objectPosition = pos
-        self.refresh()
+        x = ui.create('factorypartsselectpart', 2)
+        uihelper.updateAttribute(x,'objectPosition', self.objectPosition)
+        uihelper.reloadModel(x)

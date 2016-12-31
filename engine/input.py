@@ -36,9 +36,7 @@ class input():
                       Buffer used because some events change size of activeEventDB (for example an event that closes
                       itself). Every event is added to a buffer then performed after the loop is completed in order.
                     '''
-                    print('LC')
                     if (not inputbuffer.isClick()):
-                        print('IC')
                         # No buffer found
                         buffer = []
                         for id, each in eventObject.getActive().items():

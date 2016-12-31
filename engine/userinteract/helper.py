@@ -15,6 +15,7 @@ class helper:
 
     @staticmethod
     def toggleModel(modelID, reload=False):
+
         model = helper.getModel(modelID)
 
         if (model.active == False):
