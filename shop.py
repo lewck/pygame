@@ -21,6 +21,8 @@ class shop:
             settings.webinteract['market'].verifyCache()
             itemUsed = False
             for cache in settings.marketCache:
+                print('---')
+                print(cache)
                 if(cache['itemid'] == each.id):
                     # Sell
                     itemUsed = True
@@ -32,7 +34,12 @@ class shop:
                     break
 
             if(not itemUsed):
-                settings.player.balance += settings.itemDB[each.id]['sellPrice']
+                if('discovered' in settings.itemDB[each.id]):
+                    # Non Compound
+                    settings.player.balance += settings.itemDB[each.id]['sellPrice']
+                else:
+                    # Compound
+                    settings.player.balance += settings.itemDB[each.id]['type'][each.type]['sellPrice']
 
             # Check if balance objective is met
             if (int(settings.gameData['objectives'][0]) == 1):

@@ -47,18 +47,14 @@ class menuunlock(base):
     #  Model-Specific Functionality
     #--------------------------------------------------
     def unlockItem(self, itemID, type=None):
-        print('UNLOCK')
-        print(type)
         unlockPrice = itemhelper.getPrice(itemID, type)
 
         if (shop.canPurchase(unlockPrice)):
             shop.purchase(unlockPrice)
 
-            itemhelper.discover(itemID, type)
 
-            uihelper.reloadModel(settings.activeModelDB[settings.activeUI['factorypartsselectpart']].id)
-            uihelper.reloadModel(settings.activeModelDB[settings.activeUI['menuunlock']].id)
-            uihelper.toggleModel('menuunlock')
+            itemhelper.discover(itemID, type)
+            uihelper.toggleModel('menuunlock', True)
 
     def renderDiscovered(self, basey, identifier, data, type=None):
         if (data['discovered']):

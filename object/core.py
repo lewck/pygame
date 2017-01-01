@@ -308,6 +308,7 @@ class empty(base):
         base.setVars(self, base='empty', **kwargs)
         self.passable = []
 
+
 class exports(base):
     def __init__(self, **kwargs):
         self.type = 'exports'
@@ -326,6 +327,7 @@ class exports(base):
             if(self.inventory.hasAny()):
                 toSell = self.inventory.takeItem('all', 'all')
                 shop.sell(toSell)
+
 
 class garage(base):
     def __init__(self, **kwargs):

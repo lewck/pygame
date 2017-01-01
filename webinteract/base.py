@@ -44,6 +44,7 @@ class base:
             print('Webinteract fail '+str(jsonData['fail']))
             return False
 
+        print(jsonData)
         return jsonData
 
 

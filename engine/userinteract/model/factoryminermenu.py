@@ -6,7 +6,7 @@ import settings
 
 class factoryminermenu(base):
     def __init__(self, **kwargs):
-        self.basePriority = 70
+        self.basePriority = 60
         self.basePos = [0,0]
         self.baseDim = [512,512]
 
@@ -94,7 +94,7 @@ class factoryminermenu(base):
             if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])):
                 shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])
                 obj.speedLevel += 1
-                uihelper.toggleModel('factorypartsmenu')
+                uihelper.toggleModel(self.id)
 
     def createPartSelect(self):
         x = ui.create('factorypartsselectpart', 2)
