@@ -107,8 +107,8 @@ class gamesettings(base):
 
         if(gameStatus):
             # Game creation success
-            uihelper.toggleModel('gamesettings')
-            uihelper.reloadModel(settings.activeUI['menustartonlinegame'])
+            uihelper.toggle('gamesettings')
+            uihelper.reload(settings.activeUI['menustartonlinegame'])
 
         # Game creation error
         print('Game Could Not Be Created')

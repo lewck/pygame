@@ -12,9 +12,6 @@ from util.tool import tool
 #  Factory Class
 #--------------------------------------------------
 class factory:
-    def __init(self):
-        print('success')
-
     @staticmethod
     def create(**args):
         id = tool.genRandomString(16)
@@ -25,7 +22,9 @@ class factory:
         if(result.type=='vehicle'):
             # Find suitable storage
             storage = objecthelper.getEmptyStorageAll('vehicle')[0]
-            print(storage)
+
+            if(not storage):
+                return False
 
             result.pos = [storage[0], storage[1]]
 
@@ -50,8 +49,6 @@ class base:
         self.claimed = False
         self.id = kwargs['id']
         self.tickID = settings.tick.register(5, 'settings.activeEntityDB["'+self.id+'"].doTick(0)')
-        print('YA')
-        print(str(self.tickID))
 
     def assign(self, jobID):
         self.job = settings.activeJobDB[jobID]

@@ -14,7 +14,7 @@ class factorypartsselectpart(base):
     def selectPart(self, itemID):
         print(self.objectPosition)
         settings.grid[self.objectPosition[0]][self.objectPosition[1]].itemID = itemID
-        uihelper.toggleModel(self.id)
+        uihelper.toggle(self.id)
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority= 5, title='openBuyMenu', attribute={

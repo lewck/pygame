@@ -141,4 +141,4 @@ class defaultoverlay(base):
     #--------------------------------------------------
     def openMenu(self, uid):
         # Open menu Ui
-        uihelper.toggleModel(uid)
+        uihelper.toggle(uid)

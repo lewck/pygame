@@ -75,7 +75,6 @@ class moveItem(base):
         }
 
         if(self.taskCurrent == 1):
-            # Assign entity to pat
             self.taskCurrent += 1
             # Assign Entity
             settings.activeEntityDB[self.entityID].assign(self.jobID)

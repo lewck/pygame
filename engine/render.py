@@ -100,10 +100,6 @@ class render:
             else:
                 settings.logObject.add('Not Rendered type' + str(each.data['type']), 2)
 
-
-
-
-
     @staticmethod
     def render():
         # Flush screen

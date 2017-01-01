@@ -97,6 +97,6 @@ class input():
                 if (event.key == pygame.K_F5):
                     settings.webinteractmarket.reduceDemand('metalzinc', 5)
                 if(event.key == pygame.K_F9):
-                    uihelper.toggleModel('menuvehiclebuy')
+                    uihelper.toggle('menuvehiclebuy')
                 if (event.key == pygame.K_F11):
                     entityID = entity.factory.create(uid='car')

@@ -34,7 +34,7 @@ class factory:
                 return True
 
             else:
-                # Check balance etc
+                # Check balance
                 if (shop.canPurchase(result.price)):
                     shop.purchase(result.price)
                     settings.grid[kwargs['y']][kwargs['x']] = result
@@ -196,7 +196,7 @@ class factory_parts(base):
 
     def eventClick(self):
         settings.activeModelDB[settings.activeUI['factorypartsmenu']].objectPosition = [self.y,self.x]
-        uihelper.toggleModel('factorypartsmenu', True)
+        uihelper.toggle('factorypartsmenu', True)
 
 #===========================================================================
 #  Bases
@@ -249,7 +249,6 @@ class producer_base(base):
         if (tickID == 0):
             if(self.itemID):
                 self.checkFullInventory()
-
                 # Continuously create item
                 self.inventoryOutput.addItem(id=self.itemID, quantity=settings.itemDB[self.itemID]['makes'] *
                                         self.details['speed_upgrades_modifier'][
@@ -268,7 +267,7 @@ class factory_miner(producer_base):
     def eventClick(self):
         x = ui.create('factoryminermenu')
         uihelper.updateAttribute(x, 'objectPosition', [self.y,self.x])
-        uihelper.reloadModel(x)
+        uihelper.reload(x)
 
 class factory_press(processor_base):
     def __init__(self, **kwargs):

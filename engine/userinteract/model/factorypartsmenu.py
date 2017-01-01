@@ -29,11 +29,11 @@ class factorypartsmenu(base):
             if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])):
                 shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])
                 obj.speedLevel += 1
-                uihelper.toggleModel('factorypartsmenu')
+                uihelper.toggle('factorypartsmenu')
 
     def createPartSelect(self):
         uihelper.updateAttribute('factorypartsselectpart','objectPosition', self.objectPosition)
-        uihelper.toggleModel('factorypartsselectpart')
+        uihelper.toggle('factorypartsselectpart')
 
     def addInputs(self):
         self.addInput(type='mouseAction', priority=5, title='openBuyMenu', attribute={

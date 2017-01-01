@@ -8,16 +8,11 @@ class factory:
     @staticmethod
     def create(**kwargs):
         # Return object of UID
-        print('creating')
-        print(kwargs['type'])
-        print(kwargs['item'])
 
         if(not kwargs['type']):
             return eval(kwargs['item']+'()')
 
         # Generate object with a type
-        print('att2')
-
         items = eval(kwargs['item']+'()')
         items.type = kwargs['type']
 
@@ -33,15 +28,10 @@ class base:
 
 #===========================================================================
 #  METAL ITEMS
-#===========================================================================
-class metalBase(base):
-    def __init__(self):
-        super(metalBase, self).__init__()
-
-#--------------------------------------------------
+#===========================================================================------------------------------
 #  Metal Brass
 #--------------------------------------------------
-class metalbrass(metalBase):
+class metalbrass(base):
     def __init__(self, **args):
         self.id = 'metalbrass'
         super(metalbrass, self).__init__()
@@ -49,7 +39,7 @@ class metalbrass(metalBase):
 #--------------------------------------------------
 #  Metal Bronze
 #--------------------------------------------------
-class metalbronze(metalBase):
+class metalbronze(base):
     def __init__(self, **args):
         self.id = 'metalbronze'
         super(metalbronze, self).__init__()
@@ -57,7 +47,7 @@ class metalbronze(metalBase):
 #--------------------------------------------------
 #  Metal Copper
 #--------------------------------------------------
-class metalcopper(metalBase):
+class metalcopper(base):
     def __init__(self, **args):
         self.id = 'metalcopper'
         super(metalcopper, self).__init__()
@@ -65,7 +55,7 @@ class metalcopper(metalBase):
 #--------------------------------------------------
 #  Metal Tin
 #--------------------------------------------------
-class metaltin(metalBase):
+class metaltin(base):
     def __init__(self, **args):
         self.id = 'metaltin'
         super(metaltin, self).__init__()
@@ -73,7 +63,7 @@ class metaltin(metalBase):
 #--------------------------------------------------
 #  Metal Zinc
 #--------------------------------------------------
-class metalzinc(metalBase):
+class metalzinc(base):
     def __init__(self, **args):
         self.id = 'metalzinc'
         super(metalzinc, self).__init__()

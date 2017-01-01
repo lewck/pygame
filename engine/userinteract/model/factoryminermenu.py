@@ -94,9 +94,9 @@ class factoryminermenu(base):
             if (shop.canPurchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])):
                 shop.purchase(settings.objectDB['producer']['factory_parts']['speed_upgrades'][obj.speedLevel + 1])
                 obj.speedLevel += 1
-                uihelper.toggleModel(self.id)
+                uihelper.toggle(self.id)
 
     def createPartSelect(self):
         x = ui.create('factorypartsselectpart', 2)
         uihelper.updateAttribute(x,'objectPosition', self.objectPosition)
-        uihelper.reloadModel(x)
+        uihelper.reload(x)

@@ -31,6 +31,7 @@ class ui:
             from engine.userinteract.model.menujoingame import menujoingame
             from engine.userinteract.model.menufactorybuy import menufactorybuy
             import engine.userinteract.model
+
         elif(classification == 2):
             from engine.userinteract.model.factorypartsselectpart import factorypartsselectpart
 
@@ -38,11 +39,8 @@ class ui:
         modelID = tool.genRandomString(16)
 
         try:
-            print('no')
             model = eval(uid + '(id = modelID)')
-            print(model)
         except NameError:
-
             # Model not defined/imported, exit
             settings.logObject.add('Model "' + str(uid) + '" failed to initiate', 2)
             return False
@@ -81,7 +79,3 @@ class ui:
         settings.activeModelDB[modelID] = model
 
         return modelID
-
-    def getInstance(self):
-        # Use to get an instance of the model, opposed to a globally assigned
-        pass

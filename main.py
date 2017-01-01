@@ -80,7 +80,7 @@ for key, value in settings.activeUI.items():
     settings.activeUI[key] = ui.create(key)
 
 # Open start menu UI
-uihelper.toggleModel('menustart')
+uihelper.toggle('menustart')
 
 # Start Menu Loop
 while settings.currentScreen=='menu' and not settings.gameExit:
@@ -108,7 +108,7 @@ if(settings.currentScreen == 'game'):
     settings.player = player()
 
     # Pre game setup
-    uihelper.toggleModel('defaultoverlay')
+    uihelper.toggle('defaultoverlay')
     map.create(0)
     entity.factory.create(uid='car')
 
@@ -126,7 +126,7 @@ if(settings.currentScreen == 'game'):
     devTick = settings.tick.register(50000, "settings.webinteract['game'].checkCompleted()")
 
     # Close Loading overlay
-    uihelper.closeModel('menuloading')
+    uihelper.close('menuloading')
 
 
     # Core Game Loop
@@ -167,7 +167,7 @@ if(settings.currentScreen == 'game'):
 if(settings.currentScreen == 'gameCompleted'):
     # End game setup
     uihelper.updateAttribute('menugameend', 'winstatus', settings.winStatus)
-    uihelper.toggleModel('menugameend', True)
+    uihelper.toggle('menugameend', True)
 
     # End game loop
     while (settings.currentScreen=='gameCompleted') and (not settings.gameExit):

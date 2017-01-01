@@ -73,5 +73,5 @@ class menustartonlinegame(base):
     #--------------------------------------------------
     def startGame(self):
         settings.currentScreen = 'game'
-        uihelper.toggleModel('menustartonlinegame')
-        uihelper.toggleModel('menuloading')
+        uihelper.toggle('menustartonlinegame')
+        uihelper.toggle('menuloading')

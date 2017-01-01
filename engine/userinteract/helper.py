@@ -14,19 +14,19 @@ class helper:
         return settings.activeModelDB[uid]
 
     @staticmethod
-    def toggleModel(modelID, reload=False):
+    def toggle(modelID, reload=False):
 
         model = helper.getModel(modelID)
 
         if (model.active == False):
             if (reload):
-                helper.reloadModel(model.id)
+                helper.reload(model.id)
             model.activate()
         else:
             model.close()
 
     @staticmethod
-    def reloadModel(modelID):
+    def reload(modelID):
         model = helper.getModel(modelID)
 
         model.close()
@@ -60,7 +60,13 @@ class helper:
         setattr(model, att, val)
 
     @staticmethod
-    def closeModel(modelID):
+    def close(modelID):
         model = helper.getModel(modelID)
         if (model.active == True):
             model.close()
+
+    @staticmethod
+    def activate(modelID):
+        model = helper.getModel(modelID)
+        if (model.active == False):
+            model.activate()

@@ -1,8 +1,3 @@
-'''
-'
-'   Tick class handles registering, and calling ticking
-'
-'''
 from util.tool import tool
 
 class tick:

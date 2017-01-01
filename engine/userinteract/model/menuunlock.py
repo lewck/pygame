@@ -54,7 +54,7 @@ class menuunlock(base):
 
 
             itemhelper.discover(itemID, type)
-            uihelper.toggleModel('menuunlock', True)
+            uihelper.toggle('menuunlock', True)
 
     def renderDiscovered(self, basey, identifier, data, type=None):
         if (data['discovered']):

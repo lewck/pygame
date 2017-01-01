@@ -75,9 +75,9 @@ class menustart(base):
     #--------------------------------------------------
     def createGame(self):
         # Toggle to create game menu
-        uihelper.toggleModel('menustart')
-        uihelper.toggleModel('gamesettings')
+        uihelper.toggle('menustart')
+        uihelper.toggle('gamesettings')
 
     def joinGame(self):
-        uihelper.toggleModel('menustart')
-        uihelper.toggleModel('menujoingame')
+        uihelper.toggle('menustart')
+        uihelper.toggle('menujoingame')

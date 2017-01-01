@@ -13,6 +13,8 @@ class shop:
     def purchase(price):
         if(shop.canPurchase(price)):
             settings.player.balance += -price
+            return True
+        return False
 
     @staticmethod
     def sell(items):
@@ -21,8 +23,6 @@ class shop:
             settings.webinteract['market'].verifyCache()
             itemUsed = False
             for cache in settings.marketCache:
-                print('---')
-                print(cache)
                 if(cache['itemid'] == each.id):
                     # Sell
                     itemUsed = True

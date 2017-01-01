@@ -113,16 +113,16 @@ class menujoingame(base):
     #--------------------------------------------------
     def selectGameID(self, gameID):
         self.gameID = gameID
-        uihelper.reloadModel(self.id)
+        uihelper.reload(self.id)
 
     def selectGamePin(self, gamePin):
         self.gamePin = gamePin
-        uihelper.reloadModel(self.id)
+        uihelper.reload(self.id)
 
     def joinGame(self):
         gamewebinteract = game()
         if(gamewebinteract.join(self.gameID, self.gamePin)):
-            uihelper.toggleModel('menujoingame')
+            uihelper.toggle('menujoingame')
             settings.currentScreen = 'game'
 
     def inputGameID(self):
