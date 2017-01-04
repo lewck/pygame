@@ -3,5 +3,5 @@ import settings
 class helper:
     @staticmethod
     def complete(jobsetID, jobid):
-        #Close Job
+        # Close Job
         settings.activeJobsetDB[jobsetID].eventTaskComplete()

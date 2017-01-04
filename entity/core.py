@@ -152,7 +152,7 @@ class van(base):
         super(van, self).setVars(**args)
         self.image = pygame.image.load('sprites/van.png')
         self.tickListen = [5]
-        self.inventory = inventory(30)
+        self.inventory = inventory(25)
 
     def doTick(self, tickID):
         if(tickID==0):

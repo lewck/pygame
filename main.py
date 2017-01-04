@@ -3,7 +3,6 @@ import pygame
 import entity
 import object
 import settings
-from dev.testmap import testmap
 from engine.input import input
 from engine.render import render
 from engine.tick import tick
