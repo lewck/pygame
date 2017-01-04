@@ -26,7 +26,7 @@ class shop:
                 if(cache['itemid'] == each.id):
                     # Sell
                     itemUsed = True
-                    settings.player.balance += settings.itemDB[each.id]['sellPrice'] + cache['current_demand_addition']
+                    settings.player.balance += settings.itemDB[each.id]['sellPrice'] * cache['current_demand_addition']
 
                     # Update demands
                     settings.webinteract['market'].reduceDemand(each.id, 1)

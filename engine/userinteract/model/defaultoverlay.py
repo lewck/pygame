@@ -93,7 +93,7 @@ class defaultoverlay(base):
         self.addOutput(pos=[(settings.yMax * 50) + 15, 175], type='text', priority=5, attribute={
            'font': 'primaryFont',
            'size': 20,
-           'value': 'Producer Menu',
+           'value': 'Factory Menu',
            'color': (0, 0, 0)
         })
 

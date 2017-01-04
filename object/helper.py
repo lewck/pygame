@@ -12,7 +12,7 @@ class helper:
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
                 if (settings.grid[y][x].hasInventory()):
-                    # Has invntory
+                    # Has inventory
                     if (not settings.grid[y][x].inventory.isFull()) & (settings.grid[y][x].inventory.type == type):
                         # Not full, correct type
                         if(not hasattr(settings.grid[y][x], 'inventoryOutput')):
@@ -40,8 +40,6 @@ class helper:
         for position in locations:
             # Get Interact Position
             positionInteract = helper.getInteractPosition(position[0], position[1], position[2])
-            print('pi')
-            print(positionInteract)
             path = pathFind(apos[0], apos[1], positionInteract[0], positionInteract[1], 5)
             if (path.find()):
                 return positionInteract

@@ -289,7 +289,12 @@ def init():
             }
         },
         'storage': {
-
+            'storageunit': {
+                'title': 'empty',
+                'tickListen': [],
+                'price': 100,
+                'discovered': True,
+            }
         },
         'storageVehicles': {
             'garage': {

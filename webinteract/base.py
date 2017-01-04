@@ -24,7 +24,7 @@ class base:
         url_values = urllib.parse.urlencode(data)
         print(url_values)
 
-        url = 'http://'+settings.remoteURL+'/pygame/kernal.php'
+        url = 'http://'+settings.remoteURL+'/pygame/kernel.php'
 
         print('CALLING')
         print(url)

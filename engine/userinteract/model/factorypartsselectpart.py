@@ -12,7 +12,6 @@ class factorypartsselectpart(base):
         base.__init__(self, **kwargs)
 
     def selectPart(self, itemID):
-        print(self.objectPosition)
         settings.grid[self.objectPosition[0]][self.objectPosition[1]].itemID = itemID
         uihelper.toggle(self.id)
 

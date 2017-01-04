@@ -146,7 +146,7 @@ if(settings.currentScreen == 'game'):
         # Tick everything else
         tickBuffer = []
         for key, each in settings.tick.getAll().items():
-            #Create buffer
+            # Create buffer
             if(pygame.time.get_ticks()%each[1] == 0):
                 tickBuffer.append(each[2])
 

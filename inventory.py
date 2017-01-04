@@ -17,9 +17,6 @@ class node():
         return False
 
     def addItem(self, itemID, quantity, type):
-        print('y' + str(quantity))
-        print(len(self.inventory))
-        print(self.size)
         count = 0
         while (len(self.inventory) < self.size):
             if(count < quantity):

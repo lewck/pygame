@@ -21,7 +21,7 @@ class menugameend(base):
     #--------------------------------------------------
     def addOutputs(self):
         # Title
-        self.addOutput(pos=[80,425], type='text', priority= 2, attribute={
+        self.addOutput(pos=[80,425], type='text', priority=2, attribute={
             'font': 'primaryFont',
             'size': 60,
             'value': 'Game Over!',

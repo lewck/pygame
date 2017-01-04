@@ -24,7 +24,7 @@ class menufactorybuy(base):
         self.addOutput(pos=self.basePos, type='text', priority= 2, attribute={
             'font': 'primaryFont',
             'size': 50,
-            'value': 'Producer Shop',
+            'value': 'Factory Shop',
             'color': (255, 255, 255)
         })
 
@@ -43,7 +43,7 @@ class menufactorybuy(base):
                 self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, attribute={
                     'shape': 'rectangle',
                     'dim': [39, 39],
-                    'color': (0, 0, 0)
+                    'color': (255, 255, 255)
                 })
 
                 if(count<=max):

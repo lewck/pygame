@@ -347,3 +347,12 @@ class road(base):
         base.__init__(self)
         base.setVars(self, **kwargs)
         self.passable = [5]
+
+class storageunit(base):
+    def __init__(self, **kwargs):
+        self.type = 'storage'
+        self.title = 'storageunit'
+        self.inventory = inventory(30)
+        base.__init__(self)
+        base.setVars(self, **kwargs)
+        self.passable = [5]

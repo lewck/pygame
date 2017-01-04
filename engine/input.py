@@ -11,7 +11,8 @@ from engine.userinteract.helper import helper as uihelper
 from engine.inputbuffer import inputbuffer
 from engine.event import event as eventObject
 from util.map import map
-
+from pathfind import pathFind
+from object.helper import helper as objecthelper
 
 class input():
     @staticmethod
@@ -84,19 +85,8 @@ class input():
                         # Send buffer
                         inputbuffer.complete()
 
-                if (event.key == pygame.K_F1):
-                    x = ui.create('gamesettings')
-                    settings.activeModelDB[x].activate()
-
-                if (event.key == pygame.K_F2):
-                    devmap.create(0)
-                if (event.key == pygame.K_F3):
-                    devmap.create(1)
-                if (event.key == pygame.K_F4):
-                    object.factory.create(uid='factory_press', y=5, x=5, direction=0)
-                if (event.key == pygame.K_F5):
-                    settings.webinteractmarket.reduceDemand('metalzinc', 5)
+                # Hotkey Handle
                 if(event.key == pygame.K_F9):
                     uihelper.toggle('menuvehiclebuy')
                 if (event.key == pygame.K_F11):
-                    entityID = entity.factory.create(uid='car')
+                    pass

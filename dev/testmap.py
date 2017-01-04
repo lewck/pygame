@@ -7,7 +7,6 @@ class testmap:
 
     def loadmap0(self):
         # Map for testing pathfinding
-        print('loading')
         object.factory.create(uid='genericHouse', y=0, x=1, direction=0, dev=True)
         object.factory.create(uid='genericHouse', y=1, x=1, direction=0, dev=True)
         object.factory.create(uid='genericHouse', y=2, x=1, direction=0, dev=True)
@@ -30,7 +29,6 @@ class testmap:
 
     def loadmap1(self):
         # Map for testing
-        print('loading')
         object.factory.create(uid='road', y=1, x=1, direction=0, dev=True)
         object.factory.create(uid='road', y=1, x=2, direction=0, dev=True)
         object.factory.create(uid='road', y=1, x=3, direction=0, dev=True)
@@ -47,12 +45,10 @@ class testmap:
         object.factory.create(uid='exports', y=0, x=3, direction=2, dev=True)
 
     def loadmap2(self):
-        print('loading')
         object.factory.create(uid='garage', y=0, x=4, direction=2, dev=True)
 
     def loadmap3(self):
         # Map for testing new game spawns
-        print('loading')
         object.factory.create(uid='garage', y=0, x=4, direction=2, dev=True)
         object.factory.create(uid='factory_parts', y=0, x=1, direction=2, dev=True)
         object.factory.create(uid='road', y=1, x=1, direction=0, dev=True)

@@ -28,6 +28,7 @@ class tool:
 
     @staticmethod
     def bubbleSort(**kwargs):
+        # Sorts arg 'values'
         if('localvariable' in kwargs):
             if(type(kwargs['values']) is list):
                 # Sort array, return array

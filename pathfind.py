@@ -36,22 +36,24 @@ class pathFind():
         # Up
         if(self.current.y-1>=0):
             if(not self.checkClosed(self.current.y-1, self.current.x)) and self.isPassible(self.current.y-1, self.current.x ) and (not(self.isOpen(self.current.y-1, self.current.x))):
-                #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
-                self.open.append(node(self.current.y-1, self.current.x,[self.current.y, self.current.x,0,  self.current.parent], self.sets))
+                self.open.append(
+                    node(self.current.y-1, self.current.x,[self.current.y, self.current.x,0,  self.current.parent],
+                         self.sets))
         # Left
         if (self.current.x-1 >= 0):
             if (not self.checkClosed(self.current.y, self.current.x-1)) and self.isPassible(self.current.y, self.current.x-1) and (not(self.isOpen(self.current.y, self.current.x-1))):
-                #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
-                self.open.append(node(self.current.y, self.current.x-1,[self.current.y, self.current.x,3, self.current.parent], self.sets))
+                self.open.append(
+                    node(self.current.y, self.current.x-1,[self.current.y, self.current.x,3, self.current.parent],
+                         self.sets))
         # Right
         if (self.current.x+1 <= settings.xMax-1):
             if (not self.checkClosed(self.current.y, self.current.x+1))and self.isPassible(self.current.y, self.current.x+1) and (not(self.isOpen(self.current.y, self.current.x+1))):
-                #print('checked' + str(self.current.y) + ' ' + str(self.current.x-1))
-                self.open.append(node(self.current.y, self.current.x+1,[self.current.y, self.current.x, 1,self.current.parent], self.sets))
+                self.open.append(
+                    node(self.current.y, self.current.x+1,[self.current.y, self.current.x, 1,self.current.parent],
+                         self.sets))
         # Down
         if (self.current.y+1 <= settings.yMax-1):
             if (not self.checkClosed(self.current.y + 1, self.current.x))and self.isPassible(self.current.y+1, self.current.x) and (not(self.isOpen(self.current.y+1, self.current.x))):
-                #print('checked'+str(self.current.y-1)+' '+str(self.current.x))
                 self.open.append(
                     node(self.current.y+1, self.current.x, [self.current.y, self.current.x,2, self.current.parent],
                         self.sets))
@@ -71,23 +73,22 @@ class pathFind():
         self.current = node(self.ybegin, self.xbegin, [self.ybegin, self.xbegin], self.sets)
         self.close(self.ybegin, self.xbegin)
         self.checkNeighbours()
-        #print('checking N')
-        #print(self.open)
 
         cur = 0
         while self.open:
-            #print(self.open)
-            #print('Checking Open')
+            # Check next open node
             pos = self.lowestF()
             self.current = self.open[pos]
-            #print('Current = '+str(self.current.y)+' '+str(self.current.x))
+
+            # Check neighbours of lowest F
             self.checkNeighbours()
-            #print('Checking Neighbours')
+
+            # Close Self
             self.close(self.current.y,self.current.x)
             self.open.pop(pos)
-            #print('Closed Self')
 
             if self.current.x==self.xend and self.current.y==self.yend:
+                # Reformat output when path is found
                 return(self.organise([[self.current.y, self.current.x, 4], self.current.parent]))
 
 
@@ -96,7 +97,6 @@ class pathFind():
     def organise(self, check):
         store = []
         while True:
-            # print(check)  # uncomment for sort debug
             if (check[0] == -1):
                 break
             else:
@@ -104,12 +104,9 @@ class pathFind():
                 check = check[1]
 
         for each in store:
-            # print(each)
             settings.grid[each[0]][each[1]].highlightAdd(each[2]) #Highlight
             pass
 
-
-        # print(store)
         pathID = tool.genRandomString()
 
         settings.pathDB[pathID] = ([[[0, 0], [9, 9]], [store]])

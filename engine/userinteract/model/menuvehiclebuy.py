@@ -42,7 +42,7 @@ class menuvehiclebuy(base):
                 self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, attribute={
                     'shape': 'rectangle',
                     'dim': [39, 39],
-                    'color': (0, 0, 0)
+                    'color': (255,255,255)
                 })
                 if(count<=max):
                     uid = keys[count]

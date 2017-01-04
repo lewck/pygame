@@ -15,23 +15,17 @@ class menuproducerbuy(base):
     #--------------------------------------------------
     def addInputs(self):
         self.addCommon(uid='close', pos=[0,512])
-        self.addCommon(uid='coverall')
+        self.addCommon(uid='coverall', color=(51,51,51))
 
     #--------------------------------------------------
     #  Assign Outputs
     #--------------------------------------------------
     def addOutputs(self):
-        self.addOutput(pos=self.basePos, type='text', priority= 2, title='menustoragebuytext', attribute={
+        self.addOutput(pos=self.basePos, type='text', priority= 2, attribute={
             'font': 'primaryFont',
             'size': 50,
             'value': 'Producer Shop',
             'color': (255, 255, 255)
-        })
-
-        self.addOutput(pos=self.basePos, type='shape', priority= 0, title='shopBackground', attribute={
-            'shape': 'rectangle',
-            'dim': self.baseDim,
-            'color': (51,51,51)
         })
 
 
@@ -42,15 +36,15 @@ class menuproducerbuy(base):
         posy = 100
         for y in range(0,8):
             for x in range(0,12):
-                self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, title='shopBackground' + str(y) + str(x), attribute={
+                self.addOutput(pos=[posy + 2, posx + 2], type='shape', priority= 5, attribute={
                     'shape': 'rectangle',
                     'dim': [39, 39],
-                    'color': (0, 0, 0)
+                    'color': (255, 255, 255)
                 })
 
                 if(count<=max):
                     uid = list(settings.objectDB['producer'].keys())[count]
-                    self.addOutput(pos=[posy + 2, posx + 2], type='image', priority= 6, title='btn',  attribute={
+                    self.addOutput(pos=[posy + 2, posx + 2], type='image', priority= 6,  attribute={
                         'uid': uid,
                         'scale': (39,39)
                     })
