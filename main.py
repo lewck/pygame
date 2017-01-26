@@ -83,13 +83,13 @@ uihelper.toggle('menustart')
 
 # Start Menu Loop
 while settings.currentScreen=='menu' and not settings.gameExit:
-    #Listen for events
+    # Listen for events
     input.listenForEvent()
 
-    #Render the screen
+    # Render the screen
     render.render()
 
-    #Finish frame
+    # Finish frame
     pygame.display.update()
     clock.tick(30)
 
