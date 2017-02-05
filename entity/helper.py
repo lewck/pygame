@@ -6,6 +6,7 @@ import settings
 class helper:
     @staticmethod
     def veichleGetAvailable():
+        # Return a list of all vehicles that are not busy
         toReturn = []
         for id, each in settings.activeEntityDB.items():
             if (each.type == 'vehicle'):
@@ -17,6 +18,7 @@ class helper:
 
     @staticmethod
     def vehicleEvaluateBest(pos):
+        # Return first vehicle which is not claimed
         for each in helper.veichleGetAvailable():
             if (settings.activeEntityDB[each].claimed == False):
                 settings.activeEntityDB[each].claimed = True

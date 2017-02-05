@@ -27,7 +27,7 @@ class base:
             settings.tick.register(each, 'settings.activeJobsetDB["'+str(self.jobsetID)+'"].tick()', self.jobsetID)
 
     def initVars(self, **kwargs):
-        # Set independent vars
+        # Set common vars
         for key, value in kwargs.items():
             setattr(self, key, value)
 
@@ -36,7 +36,7 @@ class base:
         self.status = 1
 
     def eventTaskComplete(self):
-        #Called by entity when job is completed
+        # Called by entity when job is completed
         self.status = 1
         self.taskCurrent += 1
 
@@ -60,47 +60,48 @@ class collectFromObjectAndStore(base):
         self.dontTick = 0
 
     def doEvent(self, eventID):
+        # No events
         pass
 
     def task(self):
         if (self.taskCurrent == 1):
             if(self.dontTick):
-                # Apply a cooldown period if not found
+                # Apply a cool down period if not found
                 self.dontTick += -1
                 return False
 
-            # Determine best storage
+            # Determine best storage using helper
             self.pathEnd = objecthelper.evaluateBestStorage(self.startPosition, 'item', self.itemID)
 
-            print('PATHEND')
-            print(self.pathEnd)
-
+            # Return false if no storage found
             if (self.pathEnd==False):
-                # Storage Not Found
                 return False
 
+            # Find interact position for path beginning
             self.pathStart = objecthelper.getInteractPosition(self.startPosition[0], self.startPosition[1],
                                                               self.startPosition[2])
 
             # Determine best vehicle
             self.vehicleID = entityhelper.vehicleEvaluateBest(self.pathStart)
 
+            # Check vehicle was found
             if (self.vehicleID):
+                # Find path from interact positions
                 path = pathFind(self.pathStart[0], self.pathStart[1], self.pathEnd[0], self.pathEnd[1], 5)
                 self.pathID = path.find()
+
+                # If successfully finds path, increment the current task
                 if (self.pathID):
                     self.taskCurrent += 1
 
             if (self.taskCurrent == 1):
-                # Unclaim the entity, apply buffer
+                # Un-claim the entity, apply buffer
                 self.dontTick = 5
                 settings.activeEntityDB[self.vehicleID].claimed = False
 
         if (self.taskCurrent == 2):
-            # Begin
-            # Collect, move, deposit
+            # Begin moveitem job, this will collect, move and deposit then callback
             if (self.status == 1):
-
                 self.jobID = job.create(typ='moveItem', startPosition=self.pathStart, endPosition=self.pathEnd,
                                         items='all',
                                         parent=self.jobsetID, entityID=self.vehicleID, path=self.pathID)
@@ -118,6 +119,7 @@ class collectFromObjectAndStore(base):
 #--------------------------------------------------
 class waitForItems(base):
     def __init__(self, **kwargs):
+        # Set initial variables
         self.tickListen = [10]
         super(waitForItems, self).__init__(**kwargs)
         self.pos = kwargs['position']
@@ -127,6 +129,7 @@ class waitForItems(base):
         pass
 
     def needsItem(self, itemID):
+        # return true if requested itemID is what this job needs
         for id, qty in self.items.items():
             if(id==itemID):
                 return True

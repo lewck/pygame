@@ -14,6 +14,7 @@ class tick:
         return self.tick
 
     def get(self, tickID):
+        # Return the tick if it exists
         try:
             return(self.tick[tickID])
         except IndexError:
@@ -21,6 +22,7 @@ class tick:
 
     def remove(self, **kwargs):
         if('identifier' in kwargs):
+            # Remove all with a common identifier if provided
             removeBuffer = []
             for key, each in self.tick.items():
                 if(each[0]==kwargs['identifier']):

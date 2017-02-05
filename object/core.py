@@ -12,6 +12,7 @@ from shop import shop
 class factory:
     @staticmethod
     def getObject(**kwargs):
+        # Return object with provided UID as class name
         results = eval(kwargs['uid'] + '(**kwargs)')
         return results
 
@@ -71,12 +72,17 @@ class base:
         self.details = provided
         self.tickListen = provided['tickListen']
         self.price = provided['price']
+
+        # load image using engine helper
         self.image = enginehelper.loadImage(self.title)
 
+        # Load base image if exists
         if('base' in kwargs):
             self.base = enginehelper.loadImage(kwargs['base'])
 
+        # Is object being placed?
         if('y' in kwargs):
+
             self.y = kwargs['y']
             self.x = kwargs['x']
             self.direction = kwargs['direction']
@@ -86,11 +92,17 @@ class base:
                 settings.tick.register(each, 'settings.grid[' + str(self.y) + '][' + str(self.x) + '].tick()')
 
     def highlightAdd(self, direction):
+        # Assign highlight to object, usually for pathfind
         self.highlighted = True
         self.highlightedDirection = direction
 
     def highlight(self):
+        # Render highlight overlay
+
+        # Get highlight image
         image = enginehelper.loadImage('highlight')
+
+        # Transform and blit image at objects position
         directionModifier = {
             0: 180,
             1: 90,
@@ -104,11 +116,13 @@ class base:
 
 
     def isPassible(self, entityid):
+        # Check if entity can pass object (if is in passable list)
         if(entityid in self.passable):
             return True
         return False
 
     def hasInventory(self):
+        # Return True if object has an inventory
         if(hasattr(self, 'inventory')):
             return True
 
@@ -120,14 +134,16 @@ class base:
                 self.doTick(i)
 
     def checkFullInventory(self):
+        # If the inventory is not full, return image to normal and remove jobset attrbute
         if (not self.inventoryOutput.isFull()):
             self.image = enginehelper.loadImage(self.title)
             self.jobcollectcreated = False
 
         else:
+            # Inventory full, use _full verison of sprite
             self.image = enginehelper.loadImage(self.title + '_full')
 
-            # TODO fix force pick
+            # Create jobset to collect and store the items
             if (self.jobcollectcreated == False):
                 jobset.create(typ='collectFromObjectAndStore', startPosition=[self.y, self.x, self.direction],
                               itemID=self.inventoryOutput.getInventory()[0].id)
@@ -136,6 +152,7 @@ class base:
 
 class factory_parts(base):
     def __init__(self, **kwargs):
+        # Boilerplate for parts factory
         self.title = 'factory_parts'
         self.type = 'producer'
 
@@ -151,13 +168,16 @@ class factory_parts(base):
 
 
     def doTick(self, tickID):
+        # Called each tick by engine
         if (tickID == 0):
             if(self.part==0):
                 # No part assigned
                 return False
 
+            # Do required action if inventory is full
             self.checkFullInventory()
 
+            # Set segregation of inventory if required and is not yet
             if(self.setSegregation == False):
                 if (not settings.itemDB[self.part]['required'] == {}):
                     self.inventory.segregate(list(settings.itemDB[self.part]['required'].keys()))

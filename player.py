@@ -3,11 +3,10 @@ from util.tool import tool
 class player:
     def __init__(self, **kwargs):
         # Assign initial values
-
         self.newPlayer(**kwargs)
 
     def newPlayer(self, **kwargs):
-        #Init vars
+        # Init vars
         self.id = tool.genRandomString(16)
 
         playerVariableDefaults = {
@@ -15,8 +14,8 @@ class player:
         }
 
         self.playerVariables = {}
-        # Set player variables (pv prefix, non camel-case for simplicity)
 
+        # Set player variables from defaults (pv prefix, non camel-case for simplicity)
         for key, value in playerVariableDefaults.items():
             try:
                 self.playerVariables[key] = kwargs['pv'+key]

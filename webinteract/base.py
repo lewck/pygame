@@ -13,43 +13,54 @@ class base:
         data = {}
         data['function'] = function
 
+        # Assign parameters to local var if provided
         if(params != 0):
             for key, value in params.items():
                 data[key] = value
 
         data['authorisation_token'] = settings.authcode
 
-        print(data)
 
+        # Encode GET params using urllib
         url_values = urllib.parse.urlencode(data)
-        print(url_values)
+
+
 
         url = 'http://'+settings.remoteURL+'/pygame/kernel.php'
 
-        print('CALLING')
-        print(url)
+        # Collate url with get vars
         full_url = url + '?' + url_values
+
+        # Print for debugging
+        print('------------------')
+        print('Calling Webserver')
+        print(data)
+        print(url_values)
+        print('------------------')
+
+        # Attempt web call
         try:
+            # Get response
             data = urllib.request.urlopen(full_url)
+            # Decode response
             decodedData = data.read().decode('utf-8')
+            # Encode to JSON response
             jsonData = json.loads(decodedData)
 
         except urllib.error.URLError:
+            # Fail (server down?), create json response anyway
             print('Error Connecting')
             jsonData = {}
             jsonData['fail'] = '404'
+            print('Webinteract fail')
 
-
-        if('fail' in jsonData):
-            print('Webinteract fail '+str(jsonData['fail']))
-            return False
-
-        print(jsonData)
         return jsonData
 
 
     def auth(self):
+        # Authenticate with the webserver if authcode not provided
         if(settings.authcode == None):
+            # Request auth call with global api key, save to global or fail
             authcode = self.requestCall('auth', { 'apikey': settings.APIKEY })
 
             if(authcode):

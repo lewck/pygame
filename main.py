@@ -38,7 +38,9 @@ try:
         # Assign globals from settings
         settings.APIKEY = config['api_key']
         settings.remoteURL = config['server_url']
+
     except json.decoder.JSONDecodeError:
+        # Assume json misconfiguration
         log.create('JSON decode error')
         settings.gameExit = True
 except FileNotFoundError:

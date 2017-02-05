@@ -14,12 +14,15 @@ from util.tool import tool
 class factory:
     @staticmethod
     def create(**args):
+        # Generate random ID
         id = tool.genRandomString(16)
 
-        uid = args['uid']
-        result = (eval(uid+'(**args, id=id)'))
+        # Initiate class
+        result = (eval(args['uid']+'(**args, id=id)'))
 
+        # Check for vehicle class
         if(result.type=='vehicle'):
+
             # Find suitable storage
             storage = objecthelper.getEmptyStorageAll('vehicle')[0]
 
@@ -38,10 +41,8 @@ class factory:
 #  Base Class
 #--------------------------------------------------
 class base:
-    def __init__(self):
-        pass
-
     def setVars(self, **kwargs):
+        # Set common variables
         self.tickCount = 0
         self.status = 0
         self.firstMove = True
@@ -51,6 +52,7 @@ class base:
         self.tickID = settings.tick.register(5, 'settings.activeEntityDB["'+self.id+'"].doTick(0)')
 
     def assign(self, jobID):
+        # Assign local variables based on provided job
         self.job = settings.activeJobDB[jobID]
         self.path = settings.pathDB[settings.activeJobDB[jobID].path]
         self.x = self.job.startPosition[1]*50
@@ -59,6 +61,7 @@ class base:
         self.jobID = jobID
 
     def unassign(self):
+        # Reset local variables (upon job complete)
         self.job = 0
         self.path = 0
         self.x = 0
@@ -71,6 +74,7 @@ class base:
 
     def tick(self):
         if(self.tickListen!=False):
+            # Call ticks and reset
             self.tickCount += 1
             for i in range(0, len(self.tickListen)):
                 if (self.tickCount % self.tickListen[i] == 0):
@@ -79,19 +83,19 @@ class base:
                         self.tickCount = 0
 
     def doMove(self):
+        # Move if status 1 only
         if (self.status == 1):
-            xTile = (int(self.x /50))
-            yTile = (int(self.y /50))
-
+            # Iteratate path
             for i in range(0, len(self.path[1])):
                 for o in range(0, len(self.path[1][i])):
+                    # Find direction for current position
                     if (self.y / 50 == self.path[1][i][o][0] and self.x / 50 == self.path[1][i][o][1]):
                         if (self.direction == 4):
-                            # Here
+                            # Direction 4 means at destination
                             self.status = 3
                             jobhelper.complete(self.jobID)
 
-                        currDirection = self.direction
+                        # Change direction
                         self.direction = self.path[1][i][o][2]
 
             # update location tick
@@ -104,14 +108,12 @@ class base:
             elif (self.direction == 3):
                 self.x += -10
 
-        if (self.status == 3):
-            # idle
-            pass
-
     def place(self):
+        # Blit at position
         settings.surface.blit(self.image, (self.x*50, self.y*50))
 
     def draw(self):
+        # Transform and blit entity
         directionRotation = {
             0: 0,
             1: 270,

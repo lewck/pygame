@@ -1,5 +1,5 @@
-import settings
 import object
+import settings
 
 class map:
     def __init__(self, tid):

@@ -10,15 +10,20 @@ class render:
     def renderGrid():
         xmod = 0
         ymod = 0
+        # Use a for inside for to iterate the 2d list
         for y in range(0, len(settings.grid)):
             for x in range(0, len(settings.grid[y])):
+
+                # Show the path overlay if it has one
                 if (settings.grid[y][x].highlighted == True):
                     settings.grid[y][x].highlight()
                 else:
+                    # No path on this cell, transform & render base image
                     base = pygame.transform.scale(settings.grid[y][x].base, (50, 50))
                     settings.surface.blit(base, (xmod, ymod))
 
                     if (settings.grid[y][x].image != 0):
+                        # Transform & render overlay image if exists
                         image = pygame.transform.scale(settings.grid[y][x].image,((50,50)))
 
                         directionModifier = {
@@ -32,6 +37,7 @@ class render:
 
                         settings.surface.blit(image, (xmod, ymod))
 
+                # Change current position of cursor
                 xmod += 50
             ymod += 50
             xmod = 0
@@ -41,6 +47,7 @@ class render:
         sortedOutput = out.getActiveByPriority()
 
         for each in sortedOutput:
+            # Scale output
             try:
                 scale = each.data['attribute']['scale']
 
@@ -54,15 +61,22 @@ class render:
                 scale = 1
 
 
+            #--------------------------------------------------
+            # Handle text data types
+            #--------------------------------------------------
             if (each.data['type'] == 'text'):
+                # Select font
                 try:
                     font = settings.fonts[each.data['attribute']['font']][each.data['attribute']['size']]
                 except KeyError:
+                    # Use default font if none found
                     settings.logObject.add('Font not found', 2)
                     font = settings.fonts['primaryFont'][each.data['attribute']['size']]
 
+                # Apply variable output string if attribute found
                 if('variables' in each.data['attribute']):
                     for i in range(0, len(each.data['attribute']['variables'])):
+                        # Iterate each variable, replace occurrence of ID with variable submitted
 
                         m = re.search('\{'+str(i)+'\}', each.data['attribute']['value'])
 
@@ -74,9 +88,13 @@ class render:
                 else:
                     value = each.data['attribute']['value']
 
+                # Render at submitted coordinates
                 rendered = font.render(value, True, (each.data['attribute']['color']))
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
+            #--------------------------------------------------
+            # Handle image data types
+            #--------------------------------------------------
             elif (each.data['type'] == 'image'):
                 # NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
                 image = pygame.image.load('sprites/'+each.data['attribute']['uid']+'.png')
@@ -91,12 +109,13 @@ class render:
 
                 settings.surface.blit(rendered, (each.data['pos'][1], each.data['pos'][0]))
 
+            #--------------------------------------------------
+            # Handle shape render types
+            #--------------------------------------------------
             elif (each.data['type'] == 'shape'):
-                # NB scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
+                # Scale rounds to nearest int, don't rely on pixel perfect rendering if using scale
                 if(each.data['attribute']['shape']=='rectangle'):
                     pygame.draw.rect(settings.surface, each.data['attribute']['color'], (each.data['pos'][1], each.data['pos'][0], each.data['attribute']['dim'][1], each.data['attribute']['dim'][0]))
-
-
             else:
                 settings.logObject.add('Not Rendered type' + str(each.data['type']), 2)
 

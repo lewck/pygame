@@ -6,6 +6,7 @@ import settings
 class helper:
     @staticmethod
     def findItemParents(uid):
+        # Find items which are used in other items
         parents = []
         for key, each in settings.itemDB.items():
 
@@ -20,6 +21,7 @@ class helper:
 
     @staticmethod
     def getPrice(uid, type = None):
+        # Return the price of compound/noral items
         if (not type):
             unlockPrice = settings.itemDB[uid]['unlockPrice']
         else:
@@ -29,6 +31,7 @@ class helper:
 
     @staticmethod
     def discover(uid, type=None):
+        # Set discovered attribute to true
         if (not type):
             settings.itemDB[uid]['discovered'] = True
         else:

@@ -1,6 +1,7 @@
 import settings
 
 class inputbuffer:
+
     @staticmethod
     def getTitleType(title):
         # private function
@@ -16,6 +17,7 @@ class inputbuffer:
                     return key
 
         return False
+
     @staticmethod
     def get():
         return settings.inputBuffer
@@ -43,13 +45,14 @@ class inputbuffer:
             settings.inputBuffer['model'] = kwargs['model']
             settings.inputBuffer['maxlength'] = kwargs['maxlength']
 
-
+        # Assign common variables
         settings.inputBuffer['type'] = inputbuffer.getTitleType(title)
         settings.inputBuffer['title'] = title
         settings.inputBuffer['args'] = kwargs
 
     @staticmethod
     def isClick():
+        # Return true if buffer type is click
         if(inputbuffer.exists()):
             if(settings.inputBuffer['type'] == 0):
                 return True
@@ -57,6 +60,7 @@ class inputbuffer:
 
     @staticmethod
     def isKey():
+        # Return true if buffer type is key
         if (inputbuffer.exists()):
             if(settings.inputBuffer['type'] == 1):
                 return True
@@ -64,6 +68,7 @@ class inputbuffer:
 
     @staticmethod
     def clear():
+        # Clear all input buffers
         settings.inputBuffer = {}
 
     @staticmethod
@@ -76,6 +81,7 @@ class inputbuffer:
 
     @staticmethod
     def addKey(key):
+        # Append to value if not past max length
         if(len(settings.inputBuffer['value']) < settings.inputBuffer['maxlength']):
             settings.inputBuffer['value'] += key
 
