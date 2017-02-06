@@ -229,27 +229,34 @@ class processor_base(base):
 
     def doTick(self, tickID):
         if (tickID == 0):
+
+            # Do required action if inventory is full
             self.checkFullInventory()
 
             if(self.inventory.getInventory()):
                 # Has some items
                 for each in self.inventory.getInventory():
+
+                    # Get transformations that can occur, verify if inventory has required items
                     toProduce = settings.processingDB[self.process]['transformations'][each.id]
                     if(self.inventory.has(each.id, toProduce['required'])):
 
                         # Has required quantity, remove required
                         self.inventory.takeItem(each.id, toProduce['required'])
 
-                        # Add whats needed
+                        # Add whats items are required
                         if('produces' in toProduce):
-                            # Non compound
+                            # Non compound item
                             for prodKey, prodQuant in toProduce['produces'].items():
                                 if (isinstance(prodQuant, list)):
+                                    # Multiple items
                                     self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant[0], type=prodQuant[1])
                                 else:
+                                    # Single
                                     self.inventoryOutput.addItem(id=prodKey, quantity=prodQuant)
 
                         else:
+                            # Compound item
                             for prodKey, prodData in toProduce['type'].items():
                                 if(prodKey == each.type):
                                     for createsKey, createsQuantity in prodData.items():
@@ -261,6 +268,7 @@ class processor_base(base):
 
 class producer_base(base):
     def __init__(self):
+        # Boiler & init parent
         self.type = 'producer'
         self.itemID = None
         base.__init__(self)
@@ -268,6 +276,7 @@ class producer_base(base):
     def doTick(self, tickID):
         if (tickID == 0):
             if(self.itemID):
+                # Do required action if inventory is full
                 self.checkFullInventory()
                 # Continuously create item
                 self.inventoryOutput.addItem(id=self.itemID, quantity=settings.itemDB[self.itemID]['makes'] *
@@ -343,6 +352,7 @@ class exports(base):
 
     def doTick(self, tickID):
         if(tickID==0):
+            # Continuously sell items
             if(self.inventory.hasAny()):
                 toSell = self.inventory.takeItem('all', 'all')
                 shop.sell(toSell)
