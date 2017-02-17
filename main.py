@@ -83,7 +83,10 @@ for key, value in settings.activeUI.items():
 # Open start menu UI
 uihelper.toggle('menustart')
 
-# Start Menu Loop
+
+#-------------------------------------------------
+#  Menu
+#-------------------------------------------------
 while settings.currentScreen=='menu' and not settings.gameExit:
     # Listen for events
     input.listenForEvent()
@@ -95,6 +98,10 @@ while settings.currentScreen=='menu' and not settings.gameExit:
     pygame.display.update()
     clock.tick(30)
 
+
+#-------------------------------------------------
+#  Game
+#-------------------------------------------------
 if(settings.currentScreen == 'game'):
     # Initiate Pre Game Variables
     # Generate grid
@@ -124,12 +131,12 @@ if(settings.currentScreen == 'game'):
         settings.activeUI[key] = ui.create(key)
 
     # Register periodic server ping tick event
-    devTick = settings.tick.register(50000, "settings.webinteract['game'].checkCompleted()")
+    periodicPing = settings.tick.register(50000, "settings.webinteract['game'].checkCompleted()")
 
     # Close Loading overlay
     uihelper.close('menuloading')
 
-
+    tickCounter = 0
     # Core Game Loop
     while (settings.currentScreen=='game') and (not settings.gameExit):
         # Listen for events
@@ -148,7 +155,7 @@ if(settings.currentScreen == 'game'):
         tickBuffer = []
         for key, each in settings.tick.getAll().items():
             # Create buffer
-            if(pygame.time.get_ticks()%each[1] == 0):
+            if(tickCounter%each[1] == 0):
                 tickBuffer.append(each[2])
 
         for each in tickBuffer:
@@ -160,11 +167,13 @@ if(settings.currentScreen == 'game'):
 
         # Finish frame
         pygame.display.update()
+        tickCounter += 1
         clock.tick(60)
 
 
-
-# End Of Game
+#-------------------------------------------------
+#  End Of Game
+#-------------------------------------------------
 if(settings.currentScreen == 'gameCompleted'):
     # End game setup
     uihelper.updateAttribute('menugameend', 'winstatus', settings.winStatus)

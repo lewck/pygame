@@ -112,7 +112,7 @@ class moveItem(base):
                     self.taskCurrent += 1
 
         if(self.taskCurrent == 3):
-            # Move Vehicle
+            # Move Vehicle and set assigned variable. This prevents the vehicles status being continuously updated
             if(self.assigned == False):
                 settings.activeEntityDB[self.entityID].status = 1
                 self.assigned = True
@@ -151,7 +151,7 @@ class moveItem(base):
 
 #-------------------------------------------------
 #  Move Vehicle Job
-#--------------------------------------------------
+#-------------------------------------------------
 class movevehicle(base):
     def __init__(self, **kwargs):
         # Initiate job specific vars

@@ -37,8 +37,8 @@ class input():
                 if(event.button == 1):
                     # Left Click
                     #
-                    #  Buffer used because some events change size of activeEventDB (for example an event that closes
-                    #  itself). Every event is added to a buffer then performed after the loop is completed in order.
+                    # Buffer used because some events change size of activeEventDB (for example an event that closes
+                    # itself). Every event is added to a buffer then performed after the loop is completed in order.
                     #
 
                     if (not inputbuffer.isClick()):
@@ -101,5 +101,3 @@ class input():
                 # Hotkeys
                 if(event.key == pygame.K_F9):
                     uihelper.toggle('menuvehiclebuy')
-                if (event.key == pygame.K_F11):
-                    pass
